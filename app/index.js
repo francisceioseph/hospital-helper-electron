@@ -1,12 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import Root from './containers/Root';
-import { history, store } from './store';
-import './app.scss';
 
-import { configureAxiosInterceptors } from './utils/http';
+import Root from './containers/Root';
 import registerServiceWorker from './registerServiceWorker';
+
+import { history, store } from './store';
+import { configureAxiosInterceptors } from './utils/http';
+
+import './app.less';
 
 configureAxiosInterceptors();
 

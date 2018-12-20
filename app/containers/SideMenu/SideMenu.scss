@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
-
 #logo {
   z-index: 2;
-  font: 21px 'Roboto Slab';
   color: #fff;
   display: inline-block;
   vertical-align: middle;
-  line-height: 100px;
+  line-height: 25px;
   cursor: pointer;
   position: absolute;
   left: 50%;
@@ -16,8 +13,6 @@
 #logo span {
   display: inline-block;
   vertical-align: middle;
-
-  /* max-width: 30px; */
   overflow: hidden;
   transition: all 0.5s;
 }

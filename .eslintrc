@@ -43,6 +43,7 @@
     "promise/always-return": "error",
     "promise/catch-or-return": "off",
     "import/no-named-as-default-member": "off",
+    "react/destructuring-assignment": "off",
     "promise/no-native": "off",
     "react/sort-comp": [
       "error",

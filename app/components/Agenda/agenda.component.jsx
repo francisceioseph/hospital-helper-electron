@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BigCalendar from 'react-big-calendar';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import { compose, withHandlers } from 'recompose';
 import { Modal } from 'antd';
@@ -12,10 +12,10 @@ import CustomToolbar from './toolbar.component';
 import AppointmentInfo from './detail.component';
 import './agenda.scss';
 
-BigCalendar.momentLocalizer(BigCalendar.momentLocalizer(moment));
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 const withCalendarHandlers = withHandlers({
-  onOkClick: props => event => {}
+  onOkClick: () => () => {}
 });
 
 const Agenda = props => {
