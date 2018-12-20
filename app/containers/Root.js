@@ -1,13 +1,13 @@
 // @flow
 import React, { Component } from 'react';
 import ptBr from 'antd/lib/locale-provider/pt_BR';
+import PropTypes from 'prop-types';
 
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { LocaleProvider } from 'antd';
 
 import Routes from '../Routes';
-import { any } from 'bluebird-lst';
 
 export default class Root extends Component {
   render() {
@@ -25,6 +25,6 @@ export default class Root extends Component {
 }
 
 Root.propTypes = {
-  store: any,
-  history: History
-}
+  store: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(History).isRequired
+};

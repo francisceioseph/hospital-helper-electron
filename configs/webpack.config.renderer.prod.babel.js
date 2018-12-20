@@ -30,6 +30,20 @@ export default merge.smart(baseConfig, {
 
   module: {
     rules: [
+      {
+        test: /\.global\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
       // SASS support - compile all .global.scss files and pipe it to style.css
       {
         test: /\.(scss|sass)$/,

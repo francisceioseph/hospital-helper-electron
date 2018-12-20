@@ -15,8 +15,8 @@ import { pageStartLoadingAction, pageStopLoadingAction } from './actions';
 import './index.scss';
 
 const { Content } = Layout;
+const hasPermissionToAccess = () => true;
 class DefaultLayout extends React.Component {
-
   render() {
     const {
       component: Component,
@@ -44,9 +44,7 @@ class DefaultLayout extends React.Component {
                 <Bread />
                 <Loader loading={loading} fullScreen />
                 <div style={contentStyle}>
-                  {this.hasPermissionToAccess() && (
-                    <Component {...matchProps} />
-                  )}
+                  {hasPermissionToAccess() && <Component {...matchProps} />}
                 </div>
               </Content>
             </Layout>
