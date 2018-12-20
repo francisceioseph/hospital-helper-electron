@@ -2,7 +2,6 @@
  * Build config for electron renderer process
  */
 
-import autoprefixer from 'autoprefixer';
 import path from 'path';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -31,128 +30,37 @@ export default merge.smart(baseConfig, {
 
   module: {
     rules: [
-      // Extract all .global.css to style.css as is
+      // SASS support - compile all .global.scss files and pipe it to style.css
       {
-        test: /\.global\.css$/,
+        test: /\.(scss|sass)$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: './'
-            }
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
             options: {
               sourceMap: true
             }
+          },
+          {
+            loader: 'sass-loader'
           }
         ]
       },
-      // Pipe other styles through css modules and append to style.css
       {
-        test: /^((?!\.global).)*\.css$/,
+        test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]__[local]__[hash:base64:5]',
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      // Add SASS support  - compile all .global.scss files and pipe it to style.css
-      {
-        test: /\.global\.(scss|sass)$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          {
-            loader: 'css-loader',
-            options: {
               sourceMap: true,
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      // Add SASS support  - compile all other .scss files and pipe it to style.css
-      {
-        test: /\.scss$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              // Necessary for external CSS imports to work
-              // https://github.com/facebookincubator/create-react-app/issues/2677
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9' // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009'
-                })
-              ]
-            }
-          },
-          {
-            loader: require.resolve('sass-loader')
-          }
-        ]
-      },
-
-      {
-        test: /\.css$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: {
-              // Necessary for external CSS imports to work
-              // https://github.com/facebookincubator/create-react-app/issues/2677
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9' // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009'
-                })
-              ]
+              importLoaders: 1,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
             }
           }
         ]
