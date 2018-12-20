@@ -2,10 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
-import { configureStore, history } from './store/configureStore';
-import './app.global.css';
+import { history, store } from './store';
+import './app.scss';
 
-const store = configureStore();
+import { configureAxiosInterceptors } from './utils/http';
+import registerServiceWorker from './registerServiceWorker';
+
+configureAxiosInterceptors();
 
 render(
   <AppContainer>
@@ -26,3 +29,5 @@ if (module.hot) {
     );
   });
 }
+
+registerServiceWorker();

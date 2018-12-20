@@ -32,6 +32,7 @@
     "flowtype/use-flow-type": "error",
     "flowtype/valid-syntax": "error",
     "generator-star-spacing": "off",
+    "import/prefer-default-export": "off",
     "import/no-unresolved": "error",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/anchor-is-valid": "off",
@@ -40,7 +41,8 @@
     "no-multi-assign": "off",
     "promise/param-names": "error",
     "promise/always-return": "error",
-    "promise/catch-or-return": "error",
+    "promise/catch-or-return": "off",
+    "import/no-named-as-default-member": "off",
     "promise/no-native": "off",
     "react/sort-comp": [
       "error",

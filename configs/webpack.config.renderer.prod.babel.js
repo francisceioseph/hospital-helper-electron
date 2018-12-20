@@ -2,6 +2,7 @@
  * Build config for electron renderer process
  */
 
+import autoprefixer from 'autoprefixer';
 import path from 'path';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -89,24 +90,94 @@ export default merge.smart(baseConfig, {
       },
       // Add SASS support  - compile all other .scss files and pipe it to style.css
       {
-        test: /^((?!\.global).)*\.(scss|sass)$/,
+        test: /\.scss$/,
         use: [
+          require.resolve('style-loader'),
           {
-            loader: MiniCssExtractPlugin.loader
-          },
-          {
-            loader: 'css-loader',
+            loader: require.resolve('css-loader'),
             options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:5]',
-              sourceMap: true
+              importLoaders: 1
             }
           },
           {
-            loader: 'sass-loader',
+            loader: require.resolve('postcss-loader'),
             options: {
-              sourceMap: true
+              // Necessary for external CSS imports to work
+              // https://github.com/facebookincubator/create-react-app/issues/2677
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9' // React doesn't support IE8 anyway
+                  ],
+                  flexbox: 'no-2009'
+                })
+              ]
+            }
+          },
+          {
+            loader: require.resolve('sass-loader')
+          }
+        ]
+      },
+
+      {
+        test: /\.css$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              // Necessary for external CSS imports to work
+              // https://github.com/facebookincubator/create-react-app/issues/2677
+              ident: 'postcss',
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9' // React doesn't support IE8 anyway
+                  ],
+                  flexbox: 'no-2009'
+                })
+              ]
+            }
+          }
+        ]
+      },
+      // Allows you to use two kinds of imports for SVG:
+      // import logoUrl from './logo.svg'; gives you the URL.
+      // import { ReactComponent as Logo } from './logo.svg'; gives you a component.
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              // @remove-on-eject-begin
+              babelrc: false,
+              presets: [require.resolve('babel-preset-react-app')],
+              // @remove-on-eject-end
+              cacheDirectory: true
+            }
+          },
+          require.resolve('svgr/webpack'),
+          {
+            loader: require.resolve('file-loader'),
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]'
             }
           }
         ]

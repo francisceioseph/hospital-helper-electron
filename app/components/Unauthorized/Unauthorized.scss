@@ -1,0 +1,21 @@
+.error-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+
+}
+
+.error-component .error-icon {
+  max-width: 300px;
+  min-width: 200px;
+  max-height: 250px;
+  min-height: 150px;
+}
+
+.error-component span {
+  text-align: center;
+  padding: 1rem;
+  font-size: 120%;
+}

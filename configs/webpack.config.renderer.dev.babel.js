@@ -83,26 +83,9 @@ export default merge.smart(baseConfig, {
           }
         ]
       },
-      {
-        test: /^((?!\.global).)*\.css$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:5]'
-            }
-          }
-        ]
-      },
       // SASS support - compile all .global.scss files and pipe it to style.css
       {
-        test: /\.global\.(scss|sass)$/,
+        test: /\.(scss|sass)$/,
         use: [
           {
             loader: 'style-loader'
@@ -118,9 +101,8 @@ export default merge.smart(baseConfig, {
           }
         ]
       },
-      // SASS support - compile all other .scss files and pipe it to style.css
       {
-        test: /^((?!\.global).)*\.(scss|sass)$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'style-loader'
@@ -133,9 +115,31 @@ export default merge.smart(baseConfig, {
               importLoaders: 1,
               localIdentName: '[name]__[local]__[hash:base64:5]'
             }
-          },
+          }
+        ]
+      },
+      // Allows you to use two kinds of imports for SVG:
+      // import logoUrl from './logo.svg'; gives you the URL.
+      // import { ReactComponent as Logo } from './logo.svg'; gives you a component.
+      {
+        test: /\.svg$/,
+        use: [
           {
-            loader: 'sass-loader'
+            loader: require.resolve('babel-loader'),
+            options: {
+              // @remove-on-eject-begin
+              babelrc: false,
+              presets: [require.resolve('babel-preset-react-app')],
+              // @remove-on-eject-end
+              cacheDirectory: true
+            }
+          },
+          require.resolve('svgr/webpack'),
+          {
+            loader: require.resolve('file-loader'),
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]'
+            }
           }
         ]
       },
