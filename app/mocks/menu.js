@@ -223,33 +223,4 @@ export default [
       resources: ['cadastro-medico']
     }
   },
-  {
-    code: '6',
-    name: 'Configurações',
-    icon: 'cogs',
-    route: '/configuracoes',
-    permission: {
-      action: 'view',
-      resources: ['configuracoes']
-    }
-  },
-  {
-    code: '61',
-    menuParentCode: '6',
-    breadParentCode: '6',
-    name: 'Usuarios',
-    icon: 'user-secret',
-    route: '/configuracoes/usuarios',
-    permission: {
-      action: 'view',
-      resources: ['configuracoes']
-    }
-  },
-  {
-    code: '61',
-    menuParentCode: '-1',
-    breadParentCode: '61',
-    name: 'Cadastrar Usuário',
-    route: '/configuracoes/usuarios/criar'
-  }
 ];

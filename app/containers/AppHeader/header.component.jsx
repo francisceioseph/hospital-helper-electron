@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Layout, Icon, Menu } from 'antd';
 import { withHandlers, compose } from 'recompose';
 
@@ -59,5 +61,11 @@ const AppHeader = props => (
     </div>
   </Header>
 );
+
+AppHeader.propTypes = {
+  collapsed: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+  profile: PropTypes.instanceOf(Object).isRequired
+};
 
 export default compose(withHeaderHandlers)(AppHeader);
