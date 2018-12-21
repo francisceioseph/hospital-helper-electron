@@ -11,6 +11,7 @@ import examsReducer from '../pages/Exams/exams.reducer';
 import appointmentsReducer from '../pages/Appointments/appointments.reducer';
 import surgeryReducer from '../pages/Surgery/surgery.reducer';
 import loginReducer from '../pages/Login/login.reducer';
+import appointmentTypeReducer from '../pages/AppointmentTypes/appointment-types.reducer';
 
 export default function createRootReducer(history: History) {
   return combineReducers({
@@ -23,6 +24,7 @@ export default function createRootReducer(history: History) {
     exams: examsReducer,
     appointments: appointmentsReducer,
     surgeries: surgeryReducer,
-    login: loginReducer
+    login: loginReducer,
+    appointmentTypes: appointmentTypeReducer,
   });
 }

@@ -16,6 +16,7 @@ import { ExamList, ExamForm } from './pages/Exams';
 import { AppointmentList, AppointmentForm } from './pages/Appointments';
 import { SurgeryList } from './pages/Surgery';
 import { LoginPage } from './pages/Login';
+import { AppointmentTypeList } from './pages/AppointmentTypes';
 
 export default () => (
   <App>
@@ -25,6 +26,7 @@ export default () => (
       </Route>
       <NoAuthRoute exact path="/login" component={LoginPage} />
       <ProtectedRoute exact path="/prontuarios" component={Prontuario} />
+      <ProtectedRoute exact path="/cadastros/tipo-atendimento" component={AppointmentTypeList} />
       <ProtectedRoute
         exact
         path="/cadastros/especialidade"

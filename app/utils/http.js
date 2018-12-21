@@ -11,18 +11,17 @@ export const updateDoctorUrl = doctorId => `/users/doctors/edit/${doctorId}`;
 
 export const GET_PACIENTS_URL = '/users/pacients';
 export const POST_PACIENT_URL = '/users/pacients/new';
-export const updatePacientUrl = pacientId =>
-  `/users/pacients/edit/${pacientId}`;
-export const removePacientUrl = pacientId =>
-  `/users/pacients/remove/${pacientId}`;
+export const updatePacientUrl = pacientId => `/users/pacients/edit/${pacientId}`;
+export const removePacientUrl = pacientId => `/users/pacients/remove/${pacientId}`;
 
-export const GET_APPOINTMENT_TYPES_URL = '/appointments/types';
+export const GET_APPOINTMENT_TYPES_URL = '/appointment-types';
+export const POST_APPOINTMENT_TYPE_URL = '/appointment-types/new';
+export const getRemoveAppointmentTypeUrl = id => `/appointment-types/remove/${id}`;
+
 export const GET_APPOINTMENTS_URL = '/appointments';
 export const POST_APPOINTMENT_URL = '/appointments/new';
-export const getAppointmentUrl = appointmentId =>
-  `/appointments/${appointmentId}`;
-export const updateAppointmentUrl = appointmentId =>
-  `/appointments/edit/${appointmentId}`;
+export const getAppointmentUrl = appointmentId => `/appointments/${appointmentId}`;
+export const updateAppointmentUrl = appointmentId => `/appointments/edit/${appointmentId}`;
 
 export const GET_SPECIALTIES_URL = '/specialties';
 export const POST_SPECIALTY_URL = '/specialties/new';
@@ -52,17 +51,17 @@ export const getRequest = async path => {
   return axios.get(URL);
 };
 
-export const postRequest = async (path, data) => {
+export const postRequest = async(path, data) => {
   const URL = BASE_BACKEND_URL + path;
   return axios.post(URL, data);
 };
 
-export const putRequest = async (path, data) => {
+export const putRequest = async(path, data) => {
   const URL = BASE_BACKEND_URL + path;
   return axios.put(URL, data);
 };
 
-export const patchRequest = async (path, data) => {
+export const patchRequest = async(path, data) => {
   const URL = BASE_BACKEND_URL + path;
   return axios.pacth(URL, data);
 };
