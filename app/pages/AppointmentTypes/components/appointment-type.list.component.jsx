@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  compose, lifecycle, withState, withHandlers,
-} from 'recompose';
-import {
-  Row, Input, Divider, Table, Button, Col,
-} from 'antd';
+import { compose, lifecycle, withState, withHandlers } from 'recompose';
+import { Row, Input, Divider, Table, Button, Col } from 'antd';
 
 import * as WebAPI from '../../../utils/webAPI';
 
@@ -25,7 +21,7 @@ const AppointmentTypeList = props => (
       </Col>
       <Col>
         <Button type="primary" onClick={props.showModal}>
-            Novo Tipo de Atendimento
+          Novo Tipo de Atendimento
         </Button>
       </Col>
     </Row>
@@ -62,7 +58,7 @@ AppointmentTypeList.propTypes = {
   handleCreate: PropTypes.func.isRequired,
   appointmentTypes: PropTypes.instanceOf(Array).isRequired,
   visible: PropTypes.bool.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
+  confirmLoading: PropTypes.bool.isRequired
 };
 
 const withVisibleState = withState('visible', 'setVisible', false);
@@ -91,8 +87,7 @@ const handleCreate = props => () => {
         props.setConfirmLoading(false);
         props.setVisible(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         props.setConfirmLoading(false);
       });
   });
@@ -103,13 +98,13 @@ const withListHandlers = withHandlers({
   handleCancel,
   handleCreate,
   handleSaveFormRef,
-  onSearch: () => () => {},
+  onSearch: () => () => {}
 });
 
 const withListLifecycle = lifecycle({
   componentDidMount() {
     this.props.getAppointmentTypes();
-  },
+  }
 });
 
 export default compose(
