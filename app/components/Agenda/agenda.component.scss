@@ -7,6 +7,7 @@
     font-weight: 200;
     color: #1890ff;
   }
+
   margin-top: 1em;
   margin-bottom: 1em;
   margin-right: 8px;
@@ -14,7 +15,7 @@
 }
 
 .rbc-month-view {
-  border: 0px;
+  border: 0;
 
   .rbc-month-row {
     flex-basis: 9em;
@@ -22,9 +23,9 @@
 
   .rbc-day-bg {
     border-top: 2px solid #e8e8e8;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
     margin-right: 8px;
     margin-left: 8px;
   }
@@ -35,7 +36,7 @@
   }
 
   .rbc-month-row + .rbc-month-row {
-    border-top: 0px;
+    border-top: 0;
   }
 
   .rbc-off-range-bg {
@@ -43,7 +44,7 @@
   }
 
   .rbc-day-bg + .rbc-day-bg {
-    border-left: 0px;
+    border-left: 0;
   }
 
   .rbc-date-cell {
@@ -57,9 +58,9 @@
 
   .rbc-header {
     text-align: right;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
     margin-right: 8px;
     margin-left: 8px;
 
@@ -70,7 +71,7 @@
   }
 
   .rbc-header + .rbc-header {
-    border-left: 0px;
+    border-left: 0;
   }
 }
 
@@ -80,5 +81,5 @@
 
 .ant-modal-confirm-body .ant-modal-confirm-content {
   margin-top: 24px;
-  margin-left: 0px;
+  margin-left: 0;
 }
