@@ -26,5 +26,5 @@ export default class Root extends Component {
 
 Root.propTypes = {
   store: PropTypes.instanceOf(Object).isRequired,
-  history: PropTypes.instanceOf(History).isRequired
+  history: PropTypes.instanceOf(Object).isRequired
 };

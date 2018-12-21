@@ -186,7 +186,7 @@ export default [
     }
   },
   {
-    code: '511',
+    code: '51',
     menuParentCode: '-1',
     breadParentCode: '51',
     name: 'Cadastrar Paciente',
@@ -205,7 +205,7 @@ export default [
     }
   },
   {
-    code: '521',
+    code: '52',
     menuParentCode: '-1',
     breadParentCode: '52',
     name: 'Cadastrar Médico',
@@ -222,13 +222,6 @@ export default [
       action: 'view',
       resources: ['cadastro-medico']
     }
-  },
-  {
-    code: '531',
-    menuParentCode: '-1',
-    breadParentCode: '53',
-    name: 'Cadastrar Especialidade',
-    route: '/cadastros/medicos/criar'
   },
   {
     code: '6',
@@ -253,7 +246,7 @@ export default [
     }
   },
   {
-    code: '611',
+    code: '61',
     menuParentCode: '-1',
     breadParentCode: '61',
     name: 'Cadastrar Usuário',

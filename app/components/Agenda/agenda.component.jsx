@@ -10,7 +10,7 @@ import 'moment/locale/pt-br';
 
 import CustomToolbar from './toolbar.component';
 import AppointmentInfo from './detail.component';
-import './agenda.scss';
+import './agenda.component.scss';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 

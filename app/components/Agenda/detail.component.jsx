@@ -1,31 +1,38 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import { List } from 'antd';
 import moment from 'moment';
-import { DATE_FORMAT_PT_BR } from '../forms';
-const Item = List.Item;
+import PropTypes from 'prop-types';
 
-const AppointmentInfo = ({ appointment }) => {
-  return (
-    <List size="small" bordered>
-      <Item>
-        <Item.Meta title="Paciente" />
-        <b>{appointment.full_name}</b>
-      </Item>
-      <Item>
-        <Item.Meta title="Médico Responsável" />
-        <b>{appointment.doctor_name}</b>
-      </Item>
-      <Item>
-        <Item.Meta title="Tipo de Atendimento" />
-        <b>{appointment.appointment_type_name}</b>
-      </Item>
-      <Item>
-        <Item.Meta title="Horário Marcado" />
-        <b>{moment(appointment.scheduled_to).format(DATE_FORMAT_PT_BR)}</b>
-      </Item>
-    </List>
-  );
+import { List } from 'antd';
+import { DATE_FORMAT_PT_BR } from '../forms';
+
+import './detail.component.less';
+
+const { Item } = List;
+
+const AppointmentInfo = ({ appointment }) => (
+  <List size="small" bordered>
+    <Item>
+      <Item.Meta title="Paciente" />
+      <b>{appointment.full_name}</b>
+    </Item>
+    <Item>
+      <Item.Meta title="Médico Responsável" />
+      <b>{appointment.doctor_name}</b>
+    </Item>
+    <Item>
+      <Item.Meta title="Tipo de Atendimento" />
+      <b>{appointment.appointment_type_name}</b>
+    </Item>
+    <Item>
+      <Item.Meta title="Horário Marcado" />
+      <b>{moment(appointment.scheduled_to).format(DATE_FORMAT_PT_BR)}</b>
+    </Item>
+  </List>
+);
+
+AppointmentInfo.propTypes = {
+  appointment: PropTypes.instanceOf(Object).isRequired
 };
 
 export default AppointmentInfo;

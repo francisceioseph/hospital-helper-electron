@@ -113,7 +113,6 @@ const SideMenu = ({ collapsed, location, permissions }) => {
           )}
           {!collapsed && (
             <span>
-              <Icon icon="hospital" size="2x" />
               <span>Hospital Helper</span>
             </span>
           )}
