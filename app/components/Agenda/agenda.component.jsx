@@ -9,7 +9,6 @@ import { Modal } from 'antd';
 import 'moment/locale/pt-br';
 
 import CustomToolbar from './toolbar.component';
-import AppointmentInfo from './detail.component';
 import './agenda.component.scss';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
@@ -35,12 +34,7 @@ const Agenda = props => {
         defaultView={BigCalendar.Views.MONTH}
         defaultDate={new Date()}
         culture="pt-BR"
-        onSelectEvent={event => {
-          Modal.info({
-            title: 'Agendamento',
-            content: <AppointmentInfo appointment={event.resource} />
-          });
-        }}
+        onSelectEvent={props.onSelectEvent}
         onSelectSlot={slotInfo =>
           Modal.info({
             title: 'Lista de Agendamentos',
@@ -61,7 +55,8 @@ const Agenda = props => {
 };
 
 Agenda.propTypes = {
-  events: PropTypes.instanceOf(Array)
+  events: PropTypes.instanceOf(Array),
+  onSelectEvent: PropTypes.func.isRequired
 };
 
 Agenda.defaultProps = {

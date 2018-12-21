@@ -1,4 +1,3 @@
-import AppointmentListComponent from './appointments.list.component';
-import AppointmentForm from './appointments.form.component';
-
-export { AppointmentListComponent, AppointmentForm };
+export AppointmentListComponent from './appointments.list.component';
+export AppointmentForm from './appointments.form.component';
+export AppointmentInfo from './detail.component';

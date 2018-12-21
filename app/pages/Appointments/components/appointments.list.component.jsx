@@ -1,33 +1,52 @@
 import React from 'react';
-import { compose, lifecycle } from 'recompose';
-import { Row, Input, Divider, Button, Col } from 'antd';
+import PropTypes from 'prop-types';
+
+import { compose, lifecycle, withHandlers } from 'recompose';
+import { Row, Input, Divider, Button, Col, Modal } from 'antd';
+
 import Agenda from '../../../components/Agenda';
+import AppointmentInfo from './detail.component';
 
-const AppointmentList = props => {
-  return (
-    <div>
-      <Row type="flex" justify="space-between">
-        <Col>
-          <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
-        </Col>
-        <Col>
-          <Button
-            type="primary"
-            onClick={() => props.history.push('/marcacoes/consultas/novo')}
-          >
-            Agendar Consulta
-          </Button>
-        </Col>
-      </Row>
+const AppointmentList = props => (
+  <div>
+    <Row type="flex" justify="space-between">
+      <Col>
+        <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
+      </Col>
+      <Col>
+        <Button
+          type="primary"
+          onClick={() => props.history.push('/marcacoes/consultas/novo')}
+        >
+          Agendar Consulta
+        </Button>
+      </Col>
+    </Row>
 
-      <Divider />
+    <Divider />
 
-      <Row>
-        <Agenda events={props.appointments} />
-      </Row>
-    </div>
-  );
+    <Row>
+      <Agenda events={props.appointments} onSelectEvent={props.onSelectEvent} />
+    </Row>
+  </div>
+);
+
+AppointmentList.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
+  appointments: PropTypes.instanceOf(Array).isRequired,
+  onSelectEvent: PropTypes.func.isRequired
 };
+
+const onAppointmentSelected = () => event => {
+  Modal.info({
+    title: 'Agendamento',
+    content: <AppointmentInfo appointment={event.resource} />
+  });
+};
+
+const withListHandlers = withHandlers({
+  onSelectEvent: onAppointmentSelected
+});
 
 const withLifecycle = lifecycle({
   componentDidMount() {
@@ -35,4 +54,7 @@ const withLifecycle = lifecycle({
   }
 });
 
-export default compose(withLifecycle)(AppointmentList);
+export default compose(
+  withLifecycle,
+  withListHandlers
+)(AppointmentList);

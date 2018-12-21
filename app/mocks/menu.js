@@ -222,5 +222,5 @@ export default [
       action: 'view',
       resources: ['cadastro-medico']
     }
-  },
+  }
 ];

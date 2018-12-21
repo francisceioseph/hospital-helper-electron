@@ -1,41 +1,64 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Input, Divider, Button, Col } from 'antd';
+
+import { compose, withHandlers, lifecycle } from 'recompose';
+import { Row, Input, Divider, Button, Col, Modal } from 'antd';
+
 import Agenda from '../../../components/Agenda';
+import ExamDetailList from './detail.component';
 
-class ExamComponent extends React.Component {
-  render() {
-    const { history } = this.props;
+const ExamComponent = props => {
+  const { history, exams } = props;
 
-    return (
-      <div>
-        <Row type="flex" justify="space-between">
-          <Col>
-            <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
-          </Col>
-          <Col>
-            <Button type="primary" onClick={() => history.push('/exames/novo')}>
-              Agendar Exame
-            </Button>
-          </Col>
-        </Row>
+  return (
+    <div>
+      <Row type="flex" justify="space-between">
+        <Col>
+          <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
+        </Col>
+        <Col>
+          <Button
+            type="primary"
+            onClick={() => history.push('/marcacoes/exames/novo')}
+          >
+            Agendar Exame
+          </Button>
+        </Col>
+      </Row>
 
-        <Divider />
+      <Divider />
 
-        <Row>
-          <Agenda events={this.props.exams} />
-        </Row>
-      </div>
-    );
-  }
-}
+      <Row>
+        <Agenda events={exams} onSelectEvent={props.onSelectEvent} />
+      </Row>
+    </div>
+  );
+};
 
 ExamComponent.propTypes = {
-  specialties: PropTypes.instanceOf(Array)
+  exams: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  onSelectEvent: PropTypes.func.isRequired
 };
 
-ExamComponent.defaultProps = {
-  specialties: []
+const onAppointmentSelected = () => event => {
+  Modal.info({
+    title: 'Agendamento',
+    content: <ExamDetailList appointment={event.resource} />
+  });
 };
 
-export default ExamComponent;
+const withListHandlers = withHandlers({
+  onSelectEvent: onAppointmentSelected
+});
+
+const examListLifecycle = lifecycle({
+  componentWillMount() {
+    this.props.getExams();
+  }
+});
+
+export default compose(
+  withListHandlers,
+  examListLifecycle
+)(ExamComponent);

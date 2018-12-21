@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_BACKEND_URL = 'http://localhost:3000';
 
-export const postLoginUrl = () => `/users/login`;
+export const postLoginUrl = () => '/users/login';
 
 export const GET_DOCTORS_URL = '/users/doctors';
 export const POST_DOCTOR_URL = '/users/register';
@@ -27,6 +27,12 @@ export const updateAppointmentUrl = appointmentId =>
 export const GET_SPECIALTIES_URL = '/specialties';
 export const POST_SPECIALTY_URL = '/specialties/new';
 export const removeSpecialtyUrl = id => `/specialties/${id}`;
+
+export const GET_EXAM_TYPES_URL = '/exams/types';
+export const GET_EXAMS_URL = '/exams';
+export const POST_EXAM_URL = '/exams/new';
+export const updateExamUrl = id => `/exams/edit${id}`;
+export const getExamUrl = id => `/exams/${id}`;
 
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use(oldSettings => {

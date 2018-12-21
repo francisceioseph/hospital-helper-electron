@@ -1,38 +1,33 @@
 import _ from 'lodash';
-
 import { connect } from 'react-redux';
 import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import {
-  createAppointment,
-  getAppointmentTypes
-} from '../appointments.actions';
+import { getExamTypes, createExam } from '../exams.actions';
 
-import { AppointmentForm } from '../components';
+import ExamForm from '../components/exam.form.component';
 
 import * as WebAPI from '../../../utils/webAPI';
 import * as Alert from '../../../components/Alerts';
 
-const mapStateToProps = ({ appointments, doctors, pacients }) => ({
-  appointment: appointments.appointment,
-  appointmentTypes: _.values(appointments.appointmentTypes),
+const mapStateToProps = ({ doctors, pacients, exams }) => ({
+  examTypes: _.values(exams.examTypes),
   pacients: _.values(pacients.pacients),
   doctors: _.values(doctors.doctors)
 });
 
 const mapDispatchToProps = {
-  createAppointment,
-  getAppointmentTypes,
+  getExamTypes,
   getPacients,
-  getDoctors
+  getDoctors,
+  createExam
 };
 
-const onAppointmentFormSubmit = props => async (values, form) => {
+const onExamFormSubmit = props => async (values, form) => {
   try {
-    const { data: appointment } = await WebAPI.createAppointment(values);
-    props.createAppointment(appointment);
+    const { data: exam } = await WebAPI.createExam(values);
+    props.createExam(exam);
 
     Alert.success({
       content: 'Agendamento realizado com sucesso',
@@ -46,21 +41,21 @@ const onAppointmentFormSubmit = props => async (values, form) => {
 };
 
 const withFormHandlers = withHandlers({
-  onSubmitHandler: onAppointmentFormSubmit
+  onSubmitHandler: onExamFormSubmit
 });
 
 const withLifeCycle = lifecycle({
   componentDidMount() {
+    this.props.getExamTypes();
     this.props.getPacients();
     this.props.getDoctors();
-    this.props.getAppointmentTypes();
   }
 });
 
 const AppointmentContainer = compose(
   withLifeCycle,
   withFormHandlers
-)(AppointmentForm);
+)(ExamForm);
 
 export default connect(
   mapStateToProps,

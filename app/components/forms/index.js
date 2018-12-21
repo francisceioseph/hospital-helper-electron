@@ -1,3 +1,3 @@
 export * from './formConstants';
 export * from './formDecorators';
-export * from './SugestSelector';
+export SugestSelector from './SugestSelector';

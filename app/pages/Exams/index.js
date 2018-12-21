@@ -1,3 +1,2 @@
-import ExamList from './exams.container';
-
-export { ExamList };
+export ExamList from './containers/exam.list.container';
+export ExamForm from './containers/exam.form.container';

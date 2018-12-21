@@ -20,8 +20,7 @@ export const removeDoctor = id => http.deleteRequest(http.getDoctorUrl(id));
 
 export const getAppointmentTypes = () =>
   http.getRequest(http.GET_APPOINTMENT_TYPES_URL);
-export const getAppointment = id =>
-  http.getRequest(http.getAppointmentUrl(id));
+export const getAppointment = id => http.getRequest(http.getAppointmentUrl(id));
 export const getAppointments = () => http.getRequest(http.GET_APPOINTMENTS_URL);
 export const createAppointment = data =>
   http.postRequest(http.POST_APPOINTMENT_URL, data);
@@ -35,3 +34,11 @@ export const createSpecialty = data =>
   http.postRequest(http.POST_SPECIALTY_URL, data);
 export const removeSpecialty = id =>
   http.deleteRequest(http.removeSpecialtyUrl(id));
+
+export const getExamTypes = () => http.getRequest(http.GET_EXAM_TYPES_URL);
+export const getExam = id => http.getRequest(http.getExamUrl(id));
+export const getExams = () => http.getRequest(http.GET_EXAMS_URL);
+export const createExam = data => http.postRequest(http.POST_EXAM_URL, data);
+export const updateExam = (id, data) =>
+  http.patchRequest(http.updateExamUrl(id), data);
+export const removeExam = id => http.deleteRequest(http.getExamUrl(id));
