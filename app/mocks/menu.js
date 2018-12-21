@@ -235,4 +235,16 @@ export default [
       resources: ['cadastro-tipo-atendimento'],
     },
   },
+  {
+    code: '55',
+    menuParentCode: '5',
+    breadParentCode: '5',
+    name: 'Tipo de Exame',
+    icon: '',
+    route: '/cadastros/tipo-exame',
+    permission: {
+      action: 'view',
+      resources: ['cadastro-tipo-exame'],
+    },
+  },
 ];
