@@ -105,18 +105,7 @@ const SideMenu = ({ collapsed, location, permissions }) => {
       theme="dark"
     >
       <div className="logo">
-        <div id="logo">
-          {collapsed && (
-            <span>
-              <Icon icon="hospital" size="2x" />
-            </span>
-          )}
-          {!collapsed && (
-            <span>
-              <span>Hospital Helper</span>
-            </span>
-          )}
-        </div>
+        <div id="logo" />
       </div>
       <Menu mode="inline" theme="dark" selectedKeys={defaultSelectedKeys}>
         {menuItems}

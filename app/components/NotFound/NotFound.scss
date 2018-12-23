@@ -1,21 +1,26 @@
-.error-component {
+.error-card {
+  border-style: dashed !important;
+
+  .error-component {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 1rem;
-  
   }
-  
+
   .error-component .error-icon {
     max-width: 300px;
     min-width: 200px;
     max-height: 250px;
     min-height: 150px;
   }
-  
+
   .error-component span {
+    color: rgb(10, 12, 42);
     text-align: center;
-    padding: 1rem;
     font-size: 120%;
+    font-weight: 500;
+    padding: 1rem;
   }
+}

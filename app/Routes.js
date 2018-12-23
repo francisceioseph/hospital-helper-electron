@@ -1,13 +1,12 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
-
-import { Redirect } from 'react-router-dom';
+import { Switch } from 'react-router';
 
 import NotFound from './components/NotFound';
 import ProtectedRoute from './containers/ProtectedRoute';
 import NoAuthRoute from './containers/NoAuthRoute';
 import App from './containers/App';
 
+import { Home } from './pages/Home';
 import { Prontuario } from './pages/Prontuario';
 import { SpecialtyList } from './pages/Specialty';
 import { DoctorList, DoctorForm } from './pages/Doctors';
@@ -18,17 +17,24 @@ import { SurgeryList } from './pages/Surgery';
 import { LoginPage } from './pages/Login';
 import { AppointmentTypeList } from './pages/AppointmentTypes';
 import { ExamTypeList } from './pages/ExamTypes';
+import { PanelLayout } from './containers/layouts';
 
 export default () => (
   <App>
     <Switch>
-      <Route exact path="/">
-        <Redirect to="/prontuarios" />
-      </Route>
+      <ProtectedRoute exact path="/" component={Home} />
       <NoAuthRoute exact path="/login" component={LoginPage} />
       <ProtectedRoute exact path="/prontuarios" component={Prontuario} />
-      <ProtectedRoute exact path="/cadastros/tipo-atendimento" component={AppointmentTypeList} />
-      <ProtectedRoute exact path="/cadastros/tipo-exame" component={ExamTypeList} />
+      <ProtectedRoute
+        exact
+        path="/cadastros/tipo-atendimento"
+        component={AppointmentTypeList}
+      />
+      <ProtectedRoute
+        exact
+        path="/cadastros/tipo-exame"
+        component={ExamTypeList}
+      />
       <ProtectedRoute
         exact
         path="/cadastros/especialidade"
@@ -71,7 +77,7 @@ export default () => (
         path="/marcacoes/cirurgias"
         component={SurgeryList}
       />
-      <NoAuthRoute component={NotFound} />
+      <PanelLayout component={NotFound} />
     </Switch>
   </App>
 );
