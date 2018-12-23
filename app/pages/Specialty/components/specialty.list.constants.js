@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'antd';
 
-import { store } from '../../../store/configureStore';
+import { store } from '../../../store';
 import { removeSpecialty } from '../specialty.actions';
 
 const ButtonGroup = Button.Group;

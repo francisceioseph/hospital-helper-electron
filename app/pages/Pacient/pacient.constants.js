@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'antd';
 
 import moment from 'moment';
-import { store } from '../../store/configureStore';
+import { store } from '../../store';
 import { removePacient } from './pacient.actions';
 
 const ButtonGroup = Button.Group;
