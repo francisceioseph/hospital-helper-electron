@@ -85,7 +85,7 @@ export default [
     name: 'Prontuário Eletrônico',
     permission: {
       action: 'view',
-      resources: ['prontuario-eletronico']
+      resources: ['prontuario']
     }
   },
   {
@@ -234,7 +234,7 @@ export default [
     route: '/cadastros/especialidade',
     permission: {
       action: 'view',
-      resources: ['cadastro-medico']
+      resources: ['cadastro-especialidade']
     }
   },
   {
