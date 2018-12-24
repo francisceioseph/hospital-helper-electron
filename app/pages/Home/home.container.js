@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import SideMenu from './SideMenu';
+import Home from './components/home.component';
 
 const getMenuPermissions = login => {
   const { userCredentials } = login;
@@ -10,13 +10,11 @@ const getMenuPermissions = login => {
   return role.permissions;
 };
 
-const mapStateToProps = ({ menu, location, login }) => ({
-  location,
-  collapsed: menu.collapsed,
+const mapStateToProps = ({ login }) => ({
   permissions: getMenuPermissions(login)
 });
 
 export default connect(
   mapStateToProps,
   null
-)(SideMenu);
+)(Home);

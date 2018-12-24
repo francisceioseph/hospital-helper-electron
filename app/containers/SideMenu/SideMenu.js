@@ -13,19 +13,17 @@ import './SideMenu.scss';
 
 const { Sider } = Layout;
 
-function getMenusForPermissions(menuList) {
-  return menuList;
-  // return _.filter(menuList, menu => {
-  //   const menuPermissions = _.filter(userPermissions, p => {
-  //     const { permission } = menu;
-  //     return (
-  //       permission &&
-  //       p.action === permission.action &&
-  //       _.includes(permission.resources, p.resource)
-  //     );
-  //   });
-  //   return !!menuPermissions.length;
-  // });
+function getMenusForPermissions(menuList, permissions) {
+  return _.filter(menuList, menuItem => {
+    const permission = menuItem.permission || {};
+    const permissionsGranted = _.chain(permission.resources)
+      .map(resource => permissions[resource])
+      .filter(p => !!p && !!p.can_list)
+      .size()
+      .value();
+
+    return permissionsGranted > 0;
+  });
 }
 
 function makeMenuDataTree(menuList) {
@@ -116,7 +114,7 @@ const SideMenu = ({ collapsed, location, permissions }) => {
 
 SideMenu.propTypes = {
   collapsed: PropTypes.bool.isRequired,
-  permissions: PropTypes.instanceOf(Array).isRequired,
+  permissions: PropTypes.instanceOf(Object).isRequired,
   location: PropTypes.object.isRequired // eslint-disable-line
 };
 

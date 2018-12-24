@@ -1,20 +1,34 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 
 import { Row, Col } from 'antd';
 import { compose, withState, lifecycle } from 'recompose';
 
-import menus from '../../mocks/menu';
-import ShortcutCard from './components/shortcut-card.component';
+import menus from '../../../mocks/menu';
+import ShortcutCard from './shortcut-card.component';
 
-import './Home.scss';
+import '../home.scss';
+
+function getMenusForPermissions(menuList, permissions) {
+  return _.filter(menuList, menuItem => {
+    const permission = menuItem.permission || {};
+    const permissionsGranted = _.chain(permission.resources)
+      .map(resource => permissions[resource])
+      .filter(p => !!p && !!p.can_list)
+      .size()
+      .value();
+
+    return menuItem.route && permissionsGranted > 0;
+  });
+}
 
 const withMenuList = withState('menuList', 'setMenuList', []);
 
 const withLifecyle = lifecycle({
   componentWillMount() {
-    const menuList = menus.filter(item => !!item.route);
-    this.props.setMenuList(menuList);
+    const items = getMenusForPermissions(menus, this.props.permissions);
+    this.props.setMenuList(items);
   }
 });
 

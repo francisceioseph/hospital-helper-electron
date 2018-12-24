@@ -1,1 +1,1 @@
-export Home from './Home.js';
+export Home from './home.container';

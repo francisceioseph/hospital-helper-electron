@@ -184,7 +184,14 @@ export default [
     icon: 'keyboard',
     permission: {
       action: 'view',
-      resources: ['cadastros-paciente', 'cadastro-medico', 'cadastro-cirurgia']
+      resources: [
+        'cadastro-paciente',
+        'cadastro-medico',
+        'cadastro-tipo-cirurgia',
+        'cadastro-especialidade',
+        'cadastro-tipo-atendimento',
+        'cadastro-tipo-exame'
+      ]
     }
   },
   {
