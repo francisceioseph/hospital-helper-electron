@@ -18,6 +18,7 @@ import { LoginPage } from './pages/Login';
 import { AppointmentTypeList } from './pages/AppointmentTypes';
 import { ExamTypeList } from './pages/ExamTypes';
 import { PanelLayout } from './containers/layouts';
+import RoleFormComponent from './pages/Roles/components/role.form.component';
 
 export default () => (
   <App>
@@ -76,6 +77,11 @@ export default () => (
         exact
         path="/marcacoes/cirurgias"
         component={SurgeryList}
+      />
+      <ProtectedRoute
+        exact
+        path="/cadastros/perfis-acesso"
+        component={RoleFormComponent}
       />
       <PanelLayout component={NotFound} />
     </Switch>

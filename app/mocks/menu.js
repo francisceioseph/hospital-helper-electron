@@ -18,7 +18,11 @@ import {
   faHeartbeat,
   faFile,
   faHome,
-  faCog
+  faCog,
+  faAddressCard,
+  faStethoscope,
+  faSyringe,
+  faLock
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -43,7 +47,11 @@ library.add(
   faFile,
   faHeartbeat,
   faHome,
-  faCog
+  faCog,
+  faAddressCard,
+  faStethoscope,
+  faSyringe,
+  faLock
 );
 
 export default [
@@ -237,7 +245,7 @@ export default [
     menuParentCode: '5',
     breadParentCode: '5',
     name: 'Especialidade',
-    icon: '',
+    icon: 'address-card',
     route: '/cadastros/especialidade',
     permission: {
       action: 'view',
@@ -249,7 +257,7 @@ export default [
     menuParentCode: '5',
     breadParentCode: '5',
     name: 'Tipo de Atendimento',
-    icon: '',
+    icon: 'stethoscope',
     route: '/cadastros/tipo-atendimento',
     permission: {
       action: 'view',
@@ -261,11 +269,23 @@ export default [
     menuParentCode: '5',
     breadParentCode: '5',
     name: 'Tipo de Exame',
-    icon: '',
+    icon: 'syringe',
     route: '/cadastros/tipo-exame',
     permission: {
       action: 'view',
       resources: ['cadastro-tipo-exame']
+    }
+  },
+  {
+    code: '56',
+    menuParentCode: '5',
+    breadParentCode: '5',
+    name: 'Perfis de Acesso',
+    icon: 'lock',
+    route: '/cadastros/perfis-acesso',
+    permission: {
+      action: 'view',
+      resources: ['perfis-acesso']
     }
   }
 ];
