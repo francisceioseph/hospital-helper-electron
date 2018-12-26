@@ -1,38 +1,32 @@
 import React from 'react';
-import { lifecycle, compose } from 'recompose';
-import { Row, Input, Divider, Table, Button, Col } from 'antd';
+import PropTypes from 'prop-types';
+
+import { lifecycle, compose, withHandlers } from 'recompose';
 
 import { tableColumns } from './doctor.list.constants';
+import { TableList } from '../../../components/TableList';
 
 const DoctorListComponent = props => (
-  <div>
-    <Row type="flex" justify="space-between">
-      <Col>
-        <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
-      </Col>
-      <Col>
-        <Button
-          type="primary"
-          onClick={() => props.history.push('/cadastros/medicos/novo')}
-        >
-          Novo Médico
-        </Button>
-      </Col>
-    </Row>
-
-    <Divider />
-
-    <Row>
-      <Table
-        size="middle"
-        columns={tableColumns}
-        dataSource={props.doctors}
-        rowKey={it => it.user_profile_id}
-        pagination={{ pageSize: 8 }}
-      />
-    </Row>
-  </div>
+  <TableList
+    buttonName="Novo Médico"
+    columns={tableColumns}
+    datasource={props.doctors}
+    onButtonClick={props.onNewDoctorClick}
+    idAccessor="user_profile_id"
+  />
 );
+
+DoctorListComponent.propTypes = {
+  doctors: PropTypes.instanceOf(Array).isRequired,
+  onNewDoctorClick: PropTypes.func.isRequired
+};
+
+const withListHandlers = withHandlers({
+  onNewDoctorClick: props => event => {
+    event.stopPropagation();
+    props.history.push('/cadastros/medicos/novo');
+  }
+});
 
 const listLifecycle = lifecycle({
   componentDidMount() {
@@ -40,4 +34,7 @@ const listLifecycle = lifecycle({
   }
 });
 
-export default compose(listLifecycle)(DoctorListComponent);
+export default compose(
+  withListHandlers,
+  listLifecycle
+)(DoctorListComponent);
