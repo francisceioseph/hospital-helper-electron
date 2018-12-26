@@ -22,7 +22,7 @@ import {
   faAddressCard,
   faStethoscope,
   faSyringe,
-  faLock
+  faLock,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -62,8 +62,8 @@ export default [
     route: '/',
     permission: {
       action: 'view',
-      resources: ['home']
-    }
+      resources: ['home'],
+    },
   },
   {
     code: '1',
@@ -72,8 +72,8 @@ export default [
     route: '/senhas',
     permission: {
       action: 'view',
-      resources: ['senhas']
-    }
+      resources: ['senhas'],
+    },
   },
   {
     code: '2',
@@ -81,8 +81,8 @@ export default [
     name: 'Prontuários',
     permission: {
       action: 'view',
-      resources: ['prontuario']
-    }
+      resources: ['prontuario'],
+    },
   },
   {
     code: '21',
@@ -93,8 +93,8 @@ export default [
     name: 'Prontuário Eletrônico',
     permission: {
       action: 'view',
-      resources: ['prontuario']
-    }
+      resources: ['prontuario'],
+    },
   },
   {
     code: '22',
@@ -105,8 +105,8 @@ export default [
     name: 'Emissão de Documentos',
     permission: {
       action: 'view',
-      resources: ['documentos']
-    }
+      resources: ['documentos'],
+    },
   },
   {
     code: '23',
@@ -117,8 +117,8 @@ export default [
     name: 'Evolução',
     permission: {
       action: 'view',
-      resources: ['evolucao']
-    }
+      resources: ['evolucao'],
+    },
   },
   {
     code: '4',
@@ -126,8 +126,8 @@ export default [
     icon: 'user-clock',
     permission: {
       action: 'view',
-      resources: ['consultas', 'exames', 'cirurgias']
-    }
+      resources: ['consultas', 'exames', 'cirurgias'],
+    },
   },
   {
     code: '41',
@@ -138,15 +138,15 @@ export default [
     route: '/marcacoes/consultas',
     permission: {
       action: 'view',
-      resources: ['consultas']
-    }
+      resources: ['consultas'],
+    },
   },
   {
     code: '411',
     menuParentCode: '-1',
     breadParentCode: '41',
     name: 'Nova Consulta',
-    route: '/marcacoes/consultas/novo'
+    route: '/marcacoes/consultas/novo',
   },
   {
     code: '42',
@@ -157,15 +157,15 @@ export default [
     route: '/marcacoes/exames',
     permission: {
       action: 'view',
-      resources: ['exames']
-    }
+      resources: ['exames'],
+    },
   },
   {
     code: '421',
     menuParentCode: '-1',
     breadParentCode: '44',
     name: 'Novo Exame',
-    route: '/marcacoes/exames/criar'
+    route: '/marcacoes/exames/criar',
   },
   {
     code: '43',
@@ -176,15 +176,15 @@ export default [
     route: '/marcacoes/cirurgias',
     permission: {
       action: 'view',
-      resources: ['cirurgias']
-    }
+      resources: ['cirurgias'],
+    },
   },
   {
     code: '431',
     menuParentCode: '-1',
     breadParentCode: '44',
     name: 'Nova Cirurgia',
-    route: '/marcacoes/cirurgias/criar'
+    route: '/marcacoes/cirurgias/criar',
   },
   {
     code: '5',
@@ -198,9 +198,9 @@ export default [
         'cadastro-tipo-cirurgia',
         'cadastro-especialidade',
         'cadastro-tipo-atendimento',
-        'cadastro-tipo-exame'
-      ]
-    }
+        'cadastro-tipo-exame',
+      ],
+    },
   },
   {
     code: '51',
@@ -211,15 +211,15 @@ export default [
     route: '/cadastros/pacientes',
     permission: {
       action: 'view',
-      resources: ['cadastro-paciente']
-    }
+      resources: ['cadastro-paciente'],
+    },
   },
   {
     code: '512',
     menuParentCode: '-1',
     breadParentCode: '51',
     name: 'Cadastrar Paciente',
-    route: '/cadastros/pacientes/novo'
+    route: '/cadastros/pacientes/novo',
   },
   {
     code: '52',
@@ -230,15 +230,15 @@ export default [
     route: '/cadastros/medicos',
     permission: {
       action: 'view',
-      resources: ['cadastro-medico']
-    }
+      resources: ['cadastro-medico'],
+    },
   },
   {
     code: '521',
     menuParentCode: '-1',
     breadParentCode: '52',
     name: 'Cadastrar Médico',
-    route: '/cadastros/medicos/novo'
+    route: '/cadastros/medicos/novo',
   },
   {
     code: '53',
@@ -249,8 +249,8 @@ export default [
     route: '/cadastros/especialidade',
     permission: {
       action: 'view',
-      resources: ['cadastro-especialidade']
-    }
+      resources: ['cadastro-especialidade'],
+    },
   },
   {
     code: '54',
@@ -261,8 +261,8 @@ export default [
     route: '/cadastros/tipo-atendimento',
     permission: {
       action: 'view',
-      resources: ['cadastro-tipo-atendimento']
-    }
+      resources: ['cadastro-tipo-atendimento'],
+    },
   },
   {
     code: '55',
@@ -273,8 +273,8 @@ export default [
     route: '/cadastros/tipo-exame',
     permission: {
       action: 'view',
-      resources: ['cadastro-tipo-exame']
-    }
+      resources: ['cadastro-tipo-exame'],
+    },
   },
   {
     code: '56',
@@ -285,7 +285,14 @@ export default [
     route: '/cadastros/perfis-acesso',
     permission: {
       action: 'view',
-      resources: ['perfis-acesso']
-    }
-  }
+      resources: ['perfis-acesso'],
+    },
+  },
+  {
+    code: '561',
+    menuParentCode: '-1',
+    breadParentCode: '56',
+    name: 'Cadastrar Perfil de Acesso',
+    route: '/cadastros/perfis-acesso/novo',
+  },
 ];

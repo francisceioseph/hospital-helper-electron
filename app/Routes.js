@@ -17,8 +17,8 @@ import { SurgeryList } from './pages/Surgery';
 import { LoginPage } from './pages/Login';
 import { AppointmentTypeList } from './pages/AppointmentTypes';
 import { ExamTypeList } from './pages/ExamTypes';
+import { ListRoles, RoleForm } from './pages/Roles';
 import { PanelLayout } from './containers/layouts';
-import RoleFormComponent from './pages/Roles/components/role.form.component';
 
 export default () => (
   <App>
@@ -81,7 +81,12 @@ export default () => (
       <ProtectedRoute
         exact
         path="/cadastros/perfis-acesso"
-        component={RoleFormComponent}
+        component={ListRoles}
+      />
+      <ProtectedRoute
+        exact
+        path="/cadastros/perfis-acesso/novo"
+        component={RoleForm}
       />
       <PanelLayout component={NotFound} />
     </Switch>

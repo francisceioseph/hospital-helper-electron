@@ -35,3 +35,6 @@ export const getExams = () => http.getRequest(http.GET_EXAMS_URL);
 export const createExam = data => http.postRequest(http.POST_EXAM_URL, data);
 export const updateExam = (id, data) => http.patchRequest(http.updateExamUrl(id), data);
 export const removeExam = id => http.deleteRequest(http.getExamUrl(id));
+
+export const getRoles = () => http.getRequest(http.GET_ROLES_URL);
+export const createRole = data => http.postRequest(http.POST_ROLE_URL, data);

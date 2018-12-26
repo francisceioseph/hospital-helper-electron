@@ -5,22 +5,25 @@ import {
   withHandlers,
   defaultProps,
   withState,
-  lifecycle
+  lifecycle,
 } from 'recompose';
-import { Form, Button, Divider, Table } from 'antd';
+import {
+  Form, Button, Divider, Table,
+} from 'antd';
 
 import {
   getDefaultPermissions,
   LABELS,
-  tableColumns
+  tableColumns,
 } from './role.form.constants';
+
 import { getDecoratorManager } from './role.form.decorators';
 import * as entries from './role.form.entries';
 
 import {
   HORIZONTAL_FORM_LAYOUT,
   FORM_ITEM_LAYOUT,
-  FORM_ITEM_SUBMIT_LAYOUT
+  FORM_ITEM_SUBMIT_LAYOUT,
 } from '../../../components/forms';
 
 const FormItem = Form.Item;
@@ -31,7 +34,7 @@ const handleSubmit = props => e => {
     if (!err) {
       const role = {
         ...values,
-        permissions: props.permissions
+        permissions: props.permissions,
       };
 
       props.onSubmitHandler(role, props.form);
@@ -54,7 +57,7 @@ const withLifecycle = lifecycle({
       const items = _.values(permissions);
       this.props.setPermissions(items);
     }
-  }
+  },
 });
 
 const RoleForm = props => {
@@ -98,7 +101,7 @@ const RoleForm = props => {
 const RoleFormComponent = compose(
   defaultProps({
     role: {},
-    permissions: []
+    permissions: [],
   }),
   withPermissions,
   withFormHandlers,

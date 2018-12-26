@@ -36,6 +36,9 @@ export const POST_EXAM_URL = '/exams/new';
 export const updateExamUrl = id => `/exams/edit${id}`;
 export const getExamUrl = id => `/exams/${id}`;
 
+export const GET_ROLES_URL = '/roles';
+export const POST_ROLE_URL = '/roles/new';
+
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use(oldSettings => {
     const settings = { ...oldSettings };
