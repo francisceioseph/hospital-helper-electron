@@ -12,104 +12,27 @@
     "__DEV__": true
   },
   "rules": {
-    "linebreak-style": "off",
-    "global-require": "off",
-    "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
-    "jsx-a11y/anchor-has-content": "off",
-    "jsx-a11y/no-noninteractive-element-interactions": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/href-no-hash": "off",
-    "arrow-body-style": ["error", "as-needed"],
-    "arrow-parens": ["error", "as-needed"],
-    "comma-dangle": ["error", "always-multiline"],
+    "func-names": "off",
     "indent": ["error", 2],
-    "padding-line-between-statements": [
-      "error",
-      {
-        "blankLine": "always",
-        "prev": "var",
-        "next": "return"
-      }
-    ],
-    "newline-per-chained-call": "off",
-    "no-confusing-arrow": "off",
-    "no-underscore-dangle": "off",
-    "max-len": ["error", 120],
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ],
-    "space-before-function-paren": ["error", "never"],
-    "wrap-iife": [
-      "error",
-      "inside",
-      {
-        "functionPrototypeMethods": false
-      }
-    ],
-    "react/jsx-wrap-multilines": "off",
-    "react/jsx-closing-bracket-location": "off",
-    "react/jsx-curly-spacing": [
-      "error",
-      "never",
-      {
-        "allowMultiline": true
-      }
-    ],
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ],
-    "react/jsx-indent": "off",
-    "react/jsx-indent-props": "off",
-    "react/jsx-no-bind": "error",
-    "react/no-multi-comp": "off",
-    "react/prefer-stateless-function": "off",
-    "react/destructuring-assignment": "off",
-    "react/sort-comp": [
-      "error",
-      {
-        "order": [
-          "static-methods",
-          "lifecycle",
-          "/^on.+$/",
-          "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
-          "everything-else",
-          "/^render.+$/",
-          "render"
-        ],
-        "groups": {
-          "lifecycle": [
-            "displayName",
-            "props",
-            "propTypes",
-            "contextTypes",
-            "childContextTypes",
-            "mixins",
-            "statics",
-            "defaultProps",
-            "state",
-            "constructor",
-            "getDefaultProps",
-            "getInitialState",
-            "getChildContext",
-            "componentWillMount",
-            "componentDidMount",
-            "componentWillReceiveProps",
-            "shouldComponentUpdate",
-            "componentWillUpdate",
-            "componentDidUpdate",
-            "componentWillUnmount"
-          ]
+    "comma-dangle": ["error", {
+        "arrays": "ignore",
+        "objects": "ignore",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+    }],
+    "key-spacing": ["error", {
+        "multiLine": {
+            "beforeColon": false,
+            "afterColon": true
+        },
+        "align": {
+            "beforeColon": true,
+            "afterColon": true,
+            "on": "colon"
         }
-      }
-    ]
-  }
+    }],
+    "eol-last": "off",
+    "import/prefer-default-export": "off",
+  },
 }

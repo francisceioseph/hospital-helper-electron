@@ -1,21 +1,21 @@
 import React from 'react';
 
-import { Form, Button, Divider } from 'antd';
+import { Form, Button, Divider, Collapse } from 'antd';
 import { compose, withHandlers, defaultProps } from 'recompose';
 import { getDecoratorManager } from './pacient.form.decorator';
 import { LABELS } from './pacient.form.constants';
 
-import * as entries from './pacient.form.entries';
+import IdentificationFragment from './form-sections/identification-section';
+import DemographicsFragment from './form-sections/demographycs-section';
 
 import {
   HORIZONTAL_FORM_LAYOUT,
-  FORM_ITEM_LAYOUT,
   FORM_ITEM_SUBMIT_LAYOUT
 } from '../../../components/forms';
 
 const FormItem = Form.Item;
 
-const handleSubmit = props => e => {
+const handleSubmit = props => (e) => {
   e.preventDefault();
   props.form.validateFields((err, values) => {
     if (!err) {
@@ -26,7 +26,7 @@ const handleSubmit = props => e => {
 
 const withFormHandlers = withHandlers({ handleSubmit });
 
-const PacientForm = props => {
+const PacientForm = (props) => {
   const { pacient } = props;
   const { getFieldDecorator } = props.form;
   const decoratorManager = getDecoratorManager(getFieldDecorator, pacient);
@@ -37,33 +37,14 @@ const PacientForm = props => {
         <h2>Cadastrar Paciente</h2>
       </Divider>
       <Form layout={HORIZONTAL_FORM_LAYOUT} onSubmit={props.handleSubmit}>
-        <FormItem
-          {...FORM_ITEM_LAYOUT}
-          label={LABELS.NOME_COMPLETO}
-          hasFeedback
-        >
-          {decoratorManager.fullNameDecorator(entries.getFullNameField())}
-        </FormItem>
-
-        <FormItem label={LABELS.CPF} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.cpfDecorator(entries.getCpfField())}
-        </FormItem>
-
-        <FormItem label={LABELS.CNS} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.cnsDecorator(entries.getCnsField())}
-        </FormItem>
-
-        <FormItem label={LABELS.MOTHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.motherNameDecorator(entries.getMotherNameField())}
-        </FormItem>
-
-        <FormItem label={LABELS.GENDER} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.genderDecorator(entries.getGenderField())}
-        </FormItem>
-
-        <FormItem label={LABELS.BIRTH_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
-        </FormItem>
+        <Collapse defaultActiveKey="personal-info">
+          <Collapse.Panel header="Informações Pessoais" key="personal-info">
+            <IdentificationFragment {...props} decoratorManager={decoratorManager}/>
+          </Collapse.Panel>
+          <Collapse.Panel header="Informações Sócio-Econômicas" key="demographics">
+            <DemographicsFragment {...props} decoratorManager={decoratorManager}/>
+          </Collapse.Panel>
+        </Collapse>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
           <Button
@@ -82,7 +63,9 @@ const PacientForm = props => {
 const PacientFormComponent = compose(
   defaultProps({
     pacient: {
-      gender: 'male'
+      profile: {
+        gender: 'male'
+      }
     }
   }),
   withFormHandlers

@@ -8,8 +8,22 @@ import {
 } from './pacient.actions';
 
 const initialState = {
-  pacients: {},
-  pacient: {}
+  pacients : {},
+  pacient  : {
+    profile: {
+      gender             : 'male',
+      nationality        : 'Brasileira',
+      country_birth      : 'Brasil',
+      birth_state        : 'Ceará',
+      birth_city         : 'Aquiraz',
+      is_estudying       : false,
+      course             : 'none',
+      sexual_orientation : 'none',
+      gender_identity    : 'none',
+      has_special_needs  : false,
+      special_needs      : 'none',
+    }
+  }
 };
 
 function handleGetPacients(state, action) {
@@ -65,10 +79,10 @@ function handleRemovePacient(state, action) {
 
 export default handleActions(
   {
-    [getPacients]: handleGetPacients,
-    [createPacient]: handleCreatePacient,
-    [updatePacient]: handleUpdatePacient,
-    [removePacient]: handleRemovePacient
+    [getPacients]   : handleGetPacients,
+    [createPacient] : handleCreatePacient,
+    [updatePacient] : handleUpdatePacient,
+    [removePacient] : handleRemovePacient
   },
   initialState
 );
