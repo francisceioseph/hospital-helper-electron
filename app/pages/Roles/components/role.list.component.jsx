@@ -26,7 +26,7 @@ RoleListComponent.propTypes = {
 const withListHandlers = withHandlers({
   onNewRoleClick: props => event => {
     event.stopPropagation();
-    props.history.push('/cadastros/perfis-acesso/novo');
+    props.history.push('/configuracoes/perfis-acesso/novo');
   },
   onSearch: () => () => {},
 });

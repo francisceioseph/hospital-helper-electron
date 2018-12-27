@@ -28,33 +28,33 @@ export default () => (
       <ProtectedRoute exact path="/prontuarios" component={Prontuario} />
       <ProtectedRoute
         exact
-        path="/cadastros/tipo-atendimento"
+        path="/configuracoes/tipo-atendimento"
         component={AppointmentTypeList}
       />
       <ProtectedRoute
         exact
-        path="/cadastros/tipo-exame"
+        path="/configuracoes/tipo-exame"
         component={ExamTypeList}
       />
       <ProtectedRoute
         exact
-        path="/cadastros/especialidade"
+        path="/configuracoes/especialidade"
         component={SpecialtyList}
       />
-      <ProtectedRoute exact path="/cadastros/medicos" component={DoctorList} />
+      <ProtectedRoute exact path="/usuarios/medicos" component={DoctorList} />
       <ProtectedRoute
         exact
-        path="/cadastros/medicos/novo"
+        path="/usuarios/medicos/novo"
         component={DoctorForm}
       />
       <ProtectedRoute
         exact
-        path="/cadastros/pacientes"
+        path="/usuarios/pacientes"
         component={PacientList}
       />
       <ProtectedRoute
         exact
-        path="/cadastros/pacientes/novo"
+        path="/usuarios/pacientes/novo"
         component={PacientForm}
       />
       <ProtectedRoute exact path="/marcacoes/exames" component={ExamList} />
@@ -80,12 +80,12 @@ export default () => (
       />
       <ProtectedRoute
         exact
-        path="/cadastros/perfis-acesso"
+        path="/configuracoes/perfis-acesso"
         component={ListRoles}
       />
       <ProtectedRoute
         exact
-        path="/cadastros/perfis-acesso/novo"
+        path="/configuracoes/perfis-acesso/novo"
         component={RoleForm}
       />
       <PanelLayout component={NotFound} />

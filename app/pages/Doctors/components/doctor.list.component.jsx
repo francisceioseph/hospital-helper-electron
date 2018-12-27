@@ -24,7 +24,7 @@ DoctorListComponent.propTypes = {
 const withListHandlers = withHandlers({
   onNewDoctorClick: props => event => {
     event.stopPropagation();
-    props.history.push('/cadastros/medicos/novo');
+    props.history.push('/usuarios/medicos/novo');
   }
 });
 

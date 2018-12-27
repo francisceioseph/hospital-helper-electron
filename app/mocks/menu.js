@@ -23,6 +23,8 @@ import {
   faStethoscope,
   faSyringe,
   faLock,
+  faScrewdriver,
+  faUserLock,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -51,7 +53,9 @@ library.add(
   faAddressCard,
   faStethoscope,
   faSyringe,
-  faLock
+  faLock,
+  faScrewdriver,
+  faUserLock,
 );
 
 export default [
@@ -188,7 +192,7 @@ export default [
   },
   {
     code: '5',
-    name: 'Cadastros',
+    name: 'Usuários',
     icon: 'keyboard',
     permission: {
       action: 'view',
@@ -206,9 +210,9 @@ export default [
     code: '51',
     menuParentCode: '5',
     breadParentCode: '5',
-    name: 'Paciente',
+    name: 'Pacientes',
     icon: 'user-plus',
-    route: '/cadastros/pacientes',
+    route: '/usuarios/pacientes',
     permission: {
       action: 'view',
       resources: ['cadastro-paciente'],
@@ -219,15 +223,15 @@ export default [
     menuParentCode: '-1',
     breadParentCode: '51',
     name: 'Cadastrar Paciente',
-    route: '/cadastros/pacientes/novo',
+    route: '/usuarios/pacientes/novo',
   },
   {
     code: '52',
     menuParentCode: '5',
     breadParentCode: '5',
-    name: 'Médico',
+    name: 'Médicos',
     icon: 'user-md',
-    route: '/cadastros/medicos',
+    route: '/usuarios/medicos',
     permission: {
       action: 'view',
       resources: ['cadastro-medico'],
@@ -238,61 +242,84 @@ export default [
     menuParentCode: '-1',
     breadParentCode: '52',
     name: 'Cadastrar Médico',
-    route: '/cadastros/medicos/novo',
+    route: '/usuarios/medicos/novo',
   },
   {
-    code: '53',
-    menuParentCode: '5',
-    breadParentCode: '5',
+    code: '6',
+    name: 'Configurações',
+    icon: 'cog',
+    permission: {
+      action: 'view',
+      resources: [
+        'cadastro-especialidade',
+        'cadastro-tipo-cirurgia',
+        'cadastro-tipo-atendimento',
+        'cadastro-tipo-exame',
+      ],
+    },
+  },
+  {
+    code: '61',
+    menuParentCode: '6',
+    breadParentCode: '6',
     name: 'Especialidade',
     icon: 'address-card',
-    route: '/cadastros/especialidade',
+    route: '/configuracoes/especialidade',
     permission: {
       action: 'view',
       resources: ['cadastro-especialidade'],
     },
   },
   {
-    code: '54',
-    menuParentCode: '5',
-    breadParentCode: '5',
+    code: '62',
+    menuParentCode: '6',
+    breadParentCode: '6',
     name: 'Tipo de Atendimento',
     icon: 'stethoscope',
-    route: '/cadastros/tipo-atendimento',
+    route: '/configuracoes/tipo-atendimento',
     permission: {
       action: 'view',
       resources: ['cadastro-tipo-atendimento'],
     },
   },
   {
-    code: '55',
-    menuParentCode: '5',
-    breadParentCode: '5',
+    code: '63',
+    menuParentCode: '6',
+    breadParentCode: '6',
     name: 'Tipo de Exame',
     icon: 'syringe',
-    route: '/cadastros/tipo-exame',
+    route: '/configuracoes/tipo-exame',
     permission: {
       action: 'view',
       resources: ['cadastro-tipo-exame'],
     },
   },
   {
-    code: '56',
-    menuParentCode: '5',
-    breadParentCode: '5',
-    name: 'Perfis de Acesso',
+    code: '7',
+    name: 'Segurança',
     icon: 'lock',
-    route: '/cadastros/perfis-acesso',
+    permission: {
+      action: 'view',
+      resources: ['perfis-acesso']
+    },
+  },
+  {
+    code: '71',
+    menuParentCode: '7',
+    breadParentCode: '7',
+    name: 'Perfis de Acesso',
+    icon: 'user-lock',
+    route: '/configuracoes/perfis-acesso',
     permission: {
       action: 'view',
       resources: ['perfis-acesso'],
     },
   },
   {
-    code: '561',
+    code: '711',
     menuParentCode: '-1',
-    breadParentCode: '56',
+    breadParentCode: '71',
     name: 'Cadastrar Perfil de Acesso',
-    route: '/cadastros/perfis-acesso/novo',
+    route: '/configuracoes/perfis-acesso/novo',
   },
 ];

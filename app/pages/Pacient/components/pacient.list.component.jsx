@@ -12,7 +12,7 @@ const withLifecycle = lifecycle({
 
 const withListHandlers = withHandlers({
   onNewPacientClick: props => () =>
-    props.history.push('/cadastros/pacientes/novo')
+    props.history.push('/usuarios/pacientes/novo')
 });
 
 const PacientListComponent = props => (
