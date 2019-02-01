@@ -20,7 +20,7 @@ const LoginForm = props => {
   return (
     <Form onSubmit={props.handleSubmit} className="login-form">
       <FormItem>
-        {getFieldDecorator('username', {
+        {getFieldDecorator('email', {
           rules: [{ required: true, message: 'Please input your username!' }]
         })(
           <Input

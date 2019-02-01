@@ -11,7 +11,7 @@ import './header.scss';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
-const handleLogoutButtonClick = props => () => props.clearUserCredentials();
+const handleLogoutButtonClick = props => () => props.clearCredentials();
 
 const handleOnEditProfileClick = () => () => alert('Not implemented :P');
 

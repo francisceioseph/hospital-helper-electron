@@ -21,11 +21,11 @@ export const reHydrateStore = () => {
   const data = localStorage.getItem(AppConstants.AUTH_TOKEN_STORAGE_ID);
 
   if (data) {
-    const userCredentials = JSON.parse(data);
+    const credentials = JSON.parse(data);
     return {
       login: {
         ...loginDefaultState,
-        userCredentials
+        credentials
       }
     };
   }

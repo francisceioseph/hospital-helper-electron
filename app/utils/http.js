@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_BACKEND_URL = 'http://localhost:3000';
 
-export const postLoginUrl = () => '/users/login';
+export const postLoginUrl = () => '/login';
 
 export const GET_DOCTORS_URL = '/users/doctors';
 export const POST_DOCTOR_URL = '/users/register';

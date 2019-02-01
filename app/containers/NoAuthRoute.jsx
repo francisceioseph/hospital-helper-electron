@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { PageLayout } from './layouts';
 
 const mapStateToProps = ({ login }) => ({
-  authenticated: !!login.userCredentials.token
+  authenticated: !!login.credentials.token
 });
 
 const mapDispatchToProps = {};

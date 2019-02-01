@@ -41,9 +41,9 @@ function getCrmDecorator(decorator, values) {
 
 function getEmailDecorator(decorator, values) {
   const user = values.user || {};
-  return decorator('user.username', {
+  return decorator('user.email', {
     rules: [{ required: true, message: REQUIRED_FIELD_MSG }],
-    initialValue: user.username
+    initialValue: user.email
   });
 }
 

@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { Alert } from 'antd';
 
-import { setUserCredentials, setLoginError } from './login.actions';
+import { setCredentials, setLoginError } from './login.actions';
 import LoginForm from './components/login.form';
 import * as WebAPI from '../../utils/webAPI';
 
 import './login.scss';
 
 const mapStateToProps = state => ({
-  userCredentials: state.login.userCredentials,
+  credentials: state.login.credentials,
   loginError: state.login.loginError
 });
 
 const mapDispatchToProps = {
-  setUserCredentials,
+  setCredentials,
   setLoginError
 };
 
@@ -26,13 +26,18 @@ const withRedux = connect(
 );
 
 const onSubmitHandler = ({
-  setUserCredentials,
+  setCredentials,
   setLoginError,
   history
 }) => values => {
   return WebAPI.postLogin(values)
     .then(response => {
-      setUserCredentials(response.data);
+      const credentials = {
+        token: response.headers.authorization,
+        user: response.data
+      };
+
+      setCredentials(credentials);
       history.push('/');
     })
     .catch(error => {

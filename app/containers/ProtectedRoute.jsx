@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { PanelLayout } from './layouts';
 const mapStateToProps = ({ login }) => ({
-  authenticated: !!login.userCredentials.token
+  authenticated: !!login.credentials.token
 });
 
 const mapDispatchToProps = {};

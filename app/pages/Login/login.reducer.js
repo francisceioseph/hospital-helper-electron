@@ -1,37 +1,37 @@
 import { handleActions } from 'redux-actions';
 import {
-  setUserCredentials,
+  setCredentials,
   setLoginError,
-  clearUserCredentials
+  clearCredentials
 } from './login.actions';
 
 export const loginDefaultState = {
-  userCredentials: {},
+  credentials: {},
   loginError: null
 };
 
 const handleSetLoginError = (state, action) => ({
   ...state,
-  userCredentials: {},
+  credentials: {},
   loginError: action.payload
 });
 
-const handleSetUserCredentials = (state, action) => ({
+const handleSetCredentials = (state, action) => ({
   ...state,
   loginError: null,
-  userCredentials: action.payload
+  credentials: action.payload
 });
 
-const handleClearUserCredentials = state => ({
+const handleClearCredentials = state => ({
   ...state,
   loginError: null,
-  userCredentials: {}
+  credentials: {}
 });
 
 export default handleActions(
   {
-    [setUserCredentials]: handleSetUserCredentials,
-    [clearUserCredentials]: handleClearUserCredentials,
+    [setCredentials]: handleSetCredentials,
+    [clearCredentials]: handleClearCredentials,
     [setLoginError]: handleSetLoginError
   },
   loginDefaultState

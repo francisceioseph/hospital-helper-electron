@@ -80,8 +80,8 @@ function getPathArray(array, current, pid, id) {
 
 const SideMenu = ({ collapsed, location, permissions }) => {
   // Generate Trees
-  const menusForPermissions = getMenusForPermissions(menus, permissions);
-  const menuTree = makeMenuDataTree(menusForPermissions);
+  // const menusForPermissions = getMenusForPermissions(menus, permissions);
+  const menuTree = makeMenuDataTree(menus);
   const menuItems = makeMenuItemTree(menuTree);
 
   // Look for the selected route

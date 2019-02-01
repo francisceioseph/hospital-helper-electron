@@ -1,12 +1,12 @@
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../SideMenu/actions';
-import { clearUserCredentials } from '../../pages/Login/login.actions';
+import { clearCredentials } from '../../pages/Login/login.actions';
 
 import Header from './header.component';
 
-const getProfileData = ({ userCredentials }) => {
-  const { user } = userCredentials;
+const getProfileData = ({ credentials }) => {
+  const { user } = credentials;
   return user ? user.profile : { full_name: '' };
 };
 
@@ -17,7 +17,7 @@ const mapStateToProps = ({ menu, login }) => ({
 
 const mapDispatchToProps = {
   toggleMenu,
-  clearUserCredentials
+  clearCredentials
 };
 
 export default connect(

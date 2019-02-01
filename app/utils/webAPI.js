@@ -1,6 +1,6 @@
 import * as http from './http';
 
-export const postLogin = data => http.postRequest(http.postLoginUrl(), data);
+export const postLogin = data => http.postRequest(http.postLoginUrl(), { user: data });
 
 export const getPacients = () => http.getRequest(http.GET_PACIENTS_URL);
 export const postPacient = data => http.postRequest(http.POST_PACIENT_URL, data);
