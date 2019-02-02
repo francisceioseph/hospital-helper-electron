@@ -9,12 +9,12 @@ const ButtonGroup = Button.Group;
 export const tableColumns = [
   {
     title: 'Nome',
-    dataIndex: 'full_name',
+    dataIndex: 'personal_datum.full_name',
     key: 'full_name'
   },
   {
     title: 'CRM',
-    dataIndex: 'crm',
+    dataIndex: 'personal_datum.crm',
     key: 'crm'
   },
   {

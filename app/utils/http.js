@@ -3,8 +3,9 @@ import axios from 'axios';
 const BASE_BACKEND_URL = 'http://localhost:3000';
 
 export const postLoginUrl = () => '/login';
+export const POST_USER_URL = '/signup';
 
-export const POST_DOCTOR_URL = '/register';
+export const POST_DOCTOR_URL = '/doctors';
 export const GET_DOCTORS_URL = '/doctors';
 export const getDoctorUrl = doctorId => `/doctors/${doctorId}`;
 export const updateDoctorUrl = doctorId => `/doctors//${doctorId}`;

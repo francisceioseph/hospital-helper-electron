@@ -3,8 +3,8 @@ import { withHandlers, compose } from 'recompose';
 
 import { createDoctor } from '../doctors.actions';
 import { DoctorFormComponent } from '../components';
+import { postDoctor } from '../doctors.service';
 
-import * as WebAPI from '../../../utils/webAPI';
 import * as Alert from '../../../components/Alerts';
 
 const mapStateToProps = ({ pacients }) => ({
@@ -15,14 +15,13 @@ const mapDispatchToProps = {
   createDoctor
 };
 
-const onNewDoctorFormSubmit = props => async (values, form) => {
+const onNewDoctorFormSubmit = () => async (values, form) => {
   try {
-    values.profile.profile_type_id = 5;
-    await WebAPI.createDoctor(values);
+    await postDoctor(values);
 
     Alert.success({
-      content: 'Cadastro realizado com sucesso',
-      onOk: () => form.resetFields()
+      content : 'Cadastro realizado com sucesso',
+      onOk    : () => form.resetFields()
     });
   } catch (error) {
     Alert.error();

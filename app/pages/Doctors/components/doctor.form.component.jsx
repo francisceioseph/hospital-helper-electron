@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Form, Button, Divider, Collapse } from 'antd';
+import {
+ Form, Button, Divider, Collapse 
+} from 'antd';
 import { compose, withHandlers, defaultProps } from 'recompose';
 import { getDecoratorManager } from './doctor.form.decorator';
 import { LABELS } from './doctor.form.constants';
@@ -16,7 +18,7 @@ import {
 const FormItem = Form.Item;
 const Panel = Collapse.Panel;
 
-const handleSubmit = props => e => {
+const handleSubmit = props => (e) => {
   e.preventDefault();
   props.form.validateFields((err, values) => {
     if (!err) {
@@ -27,7 +29,7 @@ const handleSubmit = props => e => {
 
 const withFormHandlers = withHandlers({ handleSubmit });
 
-const PacientForm = props => {
+const PacientForm = (props) => {
   const { pacient } = props;
   const { getFieldDecorator } = props.form;
   const decoratorManager = getDecoratorManager(getFieldDecorator, pacient);
@@ -76,6 +78,10 @@ const PacientForm = props => {
 
             <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.PASSWORD} hasFeedback>
               {decoratorManager.passwordDecorator(entries.getPasswordField())}
+            </FormItem>
+
+            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.PASSWORD_CONFIRMATION} hasFeedback>
+              {decoratorManager.passwordConfirmationDecorator(entries.getPasswordField())}
             </FormItem>
           </Panel>
         </Collapse>

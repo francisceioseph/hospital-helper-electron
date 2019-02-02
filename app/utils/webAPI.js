@@ -4,6 +4,8 @@ const makePayload = (context, data) => ({ [context]: data });
 
 export const postLogin = data => http.postRequest(http.postLoginUrl(), makePayload('users', data));
 
+export const postUser = data => http.postRequest(http.POST_USER_URL, makePayload('user', data));
+
 export const getPacients = () => http.getRequest(http.GET_PACIENTS_URL);
 export const postPacient = data => http.postRequest(http.POST_PACIENT_URL, makePayload('pacient', data));
 export const updatePacient = (id, data) => http.patchRequest(http.updatePacientUrl(id), makePayload('pacient', data));
