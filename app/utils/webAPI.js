@@ -2,7 +2,7 @@ import * as http from './http';
 
 const makePayload = (context, data) => ({ [context]: data });
 
-export const postLogin = data => http.postRequest(http.postLoginUrl(), makePayload('users', data));
+export const postLogin = data => http.postRequest(http.postLoginUrl(), makePayload('user', data));
 
 export const postUser = data => http.postRequest(http.POST_USER_URL, makePayload('user', data));
 
