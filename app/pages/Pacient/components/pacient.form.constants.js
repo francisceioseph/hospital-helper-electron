@@ -38,4 +38,7 @@ export const LABELS = {
   GENDER_IDENTITY       : 'Identidade de Gênero',
   HAS_SPECIAL_NEEDS     : 'Possui alguma Deficiência Física? ',
   SPECIAL_NEEDS         : 'Deficiência Física',
+
+  NEXT_OF_KIN_NAME : 'Nome do Responsável',
+  NEXT_OF_KIN_CPF  : 'CPF do Responsável',
 };

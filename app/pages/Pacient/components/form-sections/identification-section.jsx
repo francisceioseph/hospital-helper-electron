@@ -19,7 +19,7 @@ const IdentificationFragment = (props) => {
         {decoratorManager.socialNameDecorator(entries.getInputField())}
       </FormItem>
       <FormItem label={LABELS.RG} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.rg(entries.getInputField())}
+        {decoratorManager.rgDecorator(entries.getInputField())}
       </FormItem>
       <FormItem label={LABELS.CPF} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.cpfDecorator(entries.getCpfField())}
@@ -39,38 +39,6 @@ const IdentificationFragment = (props) => {
       <FormItem label={LABELS.NATIONALITY} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.nationalityDecorator(entries.getInputField())}
       </FormItem>
-      {/* 
-      <FormItem label={LABELS.CNS_RESPONSAVEL} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.cnsResponsavelDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.SOCIAL_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.socialNameDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.BIRTH_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
-      </FormItem>
-      <FormItem label={LABELS.MOTHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.motherNameDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.FATHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.fatherNameDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.COUNTRY_BIRTH} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.countryBirthDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.NAT_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.natDateDecorator(entries.getCpfField())}
-      </FormItem>
-      <FormItem label={LABELS.NAT_PORT} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.natPortDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.BIRTH_CITY} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.birthCityDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.BIRTH_STATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.birthStateDecorator(entries.getInputField())}
-      </FormItem>
-      */}
     </Fragment>
   );
 };

@@ -74,19 +74,19 @@ const PacientForm = (props) => {
           <TabPane tab="Informações Pessoais" key="1">
             <IdentificationFragment {...props} decoratorManager={decoratorManager} />
           </TabPane>
-          {/* <TabPane tab="Informações Sócio-Econômicas" key="2">
+          <TabPane tab="Informações Sócio-Econômicas" key="2">
             <DemographicsFragment {...props} decoratorManager={decoratorManager} />
-          </TabPane> */}
-          <TabPane tab="Contatos" key="2">
+          </TabPane>
+          <TabPane tab="Contatos" key="3">
             <ContactsFragment {...props} decoratorManager={decoratorManager} />
           </TabPane>
-          <TabPane tab="Dados Familiares" key="3">
+          <TabPane tab="Dados Familiares" key="4">
             <FamilyFragment {...props} decoratorManager={decoratorManager} />
           </TabPane>
         </Tabs>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
-          {props.currentTab !== 3 && (
+          {props.currentTab !== 4 && (
             <Button
               type="primary"
               className="login-form-button"
@@ -95,7 +95,7 @@ const PacientForm = (props) => {
             Próximo
             </Button>
           )}
-          {props.currentTab === 3 && (
+          {props.currentTab === 4 && (
             <Button
               type="primary"
               htmlType="submit"
