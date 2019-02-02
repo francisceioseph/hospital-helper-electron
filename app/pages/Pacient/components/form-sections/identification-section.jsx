@@ -15,23 +15,17 @@ const IdentificationFragment = (props) => {
       <FormItem label={LABELS.NOME_COMPLETO} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.fullNameDecorator(entries.getInputField())}
       </FormItem>
+      <FormItem label={LABELS.SOCIAL_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.socialNameDecorator(entries.getInputField())}
+      </FormItem>
+      <FormItem label={LABELS.RG} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.rg(entries.getInputField())}
+      </FormItem>
       <FormItem label={LABELS.CPF} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.cpfDecorator(entries.getCpfField())}
       </FormItem>
       <FormItem label={LABELS.CNS} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.cnsDecorator(entries.getCnsField())}
-      </FormItem>
-      <FormItem label={LABELS.FAMILY_HOLDER} {...FORM_ITEM_LAYOUT}>
-        {decoratorManager.familyHolderDecorator(entries.getYesNoRadio())}
-      </FormItem>
-      <FormItem label={LABELS.CNS_RESPONSAVEL} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.cnsResponsavelDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.SOCIAL_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.socialNameDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.BIRTH_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
       </FormItem>
       <FormItem label={LABELS.GENDER} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.genderDecorator(entries.getGenderField())}
@@ -42,14 +36,24 @@ const IdentificationFragment = (props) => {
       <FormItem label={LABELS.NIS_NUMBER} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.nisNumberDecorator(entries.getInputField())}
       </FormItem>
+      <FormItem label={LABELS.NATIONALITY} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.nationalityDecorator(entries.getInputField())}
+      </FormItem>
+      {/* 
+      <FormItem label={LABELS.CNS_RESPONSAVEL} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.cnsResponsavelDecorator(entries.getInputField())}
+      </FormItem>
+      <FormItem label={LABELS.SOCIAL_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.socialNameDecorator(entries.getInputField())}
+      </FormItem>
+      <FormItem label={LABELS.BIRTH_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
+      </FormItem>
       <FormItem label={LABELS.MOTHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.motherNameDecorator(entries.getInputField())}
       </FormItem>
       <FormItem label={LABELS.FATHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.fatherNameDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.NATIONALITY} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.nationalityDecorator(entries.getInputField())}
       </FormItem>
       <FormItem label={LABELS.COUNTRY_BIRTH} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.countryBirthDecorator(entries.getInputField())}
@@ -66,12 +70,7 @@ const IdentificationFragment = (props) => {
       <FormItem label={LABELS.BIRTH_STATE} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.birthStateDecorator(entries.getInputField())}
       </FormItem>
-      <FormItem label={LABELS.PHONE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.phoneDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.EMAIL} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.emailDecorator(entries.getInputField())}
-      </FormItem>
+      */}
     </Fragment>
   );
 };

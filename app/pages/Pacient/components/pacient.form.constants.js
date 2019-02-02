@@ -1,6 +1,7 @@
 export const LABELS = {
   CPF: 'CPF',
 
+  RG              : 'RG',
   CNS             : 'CNS',
   FAMILY_HOLDER   : 'Responsável Familiar',
   CNS_RESPONSAVEL : 'CNS Responsável',
@@ -20,6 +21,13 @@ export const LABELS = {
   BIRTH_STATE     : 'Estado onde Nasceu',
   PHONE           : 'Telefone',
   EMAIL           : 'E-mail',
+
+  STREE_NAME   : 'Rua',
+  HOUSE_NUMBER : 'Número',
+  ZIPCODE      : 'CEP',
+  NEIGHBORHOOD : 'Bairro',
+  CITY         : 'Cidade',
+  STATE        : 'Estado',
 
   JOB_TITLE             : 'Ocupação',
   JOB_CATEGORY          : 'Situação Mercado de Trabalho',
