@@ -37,7 +37,7 @@ const ExamTypeList = props => (
         size="middle"
         columns={tableColumns}
         dataSource={props.examTypes}
-        rowKey={it => it.exam_type_id}
+        rowKey={it => it.id}
         pagination={{ pageSize: 8 }}
       />
     </Row>

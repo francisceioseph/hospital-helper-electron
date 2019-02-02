@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import {
   getExamTypes, createExamType, updateExamType, removeExamType,
@@ -8,7 +9,8 @@ const initialState = {
 };
 
 const handleGetExamTypes = (state, action) => {
-  const { data: examTypes } = action.payload;
+  const { data } = action.payload;
+  const examTypes = _.pickBy(data, 'id');
   return {
     ...state,
     examTypes,
@@ -17,7 +19,7 @@ const handleGetExamTypes = (state, action) => {
 
 const handleCreateExamType = (state, action) => {
   const examType = action.payload;
-  const id = examType.exam_type_id.toString();
+  const id = examType.id.toString();
 
   return {
     ...state,
@@ -30,7 +32,7 @@ const handleCreateExamType = (state, action) => {
 
 const handleUpdateExamType = (state, action) => {
   const { data: examType } = action.payload;
-  const id = examType.exam_type_id.toString();
+  const id = examType.id.toString();
 
   return {
     ...state,

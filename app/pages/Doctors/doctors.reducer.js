@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import {
   getDoctors,
@@ -13,7 +14,8 @@ const initialState = {
 };
 
 const handleGetDoctors = (state, action) => {
-  const { data: doctors } = action.payload;
+  const { data } = action.payload;
+  const doctors = _.pickBy(data, 'id');
   return {
     ...state,
     doctors

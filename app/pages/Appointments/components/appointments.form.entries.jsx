@@ -14,9 +14,9 @@ export const getPacientNameField = pacients => (
 export const getAppointmentTypeField = appointmentTypes => (
   <SugestSelector
     options={appointmentTypes}
-    valueName="appointment_type_id"
+    valueName="id"
     labelName="appointment_type_name"
-    idName="appointment_type_id"
+    idName="id"
   />
 );
 

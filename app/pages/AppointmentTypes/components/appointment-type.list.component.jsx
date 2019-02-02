@@ -37,7 +37,7 @@ const AppointmentTypeList = props => (
         size="middle"
         columns={tableColumns}
         dataSource={props.appointmentTypes}
-        rowKey={it => it.appointment_type_id}
+        rowKey={it => it.id}
         pagination={{ pageSize: 8 }}
       />
     </Row>

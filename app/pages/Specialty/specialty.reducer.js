@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import {
   getSpecialties,
@@ -12,7 +13,9 @@ const initialState = {
 };
 
 const handleGetSpecialties = (state, action) => {
-  const { data: specialties } = action.payload;
+  const { data } = action.payload;
+  const specialties = _.pickBy(data, 'id');
+
   return {
     ...state,
     specialties
@@ -21,7 +24,7 @@ const handleGetSpecialties = (state, action) => {
 
 const handleCreateSpecialty = (state, action) => {
   const specialty = action.payload;
-  const id = specialty.specialty_id.toString();
+  const id = specialty.id.toString();
 
   return {
     ...state,
@@ -34,7 +37,7 @@ const handleCreateSpecialty = (state, action) => {
 
 const handleUpdateSpecialty = (state, action) => {
   const { data: specialty } = action.payload;
-  const id = specialty.specialty_id.toString();
+  const id = specialty.id.toString();
 
   return {
     ...state,
@@ -47,7 +50,7 @@ const handleUpdateSpecialty = (state, action) => {
 
 const handleRemoveSpecialty = (state, action) => {
   const { data: specialty } = action.payload;
-  const id = specialty.specialty_id.toString();
+  const id = specialty.id.toString();
   const { [id]: del, ...specialties } = state.specialties;
 
   return {

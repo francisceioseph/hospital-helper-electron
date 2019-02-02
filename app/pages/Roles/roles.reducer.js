@@ -1,4 +1,4 @@
-
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import {
   getRoles, retrieveRole, createRole, updateRole, removeRole,
@@ -10,7 +10,8 @@ const defaultState = {
 };
 
 const handleListRoles = (state, action) => {
-  const { data: roles } = action.payload;
+  const { data } = action.payload;
+  const roles = _.pickBy(data, 'id');
   return {
     ...state,
     roles,
@@ -31,7 +32,7 @@ const handleCreateRole = (state, action) => {
     ...state,
     roles: {
       ...state.roles,
-      [role.user_role_id]: role,
+      [role.user_id]: role,
     },
   };
 };
@@ -42,14 +43,14 @@ const handleEditRole = (state, action) => {
     ...state,
     roles: {
       ...state.roles,
-      [role.user_role_id]: role,
+      [role.user_id]: role,
     },
   };
 };
 
 const handleRemoveRole = (state, action) => {
   const role = action.payload;
-  const id = role.user_role_id;
+  const id = role.user_id;
   const { [id]: r, ...roles } = state.roles;
 
   return {

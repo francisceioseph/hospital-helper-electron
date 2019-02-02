@@ -24,7 +24,7 @@ export const tableColumns = [
             title: 'Remover Perfil',
             content: 'Você realmente deseja remover esse perfil?',
             onOk: () => {
-              store.dispatch(removeRole(record.user_role_id));
+              store.dispatch(removeRole(record.user_id));
             },
           })
           }

@@ -92,19 +92,19 @@ const AppointmentFormComponent = compose(
     appointment: {},
     appointmentTypes: [
       {
-        appointment_type_id: 1,
+        id: 1,
         appointment_type_name: 'Clínico Geral'
       }
     ],
     pacients: [
       {
-        pacient_id: 1,
+        id: 1,
         pacient_name: 'Ana Queiróz Medeiros'
       }
     ],
     doctors: [
       {
-        doctor_id: 1,
+        id: 1,
         doctor_name: 'Dr. Fernando Albuquerque'
       }
     ]

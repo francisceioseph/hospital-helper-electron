@@ -1,54 +1,56 @@
 import React from 'react';
-import * as WebAPI from '../../../utils/webAPI';
 
-import { compose, lifecycle, withState, withHandlers } from 'recompose';
-import { Row, Input, Divider, Table, Button, Col } from 'antd';
+import {
+ compose, lifecycle, withState, withHandlers 
+} from 'recompose';
+import {
+ Row, Input, Divider, Table, Button, Col 
+} from 'antd';
+import * as WebAPI from '../../../utils/webAPI';
 
 import { tableColumns } from './specialty.list.constants';
 import SpecialtyModal from './specialty.modal.component';
 
-const SpecialtyComponent = props => {
-  return (
-    <div>
-      <Row type="flex" justify="space-between">
-        <Col>
-          <Input.Search
-            onSearch={props.onSearch}
-            placeholder="Pesquisar"
-            style={{ width: 200 }}
-          />
-        </Col>
-        <Col>
-          <Button type="primary" onClick={props.showModal}>
+const SpecialtyComponent = props => (
+  <div>
+    <Row type="flex" justify="space-between">
+      <Col>
+        <Input.Search
+          onSearch={props.onSearch}
+          placeholder="Pesquisar"
+          style={{ width: 200 }}
+        />
+      </Col>
+      <Col>
+        <Button type="primary" onClick={props.showModal}>
             Nova Especialidade
-          </Button>
-        </Col>
-      </Row>
+        </Button>
+      </Col>
+    </Row>
 
-      <Divider />
+    <Divider />
 
-      <Row>
-        <Table
-          size="middle"
-          columns={tableColumns}
-          dataSource={props.specialties}
-          rowKey={it => it.specialty_id}
-          pagination={{ pageSize: 8 }}
-        />
-      </Row>
+    <Row>
+      <Table
+        size="middle"
+        columns={tableColumns}
+        dataSource={props.specialties}
+        rowKey={it => it.id}
+        pagination={{ pageSize: 8 }}
+      />
+    </Row>
 
-      <div>
-        <SpecialtyModal
-          wrappedComponentRef={props.handleSaveFormRef}
-          visible={props.visible}
-          confirmLoading={props.confirmLoading}
-          onCancel={props.handleCancel}
-          onCreate={props.handleCreate}
-        />
-      </div>
+    <div>
+      <SpecialtyModal
+        wrappedComponentRef={props.handleSaveFormRef}
+        visible={props.visible}
+        confirmLoading={props.confirmLoading}
+        onCancel={props.handleCancel}
+        onCreate={props.handleCreate}
+      />
     </div>
-  );
-};
+  </div>
+);
 
 const withVisibleState = withState('visible', 'setVisible', false);
 const withFormRef = withState('formRef', 'setFormRef', null);
@@ -68,7 +70,7 @@ const handleCreate = props => () => {
     }
 
     WebAPI.createSpecialty(values)
-      .then(response => {
+      .then((response) => {
         const specialty = response.data;
         props.createSpecialty(specialty);
 
@@ -76,7 +78,7 @@ const handleCreate = props => () => {
         props.setConfirmLoading(false);
         props.setVisible(false);
       })
-      .catch(error => {
+      .catch((error) => {
         props.setConfirmLoading(false);
       });
   });

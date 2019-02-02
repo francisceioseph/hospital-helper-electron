@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import {
   getAppointmentTypes, createAppointmentType, updateAppointmentType, removeAppointmentType,
@@ -8,7 +9,9 @@ const initialState = {
 };
 
 const handleGetAppointmentTypes = (state, action) => {
-  const { data: appointmentTypes } = action.payload;
+  const { data } = action.payload;
+  const appointmentTypes = _.pickBy(data, 'id');
+
   return {
     ...state,
     appointmentTypes,
@@ -17,7 +20,7 @@ const handleGetAppointmentTypes = (state, action) => {
 
 const handleCreateAppointmentType = (state, action) => {
   const appointmentType = action.payload;
-  const id = appointmentType.appointment_type_id.toString();
+  const id = appointmentType.id.toString();
 
   return {
     ...state,
@@ -30,7 +33,7 @@ const handleCreateAppointmentType = (state, action) => {
 
 const handleUpdateAppointmentType = (state, action) => {
   const { data: appointmentType } = action.payload;
-  const id = appointmentType.appointment_type_id.toString();
+  const id = appointmentType.id.toString();
 
   return {
     ...state,

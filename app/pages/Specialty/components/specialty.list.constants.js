@@ -8,24 +8,23 @@ const ButtonGroup = Button.Group;
 
 export const tableColumns = [
   {
-    title: 'Especialidade',
-    dataIndex: 'specialty_name',
-    key: 'specialty_name'
+    title     : 'Especialidade',
+    dataIndex : 'specialty_name',
+    key       : 'specialty_name'
   },
   {
-    title: 'Ações',
-    key: 'actions',
-    render: (text, record) => (
+    title  : 'Ações',
+    key    : 'actions',
+    render : (text, record) => (
       <ButtonGroup>
         <Button icon="edit" onClick={() => {}} />
         <Button
           icon="delete"
-          onClick={() =>
-            Modal.confirm({
-              title: 'Remover Especialidade',
-              content: 'Você realmente deseja remover esta especialidade?',
-              onOk: () => {
-                store.dispatch(removeSpecialty(record.specialty_id));
+          onClick={() => Modal.confirm({
+              title   : 'Remover Especialidade',
+              content : 'Você realmente deseja remover esta especialidade?',
+              onOk    : () => {
+                store.dispatch(removeSpecialty(record.id));
               }
             })
           }

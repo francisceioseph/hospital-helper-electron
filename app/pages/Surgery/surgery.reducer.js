@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   GET_SURGERIES,
   CREATE_SURGERY,

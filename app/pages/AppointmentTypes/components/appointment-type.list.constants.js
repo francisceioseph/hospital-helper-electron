@@ -24,7 +24,7 @@ export const tableColumns = [
             title: 'Remover Tipo de Agendamento',
             content: 'Você realmente deseja remover este Tipo de Agendamento?',
             onOk: () => {
-              store.dispatch(removeAppointmentType(record.appointment_type_id));
+              store.dispatch(removeAppointmentType(record.id));
             },
           })
           }

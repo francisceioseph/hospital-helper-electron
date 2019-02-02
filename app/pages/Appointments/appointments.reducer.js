@@ -6,10 +6,10 @@ import {
 } from './appointments.actions';
 
 const initialState = {
-  showModal: false,
-  appointments: {},
-  currentAppointment: {},
-  appointmentTypes: []
+  showModal          : false,
+  appointments       : {},
+  currentAppointment : {},
+  appointmentTypes   : []
 };
 
 const handleGetAppointments = (state, action) => {
@@ -32,7 +32,7 @@ const handleCreateAppointment = (state, action) => {
   const appointment = action.payload;
   const appointments = {
     ...state.appointments,
-    [appointment.appointment_id]: appointment
+    [appointment.id]: appointment
   };
 
   return {
@@ -43,9 +43,9 @@ const handleCreateAppointment = (state, action) => {
 
 export default handleActions(
   {
-    [getAppointments]: handleGetAppointments,
-    [getAppointmentTypes]: handleGetAppointmentTypes,
-    [createAppointment]: handleCreateAppointment
+    [getAppointments]     : handleGetAppointments,
+    [getAppointmentTypes] : handleGetAppointmentTypes,
+    [createAppointment]   : handleCreateAppointment
   },
   initialState
 );
