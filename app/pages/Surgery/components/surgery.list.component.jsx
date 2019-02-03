@@ -3,42 +3,42 @@ import PropTypes from 'prop-types';
 import { Row, Input, Divider, Button, Col } from 'antd';
 import Agenda from '../../../components/Agenda';
 
-class SurgeryComponent extends React.Component {
-  render() {
-    const { history } = this.props;
+const SurgeryComponent = (props) => {
+  const { history, surgeries, onSelectEvent } = props;
 
-    return (
-      <div>
-        <Row type="flex" justify="space-between">
-          <Col>
-            <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
-          </Col>
-          <Col>
-            <Button
-              type="primary"
-              onClick={() => history.push('/marcacoes/consultas/novo')}
-            >
-              Agendar Cirurgia
-            </Button>
-          </Col>
-        </Row>
+  return (
+    <div>
+      <Row type="flex" justify="space-between">
+        <Col>
+          <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
+        </Col>
+        <Col>
+          <Button
+            type="primary"
+            onClick={() => history.push('/marcacoes/cirurgias/novo')}
+          >
+            Agendar Cirurgia
+          </Button>
+        </Col>
+      </Row>
 
-        <Divider />
+      <Divider />
 
-        <Row>
-          <Agenda events={this.props.surgeries} />
-        </Row>
-      </div>
-    );
-  }
-}
+      <Row>
+        <Agenda events={surgeries} onSelectEvent={onSelectEvent} />
+      </Row>
+    </div>
+  );
+};
 
 SurgeryComponent.propTypes = {
-  specialties: PropTypes.instanceOf(Array)
+  history       : PropTypes.instanceOf(Object).isRequired,
+  surgeries     : PropTypes.instanceOf(Object).isRequired,
+  onSelectEvent : PropTypes.func,
 };
 
 SurgeryComponent.defaultProps = {
-  specialties: []
+  onSelectEvent: () => {}
 };
 
 export default SurgeryComponent;
