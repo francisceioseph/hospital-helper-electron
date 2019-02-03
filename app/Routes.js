@@ -13,7 +13,7 @@ import { DoctorList, DoctorForm } from './pages/Doctors';
 import { PacientList, PacientForm } from './pages/Pacient';
 import { ExamList, ExamForm } from './pages/Exams';
 import { AppointmentList, AppointmentForm } from './pages/Appointments';
-import { SurgeryList } from './pages/Surgery';
+import { SurgeryList, SurgeryForm } from './pages/Surgeries';
 import { LoginPage } from './pages/Login';
 import { AppointmentTypeList } from './pages/AppointmentTypes';
 import { ExamTypeList } from './pages/ExamTypes';
@@ -77,6 +77,11 @@ export default () => (
         exact
         path="/marcacoes/cirurgias"
         component={SurgeryList}
+      />
+      <ProtectedRoute
+        exact
+        path="/marcacoes/cirurgias/novo"
+        component={SurgeryForm}
       />
       <ProtectedRoute
         exact
