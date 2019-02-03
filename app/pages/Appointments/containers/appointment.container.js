@@ -10,19 +10,26 @@ import {
   getAppointmentTypes
 } from '../appointments.actions';
 
+import { 
+  pageStartLoadingAction,
+  pageStopLoadingAction,
+} from '../../../containers/layouts/actions';
+
 import { AppointmentForm } from '../components';
 
 import * as WebAPI from '../../../utils/webAPI';
 import * as Alert from '../../../components/Alerts';
 
 const mapStateToProps = ({ appointments, doctors, pacients }) => ({
-  appointment: appointments.appointment,
-  appointmentTypes: _.values(appointments.appointmentTypes),
-  pacients: _.values(pacients.pacients),
-  doctors: _.values(doctors.doctors)
+  appointment      : appointments.appointment,
+  appointmentTypes : _.values(appointments.appointmentTypes),
+  pacients         : _.values(pacients.pacients),
+  doctors          : _.values(doctors.doctors)
 });
 
 const mapDispatchToProps = {
+  pageStartLoadingAction,
+  pageStopLoadingAction,
   createAppointment,
   getAppointmentTypes,
   getPacients,
@@ -50,10 +57,27 @@ const withFormHandlers = withHandlers({
 });
 
 const withLifeCycle = lifecycle({
-  componentDidMount() {
-    this.props.getPacients();
-    this.props.getDoctors();
-    this.props.getAppointmentTypes();
+  async componentDidMount() {
+    try {
+      this.props.pageStartLoadingAction();
+
+      const responses = await Promise.all([
+        WebAPI.getPacients(),
+        WebAPI.getDoctors(),
+        WebAPI.getAppointmentTypes(),
+      ]);
+
+      this.props.getPacients(responses[0]);
+      this.props.getDoctors(responses[1]);
+      this.props.getAppointmentTypes(responses[2]);
+
+      this.props.pageStopLoadingAction();
+    } catch (error) {
+      this.props.pageStopLoadingAction();
+      Alert.error({
+        content: 'Não foi possível carregar agora. Tente novamente mais tarde.'
+      });
+    }
   }
 });
 

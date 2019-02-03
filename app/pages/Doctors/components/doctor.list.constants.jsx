@@ -19,8 +19,8 @@ export const tableColumns = [
   },
   {
     title     : 'Especialidade',
-    dataIndex : 'especialties',
-    key       : 'especialties',
+    dataIndex : 'specialties',
+    key       : 'specialties',
     render    : specialties => (
       <span>
         {specialties.map((specialty) => {

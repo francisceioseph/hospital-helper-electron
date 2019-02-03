@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Button, Modal } from 'antd';
 
 import moment from 'moment';
@@ -10,17 +11,17 @@ const ButtonGroup = Button.Group;
 export const tableColumns = [
   {
     title: 'Nome',
-    dataIndex: 'full_name',
+    dataIndex: 'personal_datum.full_name',
     key: 'full_name'
   },
   {
     title: 'CPF',
-    dataIndex: 'cpf',
+    dataIndex: 'personal_datum.cpf',
     key: 'cpf'
   },
   {
     title: 'CNS',
-    dataIndex: 'cns',
+    dataIndex: 'personal_datum.cns',
     key: 'cns'
   },
   {

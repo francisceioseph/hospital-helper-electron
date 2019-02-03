@@ -14,15 +14,15 @@ const AppointmentInfo = ({ appointment }) => (
   <List size="small" bordered>
     <Item>
       <Item.Meta title="Paciente" />
-      <b>{appointment.full_name}</b>
+      <b>{appointment.pacient.full_name}</b>
     </Item>
     <Item>
-      <Item.Meta title="Requisitante" />
-      <b>{appointment.doctor_name}</b>
+      <Item.Meta title="Médico" />
+      <b>{appointment.doctor.full_name}</b>
     </Item>
     <Item>
-      <Item.Meta title="Tipo de Exame" />
-      <b>{appointment.appointment_type_name}</b>
+      <Item.Meta title="Tipo de Atendimento" />
+      <b>{appointment.appointment_type.appointment_type_name}</b>
     </Item>
     <Item>
       <Item.Meta title="Horário Marcado" />

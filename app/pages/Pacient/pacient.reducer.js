@@ -63,7 +63,6 @@ function handleCreatePacient(state, action) {
   return {
     ...state,
     pacients,
-    pacient
   };
 }
 
@@ -79,7 +78,6 @@ function handleUpdatePacient(state, action) {
   return {
     ...state,
     pacients,
-    pacient
   };
 }
 

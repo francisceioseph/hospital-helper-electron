@@ -6,6 +6,7 @@ import { Row, Input, Divider, Button, Col, Modal } from 'antd';
 
 import Agenda from '../../../components/Agenda';
 import AppointmentInfo from './detail.component';
+import * as WebAPI from '../../../utils/webAPI';
 
 const AppointmentList = props => (
   <div>
@@ -49,8 +50,13 @@ const withListHandlers = withHandlers({
 });
 
 const withLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.getAppointments();
+  async componentDidMount() {
+    try {
+      const res = await WebAPI.getAppointments();
+      this.props.getAppointments(res);
+    } catch(error) {
+      console.log(error);
+    }
   }
 });
 

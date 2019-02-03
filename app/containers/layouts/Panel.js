@@ -27,9 +27,9 @@ class DefaultLayout extends React.Component {
     } = this.props;
 
     const contentStyle = {
-      padding: 24,
-      background: '#fff',
-      minHeight: 360
+      padding    : 24,
+      background : '#fff',
+      minHeight  : 360
     };
 
     return (
@@ -56,24 +56,24 @@ class DefaultLayout extends React.Component {
 }
 
 DefaultLayout.propTypes = {
-  component: PropTypes.instanceOf(Object).isRequired,
-  loading: PropTypes.bool.isRequired,
-  location: PropTypes.instanceOf(Object).isRequired,
-  requiredPermission: PropTypes.instanceOf(Object),
-  permissions: PropTypes.instanceOf(Array),
+  component          : PropTypes.instanceOf(Object).isRequired,
+  loading            : PropTypes.bool.isRequired,
+  location           : PropTypes.instanceOf(Object).isRequired,
+  requiredPermission : PropTypes.instanceOf(Object),
+  permissions        : PropTypes.instanceOf(Array),
   onEnter: PropTypes.func, // eslint-disable-line
-  history: PropTypes.instanceOf(Object).isRequired
+  history            : PropTypes.instanceOf(Object).isRequired
 };
 
 DefaultLayout.defaultProps = {
-  permissions: [],
-  requiredPermission: null
+  permissions        : [],
+  requiredPermission : null
 };
 
 function mapStateToProps({ page }) {
   return {
-    loading: page.loading,
-    permissions: []
+    loading     : page.loading,
+    permissions : []
   };
 }
 

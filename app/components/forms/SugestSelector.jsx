@@ -1,5 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
+import t from 'typy';
+
 import { Select } from 'antd';
 
 const { Option } = Select;
@@ -11,7 +13,8 @@ const filterSelectOptions = (input, option) => {
   return optionText.indexOf(inputText) >= 0;
 };
 
-class SugestSelector extends React.Component {
+// eslint-disable-next-line react/prefer-stateless-function
+export default class SugestSelector extends React.Component {
   render() {
     return (
       <Select
@@ -21,14 +24,19 @@ class SugestSelector extends React.Component {
         filterOption={filterSelectOptions}
         {...this.props}
       >
-        {this.props.options.map((it, idx) => (
-          <Option key={it[this.props.idName]} value={it[this.props.valueName]}>
-            {it[this.props.labelName]}
-          </Option>
-        ))}
+        {this.props.options.map((it) => {
+          const { idName, valueName, labelName } = this.props;
+          const id    = t(it, idName).safeObject;
+          const value = t(it, valueName).safeObject;
+          const label = t(it, labelName).safeObject;
+
+          return (
+            <Option key={id} value={value}>
+              {label}
+            </Option>
+          );
+        })}
       </Select>
     );
   }
 }
-
-export default SugestSelector;

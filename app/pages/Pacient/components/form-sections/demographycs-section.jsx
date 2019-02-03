@@ -1,3 +1,4 @@
+import t from 'typy';
 import React, { Fragment } from 'react';
 import { Form, Collapse, Divider } from 'antd';
 
@@ -10,7 +11,9 @@ const { Item: FormItem } = Form;
 const { Panel } = Collapse;
 
 const DemographicsFragment = (props) => {
-  const { decoratorManager } = props;
+  const { decoratorManager, pacient } = props;
+  const selectedCountry = t(pacient, 'personal_datum_attributes.birth_datum_attributes.country_of_birth').safeString;
+  
   return (
     <Fragment>
       <Collapse defaultActiveKey="1">
@@ -27,7 +30,7 @@ const DemographicsFragment = (props) => {
           <FormItem label={LABELS.BIRTH_CITY} {...FORM_ITEM_LAYOUT} hasFeedback>
             {decoratorManager.birthCityDecorator(entries.getInputField())}
           </FormItem>
-          {props.pacient.personal_datum_attributes.birth_datum_attributes.country_of_birth !== 'Brasil' &&(
+          {selectedCountry !== 'Brasil' &&(
             <div>
               <Divider orientation="left">Naturalização</Divider>
               <FormItem label={LABELS.NAT_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
