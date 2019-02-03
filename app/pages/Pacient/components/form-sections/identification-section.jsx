@@ -18,6 +18,12 @@ const IdentificationFragment = (props) => {
       <FormItem label={LABELS.SOCIAL_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.socialNameDecorator(entries.getInputField())}
       </FormItem>
+      <FormItem label={LABELS.MOTHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.motherNameDecorator(entries.getInputField())}
+      </FormItem>
+      <FormItem label={LABELS.FATHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.fatherNameDecorator(entries.getInputField())}
+      </FormItem>
       <FormItem label={LABELS.RG} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.rgDecorator(entries.getInputField())}
       </FormItem>
@@ -35,9 +41,6 @@ const IdentificationFragment = (props) => {
       </FormItem>
       <FormItem label={LABELS.NIS_NUMBER} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.nisNumberDecorator(entries.getInputField())}
-      </FormItem>
-      <FormItem label={LABELS.NATIONALITY} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.nationalityDecorator(entries.getInputField())}
       </FormItem>
     </Fragment>
   );

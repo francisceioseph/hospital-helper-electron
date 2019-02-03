@@ -5,9 +5,9 @@ import { DATE_FORMAT_PT_BR } from '../../../components/forms/formConstants';
 export const getPacientNameField = pacients => (
   <SugestSelector
     options={pacients}
-    valueName="user_profile_id"
+    valueName="id"
     labelName="full_name"
-    idName="user_profile_id"
+    idName="id"
   />
 );
 
@@ -23,9 +23,9 @@ export const getAppointmentTypeField = appointmentTypes => (
 export const getDoctorNameField = doctors => (
   <SugestSelector
     options={doctors}
-    valueName="user_profile_id"
+    valueName="id"
     labelName="full_name"
-    idName="user_profile_id"
+    idName="id"
   />
 );
 

@@ -285,7 +285,8 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "source-map-support": "^0.5.9",
-    "svgr": "1.6.0"
+    "svgr": "1.6.0",
+    "typy": "^3.0.1"
   },
   "devEngines": {
     "node": ">=7.x",

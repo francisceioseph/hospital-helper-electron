@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { pickBy } from '../../utils';
 import {
   GET_SURGERIES,
   CREATE_SURGERY,

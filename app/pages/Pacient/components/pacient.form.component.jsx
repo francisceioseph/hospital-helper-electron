@@ -12,7 +12,6 @@ import { LABELS } from './pacient.form.constants';
 import IdentificationFragment from './form-sections/identification-section';
 import DemographicsFragment from './form-sections/demographycs-section';
 import ContactsFragment from './form-sections/contacts-section';
-import FamilyFragment from './form-sections/family-section';
 
 import {
   HORIZONTAL_FORM_LAYOUT,
@@ -80,13 +79,10 @@ const PacientForm = (props) => {
           <TabPane tab="Contatos" key="3">
             <ContactsFragment {...props} decoratorManager={decoratorManager} />
           </TabPane>
-          <TabPane tab="Dados Familiares" key="4">
-            <FamilyFragment {...props} decoratorManager={decoratorManager} />
-          </TabPane>
         </Tabs>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
-          {props.currentTab !== 4 && (
+          {props.currentTab !== 3 && (
             <Button
               type="primary"
               className="login-form-button"
@@ -95,7 +91,7 @@ const PacientForm = (props) => {
             Próximo
             </Button>
           )}
-          {props.currentTab === 4 && (
+          {props.currentTab === 3 && (
             <Button
               type="primary"
               htmlType="submit"

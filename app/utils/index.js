@@ -48,3 +48,11 @@ export const arrayToTree = (
   });
   return result;
 };
+
+export const pickBy = (arr = [], key = 'id') => arr.reduce(
+  (acc, item) => ({ 
+    ...acc,
+    [ item[key].toString()] : item
+  }),
+  {}
+);

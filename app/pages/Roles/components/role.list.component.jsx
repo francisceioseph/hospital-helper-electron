@@ -13,7 +13,7 @@ const RoleListComponent = props => (
     datasource={props.roles}
     onButtonClick={props.onNewRoleClick}
     onSearch={props.onSearch}
-    idAccessor="user_profile_id"
+    idAccessor="id"
   />
 );
 

@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import { handleActions } from 'redux-actions';
+import { pickBy } from '../../utils';
 import {
   getAppointmentTypes, createAppointmentType, updateAppointmentType, removeAppointmentType,
 } from './appointment-types.actions';
@@ -10,7 +10,7 @@ const initialState = {
 
 const handleGetAppointmentTypes = (state, action) => {
   const { data } = action.payload;
-  const appointmentTypes = _.pickBy(data, 'id');
+  const appointmentTypes = pickBy(data, 'id');
 
   return {
     ...state,

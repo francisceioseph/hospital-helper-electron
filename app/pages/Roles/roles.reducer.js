@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { pickBy } from '../../utils';
 import { handleActions } from 'redux-actions';
 import {
   getRoles, retrieveRole, createRole, updateRole, removeRole,
@@ -11,7 +11,7 @@ const defaultState = {
 
 const handleListRoles = (state, action) => {
   const { data } = action.payload;
-  const roles = _.pickBy(data, 'id');
+  const roles = pickBy(data, 'id');
   return {
     ...state,
     roles,

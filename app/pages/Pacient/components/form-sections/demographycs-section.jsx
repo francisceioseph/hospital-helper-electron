@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Form, Collapse } from 'antd';
+import { Form, Collapse, Divider } from 'antd';
 
 import { LABELS } from '../pacient.form.constants';
 import { FORM_ITEM_LAYOUT } from '../../../../components/forms';
@@ -15,33 +15,29 @@ const DemographicsFragment = (props) => {
     <Fragment>
       <Collapse defaultActiveKey="1">
         <Panel header="Nascimento" key="1">
-          <FormItem label={LABELS.SOCIAL_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-            {decoratorManager.socialNameDecorator(entries.getInputField())}
-          </FormItem>
           <FormItem label={LABELS.BIRTH_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
             {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
-          </FormItem>
-          <FormItem label={LABELS.MOTHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-            {decoratorManager.motherNameDecorator(entries.getInputField())}
-          </FormItem>
-          <FormItem label={LABELS.FATHER_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-            {decoratorManager.fatherNameDecorator(entries.getInputField())}
           </FormItem>
           <FormItem label={LABELS.COUNTRY_BIRTH} {...FORM_ITEM_LAYOUT} hasFeedback>
             {decoratorManager.countryBirthDecorator(entries.getInputField())}
           </FormItem>
-          <FormItem label={LABELS.NAT_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-            {decoratorManager.natDateDecorator(entries.getCpfField())}
-          </FormItem>
-          <FormItem label={LABELS.NAT_PORT} {...FORM_ITEM_LAYOUT} hasFeedback>
-            {decoratorManager.natPortDecorator(entries.getInputField())}
+          <FormItem label={LABELS.BIRTH_STATE} {...FORM_ITEM_LAYOUT} hasFeedback>
+            {decoratorManager.birthStateDecorator(entries.getInputField())}
           </FormItem>
           <FormItem label={LABELS.BIRTH_CITY} {...FORM_ITEM_LAYOUT} hasFeedback>
             {decoratorManager.birthCityDecorator(entries.getInputField())}
           </FormItem>
-          <FormItem label={LABELS.BIRTH_STATE} {...FORM_ITEM_LAYOUT} hasFeedback>
-            {decoratorManager.birthStateDecorator(entries.getInputField())}
-          </FormItem>
+          {props.pacient.personal_datum_attributes.birth_datum_attributes.country_of_birth !== 'Brasil' &&(
+            <div>
+              <Divider orientation="left">Naturalização</Divider>
+              <FormItem label={LABELS.NAT_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
+                {decoratorManager.natDateDecorator(entries.getCpfField())}
+              </FormItem>
+              <FormItem label={LABELS.NAT_PORT} {...FORM_ITEM_LAYOUT} hasFeedback>
+                {decoratorManager.natPortDecorator(entries.getInputField())}
+              </FormItem>
+            </div>
+          )}
         </Panel>
         <Panel header="Informações Demográficas" key="2">
           <FormItem label={LABELS.JOB_TITLE} {...FORM_ITEM_LAYOUT} hasFeedback>

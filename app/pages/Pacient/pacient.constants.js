@@ -42,7 +42,7 @@ export const tableColumns = [
               title: 'Remover Pacient',
               content: 'Você realmente deseja remover esse paciente?',
               onOk: () => {
-                store.dispatch(removePacient(record.user_profile_id));
+                store.dispatch(removePacient(record.id));
               }
             })
           }

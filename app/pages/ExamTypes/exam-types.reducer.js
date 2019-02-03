@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { pickBy } from '../../utils';
 import { handleActions } from 'redux-actions';
 import {
   getExamTypes, createExamType, updateExamType, removeExamType,
@@ -10,7 +10,7 @@ const initialState = {
 
 const handleGetExamTypes = (state, action) => {
   const { data } = action.payload;
-  const examTypes = _.pickBy(data, 'id');
+  const examTypes = pickBy(data, 'id');
   return {
     ...state,
     examTypes,

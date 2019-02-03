@@ -17,15 +17,17 @@ const mapDispatchToProps = {
 
 const onNewPacientFormSubmit = props => async (values, form) => {
   try {
+    const { phone, email, address, ...others } = values; 
     const pacient = {
-      profile: {
-        ...values.profile,
-        profile_type_id: 6
-      }
+      ...others,
+      emails_attributes     : !!email   ? [{ address: email }] : [],
+      telephones_attributes : !!phone   ? [{ number: phone }] : [],
+      addresses_attributes    : !!address ? [{ ...address }]: [],
     };
+
     const { data } = await WebAPI.postPacient(pacient);
 
-    props.createPacient(data.profile);
+    props.createPacient(data);
     Alerts.success({
       onOk: () => form.resetFields()
     });

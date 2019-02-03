@@ -12,7 +12,7 @@ const DoctorListComponent = props => (
     columns={tableColumns}
     datasource={props.doctors}
     onButtonClick={props.onNewDoctorClick}
-    idAccessor="user_profile_id"
+    idAccessor="id"
   />
 );
 
