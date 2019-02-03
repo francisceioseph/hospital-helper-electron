@@ -1,23 +1,23 @@
 const REQUIRED_FIELD_MSG = 'Este campo é obrigatório';
 
 function getPacientNameDecorator(decorator, values) {
-  return decorator('id', {
+  return decorator('pacient_id', {
     rules: [{ required: true, message: REQUIRED_FIELD_MSG }],
-    initialValue: values.id
+    initialValue: values.pacient_id
   });
 }
 
 function getExamTypeDecorator(decorator, values) {
-  return decorator('id', {
+  return decorator('exam_type_id', {
     rules: [{ required: true, message: REQUIRED_FIELD_MSG }],
-    initialValue: values.id
+    initialValue: values.exam_type_id
   });
 }
 
 function getDoctorNameDecorator(decorator, values) {
-  return decorator('requester_id', {
+  return decorator('doctor_id', {
     rules: [{ required: true, message: REQUIRED_FIELD_MSG }],
-    initialValue: values.requester_id
+    initialValue: values.doctor_id
   });
 }
 

@@ -11,17 +11,24 @@ import ExamForm from '../components/exam.form.component';
 import * as WebAPI from '../../../utils/webAPI';
 import * as Alert from '../../../components/Alerts';
 
+import { 
+  pageStartLoadingAction,
+  pageStopLoadingAction
+} from '../../../containers/layouts/actions';
+
 const mapStateToProps = ({ doctors, pacients, exams }) => ({
-  examTypes: _.values(exams.examTypes),
-  pacients: _.values(pacients.pacients),
-  doctors: _.values(doctors.doctors)
+  examTypes : _.values(exams.examTypes),
+  pacients  : _.values(pacients.pacients),
+  doctors   : _.values(doctors.doctors)
 });
 
 const mapDispatchToProps = {
   getExamTypes,
   getPacients,
   getDoctors,
-  createExam
+  createExam,
+  pageStartLoadingAction,
+  pageStopLoadingAction
 };
 
 const onExamFormSubmit = props => async (values, form) => {
@@ -30,8 +37,8 @@ const onExamFormSubmit = props => async (values, form) => {
     props.createExam(exam);
 
     Alert.success({
-      content: 'Agendamento realizado com sucesso',
-      onOk: () => form.resetFields()
+      content : 'Agendamento realizado com sucesso',
+      onOk    : () => form.resetFields()
     });
   } catch (error) {
     Alert.error({
@@ -45,10 +52,17 @@ const withFormHandlers = withHandlers({
 });
 
 const withLifeCycle = lifecycle({
-  componentDidMount() {
-    this.props.getExamTypes();
-    this.props.getPacients();
-    this.props.getDoctors();
+  async componentDidMount() {
+    this.props.pageStartLoadingAction();
+    const response = await Promise.all([
+      WebAPI.getExamTypes(),
+      WebAPI.removeExamType(),
+    ]);
+
+    this.props.getExamTypes(response[0]);
+    this.props.getPacients(response[1]);
+    this.props.getDoctors(response[2]);
+    this.props.pageStopLoadingAction();
   }
 });
 

@@ -14,15 +14,15 @@ const ExamDetailList = ({ appointment }) => (
   <List size="small" bordered>
     <Item>
       <Item.Meta title="Paciente" />
-      <b>{appointment.pacient_name}</b>
+      <b>{appointment.pacient.full_name}</b>
     </Item>
     <Item>
       <Item.Meta title="Médico Responsável" />
-      <b>{appointment.requester_name}</b>
+      <b>{appointment.doctor.full_name}</b>
     </Item>
     <Item>
       <Item.Meta title="Tipo de Atendimento" />
-      <b>{appointment.exam_type_name}</b>
+      <b>{appointment.exam_type.exam_type_name}</b>
     </Item>
     <Item>
       <Item.Meta title="Horário Marcado" />

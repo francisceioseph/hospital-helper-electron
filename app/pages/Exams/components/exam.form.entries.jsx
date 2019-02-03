@@ -6,7 +6,7 @@ export const getPacientNameField = pacients => (
   <SugestSelector
     options={pacients}
     valueName="id"
-    labelName="full_name"
+    labelName="personal_datum.full_name"
     idName="id"
   />
 );
@@ -24,7 +24,7 @@ export const getDoctorNameField = doctors => (
   <SugestSelector
     options={doctors}
     valueName="id"
-    labelName="full_name"
+    labelName="personal_datum.full_name"
     idName="id"
   />
 );
