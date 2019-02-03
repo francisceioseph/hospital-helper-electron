@@ -56,7 +56,8 @@ const withLifeCycle = lifecycle({
     this.props.pageStartLoadingAction();
     const response = await Promise.all([
       WebAPI.getExamTypes(),
-      WebAPI.removeExamType(),
+      WebAPI.getPacients(),
+      WebAPI.getDoctors(),
     ]);
 
     this.props.getExamTypes(response[0]);
