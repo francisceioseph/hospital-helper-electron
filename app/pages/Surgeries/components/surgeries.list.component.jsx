@@ -11,7 +11,7 @@ import Agenda from '../../../components/Agenda';
 import SurgeryDetailList from './detail.component';
 
 const SurgeriesListComponent = (props) => {
-  const { history, exams } = props;
+  const { history, surgeries } = props;
 
   return (
     <div>
@@ -32,14 +32,14 @@ const SurgeriesListComponent = (props) => {
       <Divider />
 
       <Row>
-        <Agenda events={exams} onSelectEvent={props.onSelectEvent} />
+        <Agenda events={surgeries} onSelectEvent={props.onSelectEvent} />
       </Row>
     </div>
   );
 };
 
 SurgeriesListComponent.propTypes = {
-  exams         : PropTypes.instanceOf(Object).isRequired,
+  surgeries     : PropTypes.instanceOf(Object).isRequired,
   history       : PropTypes.instanceOf(Object).isRequired,
   onSelectEvent : PropTypes.func.isRequired
 };

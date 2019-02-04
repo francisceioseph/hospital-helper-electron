@@ -28,10 +28,10 @@ const mapDispatchToProps = {
   getPacients,
   getDoctors,
   pageStartLoadingAction,
-  pageStopLoadingAction
+  pageStopLoadingAction,
 };
 
-const onExamFormSubmit = props => async (values, form) => {
+const onSurgeryFormSubmit = props => async (values, form) => {
   try {
     const { data: surgery } = await WebAPI.createSurgery(values);
     props.createSurgery(surgery);
@@ -48,7 +48,7 @@ const onExamFormSubmit = props => async (values, form) => {
 };
 
 const withFormHandlers = withHandlers({
-  onSubmitHandler: onExamFormSubmit
+  onSubmitHandler: onSurgeryFormSubmit
 });
 
 const withLifeCycle = lifecycle({

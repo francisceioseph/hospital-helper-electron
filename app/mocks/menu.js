@@ -255,6 +255,7 @@ export default [
         'cadastro-tipo-cirurgia',
         'cadastro-tipo-atendimento',
         'cadastro-tipo-exame',
+        'cadastro-tipo-cirurgia',
       ],
     },
   },
@@ -292,6 +293,18 @@ export default [
     permission: {
       action: 'view',
       resources: ['cadastro-tipo-exame'],
+    },
+  },
+  {
+    code: '64',
+    menuParentCode: '6',
+    breadParentCode: '6',
+    name: 'Tipo de Cirurgia',
+    icon: 'cut',
+    route: '/configuracoes/tipo-cirurgia',
+    permission: {
+      action: 'view',
+      resources: ['cadastro-tipo-cirurgia'],
     },
   },
   {

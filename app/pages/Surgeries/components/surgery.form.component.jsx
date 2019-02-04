@@ -32,10 +32,10 @@ const handleSubmit = props => (e) => {
 
 const withFormHandlers = withHandlers({ handleSubmit });
 
-const ExamForm = (props) => {
-  const { exam, form } = props;
+const SurgeryForm = (props) => {
+  const { surgery, form } = props;
   const { getFieldDecorator } = form;
-  const decoratorManager = getDecoratorManager(getFieldDecorator, exam);
+  const decoratorManager = getDecoratorManager(getFieldDecorator, surgery);
 
   return (
     <div>
@@ -49,7 +49,7 @@ const ExamForm = (props) => {
           )}
         </FormItem>
 
-        <FormItem label={LABELS.EXAM_TYPE} {...FORM_ITEM_LAYOUT} hasFeedback>
+        <FormItem label={LABELS.SURGERY_TYPE} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.surgeryTypeDecorator(surgeryTypeField(props.surgeryTypes))}
         </FormItem>
 
@@ -81,11 +81,11 @@ const ExamForm = (props) => {
   );
 };
 
-const ExamFormComponent = compose(
+const SurgeryFormComponent = compose(
   defaultProps({
-    exam: {}
+    surgery: {}
   }),
   withFormHandlers
-)(ExamForm);
+)(SurgeryForm);
 
-export default Form.create()(ExamFormComponent);
+export default Form.create()(SurgeryFormComponent);

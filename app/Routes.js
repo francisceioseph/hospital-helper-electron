@@ -19,6 +19,7 @@ import { AppointmentTypeList } from './pages/AppointmentTypes';
 import { ExamTypeList } from './pages/ExamTypes';
 import { ListRoles, RoleForm } from './pages/Roles';
 import { PanelLayout } from './containers/layouts';
+import { SurgeryTypeList } from './pages/SurgeryTypes';
 
 export default () => (
   <App>
@@ -35,6 +36,11 @@ export default () => (
         exact
         path="/configuracoes/tipo-exame"
         component={ExamTypeList}
+      />
+      <ProtectedRoute
+        exact
+        path="/configuracoes/tipo-cirurgia"
+        component={SurgeryTypeList}
       />
       <ProtectedRoute
         exact

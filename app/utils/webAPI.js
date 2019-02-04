@@ -41,8 +41,11 @@ export const createExam = data => http.postRequest(http.POST_EXAM_URL, makePaylo
 export const updateExam = (id, data) => http.patchRequest(http.updateExamUrl(id), makePayload('exam', data));
 export const removeExam = id => http.deleteRequest(http.getExamUrl(id));
 
-export const getSurgery = id => http.getRequest(http.getSurgeryUrl(id));
 export const getSurgeryTypes = id => http.getRequest(http.GET_SURGERY_TYPES_URL);
+export const createSurgeryType = data => http.postRequest(http.GET_SURGERY_TYPES_URL, makePayload('surgery_type', data));
+export const removeSurgeryType = id => http.deleteRequest(http.removeSurgeryTypeUrl(id));
+
+export const getSurgery = id => http.getRequest(http.getSurgeryUrl(id));
 export const getSurgeries = () => http.getRequest(http.GET_SURGERIES_URL);
 export const createSurgery = data => http.postRequest(http.POST_SURGERY_URL, makePayload('surgery', data));
 export const updateSurgery = (id, data) => http.patchRequest(http.updateSurgeryUrl(id), makePayload('surgery', data));

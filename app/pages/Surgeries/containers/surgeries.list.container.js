@@ -11,7 +11,7 @@ import {
   pageStopLoadingAction
 } from '../../../containers/layouts/actions';
 
-const normalizeExamList = surgeries => _.chain(surgeries)
+const normalizeSurgeryList = surgeries => _.chain(surgeries)
   .values()
   .map(surgery => ({
     title : `Cirurgia - ${surgery.pacient_name}`,
@@ -24,7 +24,7 @@ const normalizeExamList = surgeries => _.chain(surgeries)
   .value();
 
 const mapStateToProps = ({ surgeries }) => ({
-  surgeries: normalizeExamList(surgeries.surgeries)
+  surgeries: normalizeSurgeryList(surgeries.surgeries)
 });
 
 const mapDispatchToProps = {
