@@ -39,7 +39,7 @@ const AppHeader = props => (
           title={
             <span>
               <Icon type="user" />
-              {props.profile.full_name}
+              {props.profile.personal_datum.full_name}
             </span>
           }
         >

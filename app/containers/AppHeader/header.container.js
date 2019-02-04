@@ -1,18 +1,14 @@
 // import { bindActionCreators } from 'redux';
+import t from 'typy';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../SideMenu/actions';
 import { clearCredentials } from '../../pages/Login/login.actions';
 
 import Header from './header.component';
 
-const getProfileData = ({ credentials }) => {
-  const { user } = credentials;
-  return user ? user.profile : { full_name: '' };
-};
-
 const mapStateToProps = ({ menu, login }) => ({
   collapsed: menu.collapsed,
-  profile: getProfileData(login)
+  profile: t(login, 'credentials.user.profile').safeObject,
 });
 
 const mapDispatchToProps = {
