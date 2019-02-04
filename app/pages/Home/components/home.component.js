@@ -12,14 +12,19 @@ import '../home.scss';
 
 function getMenusForPermissions(menuList, permissions) {
   return _.filter(menuList, menuItem => {
+    if (!menuItem.menuParentCode) {
+      return false;
+    }
+
     const permission = menuItem.permission || {};
+    
     const permissionsGranted = _.chain(permission.resources)
       .map(resource => permissions[resource])
-      .filter(p => !!p && !!p.can_list)
+      .filter(p => !!p && p.action_type === 'view')
       .size()
       .value();
 
-    return menuItem.route && permissionsGranted > 0;
+    return permissionsGranted > 0;
   });
 }
 
