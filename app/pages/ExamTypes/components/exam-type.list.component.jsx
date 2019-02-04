@@ -106,8 +106,16 @@ const withListHandlers = withHandlers({
 });
 
 const withListLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.getExamTypes();
+  async componentDidMount() {
+    this.props.pageStartLoadingAction();
+
+    try {
+      const response = await WebAPI.getExamTypes();
+      this.props.getExamTypes(response);
+      this.props.pageStopLoadingAction();
+    } catch (error) {
+      this.props.pageStopLoadingAction();
+    }
   },
 });
 
