@@ -11,8 +11,8 @@ import {
 } from '../appointments.actions';
 
 import { 
-  pageStartLoadingAction,
-  pageStopLoadingAction,
+  showPageLoader,
+  hidePageLoader,
 } from '../../../containers/layouts/actions';
 
 import { AppointmentForm } from '../components';
@@ -28,8 +28,8 @@ const mapStateToProps = ({ appointments, doctors, pacients }) => ({
 });
 
 const mapDispatchToProps = {
-  pageStartLoadingAction,
-  pageStopLoadingAction,
+  showPageLoader,
+  hidePageLoader,
   createAppointment,
   getAppointmentTypes,
   getPacients,
@@ -59,7 +59,7 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     try {
-      this.props.pageStartLoadingAction();
+      this.props.showPageLoader();
 
       const responses = await Promise.all([
         WebAPI.getPacients(),
@@ -71,9 +71,9 @@ const withLifeCycle = lifecycle({
       this.props.getDoctors(responses[1]);
       this.props.getAppointmentTypes(responses[2]);
 
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
     } catch (error) {
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
       Alert.error({
         content: 'Não foi possível carregar agora. Tente novamente mais tarde.'
       });

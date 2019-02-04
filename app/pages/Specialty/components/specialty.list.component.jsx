@@ -6,6 +6,7 @@ import {
 import {
  Row, Input, Divider, Table, Button, Col 
 } from 'antd';
+
 import * as WebAPI from '../../../utils/webAPI';
 
 import { tableColumns } from './specialty.list.constants';
@@ -92,8 +93,17 @@ const withListHandlers = withHandlers({
 });
 
 const specialtyListLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.getSpecialties();
+  async componentDidMount() {
+    this.props.showPageLoader();
+
+    try {
+      const response = await WebAPI.getSpecialties();
+      this.props.getSpecialties(response);
+      this.props.hidePageLoader();  
+    } catch (error) {
+      console.log(error);
+      this.props.hidePageLoader();
+    }
   }
 });
 

@@ -5,6 +5,7 @@ import { lifecycle, compose, withHandlers } from 'recompose';
 
 import { tableColumns } from './doctor.list.constants';
 import { TableList } from '../../../components/TableList';
+import * as WebAPI from '../../../utils/webAPI';
 
 const DoctorListComponent = props => (
   <TableList
@@ -29,8 +30,17 @@ const withListHandlers = withHandlers({
 });
 
 const listLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.getDoctors();
+  async componentDidMount() {
+    this.props.showPageLoader();
+
+    try {
+      const response = await WebAPI.getDoctors();
+      this.props.getDoctors(respose);
+      this.props.hidePageLoader();
+    } catch (error) {
+      console.log(error);
+      this.props.hidePageLoader();
+    }
   }
 });
 

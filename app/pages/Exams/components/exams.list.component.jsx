@@ -6,6 +6,7 @@ import { Row, Input, Divider, Button, Col, Modal } from 'antd';
 
 import Agenda from '../../../components/Agenda';
 import ExamDetailList from './detail.component';
+import * as WebAPI from '../../../utils/webAPI';
 
 const ExamComponent = props => {
   const { history, exams } = props;
@@ -53,8 +54,16 @@ const withListHandlers = withHandlers({
 });
 
 const examListLifecycle = lifecycle({
-  componentWillMount() {
-    this.props.getExams();
+  async componentWillMount() {
+    this.props.showPageLoader();
+    try {
+      const response = await WebAPI.getExams();
+      this.props.getExams(response);
+
+      this.props.hidePageLoader()
+    } catch (error) {
+      this.props.hidePageLoader()
+    }
   }
 });
 

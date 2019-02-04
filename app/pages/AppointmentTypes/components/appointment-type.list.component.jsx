@@ -106,8 +106,17 @@ const withListHandlers = withHandlers({
 });
 
 const withListLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.getAppointmentTypes();
+  async componentDidMount() {
+    this.props.showPageLoader();
+
+    try {
+      const response = await WebAPI.getAppointmentTypes();
+      this.props.getAppointmentTypes(response);
+      this.props.hidePageLoader();
+    } catch (error) {
+      console.log(error);
+      this.props.hidePageLoader();
+    }
   },
 });
 

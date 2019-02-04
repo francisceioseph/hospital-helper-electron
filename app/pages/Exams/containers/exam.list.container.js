@@ -4,6 +4,10 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { getExams } from '../exams.actions';
 import { ExamListComponent } from '../components';
+import { 
+  showPageLoader,
+  hidePageLoader
+} from '../../../containers/layouts/actions';
 
 const normalizeExamList = exams =>
   _.chain(exams)
@@ -23,7 +27,9 @@ const mapStateToProps = ({ exams }) => ({
 });
 
 const mapDispatchToProps = {
-  getExams
+  getExams,
+  showPageLoader,
+  hidePageLoader,
 };
 
 export default connect(

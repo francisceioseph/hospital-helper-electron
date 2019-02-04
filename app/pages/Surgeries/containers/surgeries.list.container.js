@@ -7,8 +7,8 @@ import { getSurgeries } from '../surgeries.actions';
 import SurgeryListComponent from '../components/surgeries.list.component';
 
 import { 
-  pageStartLoadingAction,
-  pageStopLoadingAction
+  showPageLoader,
+  hidePageLoader
 } from '../../../containers/layouts/actions';
 
 const normalizeSurgeryList = surgeries => _.chain(surgeries)
@@ -29,8 +29,8 @@ const mapStateToProps = ({ surgeries }) => ({
 
 const mapDispatchToProps = {
   getSurgeries,
-  pageStartLoadingAction,
-  pageStopLoadingAction,
+  showPageLoader,
+  hidePageLoader,
 };
 
 export default connect(

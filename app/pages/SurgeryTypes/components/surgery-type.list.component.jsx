@@ -109,13 +109,13 @@ const withListHandlers = withHandlers({
 const withListLifecycle = lifecycle({
   async componentDidMount() {
     try {
-      this.props.pageStartLoadingAction();
+      this.props.showPageLoader();
       const response = await WebAPI.getSurgeryTypes();
       this.props.getSurgeryTypes(response);
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
     } catch (error) {
       console.log(error);
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
       
       Alert.error({
         content: 'Aconteceu um erro no carregamento. Tente mais tarde!'

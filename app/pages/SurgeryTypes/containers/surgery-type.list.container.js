@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { SurgeryTypeList } from '../components';
 import { getSurgeryTypes, createSurgeryType } from '../surgery-types.actions';
 import {
-  pageStartLoadingAction,
-  pageStopLoadingAction
+  showPageLoader,
+  hidePageLoader
 } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ surgeryTypes }) => ({
@@ -14,8 +14,8 @@ const mapStateToProps = ({ surgeryTypes }) => ({
 const mapDispatchToProps = {
   getSurgeryTypes,
   createSurgeryType,
-  pageStartLoadingAction,
-  pageStopLoadingAction,
+  showPageLoader,
+  hidePageLoader,
 };
 
 export default connect(

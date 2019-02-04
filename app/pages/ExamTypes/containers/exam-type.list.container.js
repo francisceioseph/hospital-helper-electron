@@ -4,8 +4,8 @@ import { ExamTypeList } from '../components';
 import { getExamTypes, createExamType } from '../exam-types.actions';
 
 import { 
-  pageStartLoadingAction,
-  pageStopLoadingAction
+  showPageLoader,
+  hidePageLoader
 } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ examTypes }) => ({
@@ -15,8 +15,8 @@ const mapStateToProps = ({ examTypes }) => ({
 const mapDispatchToProps = {
   getExamTypes,
   createExamType,
-  pageStartLoadingAction,
-  pageStopLoadingAction,
+  showPageLoader,
+  hidePageLoader,
 };
 
 export default connect(

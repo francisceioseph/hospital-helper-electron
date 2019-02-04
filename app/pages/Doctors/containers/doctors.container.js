@@ -4,12 +4,19 @@ import _ from 'lodash';
 import { getDoctors } from '../doctors.actions';
 import { DoctorListComponent } from '../components';
 
+import { 
+  showPageLoader,
+  hidePageLoader
+} from '../../../containers/layouts/actions';
+
 const mapStateToProps = ({ doctors }) => ({
   doctors: _.values(doctors.doctors)
 });
 
 const mapDispatchToProps = {
-  getDoctors
+  getDoctors,
+  showPageLoader,
+  hidePageLoader,
 };
 
 export default connect(

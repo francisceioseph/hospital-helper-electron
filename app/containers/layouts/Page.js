@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Layout } from 'antd';
 
 import Loader from '../Loader';
-import { pageStartLoadingAction, pageStopLoadingAction } from './actions';
+import { showPageLoader, hidePageLoader } from './actions';
 
 import './index.scss';
 
@@ -36,8 +36,8 @@ function mapStateToProps({ page }) {
 const connectedPage = connect(
   mapStateToProps,
   {
-    pageStartLoadingAction,
-    pageStopLoadingAction
+    showPageLoader,
+    hidePageLoader
   }
 )(PageLayout);
 

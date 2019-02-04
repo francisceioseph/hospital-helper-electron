@@ -46,15 +46,15 @@ SurgeriesListComponent.propTypes = {
 
 const withLifecycle = lifecycle({
   async componentDidMount() {
-    this.props.pageStartLoadingAction();
+    this.props.showPageLoader();
 
     try {
       const respose = await WebAPI.getSurgeries();
       this.props.getSurgeries(respose);
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
     } catch (error) {
       console.log(error);
-      this.props.pageStopLoadingAction()
+      this.props.hidePageLoader()
     }
   }
 });

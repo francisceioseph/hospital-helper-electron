@@ -12,8 +12,8 @@ import * as WebAPI from '../../../utils/webAPI';
 import * as Alert from '../../../components/Alerts';
 
 import {
-  pageStartLoadingAction,
-  pageStopLoadingAction
+  showPageLoader,
+  hidePageLoader
 } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ doctors, pacients, surgeries }) => ({
@@ -27,8 +27,8 @@ const mapDispatchToProps = {
   getSurgeryTypes,
   getPacients,
   getDoctors,
-  pageStartLoadingAction,
-  pageStopLoadingAction,
+  showPageLoader,
+  hidePageLoader,
 };
 
 const onSurgeryFormSubmit = props => async (values, form) => {
@@ -53,7 +53,7 @@ const withFormHandlers = withHandlers({
 
 const withLifeCycle = lifecycle({
   async componentDidMount() {
-    this.props.pageStartLoadingAction();
+    this.props.showPageLoader();
     const response = await Promise.all([
       WebAPI.getSurgeryTypes(),
       WebAPI.getPacients(),
@@ -63,7 +63,7 @@ const withLifeCycle = lifecycle({
     this.props.getSurgeryTypes(response[0]);
     this.props.getPacients(response[1]);
     this.props.getDoctors(response[2]);
-    this.props.pageStopLoadingAction();
+    this.props.hidePageLoader();
   }
 });
 

@@ -107,14 +107,14 @@ const withListHandlers = withHandlers({
 
 const withListLifecycle = lifecycle({
   async componentDidMount() {
-    this.props.pageStartLoadingAction();
+    this.props.showPageLoader();
 
     try {
       const response = await WebAPI.getExamTypes();
       this.props.getExamTypes(response);
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
     } catch (error) {
-      this.props.pageStopLoadingAction();
+      this.props.hidePageLoader();
     }
   },
 });

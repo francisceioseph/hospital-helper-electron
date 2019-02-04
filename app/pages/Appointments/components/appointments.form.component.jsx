@@ -90,24 +90,9 @@ const AppointmentForm = props => {
 const AppointmentFormComponent = compose(
   defaultProps({
     appointment: {},
-    appointmentTypes: [
-      {
-        id: 1,
-        appointment_type_name: 'Clínico Geral'
-      }
-    ],
-    pacients: [
-      {
-        id: 1,
-        pacient_name: 'Ana Queiróz Medeiros'
-      }
-    ],
-    doctors: [
-      {
-        id: 1,
-        doctor_name: 'Dr. Fernando Albuquerque'
-      }
-    ]
+    appointmentTypes: [],
+    pacients: [],
+    doctors: []
   }),
   withFormHandlers
 )(AppointmentForm);

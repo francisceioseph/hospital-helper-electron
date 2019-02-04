@@ -51,11 +51,14 @@ const withListHandlers = withHandlers({
 
 const withLifecycle = lifecycle({
   async componentDidMount() {
+    this.props.showPageLoader();
     try {
       const res = await WebAPI.getAppointments();
       this.props.getAppointments(res);
+      this.props.hidePageLoader();
     } catch(error) {
       console.log(error);
+      this.props.hidePageLoader();
     }
   }
 });

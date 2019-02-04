@@ -10,7 +10,7 @@ import Bread from '../BreadCrumb';
 import Loader from '../Loader';
 
 // import { hasToken } from "../../utils/token";
-import { pageStartLoadingAction, pageStopLoadingAction } from './actions';
+import { showPageLoader, hidePageLoader } from './actions';
 
 import './index.scss';
 
@@ -80,8 +80,8 @@ function mapStateToProps({ page }) {
 const connectedPage = connect(
   mapStateToProps,
   {
-    pageStartLoadingAction,
-    pageStopLoadingAction
+    showPageLoader,
+    hidePageLoader
   }
 )(DefaultLayout);
 

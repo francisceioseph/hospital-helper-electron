@@ -7,6 +7,6 @@ export const UPDATE_DOCTOR = 'UPDATE_DOCTOR';
 export const DELETE_DOCTOR = 'DELETE_DOCTOR';
 
 export const createDoctor = createAction(CREATE_DOCTOR);
-export const getDoctors = createAction(GET_DOCTORS, WebAPI.getDoctors);
+export const getDoctors = createAction(GET_DOCTORS);
 export const updateDoctor = createAction(UPDATE_DOCTOR, WebAPI.updateDoctor);
 export const removeDoctor = createAction(DELETE_DOCTOR, WebAPI.removeDoctor);

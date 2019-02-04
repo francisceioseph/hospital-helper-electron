@@ -3,10 +3,19 @@ import { Row, Input, Divider, Table, Button, Col } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 
 import { tableColumns } from '../pacient.constants';
+import * as WebAPI from '../../../utils/webAPI';
 
 const withLifecycle = lifecycle({
-  componentDidMount() {
-    this.props.getPacients();
+  async componentDidMount() {
+    this.props.showPageLoader();
+    try {
+      const response = await WebAPI.getPacients();
+      this.props.getPacients(response);
+      this.props.hidePageLoader();
+    } catch (error) {
+      console.log(error);
+      this.props.hidePageLoader();
+    }
   }
 });
 

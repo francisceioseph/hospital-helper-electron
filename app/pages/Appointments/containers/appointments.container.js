@@ -5,6 +5,11 @@ import moment from 'moment';
 import { createAppointment, getAppointments } from '../appointments.actions';
 import { AppointmentListComponent } from '../components';
 
+import { 
+  showPageLoader,
+  hidePageLoader
+} from '../../../containers/layouts/actions';
+
 const normalizeAppointmentList = appointments =>
   _.chain(appointments)
     .values()
@@ -24,7 +29,9 @@ const mapStateToProps = ({ appointments }) => ({
 
 const mapDispatchToProps = {
   createAppointment,
-  getAppointments
+  getAppointments,
+  showPageLoader,
+  hidePageLoader,
 };
 
 export default connect(
