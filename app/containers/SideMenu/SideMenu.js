@@ -16,9 +16,10 @@ const { Sider } = Layout;
 function getMenusForPermissions(menuList, permissions) {
   return _.filter(menuList, menuItem => {
     const permission = menuItem.permission || {};
+    
     const permissionsGranted = _.chain(permission.resources)
       .map(resource => permissions[resource])
-      .filter(p => !!p && !!p.can_list)
+      .filter(p => !!p && p.action_type === 'view')
       .size()
       .value();
 
@@ -80,8 +81,8 @@ function getPathArray(array, current, pid, id) {
 
 const SideMenu = ({ collapsed, location, permissions }) => {
   // Generate Trees
-  // const menusForPermissions = getMenusForPermissions(menus, permissions);
-  const menuTree = makeMenuDataTree(menus);
+  const menuPermissions = getMenusForPermissions(menus, permissions);
+  const menuTree = makeMenuDataTree(menuPermissions);
   const menuItems = makeMenuItemTree(menuTree);
 
   // Look for the selected route
