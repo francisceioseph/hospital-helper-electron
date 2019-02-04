@@ -4,7 +4,7 @@ import { PROFILE as profile } from './profile.mock';
 
 import { renderCard } from './ProfileHelper';
 
-import './Profile.css';
+import './Profile.less';
 
 export default class Profile extends React.Component {
   render() {

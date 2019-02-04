@@ -45,6 +45,7 @@ const ShortcutList = props => (
           <ShortcutCard name={item.name} icon={item.icon} route={item.route} />
         </Col>
       ))}
+      <a href="/profile">click me</a>
     </Row>
   </div>
 );

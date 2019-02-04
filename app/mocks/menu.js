@@ -70,6 +70,16 @@ export default [
     },
   },
   {
+    code: '8',
+    name: 'Perfil',
+    icon: 'user',
+    route: '/profile',
+    permission: {
+      action: 'view',
+      resources: ['perfil']
+    },
+  },
+  {
     code: '1',
     icon: 'tachometer-alt',
     name: 'Painel de Senhas',

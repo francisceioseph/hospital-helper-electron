@@ -25,10 +25,11 @@ import { Profile } from './pages/Profile';
 export default () => (
   <App>
     <Switch>
-      <ProtectedRoute exact path="/" component={Home} />
       <NoAuthRoute exact path="/login" component={LoginPage} />
-      <ProtectedRoute exact path="/prontuarios" component={Prontuario} />
+      <ProtectedRoute exact path="/" component={Home} />
       <ProtectedRoute exact path="/profile" component={Profile} />
+      <ProtectedRoute exact path="/prontuarios" component={Prontuario} />
+      
       <ProtectedRoute
         exact
         path="/configuracoes/tipo-atendimento"
