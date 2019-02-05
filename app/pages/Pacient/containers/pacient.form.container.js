@@ -4,7 +4,7 @@ import { withHandlers, compose } from 'recompose';
 import { createPacient } from '../pacient.actions';
 import { PacientFormComponent } from '../components';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 import * as Alerts from '../../../components/Alerts';
 
 const mapStateToProps = ({ pacients }) => ({

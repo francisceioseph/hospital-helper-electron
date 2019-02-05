@@ -10,11 +10,11 @@ import {
   DETAILS_LAYOUT,
 } from './ProfileHeaderConstants';
 
-import './ProfileHeader.css';
+import './ProfileHeader.less';
 
 class ProfileHeader extends Component {
   render() {
-    const { user } = this.props;
+    const { profile } } = this.props;
 
     return (
       <div>
@@ -28,7 +28,7 @@ class ProfileHeader extends Component {
             <img
               className="avatar"
               alt="profile"
-              src={user.imgSrc || IMAGE_SOURCE}
+              src={ profile.personal_datum.img_url || IMAGE_SOURCE }
             />
           </Col>
 

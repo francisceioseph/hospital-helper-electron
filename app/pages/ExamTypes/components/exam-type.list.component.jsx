@@ -8,7 +8,7 @@ import {
   Row, Input, Divider, Table, Button, Col,
 } from 'antd';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 import { tableColumns } from './exam-type.list.constants';
 import ExamTypeModal from './exam-type.modal.component';

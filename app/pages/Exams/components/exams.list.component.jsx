@@ -6,7 +6,7 @@ import { Row, Input, Divider, Button, Col, Modal } from 'antd';
 
 import Agenda from '../../../components/Agenda';
 import ExamDetailList from './detail.component';
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 const ExamComponent = props => {
   const { history, exams } = props;

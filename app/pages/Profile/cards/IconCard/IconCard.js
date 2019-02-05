@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 
-import './IconCard.scss';
+import './IconCard.less';
 
 const PLACEHOLDER_PATH = 'https://goo.gl/fr3HCz';
 

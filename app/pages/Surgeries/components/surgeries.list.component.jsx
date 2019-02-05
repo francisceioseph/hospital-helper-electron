@@ -6,7 +6,7 @@ import {
   Row, Input, Divider, Button, Col, Modal
 } from 'antd';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 import Agenda from '../../../components/Agenda';
 import SurgeryDetailList from './detail.component';
 

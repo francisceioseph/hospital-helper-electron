@@ -8,7 +8,7 @@ import {
   Row, Input, Divider, Table, Button, Col,
 } from 'antd';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 import { tableColumns } from './appointment-type.list.constants';
 import AppointmentTypeModal from './appointment-type.modal.component';

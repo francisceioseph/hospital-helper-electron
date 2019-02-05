@@ -8,7 +8,7 @@ import { getExamTypes, createExam } from '../exams.actions';
 
 import ExamForm from '../components/exam.form.component';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
 
 import { 

@@ -4,7 +4,7 @@ import { withHandlers, compose } from 'recompose';
 import { createRole } from '../roles.actions';
 import RoleForm from '../components/role.form.component';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
 
 const mapStateToProps = ({ roles }) => ({

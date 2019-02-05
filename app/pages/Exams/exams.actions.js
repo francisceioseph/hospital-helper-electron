@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const GET_EXAMS = 'FETCH_EXAMS';
 export const GET_EXAM_TYPES = 'FETCH_EXAM_TYPES';

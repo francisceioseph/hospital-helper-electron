@@ -7,7 +7,7 @@ import {
  Row, Input, Divider, Table, Button, Col 
 } from 'antd';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 import { tableColumns } from './specialty.list.constants';
 import SpecialtyModal from './specialty.modal.component';

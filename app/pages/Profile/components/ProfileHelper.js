@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconCard, TextCard, StepCard, ChartCard } from './cards/index';
+import { IconCard, TextCard, StepCard, ChartCard } from '../cards/index';
 
 export function renderCard(facet) {
   switch (facet.type) {

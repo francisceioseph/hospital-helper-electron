@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const GET_SPECIALTIES = 'FETCH_SPECIALTIES';
 export const CREATE_SPECIALTY = 'CREATE_SPECIALTY';

@@ -8,7 +8,7 @@ import { getSurgeryTypes, createSurgery } from '../surgeries.actions';
 
 import SurgeryForm from '../components/surgery.form.component';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
 
 import {

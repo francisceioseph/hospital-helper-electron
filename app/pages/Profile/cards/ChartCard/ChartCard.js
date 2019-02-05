@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Card } from 'antd';
 import { ResponsiveContainer, BarChart, YAxis, XAxis, Bar } from 'recharts';
 
-import './ChartCard.scss';
+import './ChartCard.less';
 
 export const ChartCard = props => {
   const { content, dataKey, valuesKey } = props;

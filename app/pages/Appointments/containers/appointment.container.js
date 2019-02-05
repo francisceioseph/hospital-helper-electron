@@ -17,7 +17,7 @@ import {
 
 import { AppointmentForm } from '../components';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
 
 const mapStateToProps = ({ appointments, doctors, pacients }) => ({

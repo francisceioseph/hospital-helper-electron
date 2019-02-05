@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Steps } from 'antd';
 import PropTypes from 'prop-types';
 
-import './StepCard.scss';
+import './StepCard.less';
 
 const { Step } = Steps;
 

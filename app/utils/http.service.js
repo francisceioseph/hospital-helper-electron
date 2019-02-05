@@ -48,6 +48,8 @@ export const removeSurgeryTypeUrl = (id) => `/surgery-types/${id}`
 export const GET_ROLES_URL = '/roles';
 export const POST_ROLE_URL = '/roles';
 
+export const getProfileUrl = (id) => `/profiles/${id}`;
+
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use((oldSettings) => {
     const settings = { ...oldSettings };

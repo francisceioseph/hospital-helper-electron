@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const GET_SURGERY_TYPES = 'FETCH_SURGERY_TYPES';
 export const CREATE_SURGERY_TYPE = 'CREATE_SURGERY_TYPES';

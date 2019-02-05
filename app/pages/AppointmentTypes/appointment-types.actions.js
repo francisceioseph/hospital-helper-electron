@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const GET_APPOINTMENT_TYPES = 'FETCH_APPOINTMENT_TYPES';
 export const CREATE_APPOINTMENT_TYPE = 'CREATE_APPOINTMENT_TYPES';

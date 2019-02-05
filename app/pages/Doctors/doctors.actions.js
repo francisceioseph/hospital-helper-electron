@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const GET_DOCTORS = 'FETCH_DOCTORS';
 export const CREATE_DOCTOR = 'CREATE_DOCTOR';

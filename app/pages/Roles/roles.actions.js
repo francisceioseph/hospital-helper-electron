@@ -1,6 +1,6 @@
 
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const getRoles = createAction('FETCH_ROLES', WebAPI.getRoles);
 export const createRole = createAction('CREATE_ROLE');

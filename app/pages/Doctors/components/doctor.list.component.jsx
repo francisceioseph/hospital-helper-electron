@@ -5,7 +5,7 @@ import { lifecycle, compose, withHandlers } from 'recompose';
 
 import { tableColumns } from './doctor.list.constants';
 import { TableList } from '../../../components/TableList';
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 const DoctorListComponent = props => (
   <TableList

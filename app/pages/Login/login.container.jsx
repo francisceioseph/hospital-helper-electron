@@ -6,7 +6,7 @@ import { Alert } from 'antd';
 
 import { setCredentials, setLoginError } from './login.actions';
 import LoginForm from './components/login.form';
-import * as WebAPI from '../../utils/webAPI';
+import * as WebAPI from '../../utils/api.service';
 
 import './login.scss';
 

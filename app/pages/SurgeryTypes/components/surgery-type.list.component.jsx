@@ -8,7 +8,7 @@ import {
   Row, Input, Divider, Table, Button, Col,
 } from 'antd';
 
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 import { tableColumns } from './surgery-type.list.constants';
 import SurgeryTypeModal from './surgery-type.modal.component';

@@ -3,7 +3,7 @@ import { Row, Input, Divider, Table, Button, Col } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 
 import { tableColumns } from '../pacient.constants';
-import * as WebAPI from '../../../utils/webAPI';
+import * as WebAPI from '../../../utils/api.service';
 
 const withLifecycle = lifecycle({
   async componentDidMount() {
