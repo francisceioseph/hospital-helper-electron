@@ -33,6 +33,6 @@ export default function createRootReducer(history: History) {
     examTypes        : examTypesReducer,
     roles            : rolesReducer,
     surgeryTypes     : surgeryTypesReducer,
-    profile          : profileReducer,
+    profiles         : profileReducer,
   });
 }

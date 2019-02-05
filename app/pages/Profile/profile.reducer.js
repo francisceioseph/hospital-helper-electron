@@ -2,7 +2,15 @@ import { handleActions } from 'redux-actions';
 import { getProfile } from './profile.actions';
 
 const initialState = {
-    profile: {}
+  profile: {
+    profile_type   : '',
+    personal_datum : {
+      full_name   : '',
+      birth_datum : {},
+    },
+
+    emails: []
+  }
 };
 
 const handleGetProfile = (state, action) => {
@@ -11,9 +19,9 @@ const handleGetProfile = (state, action) => {
   return {
     ...state,
     profile,
-  }
+  };
 };
 
 export default handleActions({
   [getProfile]: handleGetProfile,
-});
+}, initialState);

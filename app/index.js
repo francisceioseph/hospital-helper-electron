@@ -6,7 +6,7 @@ import Root from './containers/Root';
 import registerServiceWorker from './registerServiceWorker';
 
 import { history, store } from './store';
-import { configureAxiosInterceptors } from './utils/http';
+import { configureAxiosInterceptors } from './utils/http.service';
 
 import './app.less';
 

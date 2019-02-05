@@ -3,11 +3,7 @@ import t from 'typy';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 
-import {
-  showPageLoader,
-  hidePageLoader
-} from '../../../containers/layouts/actions';
-
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 import { getProfile } from '../profile.actions';
 
 import ProfileComponent from '../components/profile.component';
@@ -28,7 +24,8 @@ const withLifecycle = lifecycle({
   async componentDidMount() {
     try {
       this.props.showPageLoader();
-      WebAPI.getProfile(this.props.profileId);
+      const response = await WebAPI.getProfile(this.props.profileId);
+      this.props.getProfile(response);
     } catch (e) {
       console.log(e);
     } finally {
@@ -37,6 +34,6 @@ const withLifecycle = lifecycle({
   }
 });
 
-const ProfileWrapper = compose(withLifecycle)(Profile);
+const ProfileWrapper = compose(withLifecycle)(ProfileComponent);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper);

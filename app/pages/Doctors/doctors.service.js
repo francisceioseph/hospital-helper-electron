@@ -1,4 +1,4 @@
-import * as WebAPI from '../../utils/WebAPI';
+import * as WebAPI from '../../utils/api.service';
 
 export const postDoctor = async (values) => {
   const { user, ...doctor } = values;

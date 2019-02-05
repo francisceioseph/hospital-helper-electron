@@ -25,6 +25,7 @@ import {
   faLock,
   faScrewdriver,
   faUserLock,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -56,6 +57,7 @@ library.add(
   faLock,
   faScrewdriver,
   faUserLock,
+  faUser
 );
 
 export default [

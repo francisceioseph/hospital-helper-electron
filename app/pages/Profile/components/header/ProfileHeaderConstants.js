@@ -27,4 +27,4 @@ export const DETAILS_LAYOUT = {
   xxl: { span: 6 },
 };
 
-export const IMAGE_SOURCE = 'https://goo.gl/oKoWW2';
+export const IMAGE_SOURCE = 'http://localhost:3000/user.png';
