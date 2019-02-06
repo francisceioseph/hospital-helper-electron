@@ -204,7 +204,7 @@ export default [
   },
   {
     code       : '5',
-    name       : 'Cadastros',
+    name       : 'Usuários',
     icon       : 'keyboard',
     permission : {
       action    : 'view',
