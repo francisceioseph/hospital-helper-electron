@@ -3,7 +3,7 @@ import {
   Input, DatePicker, Select, Radio
 } from 'antd';
 
-import { SIMPLE_DATE_FORMAT } from '../../../utils/date-format';
+import { SIMPLE_DATE_FORMAT_PT_BR } from '../../../utils/date-format';
 
 export const getFullNameField = () => <Input />;
 export const getCpfField = () => <Input />;
@@ -16,7 +16,7 @@ export const getGenderField = () => (
     <Select.Option value="none">Não Informado</Select.Option>
   </Select>
 );
-export const getBirthDateField = () => <DatePicker showToday format={SIMPLE_DATE_FORMAT} />;
+export const getBirthDateField = () => <DatePicker showToday format={SIMPLE_DATE_FORMAT_PT_BR} />;
 
 export const getInputField = () => <Input />;
 

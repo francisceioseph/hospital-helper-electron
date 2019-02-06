@@ -19,10 +19,24 @@ const withCalendarHandlers = withHandlers({
 
 const Agenda = (props) => {
   const views = [BigCalendar.Views.MONTH, BigCalendar.Views.WEEK, BigCalendar.Views.DAY];
+  const minTime = moment()
+    .hours(8)
+    .minutes(0)
+    .seconds(0)
+    .toDate();
+
+  const maxTime = moment()
+    .hours(18)
+    .minutes(0)
+    .seconds(0)
+    .toDate();
+
   return (
     <div>
       <BigCalendar
         selectable
+        min={minTime}
+        max={maxTime}
         events={props.events}
         showMultiDayTimes
         views={views}
