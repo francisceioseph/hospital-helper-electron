@@ -78,7 +78,7 @@ export default [
     route: '/profile',
     permission: {
       action: 'view',
-      resources: ['perfil']
+      resources: ['profile']
     },
   },
   {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, List, Empty } from 'antd';
 
+import { getLine1, getLine2, getLine3 } from '../../../../utils';
 import './cards.less';
 
 const { Item } = List;
@@ -17,9 +18,9 @@ const AddressCardComponent = ({ datasource }) => (
             itemLayout="horizontal"
             renderItem={it => (
               <Item>
-                <p>{`${it.street_name}, ${it.house_number} ${it.neighborhood}`}</p>
-                <p>{`${it.city} - ${it.state} - ${it.country}`}</p>
-                <p>{`${it.zipcode}`}</p>
+                <p>{getLine1(it)}</p>
+                <p>{getLine2(it)}</p>
+                <p>{getLine3(it)}</p>
               </Item>
             )}
           />

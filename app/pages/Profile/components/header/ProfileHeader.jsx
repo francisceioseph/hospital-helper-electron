@@ -11,6 +11,8 @@ import {
   DETAILS_LAYOUT
 } from './ProfileHeaderConstants';
 
+import { calculateAge, getLine2 } from '../../../../utils';
+
 import './ProfileHeader.less';
 
 class ProfileHeader extends Component {
@@ -21,9 +23,13 @@ class ProfileHeader extends Component {
     return names.length > 1 ? `${names[0]}, ${names[1]}` : names[0];
   }
 
-  getBirthData() {
-    const birthData = t(this.props, 'profile.personal_datum.birth_datum').safeObject;
-    return birthData ? `${birthData.city_of_birth}, ${birthData.state_of_birth}` : '';
+  getAddressLine() {
+    const address = t(this.props, 'profile.addresses[0]').safeObject;
+    return address ? getLine2(address) : 'Endereço não informado';
+  }
+
+  getEmail() {
+    return t(this.props, 'profile.emails[0]').safeString;
   }
 
   render() {
@@ -46,15 +52,14 @@ class ProfileHeader extends Component {
 
           <div className="bottom">
             <h3>{profile.profile_type.toUpperCase()}</h3>
-            {/* <h3>{user.level.toUpperCase()}</h3> */}
           </div>
         </Col>
 
         <Col {...DETAILS_LAYOUT} className="user-detail">
           <div>
-            <h4>{birthDatum.date_of_birth}</h4>
-            <h4>{this.getBirthData()}</h4>
-            <h4>{emails[0]}</h4>
+            <h4>{`${calculateAge(birthDatum.date_of_birth)} anos`}</h4>
+            <h4>{this.getAddressLine()}</h4>
+            <h4>{this.getEmail()}</h4>
           </div>
         </Col>
       </Row>

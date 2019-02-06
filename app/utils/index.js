@@ -24,12 +24,7 @@ export const queryArray = (array, key, keyAlias = 'key') => {
  * @param   {String}    children
  * @return  {Array}
  */
-export const arrayToTree = (
-  array,
-  id = 'id',
-  pid = 'pid',
-  children = 'children'
-) => {
+export const arrayToTree = (array, id = 'id', pid = 'pid', children = 'children') => {
   const data = lodash.cloneDeep(array);
   let result = []; // eslint-disable-line
   let hash = {}; // eslint-disable-line
@@ -37,7 +32,7 @@ export const arrayToTree = (
     hash[data[index][id]] = data[index];
   });
 
-  data.forEach(item => {
+  data.forEach((item) => {
     let hashVP = hash[item[pid]]; // eslint-disable-line
     if (hashVP) {
       !hashVP[children] && (hashVP[children] = []); // eslint-disable-line
@@ -50,9 +45,12 @@ export const arrayToTree = (
 };
 
 export const pickBy = (arr = [], key = 'id') => arr.reduce(
-  (acc, item) => ({ 
+  (acc, item) => ({
     ...acc,
-    [ item[key].toString()] : item
+    [item[key].toString()]: item
   }),
   {}
 );
+
+export { dateFormat, calculateAge } from './date-format';
+export { getLine1, getLine2, getLine3 } from './address-utils';

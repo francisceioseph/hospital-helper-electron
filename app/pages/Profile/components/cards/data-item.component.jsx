@@ -5,11 +5,13 @@ import { List } from 'antd';
 const { Item } = List;
 const { Meta } = Item;
 
+const renderTitle = title => <strong>{title}</strong>;
+
 const DataItemComponent = ({ title, description }) => (
   <React.Fragment>
     {!!description && (
       <Item>
-        <Meta title={title} description={description} />
+        <Meta title={renderTitle(title)} description={description} />
       </Item>
     )}
   </React.Fragment>
