@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { Form, Button, Divider } from 'antd';
+import { Form, Button } from 'antd';
 import { compose, withHandlers, defaultProps } from 'recompose';
 
-import {
-  HORIZONTAL_FORM_LAYOUT,
-  FORM_ITEM_LAYOUT,
-  FORM_ITEM_SUBMIT_LAYOUT
-} from '../../../components/forms';
+import { HORIZONTAL_FORM_LAYOUT, FORM_ITEM_LAYOUT, FORM_ITEM_SUBMIT_LAYOUT } from '../../../components/forms';
 
 import { getDecoratorManager } from './appointments.form.decorators';
 import { LABELS } from './appointments.form.constants';
@@ -39,18 +35,13 @@ const AppointmentForm = (props) => {
 
   return (
     <div>
-      <Divider orientation="left">
-        <h2>Agendar Consulta</h2>
-      </Divider>
       <Form onSubmit={props.handleSubmit} layout={HORIZONTAL_FORM_LAYOUT}>
         <FormItem label={LABELS.PACIENT_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}
         </FormItem>
 
         <FormItem label={LABELS.APPOINTMENT_TYPES} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.appointmentTypeDecorator(
-            getAppointmentTypeField(props.appointmentTypes)
-          )}
+          {decoratorManager.appointmentTypeDecorator(getAppointmentTypeField(props.appointmentTypes))}
         </FormItem>
 
         <FormItem label={LABELS.DOCTOR_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>

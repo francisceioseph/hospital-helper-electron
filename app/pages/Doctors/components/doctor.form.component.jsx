@@ -32,7 +32,6 @@ const PacientForm = (props) => {
 
   return (
     <div>
-      <h1>Cadastrar Médico</h1>
       <Form layout={HORIZONTAL_FORM_LAYOUT} onSubmit={props.onSubmit}>
         <Divider orientation="left">Dados Pessoais</Divider>
         <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.NOME_COMPLETO} hasFeedback>

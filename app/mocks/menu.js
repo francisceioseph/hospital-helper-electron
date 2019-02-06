@@ -179,9 +179,9 @@ export default [
   {
     code            : '421',
     menuParentCode  : '-1',
-    breadParentCode : '44',
+    breadParentCode : '42',
     name            : 'Novo Exame',
-    route           : '/marcacoes/exames/criar'
+    route           : '/marcacoes/exames/novo'
   },
   {
     code            : '43',
@@ -198,9 +198,9 @@ export default [
   {
     code            : '431',
     menuParentCode  : '-1',
-    breadParentCode : '44',
+    breadParentCode : '43',
     name            : 'Nova Cirurgia',
-    route           : '/marcacoes/cirurgias/criar'
+    route           : '/marcacoes/cirurgias/novo'
   },
   {
     code       : '5',

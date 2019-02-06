@@ -1,7 +1,9 @@
 import React from 'react';
-import { Input, DatePicker, Select, Radio } from 'antd';
+import {
+  Input, DatePicker, Select, Radio
+} from 'antd';
 
-import {} from './pacient.form.constants';
+import { SIMPLE_DATE_FORMAT } from '../../../utils/date-format';
 
 export const getFullNameField = () => <Input />;
 export const getCpfField = () => <Input />;
@@ -14,13 +16,13 @@ export const getGenderField = () => (
     <Select.Option value="none">Não Informado</Select.Option>
   </Select>
 );
-export const getBirthDateField = () => <DatePicker showToday />;
+export const getBirthDateField = () => <DatePicker showToday format={SIMPLE_DATE_FORMAT} />;
 
 export const getInputField = () => <Input />;
 
 export const getYesNoRadio = () => (
   <Radio.Group>
-    <Radio value={true}>Sim</Radio>
+    <Radio value>Sim</Radio>
     <Radio value={false}>Não</Radio>
   </Radio.Group>
 );
@@ -116,4 +118,4 @@ export const getSpecialNeedsInput = () => (
     <Select.Option value="other">Outro</Select.Option>
     <Select.Option value="none">Não Informado</Select.Option>
   </Select>
-)
+);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, DatePicker, Select } from 'antd';
 
-import {} from './doctor.form.constants';
+import { SIMPLE_DATE_FORMAT_PT_BR } from '../../../utils/date-format';
 
 export const getFullNameField = () => <Input />;
 export const getCpfField = () => <Input />;
@@ -14,4 +14,4 @@ export const getGenderField = () => (
     <Select.Option value="famale">Feminino</Select.Option>
   </Select>
 );
-export const getBirthDateField = () => <DatePicker showToday />;
+export const getBirthDateField = () => <DatePicker showToday format={SIMPLE_DATE_FORMAT_PT_BR} />;

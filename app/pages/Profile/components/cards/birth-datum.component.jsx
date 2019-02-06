@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Card, List, Empty } from 'antd';
 
 import Item from './data-item.component';
-import { DATE_FORMAT_PT_BR } from '../../../../components/forms';
+import { DATE_FORMAT_PT_BR } from '../../../../utils/date-format';
 
 import './cards.less';
 
@@ -16,10 +16,7 @@ const BirthDataCard = ({ birthDatum }) => (
         {!birthDatum && <Empty description="Dados indisponíveis" />}
         {!!birthDatum && (
           <List itemLayout="horizontal">
-            <Item
-              title="Data do Nascimento"
-              description={moment(birthDatum.date_of_birth).format(DATE_FORMAT_PT_BR)}
-            />
+            <Item title="Data do Nascimento" description={moment(birthDatum.date_of_birth).format(DATE_FORMAT_PT_BR)} />
             <Item title="Cidade" description={birthDatum.city_of_birth} />
             <Item title="Estado" description={birthDatum.state_of_birth} />
             <Item title="País" description={birthDatum.country_of_birth} />

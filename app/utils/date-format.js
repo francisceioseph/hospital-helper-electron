@@ -1,5 +1,7 @@
 import moment from 'moment';
-import { SIMPLE_DATE_FORMAT_PT_BR } from '../components/forms';
+
+export const DATE_FORMAT_PT_BR = 'DD/MM/YYYY hh:mm';
+export const SIMPLE_DATE_FORMAT_PT_BR = 'DD/MM/YYYY';
 
 export const dateFormat = date => moment(date).format(SIMPLE_DATE_FORMAT_PT_BR);
 

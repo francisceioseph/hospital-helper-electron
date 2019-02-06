@@ -4,7 +4,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { List } from 'antd';
-import { DATE_FORMAT_PT_BR } from '../../../components/forms';
+import { DATE_FORMAT_PT_BR } from '../../../utils/date-format';
 
 import './detail.component.less';
 

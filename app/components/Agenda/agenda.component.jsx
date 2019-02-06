@@ -18,7 +18,7 @@ const withCalendarHandlers = withHandlers({
 });
 
 const Agenda = (props) => {
-  const views = [BigCalendar.Views.WEEK, BigCalendar.Views.DAY];
+  const views = [BigCalendar.Views.MONTH, BigCalendar.Views.WEEK, BigCalendar.Views.DAY];
   return (
     <div>
       <BigCalendar
