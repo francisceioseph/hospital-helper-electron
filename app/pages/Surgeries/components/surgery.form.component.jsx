@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Form, Button, Divider } from 'antd';
+import { Link } from 'react-router-dom';
+import { Form, Button } from 'antd';
 import { compose, withHandlers, defaultProps } from 'recompose';
 
 import { HORIZONTAL_FORM_LAYOUT, FORM_ITEM_LAYOUT, FORM_ITEM_SUBMIT_LAYOUT } from '../../../components/forms';
@@ -38,6 +39,7 @@ const SurgeryForm = (props) => {
       <Form onSubmit={props.handleSubmit} layout={HORIZONTAL_FORM_LAYOUT}>
         <FormItem label={LABELS.PACIENT_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}
+          <Link to="/usuarios/pacientes/novo">Cadastrar Paciente</Link>
         </FormItem>
 
         <FormItem label={LABELS.SURGERY_TYPE} {...FORM_ITEM_LAYOUT} hasFeedback>
