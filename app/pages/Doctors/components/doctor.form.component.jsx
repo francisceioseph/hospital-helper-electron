@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
- Form, Button, Divider, Collapse 
+  Form, Button, Divider, Collapse
 } from 'antd';
 import { compose, withHandlers, defaultProps } from 'recompose';
 import { getDecoratorManager } from './doctor.form.decorator';
@@ -16,7 +16,7 @@ import {
 } from '../../../components/forms';
 
 const FormItem = Form.Item;
-const Panel = Collapse.Panel;
+const { Panel } = Collapse;
 
 const handleSubmit = props => (e) => {
   e.preventDefault();
@@ -30,8 +30,8 @@ const handleSubmit = props => (e) => {
 const withFormHandlers = withHandlers({ handleSubmit });
 
 const PacientForm = (props) => {
-  const { pacient } = props;
-  const { getFieldDecorator } = props.form;
+  const { pacient, form } = props;
+  const { getFieldDecorator } = form;
   const decoratorManager = getDecoratorManager(getFieldDecorator, pacient);
 
   return (
@@ -42,11 +42,7 @@ const PacientForm = (props) => {
       <Form layout={HORIZONTAL_FORM_LAYOUT} onSubmit={props.handleSubmit}>
         <Collapse defaultActiveKey="personal-data">
           <Panel header="Dados Pessoais" key="personal-data">
-            <FormItem
-              {...FORM_ITEM_LAYOUT}
-              label={LABELS.NOME_COMPLETO}
-              hasFeedback
-            >
+            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.NOME_COMPLETO} hasFeedback>
               {decoratorManager.fullNameDecorator(entries.getFullNameField())}
             </FormItem>
 
@@ -62,11 +58,7 @@ const PacientForm = (props) => {
               {decoratorManager.genderDecorator(entries.getGenderField())}
             </FormItem>
 
-            <FormItem
-              label={LABELS.BIRTH_DATE}
-              {...FORM_ITEM_LAYOUT}
-              hasFeedback
-            >
+            <FormItem label={LABELS.BIRTH_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
               {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
             </FormItem>
           </Panel>
@@ -86,11 +78,7 @@ const PacientForm = (props) => {
           </Panel>
         </Collapse>
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
+          <Button type="primary" htmlType="submit" className="login-form-button">
             Salvar
           </Button>
         </FormItem>

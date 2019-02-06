@@ -14,25 +14,32 @@
   "rules": {
     "func-names": "off",
     "indent": ["error", 2],
-    "comma-dangle": ["error", {
+    "max-len": ["error", { "code": 200, "tabWidth": 2 }],
+    "comma-dangle": [
+      "error",
+      {
         "arrays": "ignore",
         "objects": "ignore",
         "imports": "never",
         "exports": "never",
         "functions": "never"
-    }],
-    "key-spacing": ["error", {
+      }
+    ],
+    "key-spacing": [
+      "error",
+      {
         "multiLine": {
-            "beforeColon": false,
-            "afterColon": true
+          "beforeColon": false,
+          "afterColon": true
         },
         "align": {
-            "beforeColon": true,
-            "afterColon": true,
-            "on": "colon"
+          "beforeColon": true,
+          "afterColon": true,
+          "on": "colon"
         }
-    }],
+      }
+    ],
     "eol-last": "off",
-    "import/prefer-default-export": "off",
-  },
+    "import/prefer-default-export": "off"
+  }
 }

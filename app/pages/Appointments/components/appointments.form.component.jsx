@@ -21,7 +21,7 @@ import {
 
 const FormItem = Form.Item;
 
-const handleSubmit = props => e => {
+const handleSubmit = props => (e) => {
   e.preventDefault();
   props.form.validateFields((err, values) => {
     if (!err) {
@@ -32,7 +32,7 @@ const handleSubmit = props => e => {
 
 const withFormHandlers = withHandlers({ handleSubmit });
 
-const AppointmentForm = props => {
+const AppointmentForm = (props) => {
   const { appointment } = props;
   const { getFieldDecorator } = props.form;
   const decoratorManager = getDecoratorManager(getFieldDecorator, appointment);
@@ -44,41 +44,25 @@ const AppointmentForm = props => {
       </Divider>
       <Form onSubmit={props.handleSubmit} layout={HORIZONTAL_FORM_LAYOUT}>
         <FormItem label={LABELS.PACIENT_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.pacientNameDecorator(
-            getPacientNameField(props.pacients)
-          )}
+          {decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}
         </FormItem>
 
-        <FormItem
-          label={LABELS.APPOINTMENT_TYPES}
-          {...FORM_ITEM_LAYOUT}
-          hasFeedback
-        >
+        <FormItem label={LABELS.APPOINTMENT_TYPES} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.appointmentTypeDecorator(
             getAppointmentTypeField(props.appointmentTypes)
           )}
         </FormItem>
 
         <FormItem label={LABELS.DOCTOR_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.doctorNameDecorator(
-            getDoctorNameField(props.doctors)
-          )}
+          {decoratorManager.doctorNameDecorator(getDoctorNameField(props.doctors))}
         </FormItem>
 
-        <FormItem
-          label={LABELS.SCHEDULED_DATE}
-          {...FORM_ITEM_LAYOUT}
-          hasFeedback
-        >
+        <FormItem label={LABELS.SCHEDULED_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.scheduledDateDecorator(getScheduledDateField())}
         </FormItem>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
+          <Button type="primary" htmlType="submit" className="login-form-button">
             Cadastrar
           </Button>
         </FormItem>
@@ -89,10 +73,10 @@ const AppointmentForm = props => {
 
 const AppointmentFormComponent = compose(
   defaultProps({
-    appointment: {},
-    appointmentTypes: [],
-    pacients: [],
-    doctors: []
+    appointment      : {},
+    appointmentTypes : [],
+    pacients         : [],
+    doctors          : []
   }),
   withFormHandlers
 )(AppointmentForm);

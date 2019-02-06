@@ -18,12 +18,12 @@ const DoctorListComponent = props => (
 );
 
 DoctorListComponent.propTypes = {
-  doctors: PropTypes.instanceOf(Array).isRequired,
-  onNewDoctorClick: PropTypes.func.isRequired
+  doctors          : PropTypes.instanceOf(Array).isRequired,
+  onNewDoctorClick : PropTypes.func.isRequired
 };
 
 const withListHandlers = withHandlers({
-  onNewDoctorClick: props => event => {
+  onNewDoctorClick: props => (event) => {
     event.stopPropagation();
     props.history.push('/usuarios/medicos/novo');
   }
@@ -35,7 +35,7 @@ const listLifecycle = lifecycle({
 
     try {
       const response = await WebAPI.getDoctors();
-      this.props.getDoctors(respose);
+      this.props.getDoctors(response);
       this.props.hidePageLoader();
     } catch (error) {
       console.log(error);

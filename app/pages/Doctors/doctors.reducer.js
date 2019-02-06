@@ -1,16 +1,13 @@
-import { pickBy } from '../../utils';
 import { handleActions } from 'redux-actions';
+import { pickBy } from '../../utils';
 import {
-  getDoctors,
-  createDoctor,
-  updateDoctor,
-  removeDoctor
+  getDoctors, createDoctor, updateDoctor, removeDoctor
 } from './doctors.actions';
 
 const initialState = {
-  showModal: false,
-  doctors: {},
-  currentDoctor: {}
+  showModal     : false,
+  doctors       : {},
+  currentDoctor : {}
 };
 
 const handleGetDoctors = (state, action) => {
@@ -57,10 +54,10 @@ const handleRemoveDoctor = (state, action) => {
 
 export default handleActions(
   {
-    [getDoctors]: handleGetDoctors,
-    [createDoctor]: handleCreateDoctor,
-    [updateDoctor]: handleUpdateDoctor,
-    [removeDoctor]: handleRemoveDoctor
+    [getDoctors]   : handleGetDoctors,
+    [createDoctor] : handleCreateDoctor,
+    [updateDoctor] : handleUpdateDoctor,
+    [removeDoctor] : handleRemoveDoctor
   },
   initialState
 );

@@ -289,6 +289,7 @@
     "redux-thunk": "^2.3.0",
     "source-map-support": "^0.5.9",
     "svgr": "1.6.0",
+    "typeface-open-sans": "^0.0.54",
     "typy": "^3.0.1"
   },
   "devEngines": {

@@ -38,16 +38,14 @@ const ContactsFragment = (props) => {
         {decoratorManager.state(entries.getInputField())}
       </FormItem>
 
-      <Divider orientation="left">E-mails</Divider>
-      <FormItem label={LABELS.EMAIL} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.emailDecorator(entries.getInputField())}
-      </FormItem>
-
-      <Divider orientation="left">Telefones</Divider>
+      <Divider orientation="left">Contatos</Divider>
       <FormItem label={LABELS.PHONE} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.phoneDecorator(entries.getInputField())}
       </FormItem>
 
+      <FormItem label={LABELS.EMAIL} {...FORM_ITEM_LAYOUT} hasFeedback>
+        {decoratorManager.emailDecorator(entries.getInputField())}
+      </FormItem>
     </Fragment>
   );
 };

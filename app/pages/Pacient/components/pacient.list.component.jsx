@@ -1,5 +1,7 @@
 import React from 'react';
-import { Row, Input, Divider, Table, Button, Col } from 'antd';
+import {
+  Row, Input, Divider, Table, Button, Col
+} from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 
 import { tableColumns } from '../pacient.constants';
@@ -20,8 +22,7 @@ const withLifecycle = lifecycle({
 });
 
 const withListHandlers = withHandlers({
-  onNewPacientClick: props => () =>
-    props.history.push('/usuarios/pacientes/novo')
+  onNewPacientClick: props => () => props.history.push('/usuarios/pacientes/novo')
 });
 
 const PacientListComponent = props => (
@@ -40,13 +41,7 @@ const PacientListComponent = props => (
     <Divider />
 
     <Row>
-      <Table
-        size="middle"
-        columns={tableColumns}
-        dataSource={props.pacients}
-        rowKey={it => it.id}
-        pagination={{ pageSize: 8 }}
-      />
+      <Table size="middle" columns={tableColumns} dataSource={props.pacients} rowKey={it => it.id} pagination={{ pageSize: 8 }} />
     </Row>
   </div>
 );

@@ -1,48 +1,94 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import "~antd/dist/antd.less";
+@import "~typeface-open-sans/index.css";
 
-@purple-navy            : #54577c;
-@tuscan                 : #f2dda4;
-@light-goldenrod        : #faffd8;
-@teal                   : #019d9d;
-@japanese-indigo        : #1b4252;
-@japanese-indigo-dark   : #193b4a;
-@light-carmine          : #ef626c;
-@rich-black             : rgb(10, 18, 42);
-@rich-black-85          : rgb(10, 18, 42, .85);
-@rich-black-45          : rgb(10, 18, 42, .45);
-@rich-black-25          : rgb(10, 18, 42, .25);
-@rich-black-15          : rgb(10, 18, 42, .15);
-@vivid-tangerine        : #fb9f89;
-@crayola                : #21a179;
+@purple-navy : #54577c;
+@tuscan : #f2dda4;
+@light-goldenrod : #faffd8;
+@teal : #019d9d;
+@japanese-indigo : #1b4252;
+@japanese-indigo-dark : #193b4a;
+@light-carmine : #ef626c;
+@rich-black : rgb(10, 18, 42);
+@rich-black-85 : rgb(10, 18, 42, .85);
+@rich-black-45 : rgb(10, 18, 42, .45);
+@rich-black-25 : rgb(10, 18, 42, .25);
+@rich-black-15 : rgb(10, 18, 42, .15);
+@vivid-tangerine : #fb9f89;
+@crayola : #21a179;
 
-@primary-color        : @teal;                     // primary color for all components
-@link-color           : #ee7674;                 // link color
-@success-color        : @crayola;                  // success state color
-@warning-color        : @vivid-tangerine;          // warning state color
-@error-color          : @light-carmine;            // error state color
-@font-size-base       : 14px;                      // major text font size
-@text-color           : @rich-black;               // major text color
-@heading-color        : @rich-black-85;            // heading text color
-@text-color-secondary : @rich-black-45;            // secondary text color
-@disabled-color       : @rich-black-25;            // disable state color
-@border-radius-base   : 4px;                       // major border radius
-@border-color-base    : #d9d9d9;                 // major border color
-@box-shadow-base      : 0 2px 8px @rich-black-15;  // major shadow for layers
+@primary-color : @teal; // primary color for all components
+@link-color : #ee7674; // link color
+@success-color : @crayola; // success state color
+@warning-color : @vivid-tangerine; // warning state color
+@error-color : @light-carmine; // error state color
+@font-size-base : 14px; // major text font size
+@text-color : @rich-black; // major text color
+@heading-color : @rich-black-85; // heading text color
+@text-color-secondary : @rich-black-45; // secondary text color
+@disabled-color : @rich-black-25; // disable state color
+@border-radius-base : 4px; // major border radius
+@border-color-base : #d9d9d9; // major border color
+@box-shadow-base : 0 2px 8px @rich-black-15; // major shadow for layers
 
 @layout-sider-background : @japanese-indigo;
 
-@menu-dark-color            : @text-color-secondary-dark;
-@menu-dark-bg               : @japanese-indigo;
-@menu-dark-submenu-bg       : @japanese-indigo-dark;
-@menu-dark-arrow-color      : #fff;
-@menu-dark-highlight-color  : #fff;
+@menu-dark-color : @text-color-secondary-dark;
+@menu-dark-bg : @japanese-indigo;
+@menu-dark-submenu-bg : @japanese-indigo-dark;
+@menu-dark-arrow-color : #fff;
+@menu-dark-highlight-color : #fff;
 
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Open Sans";
   background-color: white;
+}
+
+h1 {
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+
+h3 {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 15.4px;
+}
+
+p {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+blockquote {
+  font-family: "Open Sans";
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+pre {
+  font-family: "Open Sans";
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5667px;
 }
 
 #root {
@@ -64,4 +110,25 @@ body {
   line-height: 1;
   text-align: left;
   margin-right: 8px;
+}
+
+.ant-divider-inner-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: @teal;
+}
+
+.ant-divider-horizontal.ant-divider-with-text-left {
+  &:before {
+    border-top-color: rgba(239, 98, 108, 0.5);
+  }
+  &:after {
+    border-top-color: rgba(239, 98, 108, 0.5);
+  }
+}
+
+.ant-form-item-label {
+  label {
+    font-weight: 600;
+  }
 }
