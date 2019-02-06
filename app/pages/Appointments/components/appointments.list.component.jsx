@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { compose, lifecycle, withHandlers } from 'recompose';
-import { Row, Input, Divider, Button, Col, Modal } from 'antd';
+import {
+  Row, Input, Divider, Button, Col, Modal
+} from 'antd';
 
 import Agenda from '../../../components/Agenda';
 import AppointmentInfo from './detail.component';
@@ -15,10 +17,7 @@ const AppointmentList = props => (
         <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
-        <Button
-          type="primary"
-          onClick={() => props.history.push('/marcacoes/consultas/novo')}
-        >
+        <Button type="primary" onClick={() => props.history.push('/marcacoes/consultas/novo')}>
           Agendar Consulta
         </Button>
       </Col>
@@ -33,15 +32,15 @@ const AppointmentList = props => (
 );
 
 AppointmentList.propTypes = {
-  history: PropTypes.instanceOf(Object).isRequired,
-  appointments: PropTypes.instanceOf(Array).isRequired,
-  onSelectEvent: PropTypes.func.isRequired
+  history       : PropTypes.instanceOf(Object).isRequired,
+  appointments  : PropTypes.instanceOf(Array).isRequired,
+  onSelectEvent : PropTypes.func.isRequired
 };
 
-const onAppointmentSelected = () => event => {
+const onAppointmentSelected = () => (event) => {
   Modal.info({
-    title: 'Agendamento',
-    content: <AppointmentInfo appointment={event.resource} />
+    title   : 'Agendamento',
+    content : <AppointmentInfo appointment={event.resource} />
   });
 };
 
@@ -56,7 +55,7 @@ const withLifecycle = lifecycle({
       const res = await WebAPI.getAppointments();
       this.props.getAppointments(res);
       this.props.hidePageLoader();
-    } catch(error) {
+    } catch (error) {
       console.log(error);
       this.props.hidePageLoader();
     }

@@ -1,13 +1,15 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Button, Radio, Row, Col } from 'antd';
+import {
+  Button, Radio, Row, Col
+} from 'antd';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const ButtonGroup = Button.Group;
 
-const CustomToolbar = toolbar => {
+const CustomToolbar = (toolbar) => {
   const goToBack = () => {
     toolbar.onNavigate('PREV');
   };
@@ -24,12 +26,14 @@ const CustomToolbar = toolbar => {
     const date = moment(toolbar.date).locale('pt-BR');
     return (
       <label className="toolbar-label">
-        <b>{date.format('MMMM')}</b> {date.format('YYYY')}
+        <b>{date.format('MMMM')}</b>
+        {' '}
+        {date.format('YYYY')}
       </label>
     );
   };
 
-  const onViewChange = e => {
+  const onViewChange = (e) => {
     toolbar.onViewChange(e.target.value);
   };
 
@@ -42,13 +46,16 @@ const CustomToolbar = toolbar => {
           <Button onClick={goToNext}>&#8250;</Button>
         </ButtonGroup>
       </Col>
-      <Col> {label()} </Col>
+      <Col>
+        {' '}
+        {label()}
+        {' '}
+      </Col>
       <Col>
         <RadioGroup onChange={onViewChange} value={toolbar.view}>
-          <RadioButton value="month">Mês</RadioButton>
-          <RadioButton value="week">Semana</RadioButton>
-          <RadioButton value="day">Dia</RadioButton>
-          <RadioButton value="agenda">Agenda</RadioButton>
+          <RadioButton value="month">Por Mês</RadioButton>
+          <RadioButton value="week">Por Semana</RadioButton>
+          <RadioButton value="day">Por Dia</RadioButton>
         </RadioGroup>
       </Col>
     </Row>

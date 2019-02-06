@@ -3,6 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import PropTypes from 'prop-types';
+import pathToRegexp from 'path-to-regexp';
 
 import SideMenu from '../SideMenu';
 import Header from '../AppHeader';
@@ -11,49 +12,54 @@ import Loader from '../Loader';
 
 // import { hasToken } from "../../utils/token";
 import { showPageLoader, hidePageLoader } from './actions';
+import menus from '../../mocks/menu';
 
 import './index.scss';
 
 const { Content } = Layout;
 const hasPermissionToAccess = () => true;
-class DefaultLayout extends React.Component {
-  render() {
-    const {
-      component: Component,
-      loading,
-      location,
-      history,
-      ...rest
-    } = this.props;
 
-    const contentStyle = {
-      padding    : 24,
-      background : '#fff',
-      minHeight  : 360
-    };
+const isCurrentLocation = (menu, location) => menu.route && pathToRegexp(menu.route).exec(location.pathname);
 
-    return (
-      <Route
-        {...rest}
-        render={matchProps => (
-          <Layout id="default-layout" style={{ height: '100%' }}>
-            <SideMenu location={location} />
-            <Layout>
-              <Header />
-              <Content style={{ margin: '0 16px' }}>
-                <Bread />
-                <Loader loading={loading} fullScreen />
-                <div style={contentStyle}>
-                  {hasPermissionToAccess() && <Component {...matchProps} />}
-                </div>
-              </Content>
-            </Layout>
+const DefaultLayout = (props) => {
+  const {
+    component: Component, loading, location, history, ...rest
+  } = props;
+
+  const contentStyle = {
+    padding    : 24,
+    background : '#fff',
+    minHeight  : 360
+  };
+
+  const menuItem = menus.find(menu => isCurrentLocation(menu, location)) || { name: 'Não encontrado' };
+
+  return (
+    <Route
+      {...rest}
+      render={matchProps => (
+        <Layout id="default-layout" style={{ height: '100%' }}>
+          <SideMenu location={location} />
+          <Layout>
+            <Header />
+            <Content style={{ margin: '0 16px' }}>
+              <Bread />
+              <Loader loading={loading} fullScreen />
+              <div style={contentStyle}>
+                {hasPermissionToAccess() && (
+                  <div>
+                    <h1 className="page-header">{menuItem.name}</h1>
+                    <Component {...matchProps} />
+                  </div>
+                )}
+              </div>
+            </Content>
           </Layout>
-        )}
-      />
-    );
-  }
-}
+        </Layout>
+      )}
+    />
+  );
+};
 
 DefaultLayout.propTypes = {
   component          : PropTypes.instanceOf(Object).isRequired,

@@ -17,13 +17,8 @@ const withCalendarHandlers = withHandlers({
   onOkClick: () => () => {}
 });
 
-const Agenda = props => {
-  const views = [
-    BigCalendar.Views.MONTH,
-    BigCalendar.Views.WEEK,
-    BigCalendar.Views.DAY,
-    BigCalendar.Views.AGENDA
-  ];
+const Agenda = (props) => {
+  const views = [BigCalendar.Views.WEEK, BigCalendar.Views.DAY];
   return (
     <div>
       <BigCalendar
@@ -31,20 +26,19 @@ const Agenda = props => {
         events={props.events}
         showMultiDayTimes
         views={views}
-        defaultView={BigCalendar.Views.MONTH}
+        defaultView={BigCalendar.Views.DAY}
         defaultDate={new Date()}
         culture="pt-BR"
         onSelectEvent={props.onSelectEvent}
-        onSelectSlot={slotInfo =>
-          Modal.info({
-            title: 'Lista de Agendamentos',
-            content: (
-              <div>
-                <p>Ainda não implementado</p>
-                <p>{JSON.stringify(slotInfo)}</p>
-              </div>
-            )
-          })
+        onSelectSlot={slotInfo => Modal.info({
+          title   : 'Lista de Agendamentos',
+          content : (
+            <div>
+              <p>Ainda não implementado</p>
+              <p>{JSON.stringify(slotInfo)}</p>
+            </div>
+          )
+        })
         }
         components={{
           toolbar: CustomToolbar
@@ -55,8 +49,8 @@ const Agenda = props => {
 };
 
 Agenda.propTypes = {
-  events: PropTypes.instanceOf(Array),
-  onSelectEvent: PropTypes.func.isRequired
+  events        : PropTypes.instanceOf(Array),
+  onSelectEvent : PropTypes.func.isRequired
 };
 
 Agenda.defaultProps = {

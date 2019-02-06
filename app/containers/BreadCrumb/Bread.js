@@ -24,7 +24,7 @@ const Bread = ({ location }) => {
     }
   }
 
-  const getPathArray = item => {
+  const getPathArray = (item) => {
     // add item at the beginning of the array
     pathArray.unshift(item);
     if (item.breadParentCode) {
@@ -36,14 +36,14 @@ const Bread = ({ location }) => {
   if (!current) {
     pathArray.push(
       menus[0] || {
-        code: 1,
-        icon: 'laptop',
-        name: 'Dashboard'
+        code : 1,
+        icon : 'laptop',
+        name : 'Dashboard'
       }
     );
     pathArray.push({
-      code: 404,
-      name: 'Not Found'
+      code : 404,
+      name : 'Not Found'
     });
   } else {
     getPathArray(current);
@@ -66,9 +66,7 @@ const Bread = ({ location }) => {
     return (
       <Breadcrumb.Item key={key}>
         {pathArray.length - 1 !== key ? (
-          <Link to={pathToRegexp.compile(item.route || '')(paramMap) || '#'}>
-            {content}
-          </Link>
+          <Link to={pathToRegexp.compile(item.route || '')(paramMap) || '#'}>{content}</Link>
         ) : (
           content
         )}

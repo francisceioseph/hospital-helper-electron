@@ -8,13 +8,15 @@ import { TableList } from '../../../components/TableList';
 import * as WebAPI from '../../../utils/api.service';
 
 const DoctorListComponent = props => (
-  <TableList
-    buttonName="Novo Médico"
-    columns={tableColumns}
-    datasource={props.doctors}
-    onButtonClick={props.onNewDoctorClick}
-    idAccessor="id"
-  />
+  <div>
+    <TableList
+      buttonName="Novo Médico"
+      columns={tableColumns}
+      datasource={props.doctors}
+      onButtonClick={props.onNewDoctorClick}
+      idAccessor="id"
+    />
+  </div>
 );
 
 DoctorListComponent.propTypes = {
