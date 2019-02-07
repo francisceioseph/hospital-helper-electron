@@ -1,21 +1,19 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { SurgeryTypeList } from '../components';
-import { getSurgeryTypes, createSurgeryType } from '../surgery-types.actions';
-import {
-  showPageLoader,
-  hidePageLoader
-} from '../../../containers/layouts/actions';
+import { getSurgeryTypes, createSurgeryType, filterByName } from '../surgery-types.actions';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ surgeryTypes }) => ({
-  surgeryTypes: _.values(surgeryTypes.surgeryTypes),
+  surgeryTypes: _.values(surgeryTypes.surgeryTypes)
 });
 
 const mapDispatchToProps = {
   getSurgeryTypes,
   createSurgeryType,
+  filterByName,
   showPageLoader,
-  hidePageLoader,
+  hidePageLoader
 };
 
 export default connect(

@@ -72,10 +72,12 @@ const handleUpdateExamType = (state, action) => {
 const handleRemoveExamType = (state, action) => {
   const { id } = action.payload.data;
   const { [id]: del, ...examTypes } = state.examTypes;
+  const { [id]: del2, ...examTypesBkp } = state.examTypesBkp;
 
   return {
     ...state,
-    examTypes
+    examTypes,
+    examTypesBkp
   };
 };
 

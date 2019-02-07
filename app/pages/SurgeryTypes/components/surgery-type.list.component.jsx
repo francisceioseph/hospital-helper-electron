@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  compose, lifecycle, withState, withHandlers,
+  compose, lifecycle, withState, withHandlers
 } from 'recompose';
 import {
-  Row, Input, Divider, Table, Button, Col,
+  Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
 import * as WebAPI from '../../../utils/api.service';
@@ -18,11 +18,7 @@ const SurgeryTypeList = props => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
-        <Input.Search
-          onSearch={props.onSearch}
-          placeholder="Pesquisar"
-          style={{ width: 200 }}
-        />
+        <Input.Search onSearch={props.onSearch} placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
         <Button type="primary" onClick={props.showModal}>
@@ -56,14 +52,14 @@ const SurgeryTypeList = props => (
 );
 
 SurgeryTypeList.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
-  handleSaveFormRef: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
-  handleCreate: PropTypes.func.isRequired,
-  surgeryTypes: PropTypes.instanceOf(Array).isRequired,
-  visible: PropTypes.bool.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
+  onSearch          : PropTypes.func.isRequired,
+  showModal         : PropTypes.func.isRequired,
+  handleSaveFormRef : PropTypes.func.isRequired,
+  handleCancel      : PropTypes.func.isRequired,
+  handleCreate      : PropTypes.func.isRequired,
+  surgeryTypes      : PropTypes.instanceOf(Array).isRequired,
+  visible           : PropTypes.bool.isRequired,
+  confirmLoading    : PropTypes.bool.isRequired
 };
 
 const withVisibleState = withState('visible', 'setVisible', false);
@@ -84,7 +80,7 @@ const handleCreate = props => () => {
     }
 
     WebAPI.createSurgeryType(values)
-      .then(response => {
+      .then((response) => {
         const surgeryType = response.data;
         props.createSurgeryType(surgeryType);
 
@@ -98,12 +94,14 @@ const handleCreate = props => () => {
   });
 };
 
+const handleOnSearch = props => text => props.filterByName(text);
+
 const withListHandlers = withHandlers({
   showModal,
   handleCancel,
   handleCreate,
   handleSaveFormRef,
-  onSearch: () => () => {},
+  onSearch: handleOnSearch
 });
 
 const withListLifecycle = lifecycle({
@@ -116,12 +114,12 @@ const withListLifecycle = lifecycle({
     } catch (error) {
       console.log(error);
       this.props.hidePageLoader();
-      
+
       Alert.error({
         content: 'Aconteceu um erro no carregamento. Tente mais tarde!'
       });
     }
-  },
+  }
 });
 
 export default compose(

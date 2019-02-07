@@ -9,7 +9,5 @@ export const REMOVE_SURGERY_TYPE = 'DELETE_SURGERY_TYPES';
 export const getSurgeryTypes = createAction(GET_SURGERY_TYPES);
 export const createSurgeryType = createAction(CREATE_SURGERY_TYPE);
 export const updateSurgeryType = createAction(UPDATE_SURGERY_TYPE);
-export const removeSurgeryType = createAction(
-  REMOVE_SURGERY_TYPE,
-  WebAPI.removeSurgeryType
-);
+export const removeSurgeryType = createAction(REMOVE_SURGERY_TYPE, WebAPI.removeSurgeryType);
+export const filterByName = createAction('FILTER_SURGERY_TYPES_BY_NAME');
