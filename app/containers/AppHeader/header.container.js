@@ -7,8 +7,8 @@ import { clearCredentials } from '../../pages/Login/login.actions';
 import Header from './header.component';
 
 const mapStateToProps = ({ menu, login }) => ({
-  collapsed: menu.collapsed,
-  profile: t(login, 'credentials.user.profile').safeObject,
+  collapsed : menu.collapsed,
+  profile   : t(login, 'credentials.user.profile').safeObject
 });
 
 const mapDispatchToProps = {

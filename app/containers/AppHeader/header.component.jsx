@@ -16,32 +16,28 @@ const handleLogoutButtonClick = props => () => props.clearCredentials();
 const handleOnEditProfileClick = () => () => alert('Not implemented :P');
 
 const withHeaderHandlers = withHandlers({
-  onLogoutClick: handleLogoutButtonClick,
-  onEditProfileClick: handleOnEditProfileClick
+  onLogoutClick      : handleLogoutButtonClick,
+  onEditProfileClick : handleOnEditProfileClick
 });
 
 const AppHeader = props => (
   <Header className="header" style={{ background: '#fff', padding: 0 }}>
     <div>
-      <Icon
-        className="trigger"
-        type={props.collapsed ? 'menu-unfold' : 'menu-fold'}
-        onClick={props.toggleMenu}
-      />
+      <Icon className="trigger" type={props.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={props.toggleMenu} />
     </div>
 
-    <div className={'rightWrapper'}>
+    <div className="rightWrapper">
       <HeaderBadge icon="bell" />
       <HeaderBadge icon="message" />
 
       <Menu mode="horizontal">
         <SubMenu
-          title={
+          title={(
             <span>
               <Icon type="user" />
               {props.profile.personal_datum.full_name}
             </span>
-          }
+          )}
         >
           <Menu.Item key="edit_profile">
             <div onClick={props.onEditProfileClick}>
@@ -63,9 +59,9 @@ const AppHeader = props => (
 );
 
 AppHeader.propTypes = {
-  collapsed: PropTypes.bool.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
-  profile: PropTypes.instanceOf(Object).isRequired
+  collapsed  : PropTypes.bool.isRequired,
+  toggleMenu : PropTypes.func.isRequired,
+  profile    : PropTypes.instanceOf(Object).isRequired
 };
 
 export default compose(withHeaderHandlers)(AppHeader);
