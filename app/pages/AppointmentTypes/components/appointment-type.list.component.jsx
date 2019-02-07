@@ -93,12 +93,14 @@ const handleCreate = props => () => {
   });
 };
 
+const handleOnSeach = props => text => props.applyAppointmentTypesFilter(text);
+
 const withListHandlers = withHandlers({
   showModal,
   handleCancel,
   handleCreate,
   handleSaveFormRef,
-  onSearch: () => () => {}
+  onSearch: handleOnSeach
 });
 
 const withListLifecycle = lifecycle({
