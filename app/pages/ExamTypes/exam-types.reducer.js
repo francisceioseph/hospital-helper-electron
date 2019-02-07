@@ -1,11 +1,28 @@
-import { pickBy } from '../../utils';
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
+
+import { pickBy } from '../../utils';
+import { filterByText } from '../../utils/filters';
+
 import {
-  getExamTypes, createExamType, updateExamType, removeExamType,
+  getExamTypes, createExamType, updateExamType, removeExamType, filterByName
 } from './exam-types.actions';
 
 const initialState = {
-  examTypes: {},
+  examTypes    : {},
+  examTypesBkp : {}
+};
+
+const handleFilterByName = (state, action) => {
+  const input = action.payload;
+  const types = _.values(state.examTypesBkp);
+  const values = filterByText(types, 'exam_type_name', input);
+  const examTypes = pickBy(values, 'id');
+
+  return {
+    ...state,
+    examTypes
+  };
 };
 
 const handleGetExamTypes = (state, action) => {
@@ -14,6 +31,7 @@ const handleGetExamTypes = (state, action) => {
   return {
     ...state,
     examTypes,
+    examTypesBkp: { ...examTypes }
   };
 };
 
@@ -25,8 +43,12 @@ const handleCreateExamType = (state, action) => {
     ...state,
     examTypes: {
       ...state.examTypes,
-      [id]: examType,
+      [id]: examType
     },
+    examTypesBkp: {
+      ...state.examTypesBkp,
+      [id]: examType
+    }
   };
 };
 
@@ -38,8 +60,12 @@ const handleUpdateExamType = (state, action) => {
     ...state,
     examTypes: {
       ...state.examTypes,
-      [id]: examType,
+      [id]: examType
     },
+    examTypesBkp: {
+      ...state.examTypesBkp,
+      [id]: examType
+    }
   };
 };
 
@@ -49,16 +75,17 @@ const handleRemoveExamType = (state, action) => {
 
   return {
     ...state,
-    examTypes,
+    examTypes
   };
 };
 
 export default handleActions(
   {
-    [getExamTypes]: handleGetExamTypes,
-    [createExamType]: handleCreateExamType,
-    [updateExamType]: handleUpdateExamType,
-    [removeExamType]: handleRemoveExamType,
+    [getExamTypes]   : handleGetExamTypes,
+    [createExamType] : handleCreateExamType,
+    [updateExamType] : handleUpdateExamType,
+    [removeExamType] : handleRemoveExamType,
+    [filterByName]   : handleFilterByName
   },
   initialState
 );

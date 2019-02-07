@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  compose, lifecycle, withState, withHandlers,
+  compose, lifecycle, withState, withHandlers
 } from 'recompose';
 import {
-  Row, Input, Divider, Table, Button, Col,
+  Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
 import * as WebAPI from '../../../utils/api.service';
@@ -17,11 +17,7 @@ const ExamTypeList = props => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
-        <Input.Search
-          onSearch={props.onSearch}
-          placeholder="Pesquisar"
-          style={{ width: 200 }}
-        />
+        <Input.Search onSearch={props.handleOnSearch} placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
         <Button type="primary" onClick={props.showModal}>
@@ -55,14 +51,14 @@ const ExamTypeList = props => (
 );
 
 ExamTypeList.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
-  handleSaveFormRef: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
-  handleCreate: PropTypes.func.isRequired,
-  examTypes: PropTypes.instanceOf(Array).isRequired,
-  visible: PropTypes.bool.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
+  onSearch          : PropTypes.func.isRequired,
+  showModal         : PropTypes.func.isRequired,
+  handleSaveFormRef : PropTypes.func.isRequired,
+  handleCancel      : PropTypes.func.isRequired,
+  handleCreate      : PropTypes.func.isRequired,
+  examTypes         : PropTypes.instanceOf(Array).isRequired,
+  visible           : PropTypes.bool.isRequired,
+  confirmLoading    : PropTypes.bool.isRequired
 };
 
 const withVisibleState = withState('visible', 'setVisible', false);
@@ -83,7 +79,7 @@ const handleCreate = props => () => {
     }
 
     WebAPI.createExamType(values)
-      .then(response => {
+      .then((response) => {
         const examType = response.data;
         props.createExamType(examType);
 
@@ -97,12 +93,14 @@ const handleCreate = props => () => {
   });
 };
 
+const handleOnSearch = props => text => props.filterByName(text);
+
 const withListHandlers = withHandlers({
   showModal,
   handleCancel,
   handleCreate,
   handleSaveFormRef,
-  onSearch: () => () => {},
+  handleOnSearch
 });
 
 const withListLifecycle = lifecycle({
@@ -116,7 +114,7 @@ const withListLifecycle = lifecycle({
     } catch (error) {
       this.props.hidePageLoader();
     }
-  },
+  }
 });
 
 export default compose(
