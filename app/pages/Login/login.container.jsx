@@ -5,19 +5,22 @@ import { compose, withHandlers } from 'recompose';
 import { Alert } from 'antd';
 
 import { setCredentials, setLoginError } from './login.actions';
+import { showPageLoader, hidePageLoader } from '../../containers/layouts/actions';
 import LoginForm from './components/login.form';
 import * as WebAPI from '../../utils/api.service';
 
 import './login.scss';
 
 const mapStateToProps = state => ({
-  credentials: state.login.credentials,
-  loginError: state.login.loginError
+  credentials : state.login.credentials,
+  loginError  : state.login.loginError
 });
 
 const mapDispatchToProps = {
   setCredentials,
-  setLoginError
+  setLoginError,
+  showPageLoader,
+  hidePageLoader
 };
 
 const withRedux = connect(
@@ -25,28 +28,27 @@ const withRedux = connect(
   mapDispatchToProps
 );
 
-const onSubmitHandler = ({
-  setCredentials,
-  setLoginError,
-  history
-}) => values => {
-  return WebAPI.postLogin(values)
-    .then(response => {
-      const credentials = {
-        token: response.headers.authorization,
-        user: response.data
-      };
+const onSubmitHandler = props => async (values) => {
+  props.showPageLoader();
 
-      setCredentials(credentials);
-      history.push('/');
-    })
-    .catch(error => {
-      setLoginError(error || { error: true });
-    });
+  try {
+    const response = await WebAPI.postLogin(values);
+    const credentials = {
+      token : response.headers.authorization,
+      user  : response.data
+    };
+
+    props.setCredentials(credentials);
+    props.history.push('/');
+  } catch (error) {
+    props.setLoginError(error || { error: true });
+  } finally {
+    props.hidePageLoader();
+  }
 };
 
 const withLoginHandlers = withHandlers({
-  onSubmitHandler: onSubmitHandler
+  onSubmitHandler
 });
 
 const LoginContainer = props => (
@@ -56,13 +58,7 @@ const LoginContainer = props => (
         <span>Login</span>
       </div>
       <LoginForm onSubmitHandler={props.onSubmitHandler} />
-      {!!props.loginError && (
-        <Alert
-          type="error"
-          message="Login failed. Check yor your username/password"
-          banner
-        />
-      )}
+      {!!props.loginError && <Alert type="error" message="Login failed. Check yor your username/password" banner />}
     </div>
   </React.Fragment>
 );
