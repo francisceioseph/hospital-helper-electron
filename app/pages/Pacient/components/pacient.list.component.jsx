@@ -22,14 +22,15 @@ const withLifecycle = lifecycle({
 });
 
 const withListHandlers = withHandlers({
-  onNewPacientClick: props => () => props.history.push('/usuarios/pacientes/novo')
+  onNewPacientClick : props => () => props.history.push('/usuarios/pacientes/novo'),
+  handleOnSearch    : props => text => props.filterByName(text)
 });
 
 const PacientListComponent = props => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
-        <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
+        <Input.Search placeholder="Pesquisar" style={{ width: 200 }} onSearch={props.handleOnSearch} />
       </Col>
       <Col>
         <Button type="primary" onClick={props.onNewPacientClick}>
@@ -41,7 +42,13 @@ const PacientListComponent = props => (
     <Divider />
 
     <Row>
-      <Table size="middle" columns={tableColumns} dataSource={props.pacients} rowKey={it => it.id} pagination={{ pageSize: 8 }} />
+      <Table
+        size="middle"
+        columns={tableColumns}
+        dataSource={props.pacients}
+        rowKey={it => it.id}
+        pagination={{ pageSize: 8 }}
+      />
     </Row>
   </div>
 );
