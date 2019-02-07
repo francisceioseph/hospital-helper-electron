@@ -13,6 +13,7 @@ const DoctorListComponent = props => (
       buttonName="Novo Médico"
       columns={tableColumns}
       datasource={props.doctors}
+      onSearch={props.onSearch}
       onButtonClick={props.onNewDoctorClick}
       idAccessor="id"
     />
@@ -28,7 +29,8 @@ const withListHandlers = withHandlers({
   onNewDoctorClick: props => (event) => {
     event.stopPropagation();
     props.history.push('/usuarios/medicos/novo');
-  }
+  },
+  onSearch: props => text => props.filterByName(text)
 });
 
 const listLifecycle = lifecycle({

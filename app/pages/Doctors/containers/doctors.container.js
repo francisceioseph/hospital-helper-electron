@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { getDoctors } from '../doctors.actions';
+import { getDoctors, filterByName } from '../doctors.actions';
 import { DoctorListComponent } from '../components';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
@@ -12,6 +12,7 @@ const mapStateToProps = ({ doctors }) => ({
 
 const mapDispatchToProps = {
   getDoctors,
+  filterByName,
   showPageLoader,
   hidePageLoader
 };
