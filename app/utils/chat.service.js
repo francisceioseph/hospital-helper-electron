@@ -8,7 +8,7 @@ function ChatConnection(callback) {
   this.senderId = user.id;
   this.callback = callback;
 
-  this.connection = ActionCable.createConsumer(wsUrl, token);
+  this.connection = ActionCable.createConsumer(wsUrl, token.split(' ')[1]);
   this.roomConnections = [];
 }
 

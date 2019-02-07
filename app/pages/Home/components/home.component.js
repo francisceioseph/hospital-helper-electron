@@ -6,18 +6,19 @@ import { Row, Col } from 'antd';
 import { compose, withState, lifecycle } from 'recompose';
 
 import menus from '../../../mocks/menu';
+import WSService from '../../../utils/chat.service';
 import ShortcutCard from './shortcut-card.component';
 
 import '../home.scss';
 
 function getMenusForPermissions(menuList, permissions) {
-  return _.filter(menuList, menuItem => {
+  return _.filter(menuList, (menuItem) => {
     if (!menuItem.menuParentCode) {
       return false;
     }
 
     const permission = menuItem.permission || {};
-    
+
     const permissionsGranted = _.chain(permission.resources)
       .map(resource => permissions[resource])
       .filter(p => !!p && p.action_type === 'view')
