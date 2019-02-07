@@ -1,11 +1,9 @@
-@import '~react-big-calendar/lib/css/react-big-calendar.css';
+@import "~react-big-calendar/lib/css/react-big-calendar.css";
 
 .toolbar {
   .toolbar-label {
-    text-transform: capitalize;
     font-size: 1.5em;
-    font-weight: 200;
-    color: #1890ff;
+    color: #019d9d;
   }
 
   margin-top: 1em;

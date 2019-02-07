@@ -10,7 +10,11 @@ import { getDecoratorManager } from './exam.form.decorators';
 import { LABELS } from './exam.form.constants';
 
 import {
-  getPacientNameField, getDoctorNameField, getScheduledDateField, examTypeField
+  getPacientNameField,
+  getDoctorNameField,
+  getScheduledDateField,
+  examTypeField,
+  getScheduledTimeField
 } from './exam.form.entries';
 
 const FormItem = Form.Item;
@@ -49,6 +53,10 @@ const ExamForm = (props) => {
 
         <FormItem label={LABELS.SCHEDULED_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.scheduledDateDecorator(getScheduledDateField())}
+        </FormItem>
+
+        <FormItem label={LABELS.SCHEDULED_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
+          {decoratorManager.scheduledDateDecorator(getScheduledTimeField())}
         </FormItem>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>

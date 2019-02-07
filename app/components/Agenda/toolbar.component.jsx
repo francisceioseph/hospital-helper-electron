@@ -5,6 +5,8 @@ import {
   Button, Radio, Row, Col
 } from 'antd';
 
+import { TEXT_DATE_FORMAT_PT_BR } from '../../utils/date-format';
+
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const ButtonGroup = Button.Group;
@@ -24,13 +26,7 @@ const CustomToolbar = (toolbar) => {
 
   const label = () => {
     const date = moment(toolbar.date).locale('pt-BR');
-    return (
-      <label className="toolbar-label">
-        <b>{date.format('MMMM')}</b>
-        {' '}
-        {date.format('YYYY')}
-      </label>
-    );
+    return <h2 className="toolbar-label">{date.format(TEXT_DATE_FORMAT_PT_BR)}</h2>;
   };
 
   const onViewChange = (e) => {
@@ -46,11 +42,7 @@ const CustomToolbar = (toolbar) => {
           <Button onClick={goToNext}>&#8250;</Button>
         </ButtonGroup>
       </Col>
-      <Col>
-        {' '}
-        {label()}
-        {' '}
-      </Col>
+      <Col>{label()}</Col>
       <Col>
         <RadioGroup onChange={onViewChange} value={toolbar.view}>
           <RadioButton value="month">Por Mês</RadioButton>

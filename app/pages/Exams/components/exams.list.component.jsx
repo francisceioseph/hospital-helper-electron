@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { compose, withHandlers, lifecycle } from 'recompose';
-import { Row, Input, Divider, Button, Col, Modal } from 'antd';
+import {
+  Row, Input, Divider, Button, Col, Modal
+} from 'antd';
 
 import Agenda from '../../../components/Agenda';
 import ExamDetailList from './detail.component';
 import * as WebAPI from '../../../utils/api.service';
 
-const ExamComponent = props => {
+const ExamComponent = (props) => {
   const { history, exams } = props;
 
   return (
@@ -18,10 +20,7 @@ const ExamComponent = props => {
           <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
         </Col>
         <Col>
-          <Button
-            type="primary"
-            onClick={() => history.push('/marcacoes/exames/novo')}
-          >
+          <Button type="primary" onClick={() => history.push('/marcacoes/exames/novo')}>
             Agendar Exame
           </Button>
         </Col>
@@ -37,15 +36,15 @@ const ExamComponent = props => {
 };
 
 ExamComponent.propTypes = {
-  exams: PropTypes.instanceOf(Object).isRequired,
-  history: PropTypes.instanceOf(Object).isRequired,
-  onSelectEvent: PropTypes.func.isRequired
+  exams         : PropTypes.instanceOf(Object).isRequired,
+  history       : PropTypes.instanceOf(Object).isRequired,
+  onSelectEvent : PropTypes.func.isRequired
 };
 
-const onAppointmentSelected = () => event => {
+const onAppointmentSelected = () => (event) => {
   Modal.info({
-    title: 'Agendamento',
-    content: <ExamDetailList appointment={event.resource} />
+    title   : 'Agendamento',
+    content : <ExamDetailList appointment={event.resource} />
   });
 };
 
@@ -60,9 +59,9 @@ const examListLifecycle = lifecycle({
       const response = await WebAPI.getExams();
       this.props.getExams(response);
 
-      this.props.hidePageLoader()
+      this.props.hidePageLoader();
     } catch (error) {
-      this.props.hidePageLoader()
+      this.props.hidePageLoader();
     }
   }
 });

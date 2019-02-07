@@ -6,10 +6,11 @@ import { Modal, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
+// eslint-disable-next-line react/prefer-stateless-function
 class AppointmentTypeModalForm extends React.Component {
   render() {
     const {
-      visible, onCancel, onCreate, confirmLoading, form,
+      visible, onCancel, onCreate, confirmLoading, form
     } = this.props;
     const { getFieldDecorator } = form;
     return (
@@ -25,7 +26,7 @@ class AppointmentTypeModalForm extends React.Component {
         <Form layout="vertical">
           <FormItem label="Nome da Tipo de Agendamento">
             {getFieldDecorator('appointment_type_name', {
-              rules: [{ required: true, message: 'Campo obrigatório' }],
+              rules: [{ required: true, message: 'Campo obrigatório' }]
             })(<Input />)}
           </FormItem>
         </Form>
@@ -35,11 +36,11 @@ class AppointmentTypeModalForm extends React.Component {
 }
 
 AppointmentTypeModalForm.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onCreate: PropTypes.func.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
-  form: PropTypes.instanceOf(Object).isRequired,
+  visible        : PropTypes.bool.isRequired,
+  onCancel       : PropTypes.func.isRequired,
+  onCreate       : PropTypes.func.isRequired,
+  confirmLoading : PropTypes.bool.isRequired,
+  form           : PropTypes.instanceOf(Object).isRequired
 };
 
 export default Form.create()(AppointmentTypeModalForm);

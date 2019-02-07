@@ -13,7 +13,8 @@ import {
   getPacientNameField,
   getDoctorNameField,
   getScheduledDateField,
-  surgeryTypeField
+  surgeryTypeField,
+  getScheduledTimeField
 } from './surgery.form.entries';
 
 const FormItem = Form.Item;
@@ -52,6 +53,10 @@ const SurgeryForm = (props) => {
 
         <FormItem label={LABELS.SCHEDULED_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.scheduledDateDecorator(getScheduledDateField())}
+        </FormItem>
+
+        <FormItem label={LABELS.SCHEDULED_DATE} {...FORM_ITEM_LAYOUT} hasFeedback>
+          {decoratorManager.scheduledDateDecorator(getScheduledTimeField())}
         </FormItem>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>

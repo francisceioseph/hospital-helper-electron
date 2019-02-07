@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  compose, lifecycle, withState, withHandlers,
+  compose, lifecycle, withState, withHandlers
 } from 'recompose';
 import {
-  Row, Input, Divider, Table, Button, Col,
+  Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
 import * as WebAPI from '../../../utils/api.service';
@@ -17,11 +17,7 @@ const AppointmentTypeList = props => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
-        <Input.Search
-          onSearch={props.onSearch}
-          placeholder="Pesquisar"
-          style={{ width: 200 }}
-        />
+        <Input.Search onSearch={props.onSearch} placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
         <Button type="primary" onClick={props.showModal}>
@@ -55,14 +51,14 @@ const AppointmentTypeList = props => (
 );
 
 AppointmentTypeList.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
-  handleSaveFormRef: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
-  handleCreate: PropTypes.func.isRequired,
-  appointmentTypes: PropTypes.instanceOf(Array).isRequired,
-  visible: PropTypes.bool.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
+  onSearch          : PropTypes.func.isRequired,
+  showModal         : PropTypes.func.isRequired,
+  handleSaveFormRef : PropTypes.func.isRequired,
+  handleCancel      : PropTypes.func.isRequired,
+  handleCreate      : PropTypes.func.isRequired,
+  appointmentTypes  : PropTypes.instanceOf(Array).isRequired,
+  visible           : PropTypes.bool.isRequired,
+  confirmLoading    : PropTypes.bool.isRequired
 };
 
 const withVisibleState = withState('visible', 'setVisible', false);
@@ -83,7 +79,7 @@ const handleCreate = props => () => {
     }
 
     WebAPI.createAppointmentType(values)
-      .then(response => {
+      .then((response) => {
         const appointmentType = response.data;
         props.createAppointmentType(appointmentType);
 
@@ -102,7 +98,7 @@ const withListHandlers = withHandlers({
   handleCancel,
   handleCreate,
   handleSaveFormRef,
-  onSearch: () => () => {},
+  onSearch: () => () => {}
 });
 
 const withListLifecycle = lifecycle({
@@ -117,7 +113,7 @@ const withListLifecycle = lifecycle({
       console.log(error);
       this.props.hidePageLoader();
     }
-  },
+  }
 });
 
 export default compose(
