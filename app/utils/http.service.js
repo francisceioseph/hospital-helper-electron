@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import { history, store } from '../store';
+import { clearCredentials } from '../pages/Login/login.actions';
+
 const BASE_BACKEND_URL = 'http://localhost:3000';
 
 export const postLoginUrl = () => '/login';
@@ -43,12 +46,12 @@ export const updateSurgeryUrl = id => `/surgeries/${id}`;
 export const getSurgeryUrl = id => `/surgeries/${id}`;
 
 export const GET_SURGERY_TYPES_URL = '/surgery-types';
-export const removeSurgeryTypeUrl = (id) => `/surgery-types/${id}`
+export const removeSurgeryTypeUrl = id => `/surgery-types/${id}`;
 
 export const GET_ROLES_URL = '/roles';
 export const POST_ROLE_URL = '/roles';
 
-export const getProfileUrl = (id) => `/profiles/${id}`;
+export const getProfileUrl = id => `/profiles/${id}`;
 
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use((oldSettings) => {
@@ -61,6 +64,18 @@ export const configureAxiosInterceptors = () => {
     settings.headers.common['Content-Type'] = 'application/json';
     return settings;
   });
+
+  axios.interceptors.response.use(
+    res => res,
+    (error) => {
+      if (error.respose.status === 401) {
+        store.dispatch(clearCredentials());
+        history.push('/login');
+      }
+
+      return error;
+    }
+  );
 };
 
 export const getRequest = async (path) => {

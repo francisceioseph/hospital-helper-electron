@@ -2,21 +2,25 @@ import React from 'react';
 import _ from 'lodash';
 import pathToRegexp from 'path-to-regexp';
 import PropTypes from 'prop-types';
-import { Layout, Menu } from 'antd';
+import {
+  Layout, Menu, Row, Col
+} from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
 import { arrayToTree, queryArray } from '../../utils';
 import menus from '../../mocks/menu';
 import Icon from '../../components/Icon';
 
+import SideMenuLogo from '../../resources/imgs/icon-side-menu.png';
+
 import './SideMenu.scss';
 
 const { Sider } = Layout;
 
 function getMenusForPermissions(menuList, permissions) {
-  return _.filter(menuList, menuItem => {
+  return _.filter(menuList, (menuItem) => {
     const permission = menuItem.permission || {};
-    
+
     const permissionsGranted = _.chain(permission.resources)
       .map(resource => permissions[resource])
       .filter(p => !!p && p.action_type === 'view')
@@ -35,7 +39,7 @@ function makeMenuDataTree(menuList) {
 function makeMenuItemTree(menuTree) {
   const levelMap = {};
 
-  return _.map(menuTree, item => {
+  return _.map(menuTree, (item) => {
     if (item.children) {
       if (item.menuParentCode) {
         levelMap[item.code] = item.menuParentCode;
@@ -43,12 +47,12 @@ function makeMenuItemTree(menuTree) {
       return (
         <Menu.SubMenu
           key={item.code}
-          title={
+          title={(
             <span>
               {item.icon && <Icon icon={item.icon} />}
               {<span>{item.name}</span>}
             </span>
-          }
+          )}
         >
           {makeMenuItemTree(item.children)}
         </Menu.SubMenu>
@@ -68,7 +72,7 @@ function makeMenuItemTree(menuTree) {
 function getPathArray(array, current, pid, id) {
   let result = [String(current[id])]; // eslint-disable-line
 
-  const getPath = item => {
+  const getPath = (item) => {
     if (item && item[pid]) {
       result.unshift(String(item[pid]));
       getPath(queryArray(array, item[pid], id));
@@ -86,25 +90,25 @@ const SideMenu = ({ collapsed, location, permissions }) => {
   const menuItems = makeMenuItemTree(menuTree);
 
   // Look for the selected route
-  const currentMenu = _.find(
-    menus,
-    it => it.route && pathToRegexp(it.route).exec(location.pathname)
-  );
+  const currentMenu = _.find(menus, it => it.route && pathToRegexp(it.route).exec(location.pathname));
 
-  const defaultSelectedKeys = currentMenu
-    ? getPathArray(menus, currentMenu, 'menuParentCode', 'code')
-    : ['1'];
+  const defaultSelectedKeys = currentMenu ? getPathArray(menus, currentMenu, 'menuParentCode', 'code') : ['1'];
 
   return (
-    <Sider
-      trigger={null}
-      collapsible
-      collapsed={collapsed}
-      width={250}
-      theme="dark"
-    >
+    <Sider trigger={null} collapsible collapsed={collapsed} width={250} theme="dark">
       <div className="logo">
-        <div id="logo" />
+        <div className="logo">
+          <Row>
+            <Col span={8}>
+              <img src={SideMenuLogo} />
+            </Col>
+            {!collapsed && (
+              <Col span={16}>
+                <span>Hospital Helper</span>
+              </Col>
+            )}
+          </Row>
+        </div>
       </div>
       <Menu mode="inline" theme="dark" selectedKeys={defaultSelectedKeys}>
         {menuItems}
@@ -114,8 +118,8 @@ const SideMenu = ({ collapsed, location, permissions }) => {
 };
 
 SideMenu.propTypes = {
-  collapsed: PropTypes.bool.isRequired,
-  permissions: PropTypes.instanceOf(Object).isRequired,
+  collapsed   : PropTypes.bool.isRequired,
+  permissions : PropTypes.instanceOf(Object).isRequired,
   location: PropTypes.object.isRequired // eslint-disable-line
 };
 
