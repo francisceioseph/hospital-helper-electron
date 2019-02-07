@@ -1,15 +1,33 @@
-import { pickBy } from '../../utils';
+import _ from 'lodash';
+
 import { handleActions } from 'redux-actions';
+import { pickBy } from '../../utils';
+import { filterByText } from '../../utils/filters';
+
 import {
   getSpecialties,
   createSpecialty,
   updateSpecialty,
-  removeSpecialty
+  removeSpecialty,
+  applySpecialtyFilter
 } from './specialty.actions';
 
 const initialState = {
-  specialties: {},
-  currentSpecialty: {}
+  specialties      : {},
+  specialtiesBkp   : {},
+  currentSpecialty : {}
+};
+
+const handleApplySpecialtyField = (state, action) => {
+  const specialtiesValues = _.values(state.specialtiesBkp);
+  const inputText = action.payload;
+
+  const specialties = pickBy(filterByText(specialtiesValues, 'specialty_name', inputText), 'id');
+
+  return {
+    ...state,
+    specialties
+  };
 };
 
 const handleGetSpecialties = (state, action) => {
@@ -18,7 +36,8 @@ const handleGetSpecialties = (state, action) => {
 
   return {
     ...state,
-    specialties
+    specialties,
+    specialtiesBkp: { ...specialties }
   };
 };
 
@@ -30,6 +49,10 @@ const handleCreateSpecialty = (state, action) => {
     ...state,
     specialties: {
       ...state.specialties,
+      [id]: specialty
+    },
+    specialtiesBkp: {
+      ...state.specialtiesBkp,
       [id]: specialty
     }
   };
@@ -44,6 +67,10 @@ const handleUpdateSpecialty = (state, action) => {
     specialties: {
       ...state.specialties,
       [id]: specialty
+    },
+    specialtiesBkp: {
+      ...state.specialtiesBkp,
+      [id]: specialty
     }
   };
 };
@@ -52,19 +79,22 @@ const handleRemoveSpecialty = (state, action) => {
   const { data: specialty } = action.payload;
   const id = specialty.id.toString();
   const { [id]: del, ...specialties } = state.specialties;
+  const { [id]: del2, ...specialtiesBkp } = state.specialtiesBkp;
 
   return {
     ...state,
-    specialties
+    specialties,
+    specialtiesBkp
   };
 };
 
 export default handleActions(
   {
-    [getSpecialties]: handleGetSpecialties,
-    [createSpecialty]: handleCreateSpecialty,
-    [updateSpecialty]: handleUpdateSpecialty,
-    [removeSpecialty]: handleRemoveSpecialty
+    [getSpecialties]       : handleGetSpecialties,
+    [createSpecialty]      : handleCreateSpecialty,
+    [updateSpecialty]      : handleUpdateSpecialty,
+    [removeSpecialty]      : handleRemoveSpecialty,
+    [applySpecialtyFilter] : handleApplySpecialtyField
   },
   initialState
 );

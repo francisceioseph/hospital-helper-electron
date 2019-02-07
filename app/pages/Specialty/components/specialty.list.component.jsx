@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
- compose, lifecycle, withState, withHandlers 
+  compose, lifecycle, withState, withHandlers
 } from 'recompose';
 import {
- Row, Input, Divider, Table, Button, Col 
+  Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
 import * as WebAPI from '../../../utils/api.service';
@@ -16,15 +16,11 @@ const SpecialtyComponent = props => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
-        <Input.Search
-          onSearch={props.onSearch}
-          placeholder="Pesquisar"
-          style={{ width: 200 }}
-        />
+        <Input.Search onSearch={props.handleOnSearch} placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
         <Button type="primary" onClick={props.showModal}>
-            Nova Especialidade
+          Nova Especialidade
         </Button>
       </Col>
     </Row>
@@ -84,12 +80,16 @@ const handleCreate = props => () => {
       });
   });
 };
+const handleOnSearch = props => (value) => {
+  props.applySpecialtyFilter(value);
+};
 
 const withListHandlers = withHandlers({
   showModal,
   handleCancel,
   handleCreate,
-  handleSaveFormRef
+  handleSaveFormRef,
+  handleOnSearch
 });
 
 const specialtyListLifecycle = lifecycle({
@@ -99,7 +99,7 @@ const specialtyListLifecycle = lifecycle({
     try {
       const response = await WebAPI.getSpecialties();
       this.props.getSpecialties(response);
-      this.props.hidePageLoader();  
+      this.props.hidePageLoader();
     } catch (error) {
       console.log(error);
       this.props.hidePageLoader();
