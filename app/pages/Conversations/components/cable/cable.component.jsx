@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { ActionCable } from 'react-actioncable-provider';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 const Cable = ({ conversations, handleReceivedMessage }) => (
   <Fragment>
     {conversations.map(conversation => (
-      <ActionCable
+      <ActionCableConsumer
         key={conversation.id}
         channel={{ channel: 'MessagesChannel', conversation: conversation.id }}
         onReceived={handleReceivedMessage}

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
-import { ActionCable } from 'react-actioncable-provider';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 import * as WebAPI from '../../../utils/api.service';
-import Cable from './cable.component';
-import ConversationList from './conversation-list.component';
-import MessagesList from './messages-list.component';
+import Cable from './cable/cable.component';
+import ConversationList from './conversation-list/conversation-list.component';
+import MessagesList from './message-list/messages-list.component';
+import './conversations-component.less';
 
 const withLifecycle = lifecycle({
   async componentDidMount() {
@@ -19,7 +20,9 @@ const withLifecycle = lifecycle({
     } finally {
       this.props.hidePageLoader();
     }
-  }
+  },
+
+  componentWillUnmount() {}
 });
 
 const handleReceivedConversation = props => (response) => {
@@ -29,7 +32,7 @@ const handleReceivedConversation = props => (response) => {
 
 const handleReceivedMessage = props => (response) => {
   const { message } = response;
-  this.props.addNewMessage(message);
+  props.addNewMessage(message);
 };
 
 const handleSelectConversation = props => (conversationId) => {
@@ -42,33 +45,23 @@ const withConversationHandlers = withHandlers({
   handleSelectConversation
 });
 
-const messages = [{
-  sender_id: 2,
-  content: 'hello'
-},{
-  sender_id: 2,
-  content: 'this is a test'
-}, {
-  sender_id: 1,
-  content: "Hi"
-}, {
-  sender_id: 1,
-  content: 'this is a test'
-}];
-
 const ConversationsComponent = props => (
   <div>
-    {/* <ActionCable channel={{ channel: 'conversations_channel' }} onReceived={props.handleReceivedConversation} />
+    <ActionCableConsumer channel={{ channel: 'ConversationsChannel' }} onReceived={props.handleReceivedConversation} />
     {props.conversations.length ? (
       <Cable conversations={props.conversations} handleReceivedMessage={props.handleReceivedMessage} />
-    ) : null} */}
+    ) : null}
 
-    <Row>
-      {/* <Col span={8}>
-        <ConversationList conversations={props.conversations} onSelect={props.handleSelectConversation} />
-      </Col> */}
-      <Col span={24}>
-        <MessagesList messages={messages} user={props.user}/>
+    <Row type="flex" className="content-row">
+      <Col span={5}>
+        <ConversationList
+          user={props.user}
+          conversations={props.conversations}
+          onSelect={props.handleSelectConversation}
+        />
+      </Col>
+      <Col span={19}>
+        <MessagesList conversation={props.conversation} user={props.user} />
       </Col>
     </Row>
   </div>

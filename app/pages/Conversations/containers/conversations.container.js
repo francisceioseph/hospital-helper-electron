@@ -9,7 +9,7 @@ import ConversationsComponent from '../components/conversations.component';
 
 const mapStateToProps = ({ conversations, login }) => ({
   conversations : _.values(conversations.conversations),
-  conversation  : conversations.selectedConversation,
+  conversation  : conversations.currentConversation,
   user          : t(login, 'credentials.user').safeObject || {}
 });
 

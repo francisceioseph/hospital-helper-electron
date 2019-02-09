@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { handleActions } from 'redux-actions';
 import {
   loadConversations, addConversation, addNewMessage, selectConversation
@@ -5,16 +7,18 @@ import {
 import { pickBy } from '../../utils';
 
 const defaultState = {
-  conversations        : {},
-  selectedConversation : {}
+  conversations       : {},
+  currentConversation : {
+    messages: []
+  }
 };
 
 const handleSelectConversation = (state, action) => {
-  const selectedConversation = state.conversations[action.payload];
+  const currentConversation = state.conversations[action.payload];
 
   return {
     ...state,
-    selectedConversation
+    currentConversation
   };
 };
 
@@ -41,10 +45,29 @@ const handleAddConversation = (state, action) => {
   };
 };
 
+const getMessages = (conversation, message) => {
+  const messages = [...conversation.messages, message];
+  return _.uniqBy(messages, 'id');
+};
+
+const getCurrentConversation = (current, conversation, message) => {
+  const isEqual = current.id === conversation.id;
+
+  if (isEqual) {
+    return {
+      ...current,
+      messages: getMessages(current, message)
+    };
+  }
+
+  return { ...current };
+};
+
 const handleAddNewMessage = (state, action) => {
   const { payload: message } = action;
   const conversation = state.conversations[message.conversation_id];
-  const messages = [...conversation.messages, message];
+  const messages = getMessages(conversation, message);
+  const currentConversation = getCurrentConversation(state.currentConversation, conversation, message);
 
   return {
     ...state,
@@ -54,7 +77,8 @@ const handleAddNewMessage = (state, action) => {
         ...conversation,
         messages
       }
-    }
+    },
+    currentConversation
   };
 };
 
