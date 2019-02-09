@@ -21,6 +21,7 @@ import { ListRoles, RoleForm } from './pages/Roles';
 import { PanelLayout } from './containers/layouts';
 import { SurgeryTypeList } from './pages/SurgeryTypes';
 import { Profile } from './pages/Profile';
+import { Conversations } from './pages/Conversations';
 
 export default () => (
   <App>
@@ -46,6 +47,7 @@ export default () => (
       <ProtectedRoute exact path="/marcacoes/cirurgias/novo" component={SurgeryForm} />
       <ProtectedRoute exact path="/configuracoes/perfis-acesso" component={ListRoles} />
       <ProtectedRoute exact path="/configuracoes/perfis-acesso/novo" component={RoleForm} />
+      <ProtectedRoute exact path="/mensagens" component={Conversations} />
       <PanelLayout component={NotFound} />
     </Switch>
   </App>

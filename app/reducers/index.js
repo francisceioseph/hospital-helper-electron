@@ -16,6 +16,7 @@ import examTypesReducer from '../pages/ExamTypes/exam-types.reducer';
 import rolesReducer from '../pages/Roles/roles.reducer';
 import surgeryTypesReducer from '../pages/SurgeryTypes/surgery-types.reducer';
 import profileReducer from '../pages/Profile/profile.reducer';
+import conversationsReducer from '../pages/Conversations/conversations.reducer';
 
 export default function createRootReducer(history: History) {
   return combineReducers({
@@ -34,5 +35,6 @@ export default function createRootReducer(history: History) {
     roles            : rolesReducer,
     surgeryTypes     : surgeryTypesReducer,
     profiles         : profileReducer,
+    conversations    : conversationsReducer,
   });
 }

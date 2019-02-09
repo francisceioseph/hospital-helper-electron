@@ -54,4 +54,6 @@ export const removeSurgery = id => http.deleteRequest(http.getSurgeryUrl(id));
 export const getRoles = () => http.getRequest(http.GET_ROLES_URL);
 export const createRole = data => http.postRequest(http.POST_ROLE_URL, makePayload('role', data));
 
-export const getProfile = (id) => http.getRequest(http.getProfileUrl(id));
+export const getProfile = id => http.getRequest(http.getProfileUrl(id));
+
+export const getConversations = () => http.getRequest(http.GET_CONVERSATIONS_URL);

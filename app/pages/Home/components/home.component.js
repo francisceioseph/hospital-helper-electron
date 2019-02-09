@@ -6,7 +6,6 @@ import { Row, Col } from 'antd';
 import { compose, withState, lifecycle } from 'recompose';
 
 import menus from '../../../mocks/menu';
-import WSService from '../../../utils/chat.service';
 import ShortcutCard from './shortcut-card.component';
 
 import '../home.scss';

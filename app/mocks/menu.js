@@ -82,6 +82,16 @@ export default [
     }
   },
   {
+    code       : '9',
+    name       : 'Mensagens',
+    icon       : 'user',
+    route      : '/mensagens',
+    permission : {
+      action    : 'view',
+      resources : ['mensagens']
+    }
+  },
+  {
     code       : '1',
     icon       : 'tachometer-alt',
     name       : 'Painel de Senhas',
