@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Empty, List } from 'antd';
-import Message from './message.component';
+
+import Message from '../message-bubble/message-bubble.component';
+import MessageForm from './message-form.component';
 
 import './messages-list.component.less';
 
@@ -43,28 +45,32 @@ const startSequence = (previous, current) => {
 
 const belongsToCurrentUser = (message, user) => message.user_id === user.id;
 
-const renderMessages = (messages, user) => (
-  <List
-    dataSource={messages}
-    renderItem={(message, index) => {
-      const previous = messages[index - 1];
-      const next = messages[index + 1];
+const renderMessages = (conversation, messages, user) => (
+  <div className="message-list-content">
+    <List
+      style={{ flexGrow: 1 }}
+      dataSource={messages}
+      renderItem={(message, index) => {
+        const previous = messages[index - 1];
+        const next = messages[index + 1];
 
-      const messageStartsSequence = startSequence(previous, message);
-      const messageEndsSequence = endsSequence(next, message);
+        const messageStartsSequence = startSequence(previous, message);
+        const messageEndsSequence = endsSequence(next, message);
 
-      return (
-        <Message
-          key={message.id}
-          isMine={belongsToCurrentUser(message, user)}
-          startsSequence={messageStartsSequence}
-          endsSequence={messageEndsSequence}
-          showTimestamp={false}
-          data={message}
-        />
-      );
-    }}
-  />
+        return (
+          <Message
+            key={message.id}
+            isMine={belongsToCurrentUser(message, user)}
+            startsSequence={messageStartsSequence}
+            endsSequence={messageEndsSequence}
+            showTimestamp={false}
+            data={message}
+          />
+        );
+      }}
+    />
+    <MessageForm conversationId={conversation.id} user={user} />
+  </div>
 );
 
 const MessagesList = ({ conversation, user }) => {
@@ -73,7 +79,7 @@ const MessagesList = ({ conversation, user }) => {
 
   return (
     <div className="message-list-container">
-      {hasMessages && renderMessages(messages, user)}
+      {hasMessages && renderMessages(conversation, messages, user)}
 
       {!hasMessages && <Empty description="Ainda não há nenhuma mensagem" />}
     </div>

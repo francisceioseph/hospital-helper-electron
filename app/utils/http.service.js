@@ -54,6 +54,7 @@ export const POST_ROLE_URL = '/roles';
 export const getProfileUrl = id => `/profiles/${id}`;
 
 export const GET_CONVERSATIONS_URL = '/conversations';
+export const POST_MESSAGE = '/messages';
 
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use((oldSettings) => {

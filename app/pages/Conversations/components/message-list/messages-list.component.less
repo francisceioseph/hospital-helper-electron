@@ -1,4 +1,55 @@
 .message-list-container {
+  display: flex;
+  flex-grow: 1;
   padding: 10px;
-  padding-bottom: 70px;
+  align-items: stretch;
+  height: 100%;
+}
+
+.message-list-content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: stretch;
+
+  .ant-list.ant-list-split {
+    display: flex !important;
+    align-items: stretch;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .ant-spin-nested-loading {
+      flex-grow: 1;
+    }
+  }
+}
+
+.new-message-form {
+  display: flex;
+  flex-direction: row;
+
+  .message-form {
+    display: flex !important;
+    flex-grow: 1;
+
+    .message-form-item {
+      display: flex !important;
+      flex-direction: row;
+      align-items: stretch;
+      flex-grow: 1;
+
+      .ant-form-item-control-wrapper {
+        flex-grow: 1 !important;
+        display: flex !important;
+
+        .ant-form-item-control {
+          flex-grow: 1 !important;
+
+          input {
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+  }
 }
