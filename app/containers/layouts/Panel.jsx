@@ -32,6 +32,25 @@ const DefaultLayout = (props) => {
     minHeight  : 360
   };
 
+  const styles = {
+    content: {
+      display       : 'flex',
+      flexDirection : 'column',
+      alignItems    : 'stretch',
+      margin        : '0 16px'
+    },
+    inner: {
+      flexGrow      : 1,
+      display       : 'flex',
+      flexDirection : 'column',
+      alignItems    : 'stretch'
+    },
+    component: {
+      flexGrow : 1,
+      display  : 'flex'
+    }
+  };
+
   const menuItem = menus.find(menu => isCurrentLocation(menu, location)) || { name: 'Não encontrado' };
 
   return (
@@ -42,18 +61,16 @@ const DefaultLayout = (props) => {
           <SideMenu location={location} />
           <Layout>
             <Header />
-            <Content style={{ margin: '0 16px' }}>
+            <Content style={styles.content}>
               <Bread />
-              <Loader loading={loading} fullScreen />
-              <div style={contentStyle}>
-                {hasPermissionToAccess() && (
-                  <div>
-                    <h1 className="page-header">{menuItem.name}</h1>
-                    <Component {...matchProps} />
-                  </div>
-                )}
-              </div>
+              {hasPermissionToAccess() && (
+                <div style={styles.inner}>
+                  <h1 className="page-header">{menuItem.name}</h1>
+                  <Component {...matchProps} />
+                </div>
+              )}
             </Content>
+            <Loader loading={loading} fullScreen />
           </Layout>
         </Layout>
       )}

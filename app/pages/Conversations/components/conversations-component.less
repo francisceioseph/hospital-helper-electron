@@ -1,13 +1,21 @@
-.mycontent-left {
-  border-right: 1px dashed #333;
+.conversations {
+  display: flex;
+  flex-grow: 1;
+  padding-bottom: 8px;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: start;
+    align-items: stretch;
+  }
+
+  .col {
+    margin-left: 8px;
+  }
 }
 
-.content-row {
-  align-items: stretch;
-  justify-content: space-around;
-  height: 400px;
-}
-
-.splitter {
-  height: 100% !important;
+.messages-list {
+  flex-grow: 1;
 }

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import {
+ Row, Col, List, Divider 
+} from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
@@ -46,24 +48,27 @@ const withConversationHandlers = withHandlers({
 });
 
 const ConversationsComponent = props => (
-  <div>
+  <div className="conversations">
     <ActionCableConsumer channel={{ channel: 'ConversationsChannel' }} onReceived={props.handleReceivedConversation} />
     {props.conversations.length ? (
       <Cable conversations={props.conversations} handleReceivedMessage={props.handleReceivedMessage} />
     ) : null}
 
-    <Row type="flex" className="content-row">
-      <Col span={5}>
+    <div className="row">
+      <div className="col">
         <ConversationList
           user={props.user}
           conversations={props.conversations}
           onSelect={props.handleSelectConversation}
         />
-      </Col>
-      <Col span={19}>
+      </div>
+      <div className="col">
+        <Divider type="vertical" style={{ height: '100%' }}/>
+      </div>
+      <div className="col messages-list">
         <MessagesList conversation={props.conversation} user={props.user} />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </div>
 );
 
