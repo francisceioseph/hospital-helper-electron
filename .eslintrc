@@ -25,6 +25,7 @@
     "__DEV__": true
   },
   "rules": {
+    "react/destructuring-assignment": "off",
     "func-names": "off",
     "indent": ["error", 2],
     "max-len": ["error", { "code": 120, "tabWidth": 2 }],

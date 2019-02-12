@@ -1,6 +1,6 @@
 import React from 'react';
 import {
- Row, Col, List, Divider 
+ Row, Col, List, Divider
 } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 import { ActionCableConsumer } from 'react-actioncable-provider';
@@ -15,10 +15,15 @@ const withLifecycle = lifecycle({
   async componentDidMount() {
     try {
       this.props.showPageLoader();
-      const response = await WebAPI.getConversations();
-      this.props.loadConversations(response);
+      const responses = await Promise.all([
+        WebAPI.getChatUsers(),
+        WebAPI.getConversations(),
+      ]);
+
+      this.props.loadUserList(responses[0])
+      this.props.loadConversations(responses[1]);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       this.props.hidePageLoader();
     }
@@ -26,6 +31,17 @@ const withLifecycle = lifecycle({
 
   componentWillUnmount() {}
 });
+
+const handleCreateNewConversation = props => async (userId) =>  {
+  try {
+    props.showPageLoader();
+    await WebAPI.postNewConversation({ receiver_id: userId });
+  } catch (e) {
+    console.log(e);
+  } finally {
+    props.hidePageLoader();
+  }
+}
 
 const handleReceivedConversation = props => (response) => {
   const { conversation } = response;
@@ -44,7 +60,8 @@ const handleSelectConversation = props => (conversationId) => {
 const withConversationHandlers = withHandlers({
   handleReceivedConversation,
   handleReceivedMessage,
-  handleSelectConversation
+  handleSelectConversation,
+  handleCreateNewConversation
 });
 
 const ConversationsComponent = props => (
@@ -58,8 +75,10 @@ const ConversationsComponent = props => (
       <div className="col">
         <ConversationList
           user={props.user}
+          users={props.users}
           conversations={props.conversations}
           onSelect={props.handleSelectConversation}
+          createConversation={props.handleCreateNewConversation}
         />
       </div>
       <div className="col">

@@ -1,9 +1,15 @@
 .message-list-container {
   display: flex;
   flex-grow: 1;
+  flex-direction: column;
+  align-items: stretch;
   padding: 10px;
   align-items: stretch;
   height: 100%;
+
+  .ant-empty {
+    flex-grow: 1 !important;
+  }
 }
 
 .message-list-content {

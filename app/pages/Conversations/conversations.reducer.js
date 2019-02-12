@@ -2,16 +2,27 @@ import _ from 'lodash';
 
 import { handleActions } from 'redux-actions';
 import {
-  loadConversations, addConversation, addNewMessage, selectConversation
+  loadConversations, addConversation, addNewMessage, selectConversation, loadUserList
 } from './conversations.actions';
 import { pickBy } from '../../utils';
 
 const defaultState = {
+  users               : {},
   conversations       : {},
   currentConversation : {
     messages: []
   }
 };
+
+const handleLoadUserList = (state,action) => {
+  const { data } = action.payload;
+  const users = pickBy(data, 'id');
+
+  return {
+    ...state,
+    users
+  };
+}
 
 const handleSelectConversation = (state, action) => {
   const currentConversation = state.conversations[action.payload];
@@ -87,7 +98,8 @@ export default handleActions(
     [loadConversations]  : handleLoadConversations,
     [addConversation]    : handleAddConversation,
     [addNewMessage]      : handleAddNewMessage,
-    [selectConversation] : handleSelectConversation
+    [selectConversation] : handleSelectConversation,
+    [loadUserList]       : handleLoadUserList,
   },
   defaultState
 );

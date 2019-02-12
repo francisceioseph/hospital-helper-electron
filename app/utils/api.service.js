@@ -57,4 +57,7 @@ export const createRole = data => http.postRequest(http.POST_ROLE_URL, makePaylo
 export const getProfile = id => http.getRequest(http.getProfileUrl(id));
 
 export const getConversations = () => http.getRequest(http.GET_CONVERSATIONS_URL);
+export const postNewConversation = (data) => http.postRequest(http.GET_CONVERSATIONS_URL, makePayload('conversation', data))
 export const postMessage = data => http.postRequest(http.POST_MESSAGE, makePayload('message', data));
+
+export const getChatUsers = () => http.getRequest(http.GET_CHAT_USERS_URL);

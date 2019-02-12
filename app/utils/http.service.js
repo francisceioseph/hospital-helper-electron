@@ -55,6 +55,7 @@ export const getProfileUrl = id => `/profiles/${id}`;
 
 export const GET_CONVERSATIONS_URL = '/conversations';
 export const POST_MESSAGE = '/messages';
+export const GET_CHAT_USERS_URL = '/conversations/users';
 
 export const configureAxiosInterceptors = () => {
   axios.interceptors.request.use((oldSettings) => {
@@ -71,7 +72,7 @@ export const configureAxiosInterceptors = () => {
   axios.interceptors.response.use(
     res => res,
     (error) => {
-      if (error.respose.status === 401) {
+      if (error.response.status === 401) {
         store.dispatch(clearCredentials());
         history.push('/login');
       }

@@ -69,7 +69,6 @@ const renderMessages = (conversation, messages, user) => (
         );
       }}
     />
-    <MessageForm conversationId={conversation.id} user={user} />
   </div>
 );
 
@@ -82,6 +81,7 @@ const MessagesList = ({ conversation, user }) => {
       {hasMessages && renderMessages(conversation, messages, user)}
 
       {!hasMessages && <Empty description="Ainda não há nenhuma mensagem" />}
+      <MessageForm conversationId={conversation.id} user={user} />
     </div>
   );
 };

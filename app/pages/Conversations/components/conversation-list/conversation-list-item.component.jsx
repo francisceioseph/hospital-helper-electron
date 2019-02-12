@@ -20,7 +20,7 @@ const getLastMessageContent = (messages) => {
 
 const ConversationListItem = (props) => {
   const { conversation, onSelect } = props;
-  const receiver = conversation.users.find(u => u.id !== props.user.id);
+  const receiver = conversation.users.find(u => u.id !== props.user.id) || props.user;
   const receiverName = t(receiver, 'profile.personal_datum.full_name').safeString;
 
   return (
