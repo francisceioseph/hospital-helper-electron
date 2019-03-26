@@ -21,24 +21,8 @@ const handleSubmit = props => (e) => {
   });
 };
 
-const handleOnTabClick = props => (tabIndex) => {
-  props.setCurrentTab(parseInt(tabIndex, 10));
-};
-
-const handleNextButtonClick = props => (event) => {
-  event.stopPropagation();
-  props.setCurrentTab(props.currentTab + 1);
-};
-const handlePrevButtonClick = props => (event) => {
-  event.stopPropagation();
-  props.setCurrentTab(props.currentTab - 1);
-};
-
 const withFormHandlers = withHandlers({
-  handleSubmit,
-  handleNextButtonClick,
-  handlePrevButtonClick,
-  handleOnTabClick
+  handleSubmit
 });
 
 const PacientForm = (props) => {
@@ -52,15 +36,19 @@ const PacientForm = (props) => {
         <IdentificationFragment {...props} decoratorManager={decoratorManager} />
         <DemographicsFragment {...props} decoratorManager={decoratorManager} />
         <ContactsFragment {...props} decoratorManager={decoratorManager} />
-        <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
+        {props.showSubmit && <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Salvar
           </Button>
-        </FormItem>
+        </FormItem>}
       </Form>
     </div>
   );
 };
+
+PacientForm.defaultProps = {
+  showSubmit: true
+}
 
 const PacientFormComponent = compose(
   defaultProps({
