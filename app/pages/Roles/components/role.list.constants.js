@@ -9,8 +9,8 @@ const ButtonGroup = Button.Group;
 export const tableColumns = [
   {
     title: 'Nome',
-    dataIndex: 'user_role_name',
-    key: 'user_role_name',
+    dataIndex: 'role_name',
+    key: 'role_name',
   },
   {
     title: 'Ações',
