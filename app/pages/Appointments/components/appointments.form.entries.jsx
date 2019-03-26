@@ -1,10 +1,24 @@
 import React from 'react';
-import { DatePicker, TimePicker } from 'antd';
+import { Link } from 'react-router-dom';
+import { DatePicker, TimePicker, Input, Row, Col, Button } from 'antd';
 import SugestSelector from '../../../components/forms/SugestSelector';
 import { SIMPLE_DATE_FORMAT_PT_BR, TIME_FORMAT_PT_BR } from '../../../utils/date-format';
 
+const InputGroup = Input.Group;
+
 export const getPacientNameField = pacients => (
-  <SugestSelector options={pacients} valueName="id" labelName="personal_datum.full_name" idName="id" />
+  <InputGroup>
+    <Row gutter={8}>
+      <Col span={15}>
+        <SugestSelector style={{width: '100%'}} options={pacients} valueName="id" labelName="personal_datum.full_name" idName="id" />
+      </Col>
+      <Col span={6}>
+        <Button>
+          <Link to="/usuarios/pacientes/novo">Cadastrar Paciente</Link>
+        </Button>
+      </Col>
+    </Row>
+  </InputGroup>
 );
 
 export const getAppointmentTypeField = appointmentTypes => (

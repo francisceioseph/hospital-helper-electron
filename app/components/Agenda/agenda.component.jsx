@@ -40,7 +40,7 @@ const Agenda = (props) => {
         events={props.events}
         showMultiDayTimes
         views={views}
-        defaultView={BigCalendar.Views.DAY}
+        defaultView={BigCalendar.Views.WEEK}
         defaultDate={new Date()}
         culture="pt-BR"
         onSelectEvent={props.onSelectEvent}
