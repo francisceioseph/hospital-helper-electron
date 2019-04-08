@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { Form, Button } from 'antd';
-import { compose, withHandlers, defaultProps } from 'recompose';
+import {
+  compose, withState, withHandlers, defaultProps
+} from 'recompose';
 
 import { HORIZONTAL_FORM_LAYOUT, FORM_ITEM_LAYOUT, FORM_ITEM_SUBMIT_LAYOUT } from '../../../components/forms';
+import { PacientModalFormContainer } from '../../../containers/Pacient';
 
 import { getDecoratorManager } from './appointments.form.decorators';
 import { LABELS } from './appointments.form.constants';
@@ -18,6 +21,8 @@ import {
 
 const FormItem = Form.Item;
 
+const withModalVisible = withState('modalVisible', 'setModalVisible', false);
+
 const handleSubmit = props => (e) => {
   e.preventDefault();
   props.form.validateFields((err, values) => {
@@ -27,7 +32,15 @@ const handleSubmit = props => (e) => {
   });
 };
 
-const withFormHandlers = withHandlers({ handleSubmit });
+const showNewPacientModal = props => () => {
+  props.setModalVisible(true);
+};
+
+const hideNewPacientModal = props => () => {
+  props.setModalVisible(false);
+};
+
+const withFormHandlers = withHandlers({ handleSubmit, showNewPacientModal, hideNewPacientModal });
 
 const AppointmentForm = (props) => {
   const { appointment } = props;
@@ -38,8 +51,13 @@ const AppointmentForm = (props) => {
     <div>
       <Form onSubmit={props.handleSubmit} layout={HORIZONTAL_FORM_LAYOUT}>
         <FormItem label={LABELS.PACIENT_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}
+          {decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients, props.showNewPacientModal))}
         </FormItem>
+
+        <PacientModalFormContainer 
+          visible={props.modalVisible} 
+          onCancel={props.hideNewPacientModal} 
+          onSubmitSuccess={props.hideNewPacientModal}/>
 
         <FormItem label={LABELS.APPOINTMENT_TYPES} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.appointmentTypeDecorator(getAppointmentTypeField(props.appointmentTypes))}
@@ -68,6 +86,7 @@ const AppointmentForm = (props) => {
 };
 
 const AppointmentFormComponent = compose(
+  withModalVisible,
   defaultProps({
     appointment      : {},
     appointmentTypes : [],
