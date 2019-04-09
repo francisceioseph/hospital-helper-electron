@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Form, Button, Row, Col } from 'antd';
+import {
+  Form, Button, Row, Col
+} from 'antd';
 import {
   compose, withState, withHandlers, defaultProps
 } from 'recompose';
@@ -52,19 +54,18 @@ const AppointmentForm = (props) => {
       <Form onSubmit={props.handleSubmit} layout={HORIZONTAL_FORM_LAYOUT}>
         <FormItem label={LABELS.PACIENT_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
           <Row gutter={8}>
-            <Col span={18}>
-                {decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}
-            </Col>
+            <Col span={18}>{decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}</Col>
             <Col span={4}>
               <Button onClick={props.showNewPacientModal}> Cadastrar Paciente </Button>
             </Col>
           </Row>
         </FormItem>
 
-        <PacientModalFormContainer 
-          visible={props.modalVisible} 
-          onCancel={props.hideNewPacientModal} 
-          onSubmitSuccess={props.hideNewPacientModal}/>
+        <PacientModalFormContainer
+          visible={props.modalVisible}
+          onCancel={props.hideNewPacientModal}
+          onSubmitSuccess={props.hideNewPacientModal}
+        />
 
         <FormItem label={LABELS.APPOINTMENT_TYPES} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.appointmentTypeDecorator(getAppointmentTypeField(props.appointmentTypes))}

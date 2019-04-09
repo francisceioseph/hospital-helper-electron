@@ -1,14 +1,12 @@
 // @flow
 
 import * as React from 'react';
-import {
-  DatePicker, TimePicker
-} from 'antd';
+import { DatePicker, TimePicker } from 'antd';
 
 import SugestSelector from '../../../components/forms/SugestSelector';
 import { SIMPLE_DATE_FORMAT_PT_BR, TIME_FORMAT_PT_BR } from '../../../utils/date-format';
 
-export const getPacientNameField = (pacients, onNewPacientButtonClick) => (
+export const getPacientNameField = pacients => (
   <SugestSelector
     style={{ width: '100%' }}
     options={pacients}

@@ -12,8 +12,8 @@ const { Header } = Layout;
 const { SubMenu } = Menu;
 
 const handleLogoutButtonClick = props => () => props.clearCredentials();
-
 const handleOnEditProfileClick = () => () => alert('Not implemented :P');
+const simplifyUserName = name => name.split(' ')[0];
 
 const withHeaderHandlers = withHandlers({
   onLogoutClick      : handleLogoutButtonClick,
@@ -35,7 +35,7 @@ const AppHeader = props => (
           title={(
             <span>
               <Icon type="user" />
-              {props.profile.personal_datum.full_name}
+              {simplifyUserName(props.profile.personal_datum.full_name)}
             </span>
           )}
         >
