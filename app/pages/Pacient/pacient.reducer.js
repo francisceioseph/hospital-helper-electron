@@ -4,42 +4,43 @@ import { pickBy } from '../../utils';
 import { filterByText } from '../../utils/filters';
 
 import {
-  getPacients, createPacient, updatePacient, removePacient, filterByName
+  getPacients,
+  createPacient,
+  updatePacient,
+  removePacient,
+  filterByName,
+  selectPacient,
+  showEditModal,
+  hideEditModal
 } from './pacient.actions';
 
+import { Pacient } from '../../models/pacient.model';
+
 const initialState = {
-  pacients    : {},
-  pacientsBkp : {},
-  pacient     : {
-    personal_datum_attributes: {
-      skin_color             : 'branco',
-      gender                 : 'masculino',
-      birth_datum_attributes : {
-        country_of_birth : 'Brasil',
-        state_of_birth   : 'Ceara',
-        city_of_birth    : 'Aquiraz'
-      }
-    },
-    demographic_attributes: {
-      job_category       : 'assalariado_carteira',
-      is_estudying       : false,
-      sexual_orientation : 'none',
-      gender_identity    : 'none',
-      has_special_needs  : false,
-      special_needs      : 'none'
-    },
-    address: {
-      zipcode      : '61700-000',
-      neighborhood : '',
-      city         : 'Aquiraz',
-      state        : 'Ceará'
-    },
-    family_datum_attributes: {
-      mother_name    : '',
-      father_name    : '',
-      is_family_head : false
-    }
-  }
+  showPacientEditModal : false,
+  pacients             : {},
+  pacientsBkp          : {},
+  pacient              : new Pacient()
+};
+
+const handleShowEditModal = state => ({
+  ...state,
+  showPacientEditModal: true
+});
+
+const handleHideEditModal = state => ({
+  ...state,
+  showPacientEditModal: false
+});
+
+const handleSelectPacient = (state, action) => {
+  const pacientId = action.payload;
+  const pacient = { ...state.pacients[pacientId] };
+
+  return {
+    ...state,
+    pacient
+  };
 };
 
 const handleFilterByName = (state, action) => {
@@ -86,7 +87,7 @@ function handleCreatePacient(state, action) {
 }
 
 function handleUpdatePacient(state, action) {
-  const { data: pacient } = action.payload;
+  const { payload: pacient } = action;
   const pacientId = pacient.id.toString();
 
   const pacients = {
@@ -125,7 +126,10 @@ export default handleActions(
     [createPacient] : handleCreatePacient,
     [updatePacient] : handleUpdatePacient,
     [removePacient] : handleRemovePacient,
-    [filterByName]  : handleFilterByName
+    [filterByName]  : handleFilterByName,
+    [selectPacient] : handleSelectPacient,
+    [showEditModal] : handleShowEditModal,
+    [hideEditModal] : handleHideEditModal
   },
   initialState
 );

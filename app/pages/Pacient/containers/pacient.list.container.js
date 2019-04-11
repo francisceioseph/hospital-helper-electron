@@ -1,19 +1,25 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { getPacients, filterByName } from '../pacient.actions';
+import {
+  getPacients, filterByName, showEditModal, hideEditModal
+} from '../pacient.actions';
 import { PacientListComponent } from '../components';
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ pacients }) => ({
-  pacients: _.values(pacients.pacients)
+  pacients             : _.values(pacients.pacients),
+  showPacientEditModal : pacients.showPacientEditModal,
+  pacient              : pacients.pacient
 });
 
 const mapDispatchToProps = {
   getPacients,
   filterByName,
   showPageLoader,
-  hidePageLoader
+  hidePageLoader,
+  showEditModal,
+  hideEditModal
 };
 
 export default connect(

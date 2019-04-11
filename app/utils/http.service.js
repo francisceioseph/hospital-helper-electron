@@ -95,7 +95,7 @@ export const putRequest = async (path, data) => {
 
 export const patchRequest = async (path, data) => {
   const URL = BASE_BACKEND_URL + path;
-  return axios.pacth(URL, data);
+  return axios.patch(URL, data);
 };
 
 export const deleteRequest = async (path) => {

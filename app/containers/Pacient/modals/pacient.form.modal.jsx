@@ -5,14 +5,19 @@ import { connect } from 'react-redux';
 import * as Alerts from '../../../components/Alerts';
 import * as WebAPI from '../../../utils/api.service';
 
+import { Pacient } from '../../../models/pacient.model';
 import { PacientModalForm } from '../../../components/Pacient';
-import { createPacient } from '../../../pages/Pacient/pacient.actions';
+import { createPacient, updatePacient } from '../../../pages/Pacient/pacient.actions';
 
 type Props = {
+  pacient: Object,
   createPacient: Function,
+  updatePacient: Function,
   visible: boolean,
   onCancel: Function,
-  onSubmitSuccess: Function
+  onSubmitSuccess: Function,
+  mode?: string,
+  titleText?: string
 };
 
 const mapStateToProps = ({ pacients }) => ({
@@ -20,7 +25,8 @@ const mapStateToProps = ({ pacients }) => ({
 });
 
 const mapDispatchToProps = {
-  createPacient
+  createPacient,
+  updatePacient
 };
 
 class PacientModalFormContainer extends React.Component<Props> {
@@ -28,19 +34,15 @@ class PacientModalFormContainer extends React.Component<Props> {
     const { form } = this.formRef.props;
 
     try {
-      const {
-        phone, email, address, ...others
-      } = values;
-      const pacient = {
-        ...others,
-        emails_attributes     : email ? [{ address: email }] : [],
-        telephones_attributes : phone ? [{ number: phone }] : [],
-        addresses_attributes  : address ? [{ ...address }] : []
-      };
+      const pacient = Pacient.buildForAPI(values, this.props.pacient);
 
-      const { data } = await WebAPI.postPacient(pacient);
-
-      this.props.createPacient(data);
+      if (this.props.mode !== 'edit') {
+        const { data } = await WebAPI.postPacient(pacient);
+        this.props.createPacient(data);
+      } else {
+        const { data } = await WebAPI.updatePacient(pacient.id, pacient);
+        this.props.updatePacient(data);
+      }
 
       Alerts.success({
         onOk: () => {
@@ -70,6 +72,8 @@ class PacientModalFormContainer extends React.Component<Props> {
     return (
       <div>
         <PacientModalForm
+          titleText={this.props.titleText}
+          pacient={this.props.pacient}
           wrappedComponentRef={this.saveFormRef}
           onCreate={this.handleCreate}
           visible={this.props.visible}
@@ -79,6 +83,11 @@ class PacientModalFormContainer extends React.Component<Props> {
     );
   }
 }
+
+PacientModalFormContainer.defaultProps = {
+  mode      : 'new',
+  titleText : 'Cadastrar Paciente'
+};
 
 export default connect(
   mapStateToProps,

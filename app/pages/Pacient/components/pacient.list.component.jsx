@@ -1,11 +1,22 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 import { compose, lifecycle, withHandlers } from 'recompose';
 
 import { tableColumns } from '../pacient.constants';
+import { PacientModalFormContainer } from '../../../containers/Pacient';
+
 import * as WebAPI from '../../../utils/api.service';
+
+type Props = {
+  showPacientEditModal: boolean,
+  pacients: Array<Object>,
+  handleOnSearch: Function,
+  onNewPacientClick: Function,
+  hideEditPacientModal: Function
+};
 
 const withLifecycle = lifecycle({
   async componentDidMount() {
@@ -15,18 +26,25 @@ const withLifecycle = lifecycle({
       this.props.getPacients(response);
       this.props.hidePageLoader();
     } catch (error) {
-      console.log(error);
       this.props.hidePageLoader();
     }
   }
 });
 
+const onNewPacientClick = (props: Props) => () => props.history.push('/usuarios/pacientes/novo');
+const handleOnSearch = (props: Props) => text => props.filterByName(text);
+
+const hideEditPacientModal = (props: Props) => () => {
+  props.hideEditModal();
+};
+
 const withListHandlers = withHandlers({
-  onNewPacientClick : props => () => props.history.push('/usuarios/pacientes/novo'),
-  handleOnSearch    : props => text => props.filterByName(text)
+  onNewPacientClick,
+  handleOnSearch,
+  hideEditPacientModal
 });
 
-const PacientListComponent = props => (
+const PacientListComponent = (props: Props) => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
@@ -50,6 +68,14 @@ const PacientListComponent = props => (
         pagination={{ pageSize: 8 }}
       />
     </Row>
+
+    <PacientModalFormContainer
+      titleText="Editar Paciente"
+      mode="edit"
+      visible={props.showPacientEditModal}
+      onCancel={props.hideEditPacientModal}
+      onSubmitSuccess={props.hideEditPacientModal}
+    />
   </div>
 );
 

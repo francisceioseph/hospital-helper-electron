@@ -5,6 +5,7 @@ import { Modal, Form } from 'antd';
 import { PacientFormComponent } from '../form';
 
 type Props = {
+  titleText?: string,
   visible: boolean,
   onCancel: Function,
   onCreate: Function,
@@ -16,8 +17,8 @@ type Props = {
 const PacientModal = (props: Props) => (
   <Modal
     visible={props.visible}
-    title="Cadastrar Paciente"
-    okText="Cadastrar"
+    title={props.titleText}
+    okText="Salvar"
     onCancel={props.onCancel}
     onOk={props.onCreate}
     style={{ top: '20px' }}
@@ -34,5 +35,9 @@ const PacientModal = (props: Props) => (
     />
   </Modal>
 );
+
+PacientModal.defaultProps = {
+  titleText: 'Cadastrar Paciente'
+};
 
 export default Form.create()(PacientModal);

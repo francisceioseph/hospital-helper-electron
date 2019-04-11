@@ -2,7 +2,7 @@ const REQUIRED_FIELD_MSG = 'Este campo é obrigatório';
 
 function getFullNameDecorator(decorator, values) {
   const profile = values.profile || {};
-  return decorator('personal_datum_attributes.full_name', {
+  return decorator('personal_datum.full_name', {
     rules        : [{ required: true, message: REQUIRED_FIELD_MSG }],
     initialValue : profile.full_name
   });
@@ -10,7 +10,7 @@ function getFullNameDecorator(decorator, values) {
 
 function getCpfDecorator(decorator, values) {
   const profile = values.profile || {};
-  return decorator('personal_datum_attributes.cpf', {
+  return decorator('personal_datum.cpf', {
     rules        : [{ required: true, message: REQUIRED_FIELD_MSG }],
     initialValue : profile.cpf
   });
@@ -18,14 +18,14 @@ function getCpfDecorator(decorator, values) {
 
 function getGenderDecorator(decorator, values) {
   const profile = values.profile || {};
-  return decorator('personal_datum_attributes.gender', {
+  return decorator('personal_datum.gender', {
     rules        : [{ required: true, message: REQUIRED_FIELD_MSG }],
     initialValue : profile.gender
   });
 }
 function getBirthDateDecorator(decorator, values) {
   const profile = values.profile || {};
-  return decorator('personal_datum_attributes.date_of_birth', {
+  return decorator('personal_datum.date_of_birth', {
     rules        : [{ required: true, message: REQUIRED_FIELD_MSG }],
     initialValue : profile.date_of_birth
   });
@@ -33,7 +33,7 @@ function getBirthDateDecorator(decorator, values) {
 
 function getCrmDecorator(decorator, values) {
   const profile = values.profile || {};
-  return decorator('personal_datum_attributes.crm', {
+  return decorator('personal_datum.crm', {
     rules        : [{ required: true, message: REQUIRED_FIELD_MSG }],
     initialValue : profile.crm
   });

@@ -11,7 +11,7 @@ const { Item: FormItem } = Form;
 
 const DemographicsFragment = (props) => {
   const { decoratorManager, pacient } = props;
-  const selectedCountry = t(pacient, 'personal_datum_attributes.birth_datum_attributes.country_of_birth').safeString;
+  const selectedCountry = t(pacient, 'personal_datum.birth_datum.country_of_birth').safeString;
 
   return (
     <Fragment>

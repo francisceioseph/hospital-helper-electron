@@ -1,38 +1,36 @@
 // @flow
 import * as React from 'react';
-
-import { Form, Button } from 'antd';
-import { compose, withHandlers, defaultProps } from 'recompose';
+import { Form } from 'antd';
 
 import { PacientFormComponent } from '../../../components/Pacient/form';
 
-class PacientForm extends React.Component {
+type Props = {
+  pacient: Object,
+  form: Object,
+  onSubmitHandler: Function
+};
+
+class PacientForm extends React.Component<Props> {
   handleSubmit = (e) => {
+    const { form, onSubmitHandler } = this.props;
+
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    form.validateFields((err, values) => {
       if (!err) {
-        this.props.onSubmitHandler(values, props.form);
+        onSubmitHandler(values, form);
       }
     });
   };
 
   render() {
-    const { pacient, form, handleSubmit } = this.props;
+    const { pacient, form } = this.props;
 
-    return (
-      <PacientFormComponent
-        showSubmit
-        handleSubmit={handleSubmit}
-        pacient={pacient}
-        form={form}
-      />
-    );
-  };
-
+    return <PacientFormComponent showSubmit handleSubmit={this.handleSubmit} pacient={pacient} form={form} />;
+  }
 }
 
 PacientForm.defaultProps = {
   showSubmit: true
-}
+};
 
 export default Form.create()(PacientForm);

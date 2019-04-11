@@ -17,12 +17,14 @@ const mapDispatchToProps = {
 
 const onNewPacientFormSubmit = props => async (values, form) => {
   try {
-    const { phone, email, address, ...others } = values; 
+    const {
+      phone, email, address, ...others
+    } = values;
     const pacient = {
       ...others,
-      emails_attributes     : !!email   ? [{ address: email }] : [],
-      telephones_attributes : !!phone   ? [{ number: phone }] : [],
-      addresses_attributes    : !!address ? [{ ...address }]: [],
+      emails     : email ? [{ address: email }] : [],
+      telephones : phone ? [{ number: phone }] : [],
+      addresses  : address ? [{ ...address }] : []
     };
 
     const { data } = await WebAPI.postPacient(pacient);
