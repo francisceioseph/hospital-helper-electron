@@ -1,36 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
+// @flow
+import * as React from 'react';
 import { lifecycle, compose, withHandlers } from 'recompose';
 
 import { tableColumns } from './doctor.list.constants';
 import { TableList } from '../../../components/TableList';
+import { DoctorModalFormContainer } from '../../../containers/Doctor';
+
 import * as WebAPI from '../../../utils/api.service';
 
-const DoctorListComponent = props => (
-  <div>
-    <TableList
-      buttonName="Novo Médico"
-      columns={tableColumns}
-      datasource={props.doctors}
-      onSearch={props.onSearch}
-      onButtonClick={props.onNewDoctorClick}
-      idAccessor="id"
-    />
-  </div>
-);
+type Props = {
+  doctors: Array<Object>,
+  onSearch: Function,
+  onNewDoctorClick: Function,
+  showModal: boolean,
+  hideEditDoctorModal: Function
+};
 
-DoctorListComponent.propTypes = {
-  doctors          : PropTypes.instanceOf(Array).isRequired,
-  onNewDoctorClick : PropTypes.func.isRequired
+const onDoctorSearchHandler = (props: Props) => (text: string) => props.filterByName(text);
+const hideEditDoctorModal = (props: Props) => () => props.hideEditDoctorModal();
+const onDoctorClickHandler = (props: Props) => (event) => {
+  event.stopPropagation();
+  props.history.push('/usuarios/medicos/novo');
 };
 
 const withListHandlers = withHandlers({
-  onNewDoctorClick: props => (event) => {
-    event.stopPropagation();
-    props.history.push('/usuarios/medicos/novo');
-  },
-  onSearch: props => text => props.filterByName(text)
+  onNewDoctorClick : onDoctorClickHandler,
+  onSearch         : onDoctorSearchHandler,
+  hideEditDoctorModal
 });
 
 const listLifecycle = lifecycle({
@@ -42,11 +38,31 @@ const listLifecycle = lifecycle({
       this.props.getDoctors(response);
       this.props.hidePageLoader();
     } catch (error) {
-      console.log(error);
       this.props.hidePageLoader();
     }
   }
 });
+
+const DoctorListComponent = (props: Props) => (
+  <div>
+    <TableList
+      buttonName="Novo Médico"
+      columns={tableColumns}
+      datasource={props.doctors}
+      onSearch={props.onSearch}
+      onButtonClick={props.onNewDoctorClick}
+      idAccessor="id"
+    />
+
+    <DoctorModalFormContainer
+      titleText="Editar Paciente"
+      mode="edit"
+      visible={props.showModal}
+      onCancel={props.hideEditDoctorModal}
+      onSubmitSuccess={props.hideEditDoctorModal}
+    />
+  </div>
+);
 
 export default compose(
   withListHandlers,

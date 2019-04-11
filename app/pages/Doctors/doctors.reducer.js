@@ -3,14 +3,23 @@ import { handleActions } from 'redux-actions';
 import { pickBy } from '../../utils';
 import { filterByText } from '../../utils/filters';
 import {
-  getDoctors, createDoctor, updateDoctor, removeDoctor, filterByName
+  getDoctors,
+  createDoctor,
+  updateDoctor,
+  removeDoctor,
+  filterByName,
+  showEditDoctorModal,
+  hideEditDoctorModal,
+  selectDoctor
 } from './doctors.actions';
 
+import { Doctor } from '../../models';
+
 const initialState = {
-  showModal     : false,
-  doctors       : {},
-  doctorsBkp    : {},
-  currentDoctor : {}
+  showModal  : false,
+  doctors    : {},
+  doctorsBkp : {},
+  doctor     : new Doctor()
 };
 
 const handleFilterByName = (state, action) => {
@@ -25,6 +34,16 @@ const handleFilterByName = (state, action) => {
   };
 };
 
+const handleShowEditDoctorModal = state => ({
+  ...state,
+  showModal: true
+});
+
+const handleHideEditDoctorModal = state => ({
+  ...state,
+  showModal: false
+});
+
 const handleGetDoctors = (state, action) => {
   const { data } = action.payload;
   const doctors = pickBy(data, 'id');
@@ -32,6 +51,15 @@ const handleGetDoctors = (state, action) => {
     ...state,
     doctors,
     doctorsBkp: { ...doctors }
+  };
+};
+
+const handleSelectDoctor = (state, action) => {
+  const doctorId = action.payload;
+  const doctor = { ...state.doctors[doctorId] };
+  return {
+    ...state,
+    doctor
   };
 };
 
@@ -80,11 +108,14 @@ const handleRemoveDoctor = (state, action) => {
 
 export default handleActions(
   {
-    [getDoctors]   : handleGetDoctors,
-    [createDoctor] : handleCreateDoctor,
-    [updateDoctor] : handleUpdateDoctor,
-    [removeDoctor] : handleRemoveDoctor,
-    [filterByName] : handleFilterByName
+    [getDoctors]          : handleGetDoctors,
+    [createDoctor]        : handleCreateDoctor,
+    [updateDoctor]        : handleUpdateDoctor,
+    [removeDoctor]        : handleRemoveDoctor,
+    [filterByName]        : handleFilterByName,
+    [showEditDoctorModal] : handleShowEditDoctorModal,
+    [hideEditDoctorModal] : handleHideEditDoctorModal,
+    [selectDoctor]        : handleSelectDoctor
   },
   initialState
 );

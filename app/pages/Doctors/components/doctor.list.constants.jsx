@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, Tag } from 'antd';
 
 import { store } from '../../../store';
-import { removeDoctor } from '../doctors.actions';
+import { removeDoctor, selectDoctor, showEditDoctorModal } from '../doctors.actions';
 
 const ButtonGroup = Button.Group;
 
@@ -23,18 +23,26 @@ export const tableColumns = [
     key       : 'specialties',
     render    : specialties => (
       <span>
-        {specialties.map((specialty) => {
-          return <Tag color="geekblue" key={specialty.id}>{specialty.specialty_name}</Tag>;
-        })}
+        {specialties.map(specialty => (
+          <Tag color="geekblue" key={specialty.id}>
+            {specialty.specialty_name}
+          </Tag>
+        ))}
       </span>
-    ),
+    )
   },
   {
     title  : 'Ações',
     key    : 'actions',
     render : (text, record) => (
       <ButtonGroup>
-        <Button icon="edit" onClick={() => {}} />
+        <Button
+          icon="edit"
+          onClick={() => {
+            store.dispatch(selectDoctor(record.id));
+            store.dispatch(showEditDoctorModal());
+          }}
+        />
         <Button
           icon="delete"
           onClick={() => Modal.confirm({
