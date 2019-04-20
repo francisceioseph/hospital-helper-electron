@@ -104,7 +104,7 @@ const SideMenu = ({ collapsed, location, permissions }) => {
             </Col>
             {!collapsed && (
               <Col span={16}>
-                <span>Hospital Helper</span>
+                <span>{"Hospital\nHelper"}</span>
               </Col>
             )}
           </Row>
