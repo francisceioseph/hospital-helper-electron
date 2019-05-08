@@ -263,6 +263,7 @@
     "axios": "^0.18.0",
     "babel-preset-react-app": "^6.1.0",
     "connected-react-router": "^5.0.1",
+    "core-js": "^2.6.5",
     "devtron": "^1.4.0",
     "electron-debug": "^2.0.0",
     "electron-log": "^2.2.17",

@@ -1,13 +1,13 @@
 import * as WebAPI from '../../utils/api.service';
 
-export const postDoctor = async (values) => {
+export const postDoctor = (values) => {
   const user = {
     ...values,
     profile: {
       ...values.profile,
-      profile_type: 'Doctor',
-    },
+      profile_type: 'Doctor'
+    }
   };
 
-  await WebAPI.postUser(user);
+  return WebAPI.postUser(user);
 };
