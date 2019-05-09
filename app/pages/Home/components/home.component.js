@@ -8,7 +8,7 @@ import { compose, withState, lifecycle } from 'recompose';
 import menus from '../../../mocks/menu';
 import ShortcutCard from './shortcut-card.component';
 
-import '../home.scss';
+import '../Home.scss';
 
 function getMenusForPermissions(menuList, permissions) {
   return _.filter(menuList, (menuItem) => {
@@ -41,7 +41,7 @@ const ShortcutList = props => (
   <div>
     <Row gutter={16}>
       {props.menuList.map(item => (
-        <Col span={4} key={item.code}>
+        <Col className="col-shortcut" span={4} key={item.code}>
           <ShortcutCard name={item.name} icon={item.icon} route={item.route} />
         </Col>
       ))}
