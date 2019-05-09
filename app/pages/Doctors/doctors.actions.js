@@ -15,5 +15,5 @@ export const showEditDoctorModal = createAction(SHOW_EDIT_DOCTOR_MODAL);
 export const hideEditDoctorModal = createAction(HIDE_EDIT_DOCTOR_MODAL);
 export const createDoctor = createAction(CREATE_DOCTOR);
 export const getDoctors = createAction(GET_DOCTORS);
-export const updateDoctor = createAction(UPDATE_DOCTOR, WebAPI.updateDoctor);
+export const updateDoctor = createAction(UPDATE_DOCTOR);
 export const removeDoctor = createAction(DELETE_DOCTOR, WebAPI.removeDoctor);

@@ -11,7 +11,7 @@ export const POST_USER_URL = '/signup';
 export const POST_DOCTOR_URL = '/doctors';
 export const GET_DOCTORS_URL = '/doctors';
 export const getDoctorUrl = doctorId => `/doctors/${doctorId}`;
-export const updateDoctorUrl = doctorId => `/doctors//${doctorId}`;
+export const updateDoctorUrl = doctorId => `/doctors/${doctorId}`;
 
 export const GET_PACIENTS_URL = '/pacients';
 export const POST_PACIENT_URL = '/pacients';

@@ -79,6 +79,7 @@ class DoctorModalFormContainer extends React.Component<Props> {
           onCreate={this.handleCreate}
           visible={this.props.visible}
           onCancel={this.props.onCancel}
+          mode={this.props.mode}
         />
       </div>
     );

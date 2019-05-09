@@ -55,7 +55,7 @@ const DoctorListComponent = (props: Props) => (
     />
 
     <DoctorModalFormContainer
-      titleText="Editar Paciente"
+      titleText="Editar Médico"
       mode="edit"
       visible={props.showModal}
       onCancel={props.hideEditDoctorModal}

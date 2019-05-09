@@ -21,7 +21,7 @@ export const tableColumns = [
     title     : 'Especialidade',
     dataIndex : 'specialties',
     key       : 'specialties',
-    render    : specialties => (
+    render    : (specialties = []) => (
       <span>
         {specialties.map(specialty => (
           <Tag color="geekblue" key={specialty.id}>

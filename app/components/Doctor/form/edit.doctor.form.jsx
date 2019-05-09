@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Form, Button, Divider } from 'antd';
 
 import * as entries from './doctor.form.entries';
-import { getDecoratorManager } from './doctor.form.decorator';
+import { getDecoratorManager } from './edit.doctor.form.decorator';
 import { LABELS } from './doctor.form.constants';
 import { HORIZONTAL_FORM_LAYOUT, FORM_ITEM_LAYOUT, FORM_ITEM_SUBMIT_LAYOUT } from '../../forms';
 
@@ -19,7 +19,7 @@ type Props = {
 
 const FormItem = Form.Item;
 
-const DoctorFormComponent = (props: Props) => {
+const EditDoctorFormComponent = (props: Props) => {
   const { doctor, form } = props;
   const { getFieldDecorator } = form;
   const decoratorManager = getDecoratorManager(getFieldDecorator, doctor);
@@ -48,23 +48,6 @@ const DoctorFormComponent = (props: Props) => {
           {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
         </FormItem>
 
-        {props.mode === 'new' && (
-          <div>
-            <Divider orientation="left">Dados de Usuário</Divider>
-            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.EMAIL} hasFeedback>
-              {decoratorManager.emailDecorator(entries.getEmailField())}
-            </FormItem>
-
-            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.PASSWORD} hasFeedback>
-              {decoratorManager.passwordDecorator(entries.getPasswordField())}
-            </FormItem>
-
-            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.PASSWORD_CONFIRMATION} hasFeedback>
-              {decoratorManager.passwordConfirmationDecorator(entries.getPasswordField())}
-            </FormItem>
-          </div>
-        )}
-
         {props.showSubmit && (
           <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
             <Button type="primary" htmlType="submit" className="login-form-button">
@@ -77,4 +60,4 @@ const DoctorFormComponent = (props: Props) => {
   );
 };
 
-export default DoctorFormComponent;
+export default EditDoctorFormComponent;

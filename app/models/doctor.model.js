@@ -15,13 +15,22 @@ export class Doctor {
 
   static buildForAPI(values, doctor = {}) {
     const personal_datum = {
-      ...doctor.profile.personal_datum,
-      ...values.profile.personal_datum
+      ...doctor.personal_datum,
+      ...values.personal_datum,
+
+      birth_datum: {
+        ...doctor.personal_datum.birth_datum,
+        ...values.personal_datum.birth_datum
+      }
     };
 
     return {
-      id: doctor.id,
-      personal_datum
+      personal_datum,
+      id                 : doctor.id,
+      addresses          : [],
+      telephones         : [],
+      emails             : [],
+      doctor_specialties : []
     };
   }
 }

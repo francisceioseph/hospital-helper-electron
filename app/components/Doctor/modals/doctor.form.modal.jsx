@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Modal, Form } from 'antd';
 
-import { DoctorFormComponent } from '../form';
+import { EditDoctorFormComponent } from '../form';
 
 type Props = {
   titleText?: string,
@@ -10,8 +10,9 @@ type Props = {
   onCancel: Function,
   onCreate: Function,
   handleSubmit: Function,
-  pacient: Object,
-  form: Object
+  doctor: Object,
+  form: Object,
+  mode: String
 };
 
 const DoctorModal = (props: Props) => (
@@ -27,10 +28,11 @@ const DoctorModal = (props: Props) => (
     destroyOnClose
     maskClosable={false}
   >
-    <DoctorFormComponent
+    <EditDoctorFormComponent
+      mode={props.mode}
       showSubmit={false}
       handleSubmit={props.handleSubmit}
-      pacient={props.pacient}
+      doctor={props.doctor}
       form={props.form}
     />
   </Modal>

@@ -20,8 +20,10 @@ const onNewDoctorFormSubmit = () => async (values, form) => {
     const user = {
       ...values,
       profile: {
-        ...values.profile,
-        profile_type: 'Doctor'
+        profile_type   : 'Doctor',
+        personal_datum : {
+          ...values.personal_datum
+        }
       }
     };
 
