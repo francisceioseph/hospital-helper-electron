@@ -5,15 +5,9 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import {
-  createAppointment,
-  getAppointmentTypes
-} from '../appointments.actions';
+import { createAppointment, getAppointmentTypes } from '../appointments.actions';
 
-import { 
-  showPageLoader,
-  hidePageLoader,
-} from '../../../containers/layouts/actions';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 import { AppointmentForm } from '../components';
 
@@ -42,8 +36,8 @@ const onAppointmentFormSubmit = props => async (values, form) => {
     props.createAppointment(appointment);
 
     Alert.success({
-      content: 'Agendamento realizado com sucesso',
-      onOk: () => form.resetFields()
+      content : 'Agendamento realizado com sucesso',
+      onOk    : () => form.resetFields()
     });
   } catch (error) {
     Alert.error({
@@ -61,11 +55,7 @@ const withLifeCycle = lifecycle({
     try {
       this.props.showPageLoader();
 
-      const responses = await Promise.all([
-        WebAPI.getPacients(),
-        WebAPI.getDoctors(),
-        WebAPI.getAppointmentTypes(),
-      ]);
+      const responses = await Promise.all([WebAPI.getPacients(), WebAPI.getDoctors(), WebAPI.getAppointmentTypes()]);
 
       this.props.getPacients(responses[0]);
       this.props.getDoctors(responses[1]);
