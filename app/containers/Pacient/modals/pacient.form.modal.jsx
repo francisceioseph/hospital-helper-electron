@@ -7,12 +7,13 @@ import * as WebAPI from '../../../utils/api.service';
 
 import { Pacient } from '../../../models/pacient.model';
 import { PacientModalForm } from '../../../components/Pacient';
-import { createPacient, updatePacient } from '../../../pages/Pacient/pacient.actions';
+import { createPacient, updatePacient, clearSelectedPacient } from '../../../pages/Pacient/pacient.actions';
 
 type Props = {
   pacient: Object,
   createPacient: Function,
   updatePacient: Function,
+  clearSelectedPacient: Function,
   visible: boolean,
   onCancel: Function,
   onSubmitSuccess: Function,
@@ -26,7 +27,8 @@ const mapStateToProps = ({ pacients }) => ({
 
 const mapDispatchToProps = {
   createPacient,
-  updatePacient
+  updatePacient,
+  clearSelectedPacient
 };
 
 class PacientModalFormContainer extends React.Component<Props> {
@@ -60,12 +62,18 @@ class PacientModalFormContainer extends React.Component<Props> {
     form.validateFields((error, values) => {
       if (!error) {
         this.saveFormData(values);
+        this.props.clearSelectedPacient();
       }
     });
   };
 
   saveFormRef = (formRef) => {
     this.formRef = formRef;
+  };
+
+  handleCancel = (event) => {
+    this.props.onCancel(event);
+    this.props.clearSelectedPacient();
   };
 
   render() {
@@ -77,7 +85,7 @@ class PacientModalFormContainer extends React.Component<Props> {
           wrappedComponentRef={this.saveFormRef}
           onCreate={this.handleCreate}
           visible={this.props.visible}
-          onCancel={this.props.onCancel}
+          onCancel={this.handleCancel}
         />
       </div>
     );

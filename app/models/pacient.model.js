@@ -1,7 +1,7 @@
 import t from 'typy';
 
 export class Pacient {
-  constructor(personalDatum = { bith_datum: {} }, demographics = {}, address = {}, familyDatum = {}) {
+  constructor(personalDatum = { bith_datum: {} }, demographics = {}, address = {}, family_datum = {}) {
     const { birth_datum: birthDatum, ...otherPersonalDatum } = personalDatum;
 
     this.personal_datum = {
@@ -34,11 +34,11 @@ export class Pacient {
       ...address
     };
 
-    this.family_datum = familyDatum || {
+    this.family_datum = family_datum || {
       mother_name    : '',
       father_name    : '',
       is_family_head : false,
-      ...familyDatum
+      ...family_datum
     };
   }
 
@@ -73,12 +73,18 @@ export class Pacient {
       }
     ];
 
+    const family_datum = {
+      ...t(pacient, 'family_datum').safeObject,
+      ...others.family_datum
+    };
+
     return {
       id: pacient.id,
       personal_datum,
       emails,
       telephones,
-      addresses
+      addresses,
+      family_datum
     };
   }
 }

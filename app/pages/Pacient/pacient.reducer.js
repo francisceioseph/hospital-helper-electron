@@ -11,7 +11,8 @@ import {
   filterByName,
   selectPacient,
   showEditModal,
-  hideEditModal
+  hideEditModal,
+  clearSelectedPacient
 } from './pacient.actions';
 
 import { Pacient } from '../../models/pacient.model';
@@ -120,16 +121,24 @@ function handleRemovePacient(state, action) {
   };
 }
 
+function handleClearSelectedPacient(state) {
+  return {
+    ...state,
+    pacient: new Pacient()
+  };
+}
+
 export default handleActions(
   {
-    [getPacients]   : handleGetPacients,
-    [createPacient] : handleCreatePacient,
-    [updatePacient] : handleUpdatePacient,
-    [removePacient] : handleRemovePacient,
-    [filterByName]  : handleFilterByName,
-    [selectPacient] : handleSelectPacient,
-    [showEditModal] : handleShowEditModal,
-    [hideEditModal] : handleHideEditModal
+    [getPacients]          : handleGetPacients,
+    [createPacient]        : handleCreatePacient,
+    [updatePacient]        : handleUpdatePacient,
+    [removePacient]        : handleRemovePacient,
+    [filterByName]         : handleFilterByName,
+    [selectPacient]        : handleSelectPacient,
+    [showEditModal]        : handleShowEditModal,
+    [hideEditModal]        : handleHideEditModal,
+    [clearSelectedPacient] : handleClearSelectedPacient
   },
   initialState
 );

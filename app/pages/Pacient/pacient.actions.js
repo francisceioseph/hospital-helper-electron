@@ -17,3 +17,4 @@ export const getPacients = createAction(GET_PACIENTS);
 export const createPacient = createAction(CREATE_PACIENT);
 export const updatePacient = createAction(UPDATE_PACIENT);
 export const removePacient = createAction(DELETE_PACIENT, WebAPI.removePacient);
+export const clearSelectedPacient = createAction('CLEAR_SELECTED_PACIENT');
