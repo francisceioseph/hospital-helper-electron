@@ -30,6 +30,7 @@ export const updateAppointmentUrl = appointmentId => `/appointments/${appointmen
 
 export const GET_SPECIALTIES_URL = '/specialties';
 export const POST_SPECIALTY_URL = '/specialties';
+export const updateSpecialtyUrl = id => `/specialties/${id}`;
 export const removeSpecialtyUrl = id => `/specialties/${id}`;
 
 export const GET_EXAM_TYPES_URL = '/exam-types';

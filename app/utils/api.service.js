@@ -30,6 +30,7 @@ export const removeAppointment = id => http.deleteRequest(http.getAppointmentUrl
 
 export const getSpecialties = () => http.getRequest(http.GET_SPECIALTIES_URL);
 export const createSpecialty = data => http.postRequest(http.POST_SPECIALTY_URL, makePayload('specialty', data));
+export const updateSpecialty = (id, data) => http.patchRequest(http.updateSpecialtyUrl(id), makePayload('specialty', data));
 export const removeSpecialty = id => http.deleteRequest(http.removeSpecialtyUrl(id));
 
 export const getExamTypes = () => http.getRequest(http.GET_EXAM_TYPES_URL);

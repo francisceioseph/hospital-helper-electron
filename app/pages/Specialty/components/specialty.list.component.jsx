@@ -1,25 +1,30 @@
+// @flow
 import React from 'react';
 
-import {
-  compose, lifecycle, withState, withHandlers
-} from 'recompose';
+import { compose, lifecycle, withHandlers } from 'recompose';
 import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
 import * as WebAPI from '../../../utils/api.service';
+import { SpecialtyModalContainer } from '../../../containers/Specialty';
 
 import { tableColumns } from './specialty.list.constants';
-import SpecialtyModal from './specialty.modal.component';
 
-const SpecialtyComponent = props => (
+type Props = {
+  handleOnSearch: Function,
+  showSpecialtyModal: Function,
+  specialties: Array<Object>
+};
+
+const SpecialtyComponent = (props: Props) => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
         <Input.Search onSearch={props.handleOnSearch} placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
-        <Button type="primary" onClick={props.showModal}>
+        <Button type="primary" onClick={props.showSpecialtyModal}>
           Nova Especialidade
         </Button>
       </Col>
@@ -38,57 +43,16 @@ const SpecialtyComponent = props => (
     </Row>
 
     <div>
-      <SpecialtyModal
-        wrappedComponentRef={props.handleSaveFormRef}
-        visible={props.visible}
-        confirmLoading={props.confirmLoading}
-        onCancel={props.handleCancel}
-        onCreate={props.handleCreate}
-      />
+      <SpecialtyModalContainer />
     </div>
   </div>
 );
 
-const withVisibleState = withState('visible', 'setVisible', false);
-const withFormRef = withState('formRef', 'setFormRef', null);
-const withLoading = withState('confirmLoading', 'setConfirmLoading', false);
-
-const showModal = props => () => props.setVisible(true);
-const handleCancel = props => () => props.setVisible(false);
-const handleSaveFormRef = props => formRef => props.setFormRef(formRef);
-const handleCreate = props => () => {
-  const form = props.formRef.props.form;
-  props.setConfirmLoading(true);
-
-  form.validateFields((err, values) => {
-    if (err) {
-      props.setConfirmLoading(false);
-      return;
-    }
-
-    WebAPI.createSpecialty(values)
-      .then((response) => {
-        const specialty = response.data;
-        props.createSpecialty(specialty);
-
-        form.resetFields();
-        props.setConfirmLoading(false);
-        props.setVisible(false);
-      })
-      .catch((error) => {
-        props.setConfirmLoading(false);
-      });
-  });
-};
 const handleOnSearch = props => (value) => {
   props.applySpecialtyFilter(value);
 };
 
 const withListHandlers = withHandlers({
-  showModal,
-  handleCancel,
-  handleCreate,
-  handleSaveFormRef,
   handleOnSearch
 });
 
@@ -108,9 +72,6 @@ const specialtyListLifecycle = lifecycle({
 });
 
 export default compose(
-  withLoading,
-  withFormRef,
-  withVisibleState,
   withListHandlers,
   specialtyListLifecycle
 )(SpecialtyComponent);

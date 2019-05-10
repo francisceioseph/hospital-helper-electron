@@ -3,11 +3,20 @@ import React from 'react';
 import { Modal, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
+type Props = {
+  visible: boolean,
+  confirmLoading: boolean,
+  onCancel: Function,
+  onCreate: Function,
+  form: Object,
+  specialty: Object
+};
 
-class SpecialtyModalForm extends React.Component {
+// eslint-disable-next-line react/prefer-stateless-function
+class SpecialtyModalForm extends React.Component<Props> {
   render() {
     const {
-      visible, onCancel, onCreate, confirmLoading, form
+      visible, onCancel, onCreate, confirmLoading, form, specialty
     } = this.props;
     const { getFieldDecorator } = form;
     return (
@@ -23,7 +32,8 @@ class SpecialtyModalForm extends React.Component {
         <Form layout="vertical">
           <FormItem label="Nome da Especialidade">
             {getFieldDecorator('specialty_name', {
-              rules: [{ required: true, message: 'Campo obrigatório' }]
+              rules        : [{ required: true, message: 'Campo obrigatório' }],
+              initialValue : specialty.specialty_name
             })(<Input />)}
           </FormItem>
         </Form>

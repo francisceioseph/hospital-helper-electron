@@ -9,14 +9,44 @@ import {
   createSpecialty,
   updateSpecialty,
   removeSpecialty,
-  applySpecialtyFilter
+  applySpecialtyFilter,
+  selectSpecialty,
+  clearSpecialty,
+  showSpecialtyModal,
+  hideSpecialtyModal
 } from './specialty.actions';
 
 const initialState = {
-  specialties      : {},
-  specialtiesBkp   : {},
-  currentSpecialty : {}
+  specialties        : {},
+  specialtiesBkp     : {},
+  currentSpecialty   : {},
+  specialty          : {},
+  showSpecialtyModal : false
 };
+
+const handleSelectSpecialty = (state, action) => {
+  const id = action.payload;
+
+  return {
+    ...state,
+    specialty: { ...state.specialties[id] }
+  };
+};
+
+const handleClearSpecialty = state => ({
+  ...state,
+  specialty: {}
+});
+
+const handleShowSpecialtyModal = state => ({
+  ...state,
+  showSpecialtyModal: true
+});
+
+const handleHideSpecialtyModal = state => ({
+  ...state,
+  showSpecialtyModal: false
+});
 
 const handleApplySpecialtyField = (state, action) => {
   const specialtiesValues = _.values(state.specialtiesBkp);
@@ -59,7 +89,7 @@ const handleCreateSpecialty = (state, action) => {
 };
 
 const handleUpdateSpecialty = (state, action) => {
-  const { data: specialty } = action.payload;
+  const { payload: specialty } = action;
   const id = specialty.id.toString();
 
   return {
@@ -71,7 +101,8 @@ const handleUpdateSpecialty = (state, action) => {
     specialtiesBkp: {
       ...state.specialtiesBkp,
       [id]: specialty
-    }
+    },
+    specialty: {}
   };
 };
 
@@ -94,7 +125,11 @@ export default handleActions(
     [createSpecialty]      : handleCreateSpecialty,
     [updateSpecialty]      : handleUpdateSpecialty,
     [removeSpecialty]      : handleRemoveSpecialty,
-    [applySpecialtyFilter] : handleApplySpecialtyField
+    [applySpecialtyFilter] : handleApplySpecialtyField,
+    [selectSpecialty]      : handleSelectSpecialty,
+    [clearSpecialty]       : handleClearSpecialty,
+    [showSpecialtyModal]   : handleShowSpecialtyModal,
+    [hideSpecialtyModal]   : handleHideSpecialtyModal
   },
   initialState
 );
