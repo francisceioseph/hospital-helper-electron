@@ -9,13 +9,43 @@ import {
   createSurgeryType,
   updateSurgeryType,
   removeSurgeryType,
-  filterByName
+  filterByName,
+  selectSurgeryType,
+  clearSurgeryType,
+  showSurgeryTypeModal,
+  hideSurgeryTypeModal
 } from './surgery-types.actions';
 
 const initialState = {
-  surgeryTypes    : {},
-  surgeryTypesBkp : {}
+  surgeryTypes         : {},
+  surgeryTypesBkp      : {},
+  surgeryType          : {},
+  showSurgeryTypeModal : false
 };
+
+const handleSelectSurgeryType = (state, action) => {
+  const id = action.payload;
+
+  return {
+    ...state,
+    surgeryType: { ...state.surgeryTypes[id] }
+  };
+};
+
+const handleClearSurgeryType = state => ({
+  ...state,
+  surgeryType: {}
+});
+
+const handleShowSurgeryTypeModal = state => ({
+  ...state,
+  showSurgeryTypeModal: true
+});
+
+const handleHideSurgeryTypeModal = state => ({
+  ...state,
+  showSurgeryTypeModal: false
+});
 
 const handleFilterByName = (state, action) => {
   const input = action.payload;
@@ -58,7 +88,7 @@ const handleCreateSurgeryType = (state, action) => {
 };
 
 const handleUpdateSurgeryType = (state, action) => {
-  const { data: surgeryType } = action.payload;
+  const { payload: surgeryType } = action;
   const id = surgeryType.id.toString();
 
   return {
@@ -70,7 +100,8 @@ const handleUpdateSurgeryType = (state, action) => {
     surgeryTypesBkp: {
       ...state.surgeryTypesBkp,
       [id]: surgeryType
-    }
+    },
+    surgeryType: {}
   };
 };
 
@@ -88,11 +119,15 @@ const handleRemoveSurgeryType = (state, action) => {
 
 export default handleActions(
   {
-    [getSurgeryTypes]   : handleGetSurgeryTypes,
-    [createSurgeryType] : handleCreateSurgeryType,
-    [updateSurgeryType] : handleUpdateSurgeryType,
-    [removeSurgeryType] : handleRemoveSurgeryType,
-    [filterByName]      : handleFilterByName
+    [getSurgeryTypes]      : handleGetSurgeryTypes,
+    [createSurgeryType]    : handleCreateSurgeryType,
+    [updateSurgeryType]    : handleUpdateSurgeryType,
+    [removeSurgeryType]    : handleRemoveSurgeryType,
+    [filterByName]         : handleFilterByName,
+    [selectSurgeryType]    : handleSelectSurgeryType,
+    [clearSurgeryType]     : handleClearSurgeryType,
+    [showSurgeryTypeModal] : handleShowSurgeryTypeModal,
+    [hideSurgeryTypeModal] : handleHideSurgeryTypeModal
   },
   initialState
 );
