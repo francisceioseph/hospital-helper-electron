@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  compose, lifecycle, withState, withHandlers
-} from 'recompose';
+import { compose, lifecycle, withHandlers } from 'recompose';
 import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
 import * as WebAPI from '../../../utils/api.service';
+import { ExamTypeModalContainer } from '../../../containers/ExamType';
 
 import { tableColumns } from './exam-type.list.constants';
-import ExamTypeModal from './exam-type.modal.component';
 
 const ExamTypeList = props => (
   <div>
@@ -20,7 +18,7 @@ const ExamTypeList = props => (
         <Input.Search onSearch={props.handleOnSearch} placeholder="Pesquisar" style={{ width: 200 }} />
       </Col>
       <Col>
-        <Button type="primary" onClick={props.showModal}>
+        <Button type="primary" onClick={props.showExamTypeModal}>
           Novo Tipo de Exame
         </Button>
       </Col>
@@ -39,67 +37,20 @@ const ExamTypeList = props => (
     </Row>
 
     <div>
-      <ExamTypeModal
-        wrappedComponentRef={props.handleSaveFormRef}
-        visible={props.visible}
-        confirmLoading={props.confirmLoading}
-        onCancel={props.handleCancel}
-        onCreate={props.handleCreate}
-      />
+      <ExamTypeModalContainer />
     </div>
   </div>
 );
 
 ExamTypeList.propTypes = {
-  onSearch          : PropTypes.func.isRequired,
-  showModal         : PropTypes.func.isRequired,
-  handleSaveFormRef : PropTypes.func.isRequired,
-  handleCancel      : PropTypes.func.isRequired,
-  handleCreate      : PropTypes.func.isRequired,
-  examTypes         : PropTypes.instanceOf(Array).isRequired,
-  visible           : PropTypes.bool.isRequired,
-  confirmLoading    : PropTypes.bool.isRequired
-};
-
-const withVisibleState = withState('visible', 'setVisible', false);
-const withFormRef = withState('formRef', 'setFormRef', null);
-const withLoading = withState('confirmLoading', 'setConfirmLoading', false);
-
-const showModal = props => () => props.setVisible(true);
-const handleCancel = props => () => props.setVisible(false);
-const handleSaveFormRef = props => formRef => props.setFormRef(formRef);
-const handleCreate = props => () => {
-  const { form } = props.formRef.props;
-  props.setConfirmLoading(true);
-
-  form.validateFields((err, values) => {
-    if (err) {
-      props.setConfirmLoading(false);
-      return;
-    }
-
-    WebAPI.createExamType(values)
-      .then((response) => {
-        const examType = response.data;
-        props.createExamType(examType);
-
-        form.resetFields();
-        props.setConfirmLoading(false);
-        props.setVisible(false);
-      })
-      .catch(() => {
-        props.setConfirmLoading(false);
-      });
-  });
+  handleOnSearch    : PropTypes.func.isRequired,
+  showExamTypeModal : PropTypes.func.isRequired,
+  examTypes         : PropTypes.instanceOf(Array).isRequired
 };
 
 const handleOnSearch = props => text => props.filterByName(text);
 
 const withListHandlers = withHandlers({
-  showModal,
-  handleCancel,
-  handleCreate,
-  handleSaveFormRef,
   handleOnSearch
 });
 
@@ -118,9 +69,6 @@ const withListLifecycle = lifecycle({
 });
 
 export default compose(
-  withLoading,
-  withFormRef,
-  withVisibleState,
   withListHandlers,
   withListLifecycle
 )(ExamTypeList);

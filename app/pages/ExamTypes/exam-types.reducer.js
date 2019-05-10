@@ -5,13 +5,47 @@ import { pickBy } from '../../utils';
 import { filterByText } from '../../utils/filters';
 
 import {
-  getExamTypes, createExamType, updateExamType, removeExamType, filterByName
+  getExamTypes,
+  createExamType,
+  updateExamType,
+  removeExamType,
+  filterByName,
+  selectExamType,
+  clearExamType,
+  showExamTypeModal,
+  hideExamTypeModal
 } from './exam-types.actions';
 
 const initialState = {
-  examTypes    : {},
-  examTypesBkp : {}
+  examTypes         : {},
+  examTypesBkp      : {},
+  examType          : {},
+  showExamTypeModal : false
 };
+
+const handleSelectExamType = (state, action) => {
+  const id = action.payload;
+
+  return {
+    ...state,
+    examType: { ...state.examTypes[id] }
+  };
+};
+
+const handleClearExamType = state => ({
+  ...state,
+  examType: {}
+});
+
+const handleShowExamTypeModal = state => ({
+  ...state,
+  showExamTypeModal: true
+});
+
+const handleHideExamTypeModal = state => ({
+  ...state,
+  showExamTypeModal: false
+});
 
 const handleFilterByName = (state, action) => {
   const input = action.payload;
@@ -53,7 +87,7 @@ const handleCreateExamType = (state, action) => {
 };
 
 const handleUpdateExamType = (state, action) => {
-  const { data: examType } = action.payload;
+  const examType = action.payload;
   const id = examType.id.toString();
 
   return {
@@ -65,7 +99,8 @@ const handleUpdateExamType = (state, action) => {
     examTypesBkp: {
       ...state.examTypesBkp,
       [id]: examType
-    }
+    },
+    examType: {}
   };
 };
 
@@ -83,11 +118,15 @@ const handleRemoveExamType = (state, action) => {
 
 export default handleActions(
   {
-    [getExamTypes]   : handleGetExamTypes,
-    [createExamType] : handleCreateExamType,
-    [updateExamType] : handleUpdateExamType,
-    [removeExamType] : handleRemoveExamType,
-    [filterByName]   : handleFilterByName
+    [getExamTypes]      : handleGetExamTypes,
+    [createExamType]    : handleCreateExamType,
+    [updateExamType]    : handleUpdateExamType,
+    [removeExamType]    : handleRemoveExamType,
+    [filterByName]      : handleFilterByName,
+    [selectExamType]    : handleSelectExamType,
+    [clearExamType]     : handleClearExamType,
+    [showExamTypeModal] : handleShowExamTypeModal,
+    [hideExamTypeModal] : handleHideExamTypeModal
   },
   initialState
 );

@@ -9,14 +9,14 @@ const FormItem = Form.Item;
 class SurgeryTypeModalForm extends React.Component {
   render() {
     const {
-      visible, onCancel, onCreate, confirmLoading, form,
+      visible, onCancel, onCreate, confirmLoading, form
     } = this.props;
     const { getFieldDecorator } = form;
     return (
       <Modal
         visible={visible}
         title="Adicionar Tipo de Cirurgia"
-        okText="Adicionar"
+        okText="Finalizar"
         onCancel={onCancel}
         closable={false}
         confirmLoading={confirmLoading}
@@ -25,7 +25,7 @@ class SurgeryTypeModalForm extends React.Component {
         <Form layout="vertical">
           <FormItem label="Nome da Tipo de Cirurgia">
             {getFieldDecorator('surgery_type_name', {
-              rules: [{ required: true, message: 'Campo obrigatório' }],
+              rules: [{ required: true, message: 'Campo obrigatório' }]
             })(<Input />)}
           </FormItem>
         </Form>
@@ -35,11 +35,11 @@ class SurgeryTypeModalForm extends React.Component {
 }
 
 SurgeryTypeModalForm.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onCreate: PropTypes.func.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
-  form: PropTypes.instanceOf(Object).isRequired,
+  visible        : PropTypes.bool.isRequired,
+  onCancel       : PropTypes.func.isRequired,
+  onCreate       : PropTypes.func.isRequired,
+  confirmLoading : PropTypes.bool.isRequired,
+  form           : PropTypes.instanceOf(Object).isRequired
 };
 
 export default Form.create()(SurgeryTypeModalForm);

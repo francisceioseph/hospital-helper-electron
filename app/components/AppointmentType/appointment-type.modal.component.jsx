@@ -17,7 +17,7 @@ class AppointmentTypeModalForm extends React.Component {
       <Modal
         visible={visible}
         title="Adicionar Tipo de Agendamento"
-        okText="Adicionar"
+        okText="Finalizar"
         onCancel={onCancel}
         closable={false}
         confirmLoading={confirmLoading}

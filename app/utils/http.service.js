@@ -35,6 +35,7 @@ export const removeSpecialtyUrl = id => `/specialties/${id}`;
 export const GET_EXAM_TYPES_URL = '/exam-types';
 export const POST_EXAM_TYPES_URL = '/exam-types';
 export const removeExamTypeUrl = id => `/exam-types/${id}`;
+export const updateExamTypeUrl = id => `/exam-types/${id}`;
 
 export const GET_EXAMS_URL = '/exams';
 export const POST_EXAM_URL = '/exams';

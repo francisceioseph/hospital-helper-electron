@@ -77,7 +77,7 @@ const handleCreateAppointmentType = (state, action) => {
 };
 
 const handleUpdateAppointmentType = (state, action) => {
-  const { data: appointmentType } = action.payload;
+  const { payload: appointmentType } = action;
   const id = appointmentType.id.toString();
 
   return {
@@ -89,7 +89,8 @@ const handleUpdateAppointmentType = (state, action) => {
     appointmentTypesBkp: {
       ...state.appointmentTypesBkp,
       [id]: appointmentType
-    }
+    },
+    appointmentType: {}
   };
 };
 

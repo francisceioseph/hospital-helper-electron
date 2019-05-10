@@ -34,6 +34,7 @@ export const removeSpecialty = id => http.deleteRequest(http.removeSpecialtyUrl(
 
 export const getExamTypes = () => http.getRequest(http.GET_EXAM_TYPES_URL);
 export const createExamType = data => http.postRequest(http.POST_EXAM_TYPES_URL, makePayload('exam_type', data));
+export const updateExamType = (id, data) => http.patchRequest(http.updateExamTypeUrl(id), makePayload('exam_type', data));
 export const removeExamType = id => http.deleteRequest(http.removeExamTypeUrl(id));
 
 export const getExam = id => http.getRequest(http.getExamUrl(id));

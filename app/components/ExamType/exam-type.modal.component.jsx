@@ -1,22 +1,31 @@
-/* eslint-disable no-undef */
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
 
+import * as React from 'react';
 import { Modal, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-class ExamTypeModalForm extends React.Component {
+type Props = {
+  visible: boolean,
+  confirmLoading: boolean,
+  onCancel: Function,
+  onCreate: Function,
+  form: Object,
+  examType: Object
+};
+
+// eslint-disable-next-line react/prefer-stateless-function
+class ExamTypeModalForm extends React.Component<Props> {
   render() {
     const {
-      visible, onCancel, onCreate, confirmLoading, form,
+      visible, onCancel, onCreate, confirmLoading, form, examType
     } = this.props;
     const { getFieldDecorator } = form;
     return (
       <Modal
         visible={visible}
         title="Adicionar Tipo de Exame"
-        okText="Adicionar"
+        okText="Finalizar"
         onCancel={onCancel}
         closable={false}
         confirmLoading={confirmLoading}
@@ -25,7 +34,8 @@ class ExamTypeModalForm extends React.Component {
         <Form layout="vertical">
           <FormItem label="Nome do Tipo de Exame">
             {getFieldDecorator('exam_type_name', {
-              rules: [{ required: true, message: 'Campo obrigatório' }],
+              rules        : [{ required: true, message: 'Campo obrigatório' }],
+              initialValue : examType.exam_type_name
             })(<Input />)}
           </FormItem>
         </Form>
@@ -33,13 +43,4 @@ class ExamTypeModalForm extends React.Component {
     );
   }
 }
-
-ExamTypeModalForm.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onCreate: PropTypes.func.isRequired,
-  confirmLoading: PropTypes.bool.isRequired,
-  form: PropTypes.instanceOf(Object).isRequired,
-};
-
 export default Form.create()(ExamTypeModalForm);

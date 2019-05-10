@@ -59,11 +59,6 @@ module.exports = (api) => {
         {
           libraryName : 'antd',
           style       : true // or 'css'
-        },
-        {
-          libraryName             : 'lodash',
-          libraryDirectory        : '',
-          camel2DashComponentName : false // default: true
         }
       ],
 

@@ -6,13 +6,15 @@ const FormItem = Form.Item;
 
 class SpecialtyModalForm extends React.Component {
   render() {
-    const { visible, onCancel, onCreate, confirmLoading, form } = this.props;
+    const {
+      visible, onCancel, onCreate, confirmLoading, form
+    } = this.props;
     const { getFieldDecorator } = form;
     return (
       <Modal
         visible={visible}
         title="Adicionar Especialidade"
-        okText="Adicionar"
+        okText="Finalizar"
         onCancel={onCancel}
         closable={false}
         confirmLoading={confirmLoading}

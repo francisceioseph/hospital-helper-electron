@@ -5,37 +5,37 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
 import * as WebAPI from '../../utils/api.service';
-import { AppointmentTypeModal } from '../../components/AppointmentType';
+import { ExamTypeModal } from '../../components/ExamType';
 import {
-  createAppointmentType,
-  hideAppointmentTypeModal,
-  updateAppointmentType,
-  clearAppointmentType
-} from '../../pages/AppointmentTypes/appointment-types.actions';
+  createExamType,
+  hideExamTypeModal,
+  updateExamType,
+  clearExamType
+} from '../../pages/ExamTypes/exam-types.actions';
 
-const mapStateToProps = ({ appointmentTypes }) => ({
-  appointmentTypes : _.values(appointmentTypes.appointmentTypes),
-  appointmentType  : appointmentTypes.appointmentType,
-  visible          : appointmentTypes.showAppointmentTypeModal
+const mapStateToProps = ({ examTypes }) => ({
+  examTypes : _.values(examTypes.examTypes),
+  examType  : examTypes.examType,
+  visible   : examTypes.showExamTypeModal
 });
 
 const mapDispatchToProps = {
-  createAppointmentType,
-  hideAppointmentTypeModal,
-  updateAppointmentType,
-  clearAppointmentType
+  createExamType,
+  hideExamTypeModal,
+  updateExamType,
+  clearExamType
 };
 
 type Props = {
   visible: boolean,
-  appointmentType: Object,
-  createAppointmentType: Function,
-  updateAppointmentType: Function,
-  hideAppointmentTypeModal: Function,
-  clearAppointmentType: Function
+  examType: Object,
+  createExamType: Function,
+  updateExamType: Function,
+  hideExamTypeModal: Function,
+  clearExamType: Function
 };
 
-class AppointmentTypeModalContainer extends React.Component<Props> {
+class ExamTypeModalContainer extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
@@ -50,23 +50,23 @@ class AppointmentTypeModalContainer extends React.Component<Props> {
 
   saveFormData = async (values) => {
     try {
-      const { id } = this.props.appointmentType;
-      const promise = id ? WebAPI.updateAppointmentType(id, values) : WebAPI.createAppointmentType(values);
+      const { id } = this.props.examType;
+      const promise = id ? WebAPI.updateExamType(id, values) : WebAPI.createExamType(values);
 
-      const { data: appointmentType } = await promise;
+      const { data: examType } = await promise;
       const { form } = this.formRef.props;
 
       if (id) {
-        this.props.updateAppointmentType(appointmentType);
+        this.props.updateExamType(examType);
       } else {
-        this.props.createAppointmentType(appointmentType);
+        this.props.createExamType(examType);
       }
 
       form.resetFields();
 
       this.setConfirmLoading(false);
-      this.props.clearAppointmentType();
-      this.props.hideAppointmentTypeModal();
+      this.props.clearExamType();
+      this.props.hideExamTypeModal();
     } catch (error) {
       this.setConfirmLoading(false);
     }
@@ -86,8 +86,8 @@ class AppointmentTypeModalContainer extends React.Component<Props> {
   };
 
   handleOnCancel = () => {
-    this.props.hideAppointmentTypeModal();
-    this.props.clearAppointmentType();
+    this.props.hideExamTypeModal();
+    this.props.clearExamType();
   };
 
   handleSaveFormRef = (formRef) => {
@@ -97,13 +97,13 @@ class AppointmentTypeModalContainer extends React.Component<Props> {
   render() {
     return (
       <div>
-        <AppointmentTypeModal
+        <ExamTypeModal
           wrappedComponentRef={this.handleSaveFormRef}
           onCreate={this.handleOnCreate}
           onCancel={this.handleOnCancel}
           visible={this.props.visible}
           confirmLoading={this.state.confirmLoading}
-          appointmentType={this.props.appointmentType}
+          examType={this.props.examType}
         />
       </div>
     );
@@ -113,4 +113,4 @@ class AppointmentTypeModalContainer extends React.Component<Props> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AppointmentTypeModalContainer);
+)(ExamTypeModalContainer);

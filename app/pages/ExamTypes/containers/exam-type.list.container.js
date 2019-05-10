@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { ExamTypeList } from '../components';
-import { getExamTypes, createExamType, filterByName } from '../exam-types.actions';
+import {
+  getExamTypes, createExamType, filterByName, showExamTypeModal
+} from '../exam-types.actions';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ examTypes }) => ({
-  examTypes: _.values(examTypes.examTypes)
+  examTypes : _.values(examTypes.examTypes),
+  visible   : examTypes.showExamTypeModal
 });
 
 const mapDispatchToProps = {
@@ -14,7 +17,8 @@ const mapDispatchToProps = {
   createExamType,
   filterByName,
   showPageLoader,
-  hidePageLoader
+  hidePageLoader,
+  showExamTypeModal
 };
 
 export default connect(
