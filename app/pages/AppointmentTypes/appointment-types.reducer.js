@@ -7,15 +7,45 @@ import {
   createAppointmentType,
   updateAppointmentType,
   removeAppointmentType,
-  applyAppointmentTypesFilter
+  applyAppointmentTypesFilter,
+  selectAppointmentType,
+  clearAppointmentType,
+  showAppointmentTypeModal,
+  hideAppointmentTypeModal
 } from './appointment-types.actions';
 
 import { filterByText } from '../../utils/filters';
 
 const initialState = {
-  appointmentTypes    : {},
-  appointmentTypesBkp : {}
+  appointmentTypes         : {},
+  appointmentTypesBkp      : {},
+  appointmentType          : {},
+  showAppointmentTypeModal : false
 };
+
+const handleSelectAppointmentType = (state, action) => {
+  const id = action.payload;
+
+  return {
+    ...state,
+    appointmentType: { ...state.appointmentTypes[id] }
+  };
+};
+
+const handleClearAppointmentType = state => ({
+  ...state,
+  appointmentType: {}
+});
+
+const handleShowAppointmentTypeModal = state => ({
+  ...state,
+  showAppointmentTypeModal: true
+});
+
+const handleHideAppointmentTypeModal = state => ({
+  ...state,
+  showAppointmentTypeModal: false
+});
 
 const handleGetAppointmentTypes = (state, action) => {
   const { data } = action.payload;
@@ -93,7 +123,11 @@ export default handleActions(
     [createAppointmentType]       : handleCreateAppointmentType,
     [updateAppointmentType]       : handleUpdateAppointmentType,
     [removeAppointmentType]       : handleRemoveAppointmentType,
-    [applyAppointmentTypesFilter] : handleFilterAppointmentTypes
+    [applyAppointmentTypesFilter] : handleFilterAppointmentTypes,
+    [selectAppointmentType]       : handleSelectAppointmentType,
+    [clearAppointmentType]        : handleClearAppointmentType,
+    [showAppointmentTypeModal]    : handleShowAppointmentTypeModal,
+    [hideAppointmentTypeModal]    : handleHideAppointmentTypeModal
   },
   initialState
 );

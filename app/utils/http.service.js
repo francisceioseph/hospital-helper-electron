@@ -21,6 +21,7 @@ export const removePacientUrl = pacientId => `/pacients/${pacientId}`;
 export const GET_APPOINTMENT_TYPES_URL = '/appointment-types';
 export const POST_APPOINTMENT_TYPE_URL = '/appointment-types';
 export const getRemoveAppointmentTypeUrl = id => `/appointment-types/${id}`;
+export const getUpdateAppointmentTypeUrl = id => `/appointment-types/${id}`;
 
 export const GET_APPOINTMENTS_URL = '/appointments';
 export const POST_APPOINTMENT_URL = '/appointments';
