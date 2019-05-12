@@ -27,9 +27,6 @@ const AppHeader = props => (
     </div>
 
     <div className="rightWrapper">
-      <HeaderBadge icon="bell" />
-      <HeaderBadge icon="message" />
-
       <Menu mode="horizontal">
         <SubMenu
           title={(
@@ -39,13 +36,6 @@ const AppHeader = props => (
             </span>
           )}
         >
-          <Menu.Item key="edit_profile">
-            <div onClick={props.onEditProfileClick}>
-              <Icon type="edit" />
-              <span>Editar Perfil</span>
-            </div>
-          </Menu.Item>
-
           <Menu.Item key="logout">
             <div onClick={props.onLogoutClick}>
               <Icon type="logout" />
