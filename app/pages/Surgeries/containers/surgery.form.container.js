@@ -5,16 +5,14 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
 import { getSurgeryTypes, createSurgery } from '../surgeries.actions';
+import { printPdf } from '../../../utils/print-pdf';
 
 import SurgeryForm from '../components/surgery.form.component';
 
 import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
 
-import {
-  showPageLoader,
-  hidePageLoader
-} from '../../../containers/layouts/actions';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ doctors, pacients, surgeries }) => ({
   surgeryTypes : _.values(surgeries.surgeryTypes),
@@ -28,7 +26,20 @@ const mapDispatchToProps = {
   getPacients,
   getDoctors,
   showPageLoader,
-  hidePageLoader,
+  hidePageLoader
+};
+
+const showAppointmentPDF = async (appointment, form) => {
+  try {
+    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
+    printPdf(data);
+    form.resetFields();
+  } catch (error) {
+    Alert.error({
+      content : 'Não foi possível acessar o arquivo PDF',
+      onOk    : () => form.resetFields()
+    });
+  }
 };
 
 const onSurgeryFormSubmit = props => async (values, form) => {
@@ -37,8 +48,11 @@ const onSurgeryFormSubmit = props => async (values, form) => {
     props.createSurgery(surgery);
 
     Alert.success({
-      content : 'Agendamento realizado com sucesso',
-      onOk    : () => form.resetFields()
+      content    : 'Agendamento realizado com sucesso',
+      okText     : 'Sim',
+      cancelText : 'Não',
+      onOk       : () => showAppointmentPDF(surgery, form),
+      onCancel   : () => form.resetFields()
     });
   } catch (error) {
     Alert.error({
@@ -54,11 +68,7 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
-    const response = await Promise.all([
-      WebAPI.getSurgeryTypes(),
-      WebAPI.getPacients(),
-      WebAPI.getDoctors(),
-    ]);
+    const response = await Promise.all([WebAPI.getSurgeryTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
 
     this.props.getSurgeryTypes(response[0]);
     this.props.getPacients(response[1]);

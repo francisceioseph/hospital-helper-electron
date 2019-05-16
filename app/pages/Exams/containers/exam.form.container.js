@@ -5,16 +5,14 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
 import { getExamTypes, createExam } from '../exams.actions';
+import { printPdf } from '../../../utils/print-pdf';
 
 import ExamForm from '../components/exam.form.component';
 
 import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
 
-import { 
-  showPageLoader,
-  hidePageLoader
-} from '../../../containers/layouts/actions';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ doctors, pacients, exams }) => ({
   examTypes : _.values(exams.examTypes),
@@ -31,14 +29,30 @@ const mapDispatchToProps = {
   hidePageLoader
 };
 
+const showAppointmentPDF = async (appointment, form) => {
+  try {
+    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
+    printPdf(data);
+    form.resetFields();
+  } catch (error) {
+    Alert.error({
+      content : 'Não foi possível acessar o arquivo PDF',
+      onOk    : () => form.resetFields()
+    });
+  }
+};
+
 const onExamFormSubmit = props => async (values, form) => {
   try {
     const { data: exam } = await WebAPI.createExam(values);
     props.createExam(exam);
 
-    Alert.success({
-      content : 'Agendamento realizado com sucesso',
-      onOk    : () => form.resetFields()
+    Alert.confirm({
+      content    : 'Agendamento realizado com sucesso',
+      okText     : 'Sim',
+      cancelText : 'Não',
+      onOk       : () => showAppointmentPDF(exam, form),
+      onCancel   : () => form.resetFields()
     });
   } catch (error) {
     Alert.error({
@@ -54,11 +68,7 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
-    const response = await Promise.all([
-      WebAPI.getExamTypes(),
-      WebAPI.getPacients(),
-      WebAPI.getDoctors(),
-    ]);
+    const response = await Promise.all([WebAPI.getExamTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
 
     this.props.getExamTypes(response[0]);
     this.props.getPacients(response[1]);
