@@ -58,3 +58,10 @@ export const getRoles = () => http.getRequest(http.GET_ROLES_URL);
 export const createRole = data => http.postRequest(http.POST_ROLE_URL, makePayload('role', data));
 
 export const getProfile = id => http.getRequest(http.getProfileUrl(id));
+
+export const getPdfFile = url => http.getRequest(url, {
+  headers: {
+    Accept       : 'application/pdf',
+    responseType : 'blob'
+  }
+});

@@ -13,7 +13,14 @@
 import { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import electron from 'electron';
+import path from 'path';
+import fs from 'fs';
+import os from 'os';
+
 import MenuBuilder from './menu';
+
+const { ipcMain: ipc, shell } = electron;
 
 export default class AppUpdater {
   constructor() {
@@ -30,10 +37,7 @@ if (process.env.NODE_ENV === 'production') {
   sourceMapSupport.install();
 }
 
-if (
-  process.env.NODE_ENV === 'development' ||
-  process.env.DEBUG_PROD === 'true'
-) {
+if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
   require('electron-debug')();
 }
 
@@ -42,14 +46,22 @@ const installExtensions = async () => {
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
-  return Promise.all(
-    extensions.map(name => installer.default(installer[name], forceDownload))
-  ).catch(console.log);
+  return Promise.all(extensions.map(name => installer.default(installer[name], forceDownload))).catch(console.log);
 };
 
 /**
  * Add event listeners...
  */
+
+ipc.on('print-to-pdf', (event, pdfData) => {
+  const pdfPath = path.join(os.tmpdir(), 'print.pdf');
+
+  fs.writeFile(pdfPath, pdfData, (err) => {
+    if (err) return console.log(err.message);
+
+    return shell.openExternal(`file://${pdfPath}`);
+  });
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
@@ -60,17 +72,18 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', async () => {
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.DEBUG_PROD === 'true'
-  ) {
+  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
 
   mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728
+    show           : false,
+    width          : 1024,
+    height         : 728,
+    webPreferences : {
+      plugins         : true,
+      nodeIntegration : true
+    }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
