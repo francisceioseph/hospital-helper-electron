@@ -20,11 +20,16 @@ const onNewPacientFormSubmit = props => async (values, form) => {
     const {
       phone, email, address, ...others
     } = values;
+    
     const pacient = {
       ...others,
       emails     : email ? [{ address: email }] : [],
       telephones : phone ? [{ number: phone }] : [],
-      addresses  : address ? [{ ...address }] : []
+      addresses  : address ? [{ ...address }] : [],
+      next_of_kin: {
+        full_name: values.next_of_kin.full_name || "",
+        cpf: values.next_of_kin.cpf || "",
+      }
     };
 
     const { data } = await WebAPI.postPacient(pacient);
