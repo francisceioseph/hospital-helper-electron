@@ -11,8 +11,6 @@ import { arrayToTree, queryArray } from '../../utils';
 import menus from '../../mocks/menu';
 import Icon from '../../components/Icon';
 
-import SideMenuLogo from '../../resources/imgs/icon-side-menu.png';
-
 import './SideMenu.scss';
 
 const { Sider } = Layout;
@@ -96,20 +94,13 @@ const SideMenu = ({ collapsed, location, permissions }) => {
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed} width={250} theme="dark">
-      <div className="logo">
-        <div className="logo">
-          <Row>
-            <Col span={8}>
-              <img src={SideMenuLogo} />
-            </Col>
-            {!collapsed && (
-              <Col span={16}>
-                <span>{"Hospital\nHelper"}</span>
-              </Col>
-            )}
-          </Row>
-        </div>
-      </div>
+      <Row className="side-logo">
+        {!collapsed && (
+          <Col span={16}>
+            <span>Hospital Helper</span>
+          </Col>
+        )}
+      </Row>
       <Menu mode="inline" theme="dark" selectedKeys={defaultSelectedKeys}>
         {menuItems}
       </Menu>

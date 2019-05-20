@@ -1,28 +1,13 @@
-#logo {
-  z-index: 2;
-  color: #fff;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 25px;
-  cursor: pointer;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-#logo span {
-  display: inline-block;
-  vertical-align: middle;
-  overflow: hidden;
-  transition: all 0.5s;
-}
-#logo::before,
-#logo::after {
-  font-size: 25px;
-  color: #fff;
-  display: inline-block;
-  vertical-align: middle;
-}
-#logo:hover span {
-  max-width: 250px;
+.side-logo {
+  height: 16vh !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  span {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+  }
 }
