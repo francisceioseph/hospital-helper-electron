@@ -20,14 +20,12 @@ import { ExamTypeList } from './pages/ExamTypes';
 import { ListRoles, RoleForm } from './pages/Roles';
 import { PanelLayout } from './containers/layouts';
 import { SurgeryTypeList } from './pages/SurgeryTypes';
-import { Profile } from './pages/Profile';
 
 export default () => (
   <App>
     <Switch>
       <NoAuthRoute exact path="/login" component={LoginPage} />
       <ProtectedRoute exact path="/" component={Home} />
-      <ProtectedRoute exact path="/profile" component={Profile} />
       <ProtectedRoute exact path="/prontuarios" component={Prontuario} />
 
       <ProtectedRoute exact path="/configuracoes/tipo-atendimento" component={AppointmentTypeList} />
