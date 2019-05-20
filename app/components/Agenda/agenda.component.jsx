@@ -18,7 +18,7 @@ const withCalendarHandlers = withHandlers({
 });
 
 const Agenda = (props) => {
-  const views = [BigCalendar.Views.MONTH, BigCalendar.Views.WEEK, BigCalendar.Views.DAY];
+  const views = [BigCalendar.Views.WEEK, BigCalendar.Views.DAY];
   const minTime = moment()
     .hours(8)
     .minutes(0)
@@ -44,16 +44,7 @@ const Agenda = (props) => {
         defaultDate={new Date()}
         culture="pt-BR"
         onSelectEvent={props.onSelectEvent}
-        onSelectSlot={slotInfo => Modal.info({
-          title   : 'Lista de Agendamentos',
-          content : (
-            <div>
-              <p>Ainda não implementado</p>
-              <p>{JSON.stringify(slotInfo)}</p>
-            </div>
-          )
-        })
-        }
+        onSelectSlot={props.onSelectSlot}
         components={{
           toolbar: CustomToolbar
         }}
@@ -64,7 +55,8 @@ const Agenda = (props) => {
 
 Agenda.propTypes = {
   events        : PropTypes.instanceOf(Array),
-  onSelectEvent : PropTypes.func.isRequired
+  onSelectEvent : PropTypes.func.isRequired,
+  onSelectSlot  : PropTypes.func.isRequired
 };
 
 Agenda.defaultProps = {

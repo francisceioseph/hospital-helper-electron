@@ -29,7 +29,7 @@ const ExamComponent = (props) => {
       <Divider />
 
       <Row>
-        <Agenda events={exams} onSelectEvent={props.onSelectEvent} />
+        <Agenda events={exams} onSelectEvent={props.onSelectEvent} onSelectSlot={props.onSelectSlot} />
       </Row>
     </div>
   );
@@ -38,18 +38,28 @@ const ExamComponent = (props) => {
 ExamComponent.propTypes = {
   exams         : PropTypes.instanceOf(Object).isRequired,
   history       : PropTypes.instanceOf(Object).isRequired,
-  onSelectEvent : PropTypes.func.isRequired
+  onSelectEvent : PropTypes.func.isRequired,
+  onSelectSlot  : PropTypes.func.isRequired
 };
 
-const onAppointmentSelected = () => (event) => {
+const onSelectEvent = () => (event) => {
   Modal.info({
     title   : 'Agendamento',
     content : <ExamDetailList appointment={event.resource} />
   });
 };
 
+const onSelectSlot = props => () => {
+  Modal.confirm({
+    title   : 'Atenção',
+    content : 'Deseja realizar um agendamento?',
+    onOk    : () => props.history.push('/marcacoes/exames/novo')
+  });
+};
+
 const withListHandlers = withHandlers({
-  onSelectEvent: onAppointmentSelected
+  onSelectEvent,
+  onSelectSlot
 });
 
 const examListLifecycle = lifecycle({

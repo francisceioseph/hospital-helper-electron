@@ -20,10 +20,7 @@ const SurgeriesListComponent = (props) => {
           <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
         </Col>
         <Col>
-          <Button
-            type="primary"
-            onClick={() => history.push('/marcacoes/cirurgias/novo')}
-          >
+          <Button type="primary" onClick={() => history.push('/marcacoes/cirurgias/novo')}>
             Agendar Cirurgia
           </Button>
         </Col>
@@ -32,7 +29,7 @@ const SurgeriesListComponent = (props) => {
       <Divider />
 
       <Row>
-        <Agenda events={surgeries} onSelectEvent={props.onSelectEvent} />
+        <Agenda events={surgeries} onSelectEvent={props.onSelectEvent} onSelectSlot={props.onSelectSlot} />
       </Row>
     </div>
   );
@@ -41,7 +38,8 @@ const SurgeriesListComponent = (props) => {
 SurgeriesListComponent.propTypes = {
   surgeries     : PropTypes.instanceOf(Object).isRequired,
   history       : PropTypes.instanceOf(Object).isRequired,
-  onSelectEvent : PropTypes.func.isRequired
+  onSelectEvent : PropTypes.func.isRequired,
+  onSelectSlot  : PropTypes.func.isRequired
 };
 
 const withLifecycle = lifecycle({
@@ -54,23 +52,32 @@ const withLifecycle = lifecycle({
       this.props.hidePageLoader();
     } catch (error) {
       console.log(error);
-      this.props.hidePageLoader()
+      this.props.hidePageLoader();
     }
   }
 });
 
-const onAppointmentSelected = () => (event) => {
+const onSelectEvent = () => (event) => {
   Modal.info({
     title   : 'Agendamento',
     content : <SurgeryDetailList appointment={event.resource} />
   });
 };
 
+const onSelectSlot = props => () => {
+  Modal.confirm({
+    title   : 'Atenção',
+    content : 'Deseja realizar um agendamento?',
+    onOk    : () => props.history.push('/marcacoes/exames/novo')
+  });
+};
+
 const withListHandlers = withHandlers({
-  onSelectEvent: onAppointmentSelected
+  onSelectEvent,
+  onSelectSlot
 });
 
 export default compose(
   withLifecycle,
-  withListHandlers,
+  withListHandlers
 )(SurgeriesListComponent);

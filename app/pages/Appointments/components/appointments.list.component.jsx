@@ -26,7 +26,7 @@ const AppointmentList = props => (
     <Divider />
 
     <Row>
-      <Agenda events={props.appointments} onSelectEvent={props.onSelectEvent} />
+      <Agenda events={props.appointments} onSelectEvent={props.onSelectEvent} onSelectSlot={props.onSelectSlot} />
     </Row>
   </div>
 );
@@ -34,18 +34,28 @@ const AppointmentList = props => (
 AppointmentList.propTypes = {
   history       : PropTypes.instanceOf(Object).isRequired,
   appointments  : PropTypes.instanceOf(Array).isRequired,
-  onSelectEvent : PropTypes.func.isRequired
+  onSelectEvent : PropTypes.func.isRequired,
+  onSelectSlot  : PropTypes.func.isRequired
 };
 
-const onAppointmentSelected = () => (event) => {
+const onSelectEvent = () => (event) => {
   Modal.info({
     title   : 'Agendamento',
     content : <AppointmentInfo appointment={event.resource} />
   });
 };
 
+const onSelectSlot = props => () => {
+  Modal.confirm({
+    title   : 'Atenção',
+    content : 'Deseja realizar um agendamento?',
+    onOk    : () => props.history.push('/marcacoes/consultas/novo')
+  });
+};
+
 const withListHandlers = withHandlers({
-  onSelectEvent: onAppointmentSelected
+  onSelectEvent,
+  onSelectSlot
 });
 
 const withLifecycle = lifecycle({

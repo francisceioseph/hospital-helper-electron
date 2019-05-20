@@ -45,7 +45,6 @@ const CustomToolbar = (toolbar) => {
       <Col>{label()}</Col>
       <Col>
         <RadioGroup onChange={onViewChange} value={toolbar.view}>
-          <RadioButton value="month">Por Mês</RadioButton>
           <RadioButton value="week">Por Semana</RadioButton>
           <RadioButton value="day">Por Dia</RadioButton>
         </RadioGroup>
