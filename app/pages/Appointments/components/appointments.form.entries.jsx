@@ -1,10 +1,14 @@
 // @flow
 
 import * as React from 'react';
-import { DatePicker, TimePicker } from 'antd';
+import { DatePicker, TimePicker,Input } from 'antd';
 
 import SugestSelector from '../../../components/forms/SugestSelector';
 import { SIMPLE_DATE_FORMAT_PT_BR, TIME_FORMAT_PT_BR } from '../../../utils/date-format';
+
+const { TextArea } = Input;
+
+export const getDiagnosticHypotesisField = () => <TextArea rows={7}></TextArea>
 
 export const getPacientNameField = pacients => (
   <SugestSelector

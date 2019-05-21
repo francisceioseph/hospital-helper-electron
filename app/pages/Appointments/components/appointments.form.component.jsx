@@ -18,7 +18,8 @@ import {
   getAppointmentTypeField,
   getDoctorNameField,
   getScheduledDateField,
-  getScheduledTimeField
+  getScheduledTimeField, 
+  getDiagnosticHypotesisField
 } from './appointments.form.entries';
 
 const FormItem = Form.Item;
@@ -81,6 +82,10 @@ const AppointmentForm = (props) => {
 
         <FormItem label={LABELS.SCHEDULED_TIME} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.scheduledDateDecorator(getScheduledTimeField())}
+        </FormItem>
+        
+        <FormItem label={LABELS.DIAGNOSTIC_HYPOTESIS} {...FORM_ITEM_LAYOUT} hasFeedback>
+          {decoratorManager.diagnosticHypotesisDecorator(getDiagnosticHypotesisField())}
         </FormItem>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>

@@ -30,11 +30,19 @@ function getScheduledDateDecorator(decorator, values) {
   });
 }
 
+function getDiagnosticHypotesisDecorator(decorator, values) {
+  return decorator('diagnostic_hypotesis', {
+    rules : [],
+    initialValue: values.diagnostic_hypotesis
+  })
+}
+
 export function getDecoratorManager(decorator, values) {
   return {
-    pacientNameDecorator     : getPacientNameDecorator(decorator, values),
-    appointmentTypeDecorator : getAppointmentTypeDecorator(decorator, values),
-    doctorNameDecorator      : getDoctorNameDecorator(decorator, values),
-    scheduledDateDecorator   : getScheduledDateDecorator(decorator, values)
+    pacientNameDecorator         : getPacientNameDecorator(decorator, values),
+    appointmentTypeDecorator     : getAppointmentTypeDecorator(decorator, values),
+    doctorNameDecorator          : getDoctorNameDecorator(decorator, values),
+    scheduledDateDecorator       : getScheduledDateDecorator(decorator, values), 
+    diagnosticHypotesisDecorator : getDiagnosticHypotesisDecorator(decorator, values)
   };
 }

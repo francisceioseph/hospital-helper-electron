@@ -81,6 +81,7 @@ const withLifeCycle = lifecycle({
       this.props.hidePageLoader();
     } catch (error) {
       this.props.hidePageLoader();
+      console.log(error);
       Alert.error({
         content: 'Não foi possível carregar agora. Tente novamente mais tarde.'
       });

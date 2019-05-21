@@ -54,7 +54,7 @@ const installExtensions = async () => {
  */
 
 ipc.on('print-to-pdf', (event, pdfData) => {
-  const pdfPath = path.join(os.tmpdir(), 'print.pdf');
+  const pdfPath = path.join(os.tmpdir(), `print_${Date.now()}.pdf`);
 
   fs.writeFile(pdfPath, pdfData, (err) => {
     if (err) return console.log(err.message);
