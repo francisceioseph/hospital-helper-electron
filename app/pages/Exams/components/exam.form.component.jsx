@@ -55,7 +55,7 @@ const ExamForm = (props) => {
           <Row gutter={8}>
             <Col span={18}>{decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}</Col>
             <Col span={4}>
-              <Button onClick={props.showNewPacientModal}> Cadastrar Paciente </Button>
+              <Button onClick={props.showNewPacientModal}> Novo Paciente </Button>
             </Col>
           </Row>
         </FormItem>
@@ -84,7 +84,7 @@ const ExamForm = (props) => {
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
           <Button type="primary" htmlType="submit" className="login-form-button">
-            Salvar
+            Realizar Agendamento
           </Button>
         </FormItem>
       </Form>

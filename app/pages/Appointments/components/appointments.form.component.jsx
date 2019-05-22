@@ -18,7 +18,7 @@ import {
   getAppointmentTypeField,
   getDoctorNameField,
   getScheduledDateField,
-  getScheduledTimeField, 
+  getScheduledTimeField,
   getDiagnosticHypotesisField
 } from './appointments.form.entries';
 
@@ -57,7 +57,7 @@ const AppointmentForm = (props) => {
           <Row gutter={8}>
             <Col span={18}>{decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}</Col>
             <Col span={4}>
-              <Button onClick={props.showNewPacientModal}> Cadastrar Paciente </Button>
+              <Button onClick={props.showNewPacientModal}> Novo Paciente </Button>
             </Col>
           </Row>
         </FormItem>
@@ -83,14 +83,14 @@ const AppointmentForm = (props) => {
         <FormItem label={LABELS.SCHEDULED_TIME} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.scheduledDateDecorator(getScheduledTimeField())}
         </FormItem>
-        
+
         <FormItem label={LABELS.DIAGNOSTIC_HYPOTESIS} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.diagnosticHypotesisDecorator(getDiagnosticHypotesisField())}
         </FormItem>
 
         <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
           <Button type="primary" htmlType="submit" className="login-form-button">
-            Cadastrar
+            Realizar Agendamento
           </Button>
         </FormItem>
       </Form>
