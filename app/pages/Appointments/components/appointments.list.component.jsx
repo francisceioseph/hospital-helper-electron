@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { compose, lifecycle, withHandlers } from 'recompose';
 import {
-  Row, Input, Divider, Button, Col, Modal
+  Row, Divider, Button, Col, Modal
 } from 'antd';
 
 import SugestSelector from '../../../components/forms/SugestSelector';

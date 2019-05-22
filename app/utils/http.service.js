@@ -43,6 +43,7 @@ export const GET_EXAMS_URL = '/exams';
 export const POST_EXAM_URL = '/exams';
 export const updateExamUrl = id => `/exams/${id}`;
 export const getExamUrl = id => `/exams/${id}`;
+export const getExamsUrl = examTypeId => `/exams/exam-type/${examTypeId}`;
 
 export const GET_SURGERIES_URL = '/surgeries';
 export const POST_SURGERY_URL = '/surgeries';

@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+
 import { DatePicker, TimePicker } from 'antd';
 import SugestSelector from '../../../components/forms/SugestSelector';
 import { DATE_FORMAT_PT_BR, TIME_FORMAT_PT_BR } from '../../../utils/date-format';
