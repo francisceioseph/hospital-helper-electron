@@ -23,7 +23,7 @@ export const updateAppointmentType = (id, data) => http.patchRequest(http.getUpd
 export const removeAppointmentType = id => http.deleteRequest(http.getRemoveAppointmentTypeUrl(id));
 
 export const getAppointment = id => http.getRequest(http.getAppointmentUrl(id));
-export const getAppointments = () => http.getRequest(http.GET_APPOINTMENTS_URL);
+export const getAppointments = doctorId => http.getRequest(http.getAppointmentsUrl(doctorId));
 export const createAppointment = data => http.postRequest(http.POST_APPOINTMENT_URL, makePayload('appointment', data));
 export const updateAppointment = (id, data) => http.patchRequest(http.updateAppointmentUrl(id), makePayload('appointment', data));
 export const removeAppointment = id => http.deleteRequest(http.getAppointmentUrl(id));

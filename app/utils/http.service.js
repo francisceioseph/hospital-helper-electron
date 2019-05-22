@@ -1,81 +1,80 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { history, store } from "../store";
-import { clearCredentials } from "../pages/Login/login.actions";
+import { history, store } from '../store';
+import { clearCredentials } from '../pages/Login/login.actions';
 
-const BASE_BACKEND_URL = "http://localhost:3000";
+const BASE_BACKEND_URL = 'http://localhost:3000';
 
-export const postLoginUrl = () => "/login";
-export const POST_USER_URL = "/signup";
+export const postLoginUrl = () => '/login';
+export const POST_USER_URL = '/signup';
 
-export const POST_DOCTOR_URL = "/doctors";
-export const GET_DOCTORS_URL = "/doctors";
+export const POST_DOCTOR_URL = '/doctors';
+export const GET_DOCTORS_URL = '/doctors';
 export const getDoctorUrl = doctorId => `/doctors/${doctorId}`;
 export const updateDoctorUrl = doctorId => `/doctors/${doctorId}`;
 
-export const GET_PACIENTS_URL = "/pacients";
-export const POST_PACIENT_URL = "/pacients";
+export const GET_PACIENTS_URL = '/pacients';
+export const POST_PACIENT_URL = '/pacients';
 export const updatePacientUrl = pacientId => `/pacients/${pacientId}`;
 export const removePacientUrl = pacientId => `/pacients/${pacientId}`;
 
-export const GET_APPOINTMENT_TYPES_URL = "/appointment-types";
-export const POST_APPOINTMENT_TYPE_URL = "/appointment-types";
+export const GET_APPOINTMENT_TYPES_URL = '/appointment-types';
+export const POST_APPOINTMENT_TYPE_URL = '/appointment-types';
 export const getRemoveAppointmentTypeUrl = id => `/appointment-types/${id}`;
 export const getUpdateAppointmentTypeUrl = id => `/appointment-types/${id}`;
 
-export const GET_APPOINTMENTS_URL = "/appointments";
-export const POST_APPOINTMENT_URL = "/appointments";
-export const getAppointmentUrl = appointmentId =>
-  `/appointments/${appointmentId}`;
-export const updateAppointmentUrl = appointmentId =>
-  `/appointments/${appointmentId}`;
+export const GET_APPOINTMENTS_URL = '/appointments';
+export const POST_APPOINTMENT_URL = '/appointments';
+export const getAppointmentsUrl = doctorId => `/appointments/doctor/${doctorId}`;
+export const getAppointmentUrl = appointmentId => `/appointments/${appointmentId}`;
+export const updateAppointmentUrl = appointmentId => `/appointments/${appointmentId}`;
 
-export const GET_SPECIALTIES_URL = "/specialties";
-export const POST_SPECIALTY_URL = "/specialties";
+export const GET_SPECIALTIES_URL = '/specialties';
+export const POST_SPECIALTY_URL = '/specialties';
 export const updateSpecialtyUrl = id => `/specialties/${id}`;
 export const removeSpecialtyUrl = id => `/specialties/${id}`;
 
-export const GET_EXAM_TYPES_URL = "/exam-types";
-export const POST_EXAM_TYPES_URL = "/exam-types";
+export const GET_EXAM_TYPES_URL = '/exam-types';
+export const POST_EXAM_TYPES_URL = '/exam-types';
 export const removeExamTypeUrl = id => `/exam-types/${id}`;
 export const updateExamTypeUrl = id => `/exam-types/${id}`;
 
-export const GET_EXAMS_URL = "/exams";
-export const POST_EXAM_URL = "/exams";
+export const GET_EXAMS_URL = '/exams';
+export const POST_EXAM_URL = '/exams';
 export const updateExamUrl = id => `/exams/${id}`;
 export const getExamUrl = id => `/exams/${id}`;
 
-export const GET_SURGERIES_URL = "/surgeries";
-export const POST_SURGERY_URL = "/surgeries";
+export const GET_SURGERIES_URL = '/surgeries';
+export const POST_SURGERY_URL = '/surgeries';
 export const updateSurgeryUrl = id => `/surgeries/${id}`;
 export const getSurgeryUrl = id => `/surgeries/${id}`;
 
-export const GET_SURGERY_TYPES_URL = "/surgery-types";
+export const GET_SURGERY_TYPES_URL = '/surgery-types';
 export const removeSurgeryTypeUrl = id => `/surgery-types/${id}`;
 
-export const GET_ROLES_URL = "/roles";
-export const POST_ROLE_URL = "/roles";
+export const GET_ROLES_URL = '/roles';
+export const POST_ROLE_URL = '/roles';
 
 export const getProfileUrl = id => `/profiles/${id}`;
 
 export const configureAxiosInterceptors = () => {
-  axios.interceptors.request.use(oldSettings => {
+  axios.interceptors.request.use((oldSettings) => {
     const settings = { ...oldSettings };
-    const cacheStr = localStorage.getItem("DOCTOR_ASSISTANT_AUTH_TOKEN");
+    const cacheStr = localStorage.getItem('DOCTOR_ASSISTANT_AUTH_TOKEN');
     const cache = cacheStr ? JSON.parse(cacheStr) : {};
 
     settings.headers.common.Authorization = cache.token;
-    settings.headers.common.Accept = "application/json";
-    settings.headers.common["Content-Type"] = "application/json";
+    settings.headers.common.Accept = 'application/json';
+    settings.headers.common['Content-Type'] = 'application/json';
     return settings;
   });
 
   axios.interceptors.response.use(
     res => res,
-    error => {
+    (error) => {
       if (error.response && error.response.status === 401) {
         store.dispatch(clearCredentials());
-        history.push("/login");
+        history.push('/login');
       }
 
       return error;
@@ -103,7 +102,7 @@ export const patchRequest = async (path, data) => {
   return axios.patch(URL, data);
 };
 
-export const deleteRequest = async path => {
+export const deleteRequest = async (path) => {
   const URL = BASE_BACKEND_URL + path;
   return axios.delete(URL);
 };

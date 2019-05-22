@@ -3,28 +3,27 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import { createAppointment, getAppointments } from '../appointments.actions';
+import { getDoctors } from '../../Doctors/doctors.actions';
+
 import { AppointmentListComponent } from '../components';
 
-import { 
-  showPageLoader,
-  hidePageLoader
-} from '../../../containers/layouts/actions';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
-const normalizeAppointmentList = appointments =>
-  _.chain(appointments)
-    .values()
-    .map(appointment => ({
-      title: `Consulta - ${appointment.pacient.full_name}`,
-      start: moment(appointment.scheduled_to).toDate(),
-      end: moment(appointment.scheduled_to)
-        .add(1, 'hour')
-        .toDate(),
-      resource: appointment
-    }))
-    .value();
+const normalizeAppointmentList = appointments => _.chain(appointments)
+  .values()
+  .map(appointment => ({
+    title : `Consulta - ${appointment.pacient.full_name}`,
+    start : moment(appointment.scheduled_to).toDate(),
+    end   : moment(appointment.scheduled_to)
+      .add(1, 'hour')
+      .toDate(),
+    resource: appointment
+  }))
+  .value();
 
-const mapStateToProps = ({ appointments }) => ({
-  appointments: normalizeAppointmentList(appointments.appointments)
+const mapStateToProps = ({ appointments, doctors }) => ({
+  appointments : normalizeAppointmentList(appointments.appointments),
+  doctors      : _.values(doctors.doctors)
 });
 
 const mapDispatchToProps = {
@@ -32,6 +31,7 @@ const mapDispatchToProps = {
   getAppointments,
   showPageLoader,
   hidePageLoader,
+  getDoctors
 };
 
 export default connect(

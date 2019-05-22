@@ -6,6 +6,7 @@ import {
   Row, Input, Divider, Button, Col, Modal
 } from 'antd';
 
+import SugestSelector from '../../../components/forms/SugestSelector';
 import Agenda from '../../../components/Agenda';
 import AppointmentInfo from './detail.component';
 import * as WebAPI from '../../../utils/api.service';
@@ -14,7 +15,15 @@ const AppointmentList = props => (
   <div>
     <Row type="flex" justify="space-between">
       <Col>
-        <Input.Search placeholder="Pesquisar" style={{ width: 200 }} />
+        <SugestSelector
+          options={props.doctors}
+          valueName="id"
+          labelName="personal_datum.full_name"
+          idName="id"
+          onChange={props.onSelectDoctor}
+          style={{ width: 300 }}
+          placeholder="Selecione um Médico"
+        />
       </Col>
       <Col>
         <Button type="primary" onClick={() => props.history.push('/marcacoes/consultas/novo')}>
@@ -32,10 +41,12 @@ const AppointmentList = props => (
 );
 
 AppointmentList.propTypes = {
-  history       : PropTypes.instanceOf(Object).isRequired,
-  appointments  : PropTypes.instanceOf(Array).isRequired,
-  onSelectEvent : PropTypes.func.isRequired,
-  onSelectSlot  : PropTypes.func.isRequired
+  history        : PropTypes.instanceOf(Object).isRequired,
+  appointments   : PropTypes.instanceOf(Array).isRequired,
+  doctors        : PropTypes.instanceOf(Array).isRequired,
+  onSelectEvent  : PropTypes.func.isRequired,
+  onSelectSlot   : PropTypes.func.isRequired,
+  onSelectDoctor : PropTypes.func.isRequired
 };
 
 const onSelectEvent = () => (event) => {
@@ -53,20 +64,34 @@ const onSelectSlot = props => () => {
   });
 };
 
+const onSelectDoctor = props => async (doctorId) => {
+  props.showPageLoader();
+  try {
+    const res = await WebAPI.getAppointments(doctorId);
+    props.getAppointments(res);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    props.hidePageLoader();
+  }
+};
+
 const withListHandlers = withHandlers({
   onSelectEvent,
-  onSelectSlot
+  onSelectSlot,
+  onSelectDoctor
 });
 
 const withLifecycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
     try {
-      const res = await WebAPI.getAppointments();
-      this.props.getAppointments(res);
-      this.props.hidePageLoader();
+      const res = await WebAPI.getDoctors();
+      this.props.getDoctors(res);
+      this.props.getAppointments({ data: [] });
     } catch (error) {
       console.log(error);
+    } finally {
       this.props.hidePageLoader();
     }
   }
