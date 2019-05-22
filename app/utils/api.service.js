@@ -50,7 +50,7 @@ export const updateSurgeryType = (id, data) => http.postRequest(http.removeExamT
 export const removeSurgeryType = id => http.deleteRequest(http.removeSurgeryTypeUrl(id));
 
 export const getSurgery = id => http.getRequest(http.getSurgeryUrl(id));
-export const getSurgeries = () => http.getRequest(http.GET_SURGERIES_URL);
+export const getSurgeries = doctorId => http.getRequest(http.getSurgeriesUrl(doctorId));
 export const createSurgery = data => http.postRequest(http.POST_SURGERY_URL, makePayload('surgery', data));
 export const updateSurgery = (id, data) => http.patchRequest(http.updateSurgeryUrl(id), makePayload('surgery', data));
 export const removeSurgery = id => http.deleteRequest(http.getSurgeryUrl(id));

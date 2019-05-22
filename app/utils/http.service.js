@@ -49,6 +49,7 @@ export const GET_SURGERIES_URL = '/surgeries';
 export const POST_SURGERY_URL = '/surgeries';
 export const updateSurgeryUrl = id => `/surgeries/${id}`;
 export const getSurgeryUrl = id => `/surgeries/${id}`;
+export const getSurgeriesUrl = doctorId => `/surgeries/doctor/${doctorId}`;
 
 export const GET_SURGERY_TYPES_URL = '/surgery-types';
 export const removeSurgeryTypeUrl = id => `/surgery-types/${id}`;

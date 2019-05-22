@@ -1,3 +1,3 @@
-import ExamListComponent from './exams.list.component';
+import SurgeryListComponent from './surgeries.list.component';
 
-export { ExamListComponent };
+export { SurgeryListComponent };

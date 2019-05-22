@@ -95,7 +95,6 @@ class SurgeryTypeModalContainer extends React.Component<Props> {
   };
 
   render() {
-    console.log(this.props.surgeryType);
     return (
       <div>
         <SurgeryTypeModal
