@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { DatePicker, TimePicker } from 'antd';
 import SugestSelector from '../../../components/forms/SugestSelector';
-import { DATE_FORMAT_PT_BR, TIME_FORMAT_PT_BR } from '../../../utils/date-format';
+import { SIMPLE_DATE_FORMAT_PT_BR, TIME_FORMAT_PT_BR } from '../../../utils/date-format';
 
 export const getPacientNameField = pacients => (
   <SugestSelector options={pacients} valueName="id" labelName="personal_datum.full_name" idName="id" />
@@ -24,6 +24,6 @@ const disabledDate = (slotValue) => {
 };
 
 export const getScheduledDateField = () => (
-  <DatePicker showToday disabledDate={disabledDate} format={DATE_FORMAT_PT_BR} />
+  <DatePicker showToday disabledDate={disabledDate} format={SIMPLE_DATE_FORMAT_PT_BR} />
 );
 export const getScheduledTimeField = () => <TimePicker showToday format={TIME_FORMAT_PT_BR} minuteStep={15} />;

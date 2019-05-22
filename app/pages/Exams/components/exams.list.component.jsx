@@ -16,8 +16,9 @@ const ExamComponent = (props) => {
 
   return (
     <div>
-      <Row type="flex" justify="space-between">
+      <Row type="flex" justify="space-between" align="bottom">
         <Col>
+          <h4>Tipo de Exame</h4>
           <SugestSelector
             options={props.examTypes}
             valueName="id"

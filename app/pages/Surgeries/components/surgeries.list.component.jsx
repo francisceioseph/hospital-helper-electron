@@ -17,8 +17,9 @@ const SurgeriesListComponent = (props) => {
 
   return (
     <div>
-      <Row type="flex" justify="space-between">
+      <Row type="flex" justify="space-between" align="bottom">
         <Col>
+          <h4>Cirugião</h4>
           <SugestSelector
             options={props.doctors}
             valueName="id"
@@ -26,7 +27,7 @@ const SurgeriesListComponent = (props) => {
             idName="id"
             onChange={props.onSelectDoctor}
             style={{ width: 300 }}
-            placeholder="Selecione um Médico"
+            placeholder="Selecione um Cirurgião"
           />
         </Col>
         <Col>

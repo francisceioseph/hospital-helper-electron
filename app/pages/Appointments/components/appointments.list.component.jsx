@@ -13,8 +13,9 @@ import * as WebAPI from '../../../utils/api.service';
 
 const AppointmentList = props => (
   <div>
-    <Row type="flex" justify="space-between">
+    <Row type="flex" justify="space-between" align="bottom">
       <Col>
+        <h4>Médico</h4>
         <SugestSelector
           options={props.doctors}
           valueName="id"
