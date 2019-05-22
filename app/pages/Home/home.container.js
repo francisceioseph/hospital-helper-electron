@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import Home from './components/home.component';
 import { pickBy } from '../../utils';
 
-
-const getMenuPermissions = login => {
+const getMenuPermissions = (login) => {
   const { credentials } = login;
   const { user } = credentials;
   const { role } = user;
@@ -13,7 +12,7 @@ const getMenuPermissions = login => {
 };
 
 const mapStateToProps = ({ login }) => ({
-  permissions: getMenuPermissions(login),
+  permissions: getMenuPermissions(login)
 });
 
 export default connect(
