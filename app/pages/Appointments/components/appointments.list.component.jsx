@@ -50,11 +50,16 @@ AppointmentList.propTypes = {
   onSelectDoctor : PropTypes.func.isRequired
 };
 
-const onSelectEvent = () => (event) => {
-  Modal.info({
-    title   : 'Agendamento',
-    content : <AppointmentInfo appointment={event.resource} />
+const onSelectEvent = props => (event) => {
+  const modal = Modal.info({
+    title: 'Agendamento'
   });
+
+  const content = (
+    <AppointmentInfo appointment={event.resource} selectAppointment={props.selectAppointment} modal={modal} />
+  );
+
+  modal.update({ content });
 };
 
 const onSelectSlot = props => () => {

@@ -48,7 +48,7 @@ const onExamFormSubmit = props => async (values, form) => {
     props.createExam(exam);
 
     Alert.confirm({
-      content    : 'Agendamento realizado com sucesso',
+      content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
       onOk       : () => showAppointmentPDF(exam, form),

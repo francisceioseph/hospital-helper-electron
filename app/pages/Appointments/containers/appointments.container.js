@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
 
-import { createAppointment, getAppointments } from '../appointments.actions';
+import { createAppointment, getAppointments, selectAppointment } from '../appointments.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
 
 import { AppointmentListComponent } from '../components';
@@ -31,7 +31,8 @@ const mapDispatchToProps = {
   getAppointments,
   showPageLoader,
   hidePageLoader,
-  getDoctors
+  getDoctors,
+  selectAppointment
 };
 
 export default connect(

@@ -5,7 +5,7 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import { createAppointment, getAppointmentTypes } from '../appointments.actions';
+import { createAppointment, getAppointmentTypes, updateAppointment } from '../appointments.actions';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
@@ -28,7 +28,8 @@ const mapDispatchToProps = {
   createAppointment,
   getAppointmentTypes,
   getPacients,
-  getDoctors
+  getDoctors,
+  updateAppointment
 };
 
 const showAppointmentPDF = async (appointment, form) => {
@@ -46,14 +47,27 @@ const showAppointmentPDF = async (appointment, form) => {
 
 const onAppointmentFormSubmit = props => async (values, form) => {
   try {
-    const { data: appointment } = await WebAPI.createAppointment(values);
-    props.createAppointment(appointment);
+    const { appointment } = props;
+    let response;
+
+    if (appointment.id) {
+      const valuesWithId = {
+        id: appointment.id,
+        ...values
+      };
+
+      response = await WebAPI.updateAppointment(appointment.id, valuesWithId);
+      props.updateAppointment(response.data);
+    } else {
+      response = await WebAPI.createAppointment(values);
+      props.createAppointment(response.data);
+    }
 
     Alert.confirm({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
-      onOk       : () => showAppointmentPDF(appointment, form),
+      onOk       : () => showAppointmentPDF(response.data, form),
       onCancel   : () => form.resetFields()
     });
   } catch (error) {

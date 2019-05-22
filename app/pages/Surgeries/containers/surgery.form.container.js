@@ -48,7 +48,7 @@ const onSurgeryFormSubmit = props => async (values, form) => {
     props.createSurgery(surgery);
 
     Alert.success({
-      content    : 'Agendamento realizado com sucesso',
+      content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
       onOk       : () => showAppointmentPDF(surgery, form),
