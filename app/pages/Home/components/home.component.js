@@ -41,7 +41,7 @@ const ShortcutList = props => (
   <div>
     <Row gutter={16}>
       {props.menuList.map(item => (
-        <Col className="col-shortcut" xs={12} sm={12} md={8} lg={8} xl={4} key={item.code}>
+        <Col className="col-shortcut" xs={12} sm={12} md={6} lg={6} xl={4} key={item.code}>
           <ShortcutCard name={item.name} icon={item.icon} route={item.route} />
         </Col>
       ))}
