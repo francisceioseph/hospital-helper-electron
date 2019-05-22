@@ -15,5 +15,13 @@ export const getDoctorNameField = doctors => (
   <SugestSelector options={doctors} valueName="id" labelName="personal_datum.full_name" idName="id" />
 );
 
-export const getScheduledDateField = () => <DatePicker showTime format={DATE_FORMAT_PT_BR} />;
+const disabledDate = (slotValue) => {
+  const today = moment();
+  const slotDate = moment(slotValue);
+  return slotDate.isBefore(today, 'days');
+};
+
+export const getScheduledDateField = () => (
+  <DatePicker showTime disabledDate={disabledDate} format={DATE_FORMAT_PT_BR} />
+);
 export const getScheduledTimeField = () => <TimePicker showToday format={TIME_FORMAT_PT_BR} minuteStep={15} />;
