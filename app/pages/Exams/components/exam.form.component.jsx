@@ -3,9 +3,7 @@ import React from 'react';
 import {
   Form, Button, Col, Row
 } from 'antd';
-import {
-  compose, withHandlers, defaultProps, withState
-} from 'recompose';
+import { compose, withHandlers, withState } from 'recompose';
 
 import { HORIZONTAL_FORM_LAYOUT, FORM_ITEM_LAYOUT, FORM_ITEM_SUBMIT_LAYOUT } from '../../../components/forms';
 import { PacientModalFormContainer } from '../../../containers/Pacient';
@@ -94,9 +92,6 @@ const ExamForm = (props) => {
 
 const ExamFormComponent = compose(
   withModalVisible,
-  defaultProps({
-    exam: {}
-  }),
   withFormHandlers
 )(ExamForm);
 

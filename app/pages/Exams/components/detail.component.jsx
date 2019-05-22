@@ -4,8 +4,11 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { List, Button } from 'antd';
+import { withHandlers, compose } from 'recompose';
+
 import { DATE_FORMAT_PT_BR } from '../../../utils/date-format';
 import { printPdf } from '../../../utils/print-pdf';
+import { history } from '../../../store';
 
 import * as WebAPI from '../../../utils/api.service';
 import * as Alert from '../../../components/Alerts';
@@ -25,7 +28,18 @@ const showAppointmentPDF = async (appointment) => {
   }
 };
 
-const ExamDetailList = ({ appointment }) => (
+const rescheduleAppointment = props => (event) => {
+  event.preventDefault();
+  props.selectAppointment(props.appointment.id);
+  history.push('/marcacoes/exames/novo');
+  props.modal.destroy();
+};
+
+const withEventHandlers = withHandlers({
+  handleRescheduleAppointment: rescheduleAppointment
+});
+
+const ExamDetailList = ({ appointment, handleRescheduleAppointment }) => (
   <div>
     <List size="small" bordered>
       <Item>
@@ -45,14 +59,20 @@ const ExamDetailList = ({ appointment }) => (
         <b>{moment(appointment.scheduled_to).format(DATE_FORMAT_PT_BR)}</b>
       </Item>
     </List>
+
     <Button block type="primary" onClick={() => showAppointmentPDF(appointment)} style={{ marginTop: 16 }}>
       Imprimir Comprovante
+    </Button>
+
+    <Button block type="danger" onClick={handleRescheduleAppointment} style={{ marginTop: 16 }}>
+      Remarcar Exame
     </Button>
   </div>
 );
 
 ExamDetailList.propTypes = {
-  appointment: PropTypes.instanceOf(Object).isRequired
+  handleRescheduleAppointment : PropTypes.func.isRequired,
+  appointment                 : PropTypes.instanceOf(Object).isRequired
 };
 
-export default ExamDetailList;
+export default compose(withEventHandlers)(ExamDetailList);

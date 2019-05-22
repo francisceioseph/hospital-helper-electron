@@ -4,7 +4,9 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import { getExamTypes, createExam } from '../exams.actions';
+import {
+  getExamTypes, createExam, selectExam, clearExam, updateExam
+} from '../exams.actions';
 import { printPdf } from '../../../utils/print-pdf';
 
 import ExamForm from '../components/exam.form.component';
@@ -15,6 +17,7 @@ import * as Alert from '../../../components/Alerts';
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
 const mapStateToProps = ({ doctors, pacients, exams }) => ({
+  exam      : exams.exam,
   examTypes : _.values(exams.examTypes),
   pacients  : _.values(pacients.pacients),
   doctors   : _.values(doctors.doctors)
@@ -26,7 +29,10 @@ const mapDispatchToProps = {
   getDoctors,
   createExam,
   showPageLoader,
-  hidePageLoader
+  hidePageLoader,
+  updateExam,
+  selectExam,
+  clearExam
 };
 
 const showAppointmentPDF = async (appointment, form) => {
@@ -44,15 +50,34 @@ const showAppointmentPDF = async (appointment, form) => {
 
 const onExamFormSubmit = props => async (values, form) => {
   try {
-    const { data: exam } = await WebAPI.createExam(values);
-    props.createExam(exam);
+    const { exam: currentExam } = props;
+    let response;
+
+    if (currentExam.id) {
+      const newExam = {
+        id: currentExam.id,
+        ...values
+      };
+
+      response = await WebAPI.updateExam(currentExam.id, newExam);
+      props.updateExam(response);
+    } else {
+      response = await WebAPI.createExam(values);
+      props.createExam(response);
+    }
 
     Alert.confirm({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
-      onOk       : () => showAppointmentPDF(exam, form),
-      onCancel   : () => form.resetFields()
+      onOk       : () => {
+        showAppointmentPDF(response.data, form);
+        props.clearExam();
+      },
+      onCancel: () => {
+        props.clearExam();
+        form.resetFields();
+      }
     });
   } catch (error) {
     Alert.error({

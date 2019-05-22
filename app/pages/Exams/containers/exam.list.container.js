@@ -2,7 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import { connect } from 'react-redux';
-import { getExams } from '../exams.actions';
+import { getExams, selectExam, clearExam } from '../exams.actions';
 import { getExamTypes } from '../../ExamTypes/exam-types.actions';
 import { ExamListComponent } from '../components';
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
@@ -28,7 +28,9 @@ const mapDispatchToProps = {
   getExams,
   showPageLoader,
   hidePageLoader,
-  getExamTypes
+  getExamTypes,
+  selectExam,
+  clearExam
 };
 
 export default connect(

@@ -1,17 +1,13 @@
-import { pickBy } from '../../utils';
 import { handleActions } from 'redux-actions';
+import { pickBy } from '../../utils';
 import {
-  getExams,
-  getExamTypes,
-  createExam,
-  updateExam,
-  deleteExam
+  getExams, getExamTypes, createExam, updateExam, deleteExam, selectExam, clearExam
 } from './exams.actions';
 
 const initialState = {
-  examTypes: {},
-  exams: {},
-  exam: {}
+  examTypes : {},
+  exams     : {},
+  exam      : {}
 };
 
 const handleGetExams = (state, action) => {
@@ -32,7 +28,7 @@ const handleGetExamTypes = (state, action) => {
 };
 
 const handleCreateExam = (state, action) => {
-  const { payload: exam } = action;
+  const { data: exam } = action.payload;
   const exams = {
     ...state.exams,
     [exam.id]: exam
@@ -45,14 +41,14 @@ const handleCreateExam = (state, action) => {
 };
 
 const handleEditExam = (state, action) => {
-  const { payload: exam } = action;
+  const { data: exam } = action.payload;
   const exams = {
     ...state.exams,
     [exam.id]: exam
   };
 
   return {
-    ...stable,
+    ...state,
     exams
   };
 };
@@ -66,13 +62,30 @@ const handleRemoveExam = (state, action) => {
   };
 };
 
+const handleSelectExam = (state, action) => {
+  const { payload: examId } = action;
+  const exam = { ...state.exams[examId] };
+
+  return {
+    ...state,
+    exam
+  };
+};
+
+const handleClearExam = state => ({
+  ...state,
+  exam: {}
+});
+
 export default handleActions(
   {
     [getExams]     : handleGetExams,
     [getExamTypes] : handleGetExamTypes,
     [createExam]   : handleCreateExam,
     [updateExam]   : handleEditExam,
-    [deleteExam]   : handleRemoveExam
+    [deleteExam]   : handleRemoveExam,
+    [selectExam]   : handleSelectExam,
+    [clearExam]    : handleClearExam
   },
   initialState
 );

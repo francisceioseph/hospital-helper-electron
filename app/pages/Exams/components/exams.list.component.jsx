@@ -54,11 +54,14 @@ ExamComponent.propTypes = {
   onSelectExamType : PropTypes.func.isRequired
 };
 
-const onSelectEvent = () => (event) => {
-  Modal.info({
-    title   : 'Agendamento',
-    content : <ExamDetailList appointment={event.resource} />
+const onSelectEvent = props => (event) => {
+  const modal = Modal.info({
+    title: 'Agendamento'
   });
+
+  const content = <ExamDetailList appointment={event.resource} modal={modal} selectAppointment={props.selectExam} />;
+
+  modal.update({ content });
 };
 
 const onSelectSlot = props => () => {

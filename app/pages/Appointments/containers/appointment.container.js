@@ -5,7 +5,9 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import { createAppointment, getAppointmentTypes, updateAppointment } from '../appointments.actions';
+import {
+  createAppointment, getAppointmentTypes, updateAppointment, clearAppointment
+} from '../appointments.actions';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
@@ -29,7 +31,8 @@ const mapDispatchToProps = {
   getAppointmentTypes,
   getPacients,
   getDoctors,
-  updateAppointment
+  updateAppointment,
+  clearAppointment
 };
 
 const showAppointmentPDF = async (appointment, form) => {
@@ -67,8 +70,14 @@ const onAppointmentFormSubmit = props => async (values, form) => {
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
-      onOk       : () => showAppointmentPDF(response.data, form),
-      onCancel   : () => form.resetFields()
+      onOk       : () => {
+        showAppointmentPDF(response.data, form);
+        props.clearAppointment();
+      },
+      onCancel: () => {
+        form.resetFields();
+        props.clearAppointment();
+      }
     });
   } catch (error) {
     Alert.error({

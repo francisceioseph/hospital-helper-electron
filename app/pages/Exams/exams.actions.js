@@ -13,3 +13,6 @@ export const getExamTypes = createAction(GET_EXAM_TYPES, WebAPI.getExamTypes);
 export const createExam = createAction(CREATE_EXAM);
 export const updateExam = createAction(UPDATE_EXAM);
 export const deleteExam = createAction(DELETE_EXAM);
+
+export const selectExam = createAction('SELECT_EXAM');
+export const clearExam = createAction('CLEAR_EXAM');
