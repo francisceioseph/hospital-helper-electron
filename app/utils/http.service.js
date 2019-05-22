@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { cacheAdapterEnhancer, throttleAdapterEnhancer } from 'axios-extensions';
 import { history, store } from '../store';
 import { clearCredentials } from '../pages/Login/login.actions';
 
@@ -68,6 +69,8 @@ export const configureAxiosInterceptors = () => {
     settings.headers.common.Authorization = cache.token;
     settings.headers.common.Accept = 'application/json';
     settings.headers.common['Content-Type'] = 'application/json';
+    settings.headers.common['Cache-Control'] = 'no-cache';
+    settings.adapter = throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter), { threshold: 5 * 1000 });
     return settings;
   });
 
