@@ -33,12 +33,30 @@ const CustomToolbar = (toolbar) => {
     toolbar.onViewChange(e.target.value);
   };
 
+  const getCurrentLabel = () => {
+    switch(toolbar.view) {
+      case 'week': {
+        return "Esta Semana";
+      }
+
+      case 'day': {
+        return 'Hoje';
+      }
+
+      default: {
+        return 'Esta Semana';
+      }
+    }
+  }
+
+  console.log(toolbar.view);
+
   return (
     <Row className="toolbar" type="flex" justify="space-between" align="middle">
       <Col>
         <ButtonGroup>
           <Button onClick={goToBack}>&#8249;</Button>
-          <Button onClick={goToCurrent}>Hoje</Button>
+          <Button onClick={goToCurrent}>{getCurrentLabel()}</Button>
           <Button onClick={goToNext}>&#8250;</Button>
         </ButtonGroup>
       </Col>
