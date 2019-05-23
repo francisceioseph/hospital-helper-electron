@@ -16,7 +16,6 @@ type Props = {
 
 const ShortcutList = (props: Props) => (
   <div>
-    <h2> Ações Disponíveis </h2>
     <HomeShortcuts title="Agendamentos" menus={appointmentMenus} permissions={props.permissions} />
     <HomeShortcuts title="Prontuarios" menus={prontuarioMenus} permissions={props.permissions} />
     <HomeShortcuts title="Usuários" menus={userMenus} permissions={props.permissions} />

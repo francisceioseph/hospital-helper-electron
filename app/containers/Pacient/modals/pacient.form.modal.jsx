@@ -7,6 +7,7 @@ import * as WebAPI from '../../../utils/api.service';
 
 import { Pacient } from '../../../models/pacient.model';
 import { PacientModalForm } from '../../../components/Pacient';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 import { createPacient, updatePacient, clearSelectedPacient } from '../../../pages/Pacient/pacient.actions';
 
 type Props = {
@@ -28,11 +29,14 @@ const mapStateToProps = ({ pacients }) => ({
 const mapDispatchToProps = {
   createPacient,
   updatePacient,
-  clearSelectedPacient
+  clearSelectedPacient, 
+  showPageLoader, 
+  hidePageLoader
 };
 
 class PacientModalFormContainer extends React.Component<Props> {
   saveFormData = async (values) => {
+    this.props.showPageLoader();
     const { form } = this.formRef.props;
 
     try {
@@ -46,6 +50,7 @@ class PacientModalFormContainer extends React.Component<Props> {
         this.props.updatePacient(data);
       }
 
+      this.props.hidePageLoader();
       Alerts.success({
         onOk: () => {
           form.resetFields();
@@ -53,6 +58,7 @@ class PacientModalFormContainer extends React.Component<Props> {
         }
       });
     } catch (error) {
+      this.props.hidePageLoader();
       Alerts.error();
     }
   };

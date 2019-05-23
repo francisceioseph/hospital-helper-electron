@@ -9,6 +9,8 @@ import * as WebAPI from '../../../utils/api.service';
 import { DoctorModalForm } from '../../../components/Doctor';
 import { Doctor } from '../../../models';
 import { createDoctor, updateDoctor } from '../../../pages/Doctors/doctors.actions';
+import { showPageLoader, hidePageLoader } from '../../layouts/actions';
+
 
 const mapStateToProps = ({ doctors }) => ({
   doctor: doctors.doctor
@@ -16,7 +18,9 @@ const mapStateToProps = ({ doctors }) => ({
 
 const mapDispatchToProps = {
   createDoctor,
-  updateDoctor
+  updateDoctor,
+  showPageLoader,
+  hidePageLoader,
 };
 
 type Props = {
@@ -33,6 +37,7 @@ type Props = {
 class DoctorModalFormContainer extends React.Component<Props> {
   saveFormData = async (values) => {
     const { form } = this.formRef.props;
+    this.props.showPageLoader();
 
     try {
       const doctor = Doctor.buildForAPI(values, this.props.doctor);
@@ -45,6 +50,7 @@ class DoctorModalFormContainer extends React.Component<Props> {
         this.props.updateDoctor(data);
       }
 
+      this.props.hidePageLoader();      
       Alerts.success({
         onOk: () => {
           form.resetFields();
@@ -52,6 +58,7 @@ class DoctorModalFormContainer extends React.Component<Props> {
         }
       });
     } catch (error) {
+      this.props.hidePageLoader();
       Alerts.error();
     }
   };

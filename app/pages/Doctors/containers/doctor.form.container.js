@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
 
 import { createDoctor } from '../doctors.actions';
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
+
 import { DoctorFormComponent } from '../components';
 
 import * as WebAPI from '../../../utils/api.service';
@@ -12,10 +14,13 @@ const mapStateToProps = ({ pacients }) => ({
 });
 
 const mapDispatchToProps = {
-  createDoctor
+  createDoctor,
+  showPageLoader,
+  hidePageLoader
 };
 
-const onNewDoctorFormSubmit = () => async (values, form) => {
+const onNewDoctorFormSubmit = (props) => async (values, form) => {
+  props.showPageLoader();
   try {
     const user = {
       ...values,
@@ -29,11 +34,13 @@ const onNewDoctorFormSubmit = () => async (values, form) => {
 
     await WebAPI.postUser(user);
 
+    props.hidePageLoader();
     Alert.success({
       content : 'Cadastro realizado com sucesso',
       onOk    : () => form.resetFields()
     });
   } catch (error) {
+    props.hidePageLoader();
     Alert.error();
   }
 };

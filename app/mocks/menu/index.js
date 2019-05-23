@@ -70,7 +70,7 @@ export default [
   {
     code       : '0',
     icon       : 'home',
-    name       : 'Início',
+    name       : 'Ações Disponíveis',
     route      : '/',
     permission : {
       action    : 'view',

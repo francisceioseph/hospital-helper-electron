@@ -62,7 +62,11 @@ const DefaultLayout = (props) => {
                 {hasPermissionToAccess() && (
                   <div style={styles.inner}>
                     <h1 className="page-header">{menuItem.name}</h1>
-                    <Component {...matchProps} />
+                    <div className="scroll">
+                      <div style={{marginRight: 10}}>
+                        <Component {...matchProps} />
+                      </div>
+                    </div>
                   </div>
                 )}
               </Content>

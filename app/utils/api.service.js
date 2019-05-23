@@ -46,7 +46,7 @@ export const removeExam = id => http.deleteRequest(http.getExamUrl(id));
 
 export const getSurgeryTypes = id => http.getRequest(http.GET_SURGERY_TYPES_URL);
 export const createSurgeryType = data => http.postRequest(http.GET_SURGERY_TYPES_URL, makePayload('surgery_type', data));
-export const updateSurgeryType = (id, data) => http.postRequest(http.removeExamTypeUrl(id), makePayload('surgery_type', data));
+export const updateSurgeryType = (id, data) => http.patchRequest(http.removeExamTypeUrl(id), makePayload('surgery_type', data));
 export const removeSurgeryType = id => http.deleteRequest(http.removeSurgeryTypeUrl(id));
 
 export const getSurgery = id => http.getRequest(http.getSurgeryUrl(id));

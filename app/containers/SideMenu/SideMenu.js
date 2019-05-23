@@ -11,6 +11,9 @@ import { arrayToTree, queryArray } from '../../utils';
 import menus from '../../mocks/menu';
 import Icon from '../../components/Icon';
 
+import SideMenuLogo from '../../resources/imgs/cross.png';
+import SideMenuLogoBig from '../../resources/imgs/cross-big.png';
+
 import './SideMenu.scss';
 
 const { Sider } = Layout;
@@ -93,14 +96,16 @@ const SideMenu = ({ collapsed, location, permissions }) => {
   const defaultSelectedKeys = currentMenu ? getPathArray(menus, currentMenu, 'menuParentCode', 'code') : ['1'];
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed} width={250} theme="dark">
-      <Row className="side-logo">
-        {!collapsed && (
-          <Col span={16}>
-            <span>Hospital Helper</span>
-          </Col>
-        )}
-      </Row>
+    <Sider className="scroll" trigger={null} collapsible collapsed={collapsed} width={250} theme="dark">
+      <div className="side-logo" style={{ height: collapsed ? 80 : 'auto' }}>
+        <div style={{ display: collapsed ? '' : 'none' }}>
+          <img src={SideMenuLogo} alt="hospital logo" width="80" />
+        </div>
+
+        <div style={{ display: collapsed ? 'none' : '' }}>
+          <img src={SideMenuLogoBig} alt="hospital logo" width="250" />
+        </div>
+      </div>
       <Menu mode="inline" theme="dark" selectedKeys={defaultSelectedKeys}>
         {menuItems}
       </Menu>

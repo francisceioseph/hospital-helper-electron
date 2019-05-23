@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
 
+import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 import { createPacient } from '../pacient.actions';
 import { PacientFormComponent } from '../components';
 
@@ -12,10 +13,13 @@ const mapStateToProps = ({ pacients }) => ({
 });
 
 const mapDispatchToProps = {
-  createPacient
+  createPacient, 
+  showPageLoader, 
+  hidePageLoader
 };
 
 const onNewPacientFormSubmit = props => async (values, form) => {
+  props.showPageLoader();
   try {
     const {
       phone, email, address, ...others
@@ -35,11 +39,13 @@ const onNewPacientFormSubmit = props => async (values, form) => {
     const { data } = await WebAPI.postPacient(pacient);
 
     props.createPacient(data);
+    props.hidePageLoader();
     Alerts.success({
       onOk: () => form.resetFields()
     });
   } catch (error) {
     console.log(error);
+    props.hidePageLoader();
     Alerts.error();
   }
 };
