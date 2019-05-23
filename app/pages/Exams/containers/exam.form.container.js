@@ -35,12 +35,16 @@ const mapDispatchToProps = {
   clearExam
 };
 
-const showAppointmentPDF = async (appointment, form) => {
+const showAppointmentPDF = async (appointment, props, form) => {
   try {
     const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
+
     printPdf(data);
+    props.hidePageLoader();
     form.resetFields();
   } catch (error) {
+    props.hidePageLoader();
+
     Alert.error({
       content : 'Não foi possível acessar o arquivo PDF',
       onOk    : () => form.resetFields()
@@ -49,6 +53,8 @@ const showAppointmentPDF = async (appointment, form) => {
 };
 
 const onExamFormSubmit = props => async (values, form) => {
+  props.showPageLoader();
+
   try {
     const { exam: currentExam } = props;
     let response;
@@ -66,12 +72,14 @@ const onExamFormSubmit = props => async (values, form) => {
       props.createExam(response);
     }
 
+    props.hidePageLoader();
+
     Alert.confirm({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
       onOk       : () => {
-        showAppointmentPDF(response.data, form);
+        showAppointmentPDF(response.data, props, form);
         props.clearExam();
       },
       onCancel: () => {
@@ -80,6 +88,8 @@ const onExamFormSubmit = props => async (values, form) => {
       }
     });
   } catch (error) {
+    props.hidePageLoader();
+
     Alert.error({
       content: 'Aconteceu um erro com o agendamento. Tente mais tarde!'
     });
@@ -93,12 +103,18 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
-    const response = await Promise.all([WebAPI.getExamTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
 
-    this.props.getExamTypes(response[0]);
-    this.props.getPacients(response[1]);
-    this.props.getDoctors(response[2]);
-    this.props.hidePageLoader();
+    try {
+      const response = await Promise.all([WebAPI.getExamTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
+
+      this.props.getExamTypes(response[0]);
+      this.props.getPacients(response[1]);
+      this.props.getDoctors(response[2]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.props.hidePageLoader();
+    }
   }
 });
 

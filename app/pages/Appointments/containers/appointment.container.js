@@ -35,7 +35,8 @@ const mapDispatchToProps = {
   clearAppointment
 };
 
-const showAppointmentPDF = async (appointment, form) => {
+const showAppointmentPDF = async (appointment, props, form) => {
+  props.showPageLoader();
   try {
     const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
     printPdf(data);
@@ -45,10 +46,14 @@ const showAppointmentPDF = async (appointment, form) => {
       content : 'Não foi possível acessar o arquivo PDF',
       onOk    : () => form.resetFields()
     });
+  } finally {
+    props.hidePageLoader();
   }
 };
 
 const onAppointmentFormSubmit = props => async (values, form) => {
+  props.showPageLoader();
+
   try {
     const { appointment } = props;
     let response;
@@ -66,12 +71,14 @@ const onAppointmentFormSubmit = props => async (values, form) => {
       props.createAppointment(response.data);
     }
 
+    props.hidePageLoader();
+
     Alert.confirm({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
       onOk       : () => {
-        showAppointmentPDF(response.data, form);
+        showAppointmentPDF(response.data, props, form);
         props.clearAppointment();
       },
       onCancel: () => {
@@ -80,9 +87,12 @@ const onAppointmentFormSubmit = props => async (values, form) => {
       }
     });
   } catch (error) {
+    props.hidePageLoader();
     Alert.error({
       content: 'Aconteceu um erro com o agendamento. Tente mais tarde!'
     });
+  } finally {
+    props.hidePageLoader();
   }
 };
 
@@ -92,9 +102,9 @@ const withFormHandlers = withHandlers({
 
 const withLifeCycle = lifecycle({
   async componentDidMount() {
-    try {
-      this.props.showPageLoader();
+    this.props.showPageLoader();
 
+    try {
       const responses = await Promise.all([WebAPI.getPacients(), WebAPI.getDoctors(), WebAPI.getAppointmentTypes()]);
 
       this.props.getPacients(responses[0]);

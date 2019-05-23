@@ -74,15 +74,18 @@ const withLifecycle = lifecycle({
 const onSelectEvent = () => (event) => {
   Modal.info({
     title   : 'Agendamento',
+    okText  : 'Fechar',
     content : <SurgeryDetailList appointment={event.resource} />
   });
 };
 
 const onSelectSlot = props => () => {
   Modal.confirm({
-    title   : 'Atenção',
-    content : 'Deseja realizar um agendamento?',
-    onOk    : () => props.history.push('/marcacoes/exames/novo')
+    title      : 'Atenção',
+    content    : 'Deseja realizar um agendamento?',
+    okText     : 'Sim',
+    cancelText : 'Não',
+    onOk       : () => props.history.push('/marcacoes/exames/novo')
   });
 };
 

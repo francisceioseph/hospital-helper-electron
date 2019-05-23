@@ -52,7 +52,8 @@ AppointmentList.propTypes = {
 
 const onSelectEvent = props => (event) => {
   const modal = Modal.info({
-    title: 'Agendamento'
+    title  : 'Agendamento',
+    okText : 'Fechar'
   });
 
   const content = (
@@ -64,9 +65,11 @@ const onSelectEvent = props => (event) => {
 
 const onSelectSlot = props => () => {
   Modal.confirm({
-    title   : 'Atenção',
-    content : 'Deseja realizar um agendamento?',
-    onOk    : () => props.history.push('/marcacoes/consultas/novo')
+    title      : 'Atenção',
+    content    : 'Deseja realizar um agendamento?',
+    okText     : 'Sim',
+    cancelText : 'Não',
+    onOk       : () => props.history.push('/marcacoes/consultas/novo')
   });
 };
 

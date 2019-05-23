@@ -3,6 +3,7 @@ import axios from 'axios';
 import { cacheAdapterEnhancer, throttleAdapterEnhancer } from 'axios-extensions';
 import { history, store } from '../store';
 import { clearCredentials } from '../pages/Login/login.actions';
+import { setRequestDuration, setRequestError, setRequestSuccess } from '../containers/layouts/actions';
 
 const BASE_BACKEND_URL = 'http://localhost:3000';
 
@@ -71,12 +72,29 @@ export const configureAxiosInterceptors = () => {
     settings.headers.common['Content-Type'] = 'application/json';
     settings.headers.common['Cache-Control'] = 'no-cache';
     settings.adapter = throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter), { threshold: 5 * 1000 });
+
+    settings.metadata = { startTime: new Date() };
     return settings;
   });
 
   axios.interceptors.response.use(
-    res => res,
+    (response) => {
+      response.config.metadata.endTime = new Date();
+      response.duration = response.config.metadata.endTime - response.config.metadata.startTime;
+
+      store.dispatch(setRequestDuration(response.duration));
+      store.dispatch(setRequestSuccess());
+      return response;
+    },
     (error) => {
+      if (error) {
+        error.config.metadata.endTime = new Date();
+        error.duration = error.config.metadata.endTime - error.config.metadata.startTime;
+
+        store.dispatch(setRequestDuration(error.duration));
+        store.dispatch(setRequestError(error));
+      }
+
       if (error.response && error.response.status === 401) {
         store.dispatch(clearCredentials());
         history.push('/login');

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import './Loader.scss';
 
-const Loader = props => {
+const Loader = (props) => {
   const { loading, fullScreen } = props;
   return (
     <div
@@ -22,8 +22,8 @@ const Loader = props => {
 };
 
 Loader.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  fullScreen: PropTypes.bool.isRequired
+  loading    : PropTypes.bool.isRequired,
+  fullScreen : PropTypes.bool.isRequired
 };
 
 export default Loader;

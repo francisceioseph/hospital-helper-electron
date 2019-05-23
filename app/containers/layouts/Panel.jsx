@@ -9,6 +9,7 @@ import SideMenu from '../SideMenu';
 import Header from '../AppHeader';
 import Bread from '../BreadCrumb';
 import Loader from '../Loader';
+import Footer from '../Footer';
 
 // import { hasToken } from "../../utils/token";
 import { showPageLoader, hidePageLoader } from './actions';
@@ -25,12 +26,6 @@ const DefaultLayout = (props) => {
   const {
     component: Component, loading, location, history, ...rest
   } = props;
-
-  const contentStyle = {
-    padding    : 24,
-    background : '#fff',
-    minHeight  : 360
-  };
 
   const styles = {
     content: {
@@ -58,20 +53,23 @@ const DefaultLayout = (props) => {
       {...rest}
       render={matchProps => (
         <Layout id="default-layout" style={{ height: '100%' }}>
-          <SideMenu location={location} />
           <Layout>
-            <Header />
-            <Content style={styles.content}>
-              <Bread />
-              {hasPermissionToAccess() && (
-                <div style={styles.inner}>
-                  <h1 className="page-header">{menuItem.name}</h1>
-                  <Component {...matchProps} />
-                </div>
-              )}
-            </Content>
-            <Loader loading={loading} fullScreen />
+            <SideMenu location={location} />
+            <Layout>
+              <Header />
+              <Content style={styles.content}>
+                <Bread />
+                {hasPermissionToAccess() && (
+                  <div style={styles.inner}>
+                    <h1 className="page-header">{menuItem.name}</h1>
+                    <Component {...matchProps} />
+                  </div>
+                )}
+              </Content>
+              <Loader loading={loading} fullScreen />
+            </Layout>
           </Layout>
+          <Footer />
         </Layout>
       )}
     />
