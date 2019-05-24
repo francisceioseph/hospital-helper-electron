@@ -34,22 +34,20 @@ const CustomToolbar = (toolbar) => {
   };
 
   const getCurrentLabel = () => {
-    switch(toolbar.view) {
-      case 'week': {
-        return "Esta Semana";
-      }
-
-      case 'day': {
-        return 'Hoje';
-      }
-
-      default: {
-        return 'Esta Semana';
-      }
+    switch (toolbar.view) {
+    case 'week': {
+      return 'Esta Semana';
     }
-  }
 
-  console.log(toolbar.view);
+    case 'day': {
+      return 'Hoje';
+    }
+
+    default: {
+      return 'Esta Semana';
+    }
+    }
+  };
 
   return (
     <Row className="toolbar" type="flex" justify="space-between" align="middle">
