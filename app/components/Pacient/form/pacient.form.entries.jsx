@@ -1,4 +1,6 @@
 import React from 'react';
+import MaskedInput from 'react-text-mask';
+
 import {
   Input, DatePicker, Select, Radio
 } from 'antd';
@@ -6,14 +8,62 @@ import {
 import { SIMPLE_DATE_FORMAT_PT_BR } from '../../../utils/date-format';
 
 export const getFullNameField = () => <Input />;
-export const getCpfField = () => <Input />;
-export const getCnsField = () => <Input />;
+export const getCpfField = () => (
+  <MaskedInput
+    className="ant-input"
+    mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
+    guide={false}
+    showMask
+  />
+);
+
+export const getCnsField = () => (
+  <MaskedInput
+    className="ant-input"
+    mask={[/\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]}
+    guide={false}
+    showMask
+  />
+);
+
+export const getNisField = () => (
+  <MaskedInput
+    className="ant-input"
+    mask={[/\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/]}
+    guide={false}
+    showMask
+  />
+);
+
+export const getZipcodeField = () => (
+  <MaskedInput
+    className="ant-input"
+    mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
+    guide={false}
+    showMask
+  />
+);
+
+export const getTelephoneField = () => (
+  <MaskedInput
+    className="ant-input"
+    mask={(value) => {
+      if (value.length > 13) {
+        return ['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+      }
+
+      return ['(', /\d/, /\d/, ')', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    }}
+    guide={false}
+    showMask
+  />
+);
+
 export const getMotherNameField = () => <Input />;
 export const getGenderField = () => (
   <Select>
     <Select.Option value="masculino">Masculino</Select.Option>
     <Select.Option value="feminino">Feminino</Select.Option>
-    <Select.Option value="none">Não Informado</Select.Option>
   </Select>
 );
 export const getBirthDateField = () => <DatePicker showToday format={SIMPLE_DATE_FORMAT_PT_BR} />;

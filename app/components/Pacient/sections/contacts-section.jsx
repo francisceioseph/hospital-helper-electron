@@ -20,7 +20,7 @@ const ContactsFragment = (props) => {
         {decoratorManager.houseNumber(entries.getInputField())}
       </FormItem>
       <FormItem label={LABELS.ZIPCODE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.zipcode(entries.getInputField())}
+        {decoratorManager.zipcode(entries.getZipcodeField())}
       </FormItem>
       <FormItem label={LABELS.NEIGHBORHOOD} {...FORM_ITEM_LAYOUT} hasFeedback>
         {decoratorManager.neighborhood(entries.getInputField())}
@@ -34,7 +34,7 @@ const ContactsFragment = (props) => {
 
       <Divider orientation="left">Contatos</Divider>
       <FormItem label={LABELS.PHONE} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.phoneDecorator(entries.getInputField())}
+        {decoratorManager.phoneDecorator(entries.getTelephoneField())}
       </FormItem>
 
       <FormItem label={LABELS.EMAIL} {...FORM_ITEM_LAYOUT} hasFeedback>

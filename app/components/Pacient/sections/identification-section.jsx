@@ -37,7 +37,7 @@ const IdentificationFragment = (props) => {
         {decoratorManager.cpfDecorator(entries.getCpfField())}
       </FormItem>
       <FormItem label={LABELS.NIS_NUMBER} {...FORM_ITEM_LAYOUT} hasFeedback>
-        {decoratorManager.nisNumberDecorator(entries.getInputField())}
+        {decoratorManager.nisNumberDecorator(entries.getNisField())}
       </FormItem>
     </Fragment>
   );

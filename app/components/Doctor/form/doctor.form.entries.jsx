@@ -1,11 +1,21 @@
 import React from 'react';
 import { Input, DatePicker, Select } from 'antd';
+import MaskedInput from 'react-text-mask';
 
 import { SIMPLE_DATE_FORMAT_PT_BR } from '../../../utils/date-format';
 
 export const getFullNameField = () => <Input />;
-export const getCpfField = () => <Input />;
-export const getCrmField = () => <Input />;
+export const getCpfField = () => (
+  <MaskedInput
+    className="ant-input"
+    mask={[/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]}
+    guide={false}
+    showMask
+  />
+);
+export const getCrmField = () => (
+  <MaskedInput className="ant-input" mask={[/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]} guide={false} showMask />
+);
 export const getEmailField = () => <Input />;
 export const getPasswordField = () => <Input type="password" />;
 export const getGenderField = () => (
