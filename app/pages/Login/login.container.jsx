@@ -55,7 +55,7 @@ const LoginContainer = props => (
   <React.Fragment>
     <div className="form">
       <div className="logo">
-        <span>Login</span>
+        <span>Entrar no sistema</span>
       </div>
       <LoginForm onSubmitHandler={props.onSubmitHandler} />
       {!!props.loginError && <Alert type="error" message="Login failed. Check yor your username/password" banner />}
