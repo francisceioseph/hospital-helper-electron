@@ -4,8 +4,9 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
+import { showExamTypeModal, getExamTypes } from '../../ExamTypes/exam-types.actions';
 import {
-  getExamTypes, createExam, selectExam, clearExam, updateExam
+  createExam, selectExam, clearExam, updateExam
 } from '../exams.actions';
 import { printPdf } from '../../../utils/print-pdf';
 
@@ -16,9 +17,11 @@ import * as Alert from '../../../components/Alerts';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
 
-const mapStateToProps = ({ doctors, pacients, exams }) => ({
+const mapStateToProps = ({
+  doctors, pacients, exams, examTypes
+}) => ({
   exam      : exams.exam,
-  examTypes : _.values(exams.examTypes),
+  examTypes : _.values(examTypes.examTypes),
   pacients  : _.values(pacients.pacients),
   doctors   : _.values(doctors.doctors)
 });
@@ -32,7 +35,8 @@ const mapDispatchToProps = {
   hidePageLoader,
   updateExam,
   selectExam,
-  clearExam
+  clearExam,
+  showExamTypeModal
 };
 
 const showAppointmentPDF = async (appointment, props, form) => {

@@ -9,6 +9,7 @@ import { HORIZONTAL_FORM_LAYOUT, FORM_ITEM_LAYOUT, FORM_ITEM_SUBMIT_LAYOUT } fro
 import { PacientModalFormContainer } from '../../../containers/Pacient';
 import { getDecoratorManager } from './exam.form.decorators';
 import { LABELS } from './exam.form.constants';
+import { ExamTypeModalContainer } from '../../../containers/ExamType';
 
 import {
   getPacientNameField,
@@ -21,6 +22,10 @@ import {
 const FormItem = Form.Item;
 
 const withModalVisible = withState('modalVisible', 'setModalVisible', false);
+
+const showNewExamTypeModal = props => () => {
+  props.showExamTypeModal();
+};
 
 const showNewPacientModal = props => () => {
   props.setModalVisible(true);
@@ -39,7 +44,12 @@ const handleSubmit = props => (e) => {
   });
 };
 
-const withFormHandlers = withHandlers({ handleSubmit, showNewPacientModal, hideNewPacientModal });
+const withFormHandlers = withHandlers({
+  handleSubmit,
+  showNewPacientModal,
+  hideNewPacientModal,
+  showNewExamTypeModal
+});
 
 const ExamForm = (props) => {
   const { exam } = props;
@@ -53,7 +63,7 @@ const ExamForm = (props) => {
           <Row gutter={8}>
             <Col span={18}>{decoratorManager.pacientNameDecorator(getPacientNameField(props.pacients))}</Col>
             <Col span={4}>
-              <Button onClick={props.showNewPacientModal}> Novo Paciente </Button>
+              <Button onClick={props.showNewPacientModal}> Cadastrar Paciente </Button>
             </Col>
           </Row>
         </FormItem>
@@ -65,8 +75,15 @@ const ExamForm = (props) => {
         />
 
         <FormItem label={LABELS.EXAM_TYPE} {...FORM_ITEM_LAYOUT} hasFeedback>
-          {decoratorManager.examTypeDecorator(examTypeField(props.examTypes))}
+          <Row gutter={8}>
+            <Col span={18}>{decoratorManager.examTypeDecorator(examTypeField(props.examTypes))}</Col>
+            <Col span={4}>
+              <Button onClick={props.showNewExamTypeModal}> Cadastrar Exame </Button>
+            </Col>
+          </Row>
         </FormItem>
+
+        <ExamTypeModalContainer />
 
         <FormItem label={LABELS.DOCTOR_NAME} {...FORM_ITEM_LAYOUT} hasFeedback>
           {decoratorManager.doctorNameDecorator(getDoctorNameField(props.doctors))}
