@@ -10,16 +10,12 @@ import { userMenus } from '../../../mocks/menu/users';
 import { settingsMenus } from '../../../mocks/menu/settings';
 import '../Home.scss';
 
-type Props = {
-  permissions: Array<Object>
-};
-
-const ShortcutList = (props: Props) => (
+const ShortcutList = () => (
   <div>
-    <HomeShortcuts title="Agendamentos" menus={appointmentMenus} permissions={props.permissions} />
-    <HomeShortcuts title="Prontuarios" menus={prontuarioMenus} permissions={props.permissions} />
-    <HomeShortcuts title="Usuários" menus={userMenus} permissions={props.permissions} />
-    <HomeShortcuts title="Configurações" menus={settingsMenus} permissions={props.permissions} />
+    <HomeShortcuts title="Agendamentos" menus={appointmentMenus} />
+    <HomeShortcuts title="Prontuarios" menus={prontuarioMenus} />
+    <HomeShortcuts title="Usuários" menus={userMenus} />
+    <HomeShortcuts title="Configurações" menus={settingsMenus} />
   </div>
 );
 

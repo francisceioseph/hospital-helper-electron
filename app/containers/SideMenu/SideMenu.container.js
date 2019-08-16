@@ -1,20 +1,11 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import SideMenu from './SideMenu';
-import { pickBy } from '../../utils';
-
-const getMenuPermissions = login => {
-  const { credentials } = login;
-  const { user } = credentials;
-  const { role } = user;
-
-  return pickBy(role.permissions, 'resource_name');
-};
+import SideMenu from "./SideMenu";
+import { pickBy } from "../../utils";
 
 const mapStateToProps = ({ menu, location, login }) => ({
   location,
-  collapsed: menu.collapsed,
-  permissions: getMenuPermissions(login),
+  collapsed: menu.collapsed
 });
 
 export default connect(
