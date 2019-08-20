@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     specialty_id : DataTypes.INTEGER
   }, {});
   DoctorSpecialty.associate = function (models) {
-    DoctorSpecialty.Doctor = DoctorSpecialty.belongsTo(models.Doctor);
+    DoctorSpecialty.Profile = DoctorSpecialty.belongsTo(models.Profile);
     DoctorSpecialty.Specialty = DoctorSpecialty.belongsTo(models.Specialty);
   };
   return DoctorSpecialty;

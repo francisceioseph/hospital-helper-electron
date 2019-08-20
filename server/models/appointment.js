@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     diagnostic_hypotesis : DataTypes.TEXT
   }, {});
   Appointment.associate = function (models) {
-    Appointment.belongsTo(models.Doctor);
-    Appointment.belongsTo(models.Pacient);
+    Appointment.belongsTo(models.Profile);
     Appointment.belongsTo(models.Prontuario);
     Appointment.belongsTo(models.AppointmentType);
   };

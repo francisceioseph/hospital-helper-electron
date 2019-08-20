@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ExamAppointment.associate = function (models) {
     ExamAppointment.ExamType = ExamAppointment.belongsTo(models.ExamType);
-    ExamAppointment.Doctor = ExamAppointment.belongsTo(models.Doctor);
-    ExamAppointment.Pacient = ExamAppointment.belongsTo(models.Pacient);
+    ExamAppointment.Profile = ExamAppointment.belongsTo(models.Profile);
     ExamAppointment.Prontuario = ExamAppointment.belongsTo(models.Prontuario);
   };
   return ExamAppointment;

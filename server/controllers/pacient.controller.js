@@ -6,11 +6,13 @@ import {
 } from '../constants/ipc.constants';
 
 import {
-  Pacient, Address, Telephone, Email, PersonalData, Demographics, FamilyData, NextOfKin, BirthData,
+  Profile, Address, Telephone, Email, PersonalData, Demographics, FamilyData, NextOfKin, BirthData,
   ImmigrationData
 } from '../models';
 
 import { toPlainValues } from '../utils';
+
+const Pacient = Profile.scope('pacients');
 
 const nestedModels = [
   { model: Address, as: 'addresses' },
@@ -33,7 +35,7 @@ const nestedModels = [
 export class PacientController {
   static async create(event, args) {
     try {
-      const pacient = await Pacient.create(args.data, {
+      const pacient = await Pacient.create({ ...args.data, type: 'PACIENT' }, {
         include: nestedModels,
       });
 

@@ -5,9 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     address: DataTypes.STRING
   }, {});
   Email.associate = function (models) {
-    Email.Pacient = Email.belongsTo(models.Pacient);
-    Email.Doctor = Email.belongsTo(models.Doctor);
-    Email.Regulator = Email.belongsTo(models.Regulator);
+    Email.Profile = Email.belongsTo(models.Profile);
   };
   return Email;
 };

@@ -25,7 +25,7 @@ class DoctorFormComponent extends React.Component<Props> {
 
     return (
       <div>
-        <DoctorForm showSubmit={this.props.showSubmit} handleSubmit={this.handleSubmit} doctor={doctor} form={form} mode="new"/>
+        <DoctorForm showSubmit={this.props.showSubmit} handleSubmit={this.handleSubmit} doctor={doctor} form={form} mode="new" />
       </div>
     );
   }
@@ -33,6 +33,6 @@ class DoctorFormComponent extends React.Component<Props> {
 
 DoctorFormComponent.defaultProps = {
   showSubmit: true
-}
+};
 
 export default Form.create()(DoctorFormComponent);

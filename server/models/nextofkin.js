@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     pacient_id : DataTypes.STRING
   }, {});
   NextOfKin.associate = function (models) {
-    NextOfKin.Pacient = NextOfKin.belongsTo(models.Pacient);
+    NextOfKin.Profile = NextOfKin.belongsTo(models.Profile);
   };
   return NextOfKin;
 };

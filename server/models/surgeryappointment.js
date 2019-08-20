@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     surgery_type_id : DataTypes.INTEGER
   }, {});
   SurgeryAppointment.associate = function (models) {
-    SurgeryAppointment.Pacient = SurgeryAppointment.belongsTo(models.Pacient);
-    SurgeryAppointment.Doctor = SurgeryAppointment.belongsTo(models.Doctor);
+    SurgeryAppointment.Profile = SurgeryAppointment.belongsTo(models.Profile);
     SurgeryAppointment.Prontuario = SurgeryAppointment.belongsTo(models.Prontuario);
     SurgeryAppointment.SurgeryType = SurgeryAppointment.belongsTo(models.SurgeryType);
   };

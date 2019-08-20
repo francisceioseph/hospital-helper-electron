@@ -26,9 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete : 'CASCADE',
     });
 
-    PersonalData.Pacient = PersonalData.belongsTo(models.Pacient);
-    PersonalData.Doctor = PersonalData.belongsTo(models.Doctor);
-    PersonalData.Regulator = PersonalData.belongsTo(models.Regulator);
+    PersonalData.Profile = PersonalData.belongsTo(models.Profile);
   };
   return PersonalData;
 };

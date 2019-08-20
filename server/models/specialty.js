@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     specialty_name: DataTypes.STRING
   }, {});
   Specialty.associate = function (models) {
-    Specialty.Doctor = Specialty.belongsToMany(models.Doctor, {
+    Specialty.Profile = Specialty.belongsToMany(models.Profile, {
       as      : 'doctors',
       through : models.DoctorSpecialty
     });

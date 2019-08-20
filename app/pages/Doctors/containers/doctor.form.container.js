@@ -6,7 +6,7 @@ import { showPageLoader, hidePageLoader } from '../../../containers/layouts/acti
 
 import { DoctorFormComponent } from '../components';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 
 const mapStateToProps = ({ pacients }) => ({
@@ -19,20 +19,21 @@ const mapDispatchToProps = {
   hidePageLoader
 };
 
-const onNewDoctorFormSubmit = (props) => async (values, form) => {
+const onNewDoctorFormSubmit = props => async (values, form) => {
   props.showPageLoader();
   try {
-    const user = {
-      ...values,
-      profile: {
-        profile_type   : 'Doctor',
-        personal_datum : {
-          ...values.personal_datum
+    const doctor = {
+      type           : 'Doctor',
+      personal_datum : {
+        ...values.personal_datum,
+        birth_datum: {
+          ...values.personal_datum.birth_datum,
+          date_of_birth: values.personal_datum.birth_datum.date_of_birth.toISOString()
         }
       }
     };
 
-    await WebAPI.postUser(user);
+    await ipcService.createDoctor(doctor);
 
     props.hidePageLoader();
     Alert.success({

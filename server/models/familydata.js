@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     pacient_id     : DataTypes.INTEGER
   }, {});
   FamilyData.associate = function (models) {
-    FamilyData.Pacient = FamilyData.belongsTo(models.Pacient);
+    FamilyData.Profile = FamilyData.belongsTo(models.Profile);
   };
   return FamilyData;
 };

@@ -6,7 +6,7 @@ import { tableColumns } from './doctor.list.constants';
 import { TableList } from '../../../components/TableList';
 import { DoctorModalFormContainer } from '../../../containers/Doctor';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 type Props = {
   doctors: Array<Object>,
@@ -34,7 +34,7 @@ const listLifecycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await WebAPI.getDoctors();
+      const response = await ipcService.getDoctors();
       this.props.getDoctors(response);
       this.props.hidePageLoader();
     } catch (error) {

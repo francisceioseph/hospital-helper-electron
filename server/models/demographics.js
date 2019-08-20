@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     pacient_id         : DataTypes.INTEGER
   }, {});
   Demographics.associate = function (models) {
-    Demographics.Pacient = Demographics.belongsTo(models.Pacient);
+    Demographics.Profile = Demographics.belongsTo(models.Profile);
   };
   return Demographics;
 };
