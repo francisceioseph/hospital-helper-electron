@@ -12,7 +12,7 @@ import { printPdf } from '../../../utils/print-pdf';
 
 import ExamForm from '../components/exam.form.component';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
@@ -41,9 +41,9 @@ const mapDispatchToProps = {
 
 const showAppointmentPDF = async (appointment, props, form) => {
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
+    // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
 
-    printPdf(data);
+    // printPdf(data);
     props.hidePageLoader();
     form.resetFields();
   } catch (error) {
@@ -69,10 +69,10 @@ const onExamFormSubmit = props => async (values, form) => {
         ...values
       };
 
-      response = await WebAPI.updateExam(currentExam.id, newExam);
+      response = await ipcService.updateExam(currentExam.id, newExam);
       props.updateExam(response);
     } else {
-      response = await WebAPI.createExam(values);
+      response = await ipcService.createExam(values);
       props.createExam(response);
     }
 
@@ -109,7 +109,11 @@ const withLifeCycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await Promise.all([WebAPI.getExamTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
+      const response = await Promise.all([
+        ipcService.getExamTypes(),
+        ipcService.getPacients(),
+        ipcService.getDoctors()
+      ]);
 
       this.props.getExamTypes(response[0]);
       this.props.getPacients(response[1]);

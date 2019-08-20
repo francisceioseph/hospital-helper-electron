@@ -9,7 +9,7 @@ import { printPdf } from '../../../utils/print-pdf';
 
 import SurgeryForm from '../components/surgery.form.component';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
@@ -31,8 +31,8 @@ const mapDispatchToProps = {
 
 const showAppointmentPDF = async (appointment, form) => {
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-    printPdf(data);
+    // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
+    // printPdf(data);
     form.resetFields();
   } catch (error) {
     Alert.error({
@@ -44,7 +44,7 @@ const showAppointmentPDF = async (appointment, form) => {
 
 const onSurgeryFormSubmit = props => async (values, form) => {
   try {
-    const { data: surgery } = await WebAPI.createSurgery(values);
+    const { data: surgery } = await ipcService.createSurgery(values);
     props.createSurgery(surgery);
 
     Alert.success({
@@ -68,7 +68,7 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
-    const response = await Promise.all([WebAPI.getSurgeryTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
+    const response = await Promise.all([ipcService.getSurgeryTypes(), ipcService.getPacients(), ipcService.getDoctors()]);
 
     this.props.getSurgeryTypes(response[0]);
     this.props.getPacients(response[1]);

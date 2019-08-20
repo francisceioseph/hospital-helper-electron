@@ -12,11 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     prontuario_id        : DataTypes.INTEGER,
     appointment_type_id  : DataTypes.INTEGER,
     diagnostic_hypotesis : DataTypes.TEXT
-  }, {});
+  }, { underscored: true });
+
   Appointment.associate = function (models) {
-    Appointment.belongsTo(models.Profile);
-    Appointment.belongsTo(models.Prontuario);
-    Appointment.belongsTo(models.AppointmentType);
+    Appointment.belongsTo(models.Profile, { as: 'pacient', foreignKey: 'pacient_id' });
+    Appointment.belongsTo(models.Profile, { as: 'doctor', foreignKey: 'doctor_id' });
+    Appointment.belongsTo(models.AppointmentType, { as: 'appointment_type' });
+    Appointment.belongsTo(models.Prontuario, { as: 'prontuario' });
   };
+
   return Appointment;
 };

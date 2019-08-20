@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     has_special_needs  : DataTypes.BOOLEAN,
     special_needs      : DataTypes.STRING,
     pacient_id         : DataTypes.INTEGER
-  }, {});
+  }, { underscored: true });
   Demographics.associate = function (models) {
     Demographics.Profile = Demographics.belongsTo(models.Profile);
   };

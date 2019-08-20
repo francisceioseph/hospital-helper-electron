@@ -74,7 +74,9 @@ import {
   POST_SURGERY_CHANNEL,
   POST_SURGERY_RESPONSE_CHANNEL,
   UPDATE_SURGERY_CHANNEL,
-  UPDATE_SURGERY_RESPONSE_CHANNEL
+  UPDATE_SURGERY_RESPONSE_CHANNEL,
+  POST_APPOINTMENT_RESPONSE_CHANNEL,
+  GET_DOCTOR_APPOINTMENTS_RESPONSE_CHANNEL
 } from './ipc.constants';
 
 export const getPacients = () => ipc.sendOnce(GET_PACIENTS_CHANNEL, GET_PACIENTS_RESPONSE_CHANNEL);
@@ -94,8 +96,8 @@ export const updateAppointmentType = (id, data) => ipc.sendOnce(UPDATE_APPOINTME
 export const removeAppointmentType = id => ipc.sendOnce(REMOVE_APPOINTMENT_TYPE_CHANNEL, REMOVE_APPOINTMENT_TYPE_RESPONSE_CHANNEL, { id });
 
 export const getAppointment = id => ipc.sendOnce(GET_APPOINTMENT_CHANNEL, GET_APPOINTMENT_RESPONSE_CHANNEL, { id });
-export const getAppointments = doctorId => ipc.sendOnce(GET_DOCTOR_APPOINTMENTS_CHANNEL, GET_DOCTOR_APPOINTMENTS_CHANNEL, { doctorId });
-export const createAppointment = data => ipc.sendOnce(POST_APPOINTMENT_CHANNEL, { data });
+export const getAppointments = doctorId => ipc.sendOnce(GET_DOCTOR_APPOINTMENTS_CHANNEL, GET_DOCTOR_APPOINTMENTS_RESPONSE_CHANNEL, { doctorId });
+export const createAppointment = data => ipc.sendOnce(POST_APPOINTMENT_CHANNEL, POST_APPOINTMENT_RESPONSE_CHANNEL, { data });
 export const updateAppointment = (id, data) => ipc.sendOnce(UPDATE_APPOINTMENT_CHANNEL, UPDATE_APPOINTMENT_RESPONSE_CHANNEL, { id, data });
 export const removeAppointment = id => ipc.sendOnce(REMOVE_APPOINTMENT_CHANNEL, REMOVE_APPOINTMENT_RESPONSE_CHANNEL, { id });
 

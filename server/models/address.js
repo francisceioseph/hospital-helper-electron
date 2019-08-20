@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     city         : DataTypes.STRING,
     state        : DataTypes.STRING,
 
-  }, {});
+  }, { underscored: true });
   Address.associate = function (models) {
     Address.belongsTo(models.Profile);
   };

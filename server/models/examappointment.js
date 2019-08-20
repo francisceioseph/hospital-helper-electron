@@ -2,18 +2,16 @@
 
 module.exports = (sequelize, DataTypes) => {
   const ExamAppointment = sequelize.define('ExamAppointment', {
-    scheduled_to  : DataTypes.DATE,
-    finished      : DataTypes.BOOLEAN,
-    canceled      : DataTypes.BOOLEAN,
-    exam_type_id  : DataTypes.INTEGER,
-    prontuario_id : DataTypes.INTEGER,
-    doctor_id     : DataTypes.INTEGER,
-    pacient_id    : DataTypes.INTEGER
-  }, {});
+    scheduled_to : DataTypes.DATE,
+    finished     : DataTypes.BOOLEAN,
+    canceled     : DataTypes.BOOLEAN,
+
+  }, { underscored: true });
   ExamAppointment.associate = function (models) {
-    ExamAppointment.ExamType = ExamAppointment.belongsTo(models.ExamType);
-    ExamAppointment.Profile = ExamAppointment.belongsTo(models.Profile);
-    ExamAppointment.Prontuario = ExamAppointment.belongsTo(models.Prontuario);
+    ExamAppointment.belongsTo(models.Profile, { as: 'pacient', foreignKey: 'pacient_id' });
+    ExamAppointment.belongsTo(models.Profile, { as: 'doctor', foreignKey: 'doctor_id' });
+    ExamAppointment.Prontuario = ExamAppointment.belongsTo(models.Prontuario, { as: 'prontuario' });
+    ExamAppointment.ExamType = ExamAppointment.belongsTo(models.ExamType, { as: 'exam_type' });
   };
   return ExamAppointment;
 };

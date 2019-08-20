@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       crm         : DataTypes.STRING,
       cns         : DataTypes.STRING,
     },
-    {}
+    { underscored: true }
   );
   PersonalData.associate = function (models) {
     PersonalData.BirthData = PersonalData.hasOne(models.BirthData, {

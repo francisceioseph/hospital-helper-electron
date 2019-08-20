@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Prontuario = sequelize.define('Prontuario', {
     pacient_id: DataTypes.INTEGER
-  }, {});
+  }, { underscored: true });
   Prontuario.associate = function (models) {
     Prontuario.Appointment = Prontuario.hasMany(models.Appointment, {
       as: 'appointments',

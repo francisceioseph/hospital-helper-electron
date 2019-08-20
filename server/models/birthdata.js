@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     state_of_birth    : DataTypes.STRING,
     city_of_birth     : DataTypes.STRING,
     personal_datum_id : DataTypes.INTEGER
-  }, {});
+  }, { underscored: true });
   BirthData.associate = function (models) {
     BirthData.PersonalData = BirthData.belongsTo(models.PersonalData);
   };

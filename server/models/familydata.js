@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     father_name    : DataTypes.STRING,
     is_family_head : DataTypes.BOOLEAN,
     pacient_id     : DataTypes.INTEGER
-  }, {});
+  }, { underscored: true });
   FamilyData.associate = function (models) {
     FamilyData.Profile = FamilyData.belongsTo(models.Profile);
   };

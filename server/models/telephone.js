@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     number         : DataTypes.STRING,
     contact_person : DataTypes.STRING,
     profile_id     : DataTypes.INTEGER
-  }, {});
+  }, { underscored: true });
   Telephone.associate = function (models) {
     // associations can be defined here
   };

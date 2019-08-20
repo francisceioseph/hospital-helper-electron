@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false
     }
   }, {
-    scopes: {
+    underscored : true,
+    scopes      : {
       doctors: {
         where: {
           type: 'DOCTOR'

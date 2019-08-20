@@ -13,7 +13,7 @@ import { showPageLoader, hidePageLoader } from '../../../containers/layouts/acti
 
 import { AppointmentForm } from '../components';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 import { printPdf } from '../../../utils/print-pdf';
 
@@ -38,8 +38,8 @@ const mapDispatchToProps = {
 const showAppointmentPDF = async (appointment, props, form) => {
   props.showPageLoader();
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-    printPdf(data);
+    // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
+    // printPdf(data);
     form.resetFields();
   } catch (error) {
     Alert.error({
@@ -55,19 +55,19 @@ const onAppointmentFormSubmit = props => async (values, form) => {
   props.showPageLoader();
 
   try {
-    const { appointment } = props;
+    const appointment = {
+      ...props.appointment,
+      ...values,
+      scheduled_to: values.scheduled_to.toISOString()
+    };
+
     let response;
 
     if (appointment.id) {
-      const valuesWithId = {
-        id: appointment.id,
-        ...values
-      };
-
-      response = await WebAPI.updateAppointment(appointment.id, valuesWithId);
+      response = await ipcService.updateAppointment(appointment.id, appointment);
       props.updateAppointment(response.data);
     } else {
-      response = await WebAPI.createAppointment(values);
+      response = await ipcService.createAppointment(appointment);
       props.createAppointment(response.data);
     }
 
@@ -105,7 +105,11 @@ const withLifeCycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const responses = await Promise.all([WebAPI.getPacients(), WebAPI.getDoctors(), WebAPI.getAppointmentTypes()]);
+      const responses = await Promise.all([
+        ipcService.getPacients(),
+        ipcService.getDoctors(),
+        ipcService.getAppointmentTypes()
+      ]);
 
       this.props.getPacients(responses[0]);
       this.props.getDoctors(responses[1]);

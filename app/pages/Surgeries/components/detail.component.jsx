@@ -16,8 +16,8 @@ const { Item } = List;
 
 const showAppointmentPDF = async (appointment) => {
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-    printPdf(data);
+    // const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
+    // printPdf(data);
   } catch (error) {
     Alert.error({
       content: 'Não foi possível acessar o arquivo PDF'

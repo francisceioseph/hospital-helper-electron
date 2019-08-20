@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Specialty = sequelize.define('Specialty', {
     specialty_name: DataTypes.STRING
-  }, {});
+  }, { underscored: true });
   Specialty.associate = function (models) {
     Specialty.Profile = Specialty.belongsToMany(models.Profile, {
       as      : 'doctors',

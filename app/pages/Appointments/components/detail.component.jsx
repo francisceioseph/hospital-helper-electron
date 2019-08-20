@@ -18,8 +18,8 @@ const { Item } = List;
 
 const showAppointmentPDF = async (appointment) => {
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-    printPdf(data);
+    // const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
+    // printPdf(data);
   } catch (error) {
     Alert.error({
       content: 'Não foi possível acessar o arquivo PDF'
@@ -43,11 +43,11 @@ const AppointmentInfo = ({ appointment, handleRescheduleAppointment }) => (
     <List size="small" bordered>
       <Item>
         <Item.Meta title="Paciente" />
-        <b>{appointment.pacient.full_name}</b>
+        <b>{appointment.pacient.personal_datum.full_name}</b>
       </Item>
       <Item>
         <Item.Meta title="Médico" />
-        <b>{appointment.doctor.full_name}</b>
+        <b>{appointment.doctor.personal_datum.full_name}</b>
       </Item>
       <Item>
         <Item.Meta title="Tipo de Atendimento" />
