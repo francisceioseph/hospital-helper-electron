@@ -8,7 +8,7 @@ import { compose, lifecycle, withHandlers } from 'recompose';
 import { tableColumns } from '../pacient.constants';
 import { PacientModalFormContainer } from '../../../containers/Pacient';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 type Props = {
   showPacientEditModal: boolean,
@@ -22,7 +22,8 @@ const withLifecycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
     try {
-      const response = await WebAPI.getPacients();
+      const response = await ipcService.getPacients();
+      console.log(response);
       this.props.getPacients(response);
       this.props.hidePageLoader();
     } catch (error) {

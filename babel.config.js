@@ -10,7 +10,7 @@ const productionPlugins = [
   // babel-preset-react-optimize
   require('@babel/plugin-transform-react-constant-elements'),
   require('@babel/plugin-transform-react-inline-elements'),
-  require('babel-plugin-transform-react-remove-prop-types')
+  require('babel-plugin-transform-react-remove-prop-types'),
 ];
 
 module.exports = (api) => {
@@ -24,11 +24,12 @@ module.exports = (api) => {
         require('@babel/preset-env'),
         {
           targets     : { electron: require('electron/package.json').version },
-          useBuiltIns : 'usage'
-        }
+          useBuiltIns : 'usage',
+          corejs      : 3,
+        },
       ],
       require('@babel/preset-flow'),
-      [require('@babel/preset-react'), { development }]
+      [require('@babel/preset-react'), { development }],
     ],
     plugins: [
       // Stage 0
@@ -58,11 +59,11 @@ module.exports = (api) => {
         require('babel-plugin-import'),
         {
           libraryName : 'antd',
-          style       : true // or 'css'
-        }
+          style       : true, // or 'css'
+        },
       ],
 
-      ...(development ? developmentPlugins : productionPlugins)
-    ]
+      ...(development ? developmentPlugins : productionPlugins),
+    ],
   };
 };

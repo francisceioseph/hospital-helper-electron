@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     Doctor.ExamAppointment = Doctor.hasMany(models.ExamAppointment, {
       as: 'exams'
     });
-    Doctor.Specialty = Doctor.hasMany(models.Specialty, {
+    Doctor.Specialty = Doctor.belongsToMany(models.Specialty, {
       as      : 'specialties',
       through : models.DoctorSpecialty
     });
@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     Doctor.Email = Doctor.hasMany(models.Email, {
       as       : 'emails',
       onDelete : 'CASCADE'
+    });
+    Doctor.PersonalData = Doctor.hasOne(models.PersonalData, {
+      as       : 'personal_datum',
+      onDelete : 'CASCADE',
     });
   };
   return Doctor;

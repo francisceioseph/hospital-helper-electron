@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       as       : 'emails',
       onDelete : 'CASCADE'
     });
+    Regulator.PersonalData = Regulator.hasOne(models.PersonalData, {
+      as       : 'personal_datum',
+      onDelete : 'CASCADE',
+    });
   };
   return Regulator;
 };

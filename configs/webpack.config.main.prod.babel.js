@@ -22,27 +22,26 @@ export default merge.smart(baseConfig, {
   entry: './app/main.dev',
 
   output: {
-    path: path.join(__dirname, '..'),
-    filename: './app/main.prod.js'
+    path     : path.join(__dirname, '..'),
+    filename : './app/main.prod.js',
   },
 
   optimization: {
     minimizer: process.env.E2E_BUILD
       ? []
       : [
-          new TerserPlugin({
-            parallel: true,
-            sourceMap: true,
-            cache: true
-          })
-        ]
+        new TerserPlugin({
+          parallel  : true,
+          sourceMap : true,
+          cache     : true,
+        }),
+      ],
   },
 
   plugins: [
     new BundleAnalyzerPlugin({
-      analyzerMode:
-        process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
-      openAnalyzer: process.env.OPEN_ANALYZER === 'true'
+      analyzerMode : process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
+      openAnalyzer : process.env.OPEN_ANALYZER === 'true',
     }),
 
     /**
@@ -55,10 +54,10 @@ export default merge.smart(baseConfig, {
      * development checks
      */
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production',
-      DEBUG_PROD: false,
-      START_MINIMIZED: false
-    })
+      NODE_ENV        : 'production',
+      DEBUG_PROD      : false,
+      START_MINIMIZED : false,
+    }),
   ],
 
   /**
@@ -67,7 +66,7 @@ export default merge.smart(baseConfig, {
    * https://github.com/webpack/webpack/issues/2010
    */
   node: {
-    __dirname: false,
-    __filename: false
-  }
+    __dirname  : false,
+    __filename : false,
+  },
 });

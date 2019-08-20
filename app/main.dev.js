@@ -10,15 +10,15 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import electron, { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import electron from 'electron';
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
 
 import MenuBuilder from './menu';
+import { syncDB } from '../server/syncDB';
 
 const { ipcMain: ipc, shell } = electron;
 
@@ -82,8 +82,8 @@ app.on('ready', async () => {
     height         : 728,
     webPreferences : {
       plugins         : true,
-      nodeIntegration : true
-    }
+      nodeIntegration : true,
+    },
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -105,6 +105,8 @@ app.on('ready', async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  syncDB();
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
