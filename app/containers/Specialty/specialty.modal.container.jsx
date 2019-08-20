@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
-import * as WebAPI from '../../utils/api.service';
+import * as ipcService from '../../utils/ipc.service';
 import { SpecialtyModalForm } from '../../components/Specialty';
 import {
   createSpecialty,
@@ -51,7 +51,7 @@ class SpecialtyModalContainer extends React.Component<Props> {
   saveFormData = async (values) => {
     try {
       const { id } = this.props.specialty;
-      const promise = id ? WebAPI.updateSpecialty(id, values) : WebAPI.createSpecialty(values);
+      const promise = id ? ipcService.updateSpecialty(id, values) : ipcService.createSpecialty(values);
 
       const { data: specialty } = await promise;
       const { form } = this.formRef.props;

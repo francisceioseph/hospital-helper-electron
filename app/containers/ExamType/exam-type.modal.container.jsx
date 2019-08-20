@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
-import * as WebAPI from '../../utils/api.service';
+import * as ipcService from '../../utils/ipc.service';
 import { ExamTypeModal } from '../../components/ExamType';
 import {
   createExamType,
@@ -51,7 +51,7 @@ class ExamTypeModalContainer extends React.Component<Props> {
   saveFormData = async (values) => {
     try {
       const { id } = this.props.examType;
-      const promise = id ? WebAPI.updateExamType(id, values) : WebAPI.createExamType(values);
+      const promise = id ? ipcService.updateExamType(id, values) : ipcService.createExamType(values);
 
       const { data: examType } = await promise;
       const { form } = this.formRef.props;

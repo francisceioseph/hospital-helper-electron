@@ -6,7 +6,7 @@ import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import { SpecialtyModalContainer } from '../../../containers/Specialty';
 
 import { tableColumns } from './specialty.list.constants';
@@ -61,7 +61,7 @@ const specialtyListLifecycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await WebAPI.getSpecialties();
+      const response = await ipcService.getSpecialties();
       this.props.getSpecialties(response);
       this.props.hidePageLoader();
     } catch (error) {

@@ -32,7 +32,6 @@ import { prontuarioMenus } from './prontuario';
 import { appointmentMenus } from './appointments';
 import { userMenus } from './users';
 import { settingsMenus } from './settings';
-import { securityMenus } from './security';
 
 library.add(
   faTachometerAlt,
@@ -91,5 +90,4 @@ export default [
   ...appointmentMenus,
   ...userMenus,
   ...settingsMenus,
-  ...securityMenus
 ];

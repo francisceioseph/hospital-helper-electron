@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
   const SurgeryType = sequelize.define('SurgeryType', {
-    sugery_type_name         : DataTypes.STRING,
+    surgery_type_name        : DataTypes.STRING,
     surgery_type_description : DataTypes.TEXT
   }, {});
   SurgeryType.associate = function (models) {

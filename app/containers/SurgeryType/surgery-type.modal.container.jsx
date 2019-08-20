@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
-import * as WebAPI from '../../utils/api.service';
+import * as ipcService from '../../utils/ipc.service';
 import { SurgeryTypeModal } from '../../components/SurgeryType';
 import {
   createSurgeryType,
@@ -51,7 +51,7 @@ class SurgeryTypeModalContainer extends React.Component<Props> {
   saveFormData = async (values) => {
     try {
       const { id } = this.props.surgeryType;
-      const promise = id ? WebAPI.updateSurgeryType(id, values) : WebAPI.createSurgeryType(values);
+      const promise = id ? ipcService.updateSurgeryType(id, values) : ipcService.createSurgeryType(values);
 
       const { data: surgeryType } = await promise;
       const { form } = this.formRef.props;

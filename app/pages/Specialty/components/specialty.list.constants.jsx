@@ -31,7 +31,6 @@ export const tableColumns = [
     render : (text, record) => (
       <ButtonGroup>
         <Button icon="edit" onClick={() => handleOnEditClick(record)} />
-        <Button icon="delete" onClick={() => handleOnDeleteClick(record)} />
       </ButtonGroup>
     )
   }

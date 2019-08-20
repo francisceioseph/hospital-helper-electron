@@ -6,7 +6,7 @@ import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import { SurgeryTypeModalContainer } from '../../../containers/SurgeryType';
 
 import { tableColumns } from './surgery-type.list.constants';
@@ -59,7 +59,7 @@ const withListLifecycle = lifecycle({
   async componentDidMount() {
     try {
       this.props.showPageLoader();
-      const response = await WebAPI.getSurgeryTypes();
+      const response = await ipcService.getSurgeryTypes();
       this.props.getSurgeryTypes(response);
       this.props.hidePageLoader();
     } catch (error) {

@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
-import * as WebAPI from '../../utils/api.service';
+import * as ipcService from '../../utils/ipc.service';
 import { AppointmentTypeModal } from '../../components/AppointmentType';
 import {
   createAppointmentType,
@@ -51,7 +51,7 @@ class AppointmentTypeModalContainer extends React.Component<Props> {
   saveFormData = async (values) => {
     try {
       const { id } = this.props.appointmentType;
-      const promise = id ? WebAPI.updateAppointmentType(id, values) : WebAPI.createAppointmentType(values);
+      const promise = id ? ipcService.updateAppointmentType(id, values) : ipcService.createAppointmentType(values);
 
       const { data: appointmentType } = await promise;
       const { form } = this.formRef.props;
