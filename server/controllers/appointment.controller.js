@@ -1,6 +1,5 @@
 import {
   POST_APPOINTMENT_RESPONSE_CHANNEL,
-  GET_APPOINTMENTS_RESPONSE_CHANNEL,
   UPDATE_APPOINTMENT_RESPONSE_CHANNEL,
   REMOVE_APPOINTMENT_RESPONSE_CHANNEL,
   GET_DOCTOR_APPOINTMENTS_RESPONSE_CHANNEL
@@ -55,7 +54,7 @@ export class AppointmentController {
   static async update(event, args) {
     try {
       await Appointment.update(args.data, { where: { id: args.id }, returning: true });
-      const appointment = await Appointment.findOne({ where: { id: args.id } });
+      const appointment = await Appointment.findOne({ where: { id: args.id }, include: nestedModels });
       event.reply(UPDATE_APPOINTMENT_RESPONSE_CHANNEL, { data: toPlainValues(appointment, nestedModels) });
     } catch (error) {
       event.reply(UPDATE_APPOINTMENT_RESPONSE_CHANNEL, { data: null, error });
