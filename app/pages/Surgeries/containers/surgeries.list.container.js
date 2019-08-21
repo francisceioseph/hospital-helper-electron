@@ -12,7 +12,7 @@ import { showPageLoader, hidePageLoader } from '../../../containers/layouts/acti
 const normalizeSurgeryList = surgeries => _.chain(surgeries)
   .values()
   .map(surgery => ({
-    title : `Cirurgia - ${surgery.pacient.full_name}`,
+    title : `Cirurgia - ${surgery.pacient.personal_datum.full_name}`,
     start : moment(surgery.scheduled_to).toDate(),
     end   : moment(surgery.scheduled_to)
       .add(1, 'hour')

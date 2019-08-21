@@ -51,19 +51,21 @@ const onSurgeryFormSubmit = props => async (values, form) => {
       scheduled_to: values.scheduled_to.toISOString()
     };
 
+    let response;
+
     if (surgeryData.id) {
-      const { data: surgery } = await ipcService.updateSurgery(surgeryData);
-      props.updateSurgery(surgery);
+      response = await ipcService.updateSurgery(surgeryData);
+      props.updateSurgery(response.data);
     } else {
-      const { data: surgery } = await ipcService.createSurgery(surgeryData);
-      props.createSurgery(surgery);
+      response = await ipcService.createSurgery(surgeryData);
+      props.createSurgery(response.data);
     }
 
     Alert.success({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
-      onOk       : () => showAppointmentPDF(surgery, form),
+      onOk       : () => showAppointmentPDF(response.data, form),
       onCancel   : () => form.resetFields()
     });
   } catch (error) {
@@ -80,7 +82,11 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
-    const response = await Promise.all([ipcService.getSurgeryTypes(), ipcService.getPacients(), ipcService.getDoctors()]);
+    const response = await Promise.all([
+      ipcService.getSurgeryTypes(),
+      ipcService.getPacients(),
+      ipcService.getDoctors()
+    ]);
 
     this.props.getSurgeryTypes(response[0]);
     this.props.getPacients(response[1]);

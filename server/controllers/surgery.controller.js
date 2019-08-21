@@ -7,7 +7,7 @@ import {
 
 import { toPlainValues } from '../utils';
 import {
-  Surgery, SurgeryType, Profile, PersonalData
+  SurgeryAppointment, SurgeryType, Profile, PersonalData
 } from '../models';
 
 const nestedModels = [
@@ -37,26 +37,30 @@ const nestedModels = [
 export class SurgeryController {
   static async create(event, args) {
     try {
-      const surgery = await Surgery.create(args.data);
+      const surgery = await SurgeryAppointment.create(args.data);
       event.reply(POST_SURGERY_RESPONSE_CHANNEL, { data: toPlainValues(surgery, nestedModels) });
     } catch (error) {
+      console.log(error);
+
       event.reply(POST_SURGERY_RESPONSE_CHANNEL, { data: null, error });
     }
   }
 
   static async list(event, args) {
     try {
-      const surgeries = await Surgery.findAll({ where: { doctor_id: args.doctorId }, include: nestedModels });
+      const surgeries = await SurgeryAppointment.findAll({ where: { doctor_id: args.doctorId }, include: nestedModels });
       event.reply(GET_SURGERIES_BY_DOCTOR_RESPONSE_CHANNEL, { data: toPlainValues(surgeries, nestedModels) });
     } catch (error) {
+      console.log(error);
+
       event.reply(GET_SURGERIES_BY_DOCTOR_RESPONSE_CHANNEL, { data: null, error });
     }
   }
 
   static async update(event, args) {
     try {
-      await Surgery.update(args.data, { where: { id: args.id }, returning: true });
-      const surgery = await Surgery.findOne({ where: { id: args.id }, include: nestedModels });
+      await SurgeryAppointment.update(args.data, { where: { id: args.id }, returning: true });
+      const surgery = await SurgeryAppointment.findOne({ where: { id: args.id }, include: nestedModels });
       event.reply(UPDATE_SURGERY_RESPONSE_CHANNEL, { data: toPlainValues(surgery, nestedModels) });
     } catch (error) {
       event.reply(UPDATE_SURGERY_RESPONSE_CHANNEL, { data: null, error });
@@ -65,7 +69,7 @@ export class SurgeryController {
 
   static async remove(event, args) {
     try {
-      await Surgery.destroy({ where: { id: args.id } });
+      await SurgeryAppointment.destroy({ where: { id: args.id } });
       event.reply(REMOVE_SURGERY_RESPONSE_CHANNEL, { data: args });
     } catch (error) {
       event.reply(REMOVE_SURGERY_RESPONSE_CHANNEL, { data: null, error });
