@@ -15,6 +15,7 @@ type Props = {
 
 type State = {};
 
+// eslint-disable-next-line react/prefer-stateless-function
 export class HomeShortcuts extends React.Component<Props, State> {
   render() {
     return (
@@ -23,7 +24,7 @@ export class HomeShortcuts extends React.Component<Props, State> {
           <Divider orientation="left">{this.props.title}</Divider>
         )}
         <Row gutter={16}>
-          {this.props.menus.map(item => (
+          {this.props.menus.filter(m => !!m.breadParentCode).map(item => (
             <Col
               className="col-shortcut"
               xs={12}
