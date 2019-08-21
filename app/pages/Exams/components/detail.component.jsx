@@ -44,11 +44,11 @@ const ExamDetailList = ({ appointment, handleRescheduleAppointment }) => (
     <List size="small" bordered>
       <Item>
         <Item.Meta title="Paciente" />
-        <b>{appointment.pacient.full_name}</b>
+        <b>{appointment.pacient.personal_datum.full_name}</b>
       </Item>
       <Item>
         <Item.Meta title="Médico Responsável" />
-        <b>{appointment.doctor.full_name}</b>
+        <b>{appointment.doctor.personal_datum.full_name}</b>
       </Item>
       <Item>
         <Item.Meta title="Tipo de Atendimento" />

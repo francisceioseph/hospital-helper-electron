@@ -12,8 +12,14 @@ module.exports = (sequelize, DataTypes) => {
   SurgeryAppointment.associate = function (models) {
     SurgeryAppointment.belongsTo(models.Profile, { as: 'pacient', foreignKey: 'pacient_id' });
     SurgeryAppointment.belongsTo(models.Profile, { as: 'doctor', foreignKey: 'doctor_id' });
-    SurgeryAppointment.SurgeryType = SurgeryAppointment.belongsTo(models.SurgeryType, { as: 'surgery_type' });
-    SurgeryAppointment.Prontuario = SurgeryAppointment.belongsTo(models.Prontuario, { as: 'prontuario' });
+    SurgeryAppointment.SurgeryType = SurgeryAppointment.belongsTo(models.SurgeryType, {
+      as         : 'surgery_type',
+      foreignKey : 'surgery_type_id'
+    });
+    SurgeryAppointment.Prontuario = SurgeryAppointment.belongsTo(models.Prontuario, {
+      as         : 'prontuario',
+      foreignKey : 'prontuario_id'
+    });
   };
   return SurgeryAppointment;
 };

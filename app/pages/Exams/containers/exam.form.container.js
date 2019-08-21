@@ -44,7 +44,6 @@ const showAppointmentPDF = async (appointment, props, form) => {
     // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
 
     // printPdf(data);
-    props.hidePageLoader();
     form.resetFields();
   } catch (error) {
     props.hidePageLoader();
@@ -53,6 +52,8 @@ const showAppointmentPDF = async (appointment, props, form) => {
       content : 'Não foi possível acessar o arquivo PDF',
       onOk    : () => form.resetFields()
     });
+  } finally {
+    props.hidePageLoader();
   }
 };
 
@@ -60,19 +61,18 @@ const onExamFormSubmit = props => async (values, form) => {
   props.showPageLoader();
 
   try {
-    const { exam: currentExam } = props;
+    const exam = {
+      ...props.exam,
+      ...values,
+      scheduled_to: values.scheduled_to.toISOString()
+    };
     let response;
 
-    if (currentExam.id) {
-      const newExam = {
-        id: currentExam.id,
-        ...values
-      };
-
-      response = await ipcService.updateExam(currentExam.id, newExam);
+    if (exam.id) {
+      response = await ipcService.updateExam(exam.id, exam);
       props.updateExam(response);
     } else {
-      response = await ipcService.createExam(values);
+      response = await ipcService.createExam(exam);
       props.createExam(response);
     }
 

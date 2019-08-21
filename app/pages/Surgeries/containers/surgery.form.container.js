@@ -4,7 +4,7 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import { getSurgeryTypes, createSurgery } from '../surgeries.actions';
+import { getSurgeryTypes, createSurgery, updateSurgery } from '../surgeries.actions';
 import { printPdf } from '../../../utils/print-pdf';
 
 import SurgeryForm from '../components/surgery.form.component';
@@ -22,6 +22,7 @@ const mapStateToProps = ({ doctors, pacients, surgeries }) => ({
 
 const mapDispatchToProps = {
   createSurgery,
+  updateSurgery,
   getSurgeryTypes,
   getPacients,
   getDoctors,
@@ -44,8 +45,19 @@ const showAppointmentPDF = async (appointment, form) => {
 
 const onSurgeryFormSubmit = props => async (values, form) => {
   try {
-    const { data: surgery } = await ipcService.createSurgery(values);
-    props.createSurgery(surgery);
+    const surgeryData = {
+      ...props.surgery,
+      ...values,
+      scheduled_to: values.scheduled_to.toISOString()
+    };
+
+    if (surgeryData.id) {
+      const { data: surgery } = await ipcService.updateSurgery(surgeryData);
+      props.updateSurgery(surgery);
+    } else {
+      const { data: surgery } = await ipcService.createSurgery(surgeryData);
+      props.createSurgery(surgery);
+    }
 
     Alert.success({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
