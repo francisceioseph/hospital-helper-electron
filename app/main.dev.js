@@ -10,19 +10,25 @@
  *
  * @flow
  */
-import electron, { app, BrowserWindow } from 'electron';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
-import path from 'path';
-import fs from 'fs';
-import os from 'os';
 
-import MenuBuilder from './menu';
-import { syncDB } from '../server/syncDB';
+
+const log = require('electron-log');
+const path = require('path');
+const fs = require('fs');
+const os = require('os');
+
+const electron = require('electron');
+const { autoUpdater } = require('electron-updater');
+const syncDB = require('../server/syncDB');
+const MenuBuilder = require('./menu');
+
+const { app } = electron;
+const { BrowserWindow } = electron;
+
 
 const { ipcMain: ipc, shell } = electron;
 
-export default class AppUpdater {
+class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;

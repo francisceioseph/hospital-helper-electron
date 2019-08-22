@@ -25,13 +25,16 @@ import {
   faLock,
   faScrewdriver,
   faUserLock,
-  faUser
+  faUser,
+  faExchangeAlt,
+  faClipboard,
+  faCalculator
 } from '@fortawesome/free-solid-svg-icons';
 
-import { prontuarioMenus } from './prontuario';
 import { appointmentMenus } from './appointments';
 import { userMenus } from './users';
 import { settingsMenus } from './settings';
+import { regulacaoMenus } from './regulacao';
 
 library.add(
   faTachometerAlt,
@@ -62,7 +65,10 @@ library.add(
   faLock,
   faScrewdriver,
   faUserLock,
-  faUser
+  faUser,
+  faExchangeAlt,
+  faClipboard,
+  faCalculator
 );
 
 export default [
@@ -78,15 +84,14 @@ export default [
   },
   {
     code       : '1',
-    icon       : 'tachometer-alt',
-    name       : 'Painel de Senhas',
-    route      : '/senhas',
+    route      : '/prontuario-eletronico',
+    icon       : 'file-medical-alt',
+    name       : 'Prontuário Eletrônico',
     permission : {
-      action    : 'view',
-      resources : ['senhas']
+      action: 'view',
     }
   },
-  ...prontuarioMenus,
+  ...regulacaoMenus,
   ...appointmentMenus,
   ...userMenus,
   ...settingsMenus,

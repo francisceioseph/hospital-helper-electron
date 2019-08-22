@@ -1,7 +1,4 @@
-export const hasItems = (array = []) => !!array.length;
-export const hasKeys = (obj = {}) => !!Object.keys(obj).length;
-
-export function toPlainValues(rows, associations) {
+function toPlainValues(rows, associations) {
   let values;
   if (rows instanceof Array) {
     // call this method on every element of the given array of rows
@@ -28,3 +25,7 @@ export function toPlainValues(rows, associations) {
 
   return values;
 }
+
+module.exports = {
+  toPlainValues
+};

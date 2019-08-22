@@ -22,7 +22,7 @@ class SpecialtyModalForm extends React.Component<Props> {
     return (
       <Modal
         visible={visible}
-        title="Adicionar Especialidade"
+        title="Adicionar Clínica"
         okText="Finalizar"
         onCancel={onCancel}
         closable={false}
@@ -30,7 +30,7 @@ class SpecialtyModalForm extends React.Component<Props> {
         onOk={onCreate}
       >
         <Form layout="vertical">
-          <FormItem label="Nome da Especialidade">
+          <FormItem label="Nome da Clínica">
             {getFieldDecorator('specialty_name', {
               rules        : [{ required: true, message: 'Campo obrigatório' }],
               initialValue : specialty.specialty_name

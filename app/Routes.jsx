@@ -1,25 +1,25 @@
-import React from "react";
-import { Switch } from "react-router";
+import React from 'react';
+import { Switch } from 'react-router';
 
-import NotFound from "./components/NotFound";
-import ProtectedRoute from "./containers/ProtectedRoute";
-import NoAuthRoute from "./containers/NoAuthRoute";
-import App from "./containers/App";
+import NotFound from './components/NotFound';
+import ProtectedRoute from './containers/ProtectedRoute';
+import NoAuthRoute from './containers/NoAuthRoute';
+import App from './containers/App';
 
-import { Home } from "./pages/Home";
-import { Prontuario } from "./pages/Prontuario";
-import { SpecialtyList } from "./pages/Specialty";
-import { DoctorList, DoctorForm } from "./pages/Doctors";
-import { PacientList, PacientForm } from "./pages/Pacient";
-import { ExamList, ExamForm } from "./pages/Exams";
-import { AppointmentList, AppointmentForm } from "./pages/Appointments";
-import { SurgeryList, SurgeryForm } from "./pages/Surgeries";
-import { LoginPage } from "./pages/Login";
-import { AppointmentTypeList } from "./pages/AppointmentTypes";
-import { ExamTypeList } from "./pages/ExamTypes";
-import { ListRoles, RoleForm } from "./pages/Roles";
-import { PanelLayout, PageLayout } from "./containers/layouts";
-import { SurgeryTypeList } from "./pages/SurgeryTypes";
+import { Home } from './pages/Home';
+import { Prontuario } from './pages/Prontuario';
+import { SpecialtyList } from './pages/Specialty';
+import { DoctorList, DoctorForm } from './pages/Doctors';
+import { PacientList, PacientForm } from './pages/Pacient';
+import { ExamList, ExamForm } from './pages/Exams';
+import { AppointmentList, AppointmentForm } from './pages/Appointments';
+import { SurgeryList, SurgeryForm } from './pages/Surgeries';
+import { LoginPage } from './pages/Login';
+import { AppointmentTypeList } from './pages/AppointmentTypes';
+import { ExamTypeList } from './pages/ExamTypes';
+import { ListRoles, RoleForm } from './pages/Roles';
+import { PanelLayout, PageLayout } from './containers/layouts';
+import { SurgeryTypeList } from './pages/SurgeryTypes';
 
 export default () => (
   <App>

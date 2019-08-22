@@ -25,7 +25,7 @@ const SpecialtyComponent = (props: Props) => (
       </Col>
       <Col>
         <Button type="primary" onClick={props.showSpecialtyModal}>
-          Nova Especialidade
+          Nova Clínica
         </Button>
       </Col>
     </Row>

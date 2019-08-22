@@ -98,8 +98,9 @@ const examListLifecycle = lifecycle({
     this.props.showPageLoader();
     try {
       const response = await ipcService.getExamTypes();
+      const exams = await ipcService.getExams();
       this.props.getExamTypes(response);
-      this.props.getExams({ data: [] });
+      this.props.getExams(exams);
 
       this.props.hidePageLoader();
     } catch (error) {

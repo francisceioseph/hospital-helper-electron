@@ -15,7 +15,6 @@ import { AppointmentForm } from '../components';
 
 import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
-import { printPdf } from '../../../utils/print-pdf';
 
 const mapStateToProps = ({ appointments, doctors, pacients }) => ({
   appointment      : appointments.appointment,
@@ -38,8 +37,7 @@ const mapDispatchToProps = {
 const showAppointmentPDF = async (appointment, props, form) => {
   props.showPageLoader();
   try {
-    // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
-    // printPdf(data);
+    ipcService.openAppointmentPDF(appointment);
     form.resetFields();
   } catch (error) {
     Alert.error({

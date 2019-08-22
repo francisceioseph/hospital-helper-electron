@@ -7,7 +7,7 @@ import * as Alerts from '../../../components/Alerts';
 import * as ipcService from '../../../utils/ipc.service';
 
 import { DoctorModalForm } from '../../../components/Doctor';
-import { Doctor } from '../../../models';
+import { Doctor } from '../../../models/doctor.model';
 import { createDoctor, updateDoctor } from '../../../pages/Doctors/doctors.actions';
 import { showPageLoader, hidePageLoader } from '../../layouts/actions';
 

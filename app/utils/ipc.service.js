@@ -76,7 +76,10 @@ import {
   UPDATE_SURGERY_CHANNEL,
   UPDATE_SURGERY_RESPONSE_CHANNEL,
   POST_APPOINTMENT_RESPONSE_CHANNEL,
-  GET_DOCTOR_APPOINTMENTS_RESPONSE_CHANNEL
+  GET_DOCTOR_APPOINTMENTS_RESPONSE_CHANNEL,
+  EXPORT_APPOINTMENT_PDF,
+  EXPORT_EXAM_APPOINTMENT_PDF,
+  EXPORT_SURGERY_APPOINTMENT_PDF
 } from './ipc.constants';
 
 export const getPacients = () => ipc.sendOnce(GET_PACIENTS_CHANNEL, GET_PACIENTS_RESPONSE_CHANNEL);
@@ -127,3 +130,7 @@ export const getSurgeries = doctorId => ipc.sendOnce(GET_SURGERIES_BY_DOCTOR_CHA
 export const createSurgery = data => ipc.sendOnce(POST_SURGERY_CHANNEL, POST_SURGERY_RESPONSE_CHANNEL, { data });
 export const updateSurgery = (id, data) => ipc.sendOnce(UPDATE_SURGERY_CHANNEL, UPDATE_SURGERY_RESPONSE_CHANNEL, { id, data });
 export const removeSurgery = id => ipc.sendOnce(REMOVE_APPOINTMENT_CHANNEL, REMOVE_APPOINTMENT_RESPONSE_CHANNEL, { id });
+
+export const openAppointmentPDF = appointment => ipc.send(EXPORT_APPOINTMENT_PDF, appointment);
+export const openExamAppointmentPDF = appointment => ipc.send(EXPORT_EXAM_APPOINTMENT_PDF, appointment);
+export const openSurgeryAppointmentPDF = appointment => ipc.send(EXPORT_SURGERY_APPOINTMENT_PDF, appointment);

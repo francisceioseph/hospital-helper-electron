@@ -18,7 +18,7 @@ export const settingsMenus = [
     code            : '61',
     menuParentCode  : '6',
     breadParentCode : '6',
-    name            : 'Especialidade',
+    name            : 'Clínica',
     icon            : 'address-card',
     route           : '/configuracoes/especialidade',
     permission      : {

@@ -61,8 +61,9 @@ const withLifecycle = lifecycle({
 
     try {
       const response = await ipcService.getDoctors();
+      const surgeries = await ipcService.getSurgeries();
       this.props.getDoctors(response);
-      this.props.getSurgeries({ data: [] });
+      this.props.getSurgeries(surgeries);
       this.props.hidePageLoader();
     } catch (error) {
       console.log(error);

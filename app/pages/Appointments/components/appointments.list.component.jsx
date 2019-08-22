@@ -96,8 +96,9 @@ const withLifecycle = lifecycle({
     this.props.showPageLoader();
     try {
       const res = await ipcService.getDoctors();
+      const appointments = await ipcService.getAppointments();
       this.props.getDoctors(res);
-      this.props.getAppointments({ data: [] });
+      this.props.getAppointments(appointments);
     } catch (error) {
       console.log(error);
     } finally {

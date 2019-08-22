@@ -7,10 +7,9 @@ import { List, Button } from 'antd';
 import { withHandlers, compose } from 'recompose';
 
 import { DATE_FORMAT_PT_BR } from '../../../utils/date-format';
-import { printPdf } from '../../../utils/print-pdf';
 import { history } from '../../../store';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 
 import './detail.component.less';
@@ -19,8 +18,7 @@ const { Item } = List;
 
 const showAppointmentPDF = async (appointment) => {
   try {
-    // const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-    // printPdf(data);
+    ipcService.openExamAppointmentPDF(appointment);
   } catch (error) {
     Alert.error({
       content: 'Não foi possível acessar o arquivo PDF'

@@ -21,7 +21,7 @@ const handleOnEditClick = (record) => {
 
 export const tableColumns = [
   {
-    title     : 'Especialidade',
+    title     : 'Clínica',
     dataIndex : 'specialty_name',
     key       : 'specialty_name'
   },

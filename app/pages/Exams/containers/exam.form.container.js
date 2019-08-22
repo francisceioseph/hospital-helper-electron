@@ -8,7 +8,6 @@ import { showExamTypeModal, getExamTypes } from '../../ExamTypes/exam-types.acti
 import {
   createExam, selectExam, clearExam, updateExam
 } from '../exams.actions';
-import { printPdf } from '../../../utils/print-pdf';
 
 import ExamForm from '../components/exam.form.component';
 
@@ -41,9 +40,7 @@ const mapDispatchToProps = {
 
 const showAppointmentPDF = async (appointment, props, form) => {
   try {
-    // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
-
-    // printPdf(data);
+    ipcService.openExamAppointmentPDF(appointment);
     form.resetFields();
   } catch (error) {
     props.hidePageLoader();

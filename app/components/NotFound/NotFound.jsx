@@ -8,7 +8,7 @@ const NotFound = () => (
   <Card className="error-card">
     <div className="error-component">
       <SvgIcon className="error-icon" icon="NotFound" />
-      <span>Esta página não está disponível</span>
+      <span>Este recurso ainda não foi implementado :(</span>
     </div>
   </Card>
 );

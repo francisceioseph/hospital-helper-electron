@@ -5,7 +5,6 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
 import { getSurgeryTypes, createSurgery, updateSurgery } from '../surgeries.actions';
-import { printPdf } from '../../../utils/print-pdf';
 
 import SurgeryForm from '../components/surgery.form.component';
 
@@ -32,8 +31,7 @@ const mapDispatchToProps = {
 
 const showAppointmentPDF = async (appointment, form) => {
   try {
-    // const { data } = await ipcService.getPdfFile(appointment.receipt_url);
-    // printPdf(data);
+    ipcService.openSurgeryAppointmentPDF(appointment);
     form.resetFields();
   } catch (error) {
     Alert.error({
