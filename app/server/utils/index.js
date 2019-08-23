@@ -1,4 +1,4 @@
-function toPlainValues(rows, associations) {
+export function toPlainValues(rows, associations) {
   let values;
   if (rows instanceof Array) {
     // call this method on every element of the given array of rows
@@ -25,7 +25,3 @@ function toPlainValues(rows, associations) {
 
   return values;
 }
-
-module.exports = {
-  toPlainValues
-};

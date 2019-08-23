@@ -1,4 +1,3 @@
-import { PacientController } from './controllers/pacient.controller';
 
 const { ipcMain } = require('electron');
 
@@ -8,6 +7,7 @@ const {
   createSurgeryAppointmentReceiptPDF
 } = require('./pdf');
 
+const { PacientController } = require('./controllers/pacient.controller');
 const { DoctorController } = require('./controllers/doctor.controller');
 const { SpecialtyController } = require('./controllers/specialty.controller');
 const { AppointmentTypeController } = require('./controllers/appointment-type.controller');

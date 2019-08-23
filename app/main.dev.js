@@ -19,7 +19,7 @@ const os = require('os');
 
 const electron = require('electron');
 const { autoUpdater } = require('electron-updater');
-const syncDB = require('../server/syncDB');
+const syncDB = require('./server/syncDB');
 const MenuBuilder = require('./menu');
 
 const { app } = electron;

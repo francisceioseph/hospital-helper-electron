@@ -5,12 +5,12 @@ import {
   REMOVE_PACIENT_RESPONSE_CHANNEL
 } from '../constants/ipc.constants';
 
-import {
+import { toPlainValues } from '../utils';
+
+const {
   Profile, Address, Telephone, Email, PersonalData, Demographics, FamilyData, NextOfKin, BirthData,
   ImmigrationData
-} from '../models';
-
-import { toPlainValues } from '../utils';
+} = require('../models/index');
 
 const Pacient = Profile.scope('pacients');
 
