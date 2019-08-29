@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     { underscored: true }
   );
   Hospitalization.associate = function (models) {
-    Hospitalization.Bed = Hospitalization.hasOne(models.Bed);
+    Hospitalization.Bed = Hospitalization.belongsTo(models.Bed);
     Hospitalization.Pacient = Hospitalization.belongsTo(models.Profile, {
       as         : 'pacient',
       foreignKey : 'pacient_id',

@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   }, { underscored: true });
   Bed.associate = function (models) {
     Bed.Specialty = Bed.belongsTo(models.Specialty);
-    Bed.Hospitalization = Bed.belongsTo(models.Hospitalization);
+    Bed.Hospitalization = Bed.hasMany(models.Hospitalization, {
+      as: 'hospitalizations'
+    });
   };
   return Bed;
 };
