@@ -20,6 +20,7 @@ import { ExamTypeList } from './pages/ExamTypes';
 import { ListRoles, RoleForm } from './pages/Roles';
 import { PanelLayout, PageLayout } from './containers/layouts';
 import { SurgeryTypeList } from './pages/SurgeryTypes';
+import { HospitalizationList } from './pages/Hospitalizations';
 
 export default () => (
   <App>
@@ -27,6 +28,7 @@ export default () => (
       <PageLayout exact path="/login" component={LoginPage} />
       <PanelLayout exact path="/" component={Home} />
       <PanelLayout exact path="/prontuarios" component={Prontuario} />
+      <PanelLayout exact path="/regulacao/inernacoes" component={HospitalizationList} />
 
       <PanelLayout
         exact

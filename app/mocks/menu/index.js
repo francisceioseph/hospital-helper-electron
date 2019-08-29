@@ -28,7 +28,8 @@ import {
   faUser,
   faExchangeAlt,
   faClipboard,
-  faCalculator
+  faCalculator,
+  faProcedures
 } from '@fortawesome/free-solid-svg-icons';
 
 import { appointmentMenus } from './appointments';
@@ -68,7 +69,8 @@ library.add(
   faUser,
   faExchangeAlt,
   faClipboard,
-  faCalculator
+  faCalculator,
+  faProcedures
 );
 
 export default [

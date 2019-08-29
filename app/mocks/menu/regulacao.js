@@ -5,6 +5,18 @@ export const regulacaoMenus = [
     icon : 'clipboard',
   },
   {
+    code            : '90',
+    breadParentCode : '9',
+    menuParentCode  : '9',
+    name            : 'Internações',
+    icon            : 'procedures',
+    route           : '/regulacao/inernacoes',
+    permission      : {
+      action    : 'view',
+      resources : ['internacoes']
+    }
+  },
+  {
     code            : '91',
     breadParentCode : '9',
     menuParentCode  : '9',
