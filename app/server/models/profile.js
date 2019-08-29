@@ -70,6 +70,9 @@ module.exports = (sequelize, DataTypes) => {
       as       : 'next_of_kin',
       onDelete : 'CASCADE',
     });
+    Profile.Hospitalization = Profile.hasMany(models.Hospitalization, {
+      as: 'hospitalizations',
+    });
   };
   return Profile;
 };

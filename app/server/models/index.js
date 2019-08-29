@@ -35,6 +35,9 @@ const specialty = require('./specialty');
 const surgeryAppointment = require('./surgeryappointment');
 const surgeryType = require('./surgerytype');
 const telephone = require('./telephone');
+const bed = require('./bed');
+const hospitalization = require('./hospitalization');
+const transfer = require('./transfer');
 
 const db = {
   Address            : address(sequelize, Sequelize),
@@ -55,7 +58,10 @@ const db = {
   Specialty          : specialty(sequelize, Sequelize),
   SurgeryAppointment : surgeryAppointment(sequelize, Sequelize),
   SurgeryType        : surgeryType(sequelize, Sequelize),
-  Telephone          : telephone(sequelize, Sequelize)
+  Telephone          : telephone(sequelize, Sequelize),
+  Bed                : bed(sequelize, Sequelize),
+  Hospitalization    : hospitalization(sequelize, Sequelize),
+  Transfer           : transfer(sequelize, Sequelize),
 };
 
 // fs.readdirSync(__dirname)

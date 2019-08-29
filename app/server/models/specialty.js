@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       as      : 'doctors',
       through : models.DoctorSpecialty
     });
+
+    Specialty.Bed = Specialty.hasMany(models.Bed, { as: 'beds' });
   };
   return Specialty;
 };
