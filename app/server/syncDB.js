@@ -17,7 +17,7 @@ const { AppointmentController } = require('./controllers/appointment.controller'
 const { SurgeryController } = require('./controllers/surgery.controller');
 const { ExamController } = require('./controllers/exam.controller');
 
-const { sequelize, seedersManager, migrationManager } = require('./models');
+const { sequelize } = require('./models');
 
 require('events').EventEmitter.defaultMaxListeners = 150;
 
@@ -65,8 +65,6 @@ const {
 
 const syncDB = () => {
   sequelize.sync()
-    .then(() => migrationManager.up())
-    .then(() => seedersManager.up())
     .then(() => {
       console.log('register listeners');
       ipcMain.on(POST_PACIENT_CHANNEL, PacientController.create);

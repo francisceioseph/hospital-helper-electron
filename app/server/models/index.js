@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const os = require('os');
-const Umzug = require('umzug');
 
 const dbPath = process.env.NODE_ENV === 'development'
   ? 'hospital_helper_dev.sqlite3'
@@ -77,62 +76,6 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-const migrationManager = new Umzug({
-  storage        : 'sequelize',
-  storageOptions : {
-    sequelize,
-    modelName: 'SequelizeMigrationMeta'
-  },
-
-  migrations: {
-    params: [
-      sequelize.getQueryInterface(),
-      sequelize.constructor,
-      function () {
-        throw new Error(
-          `Seeder tried to use old style "done" callback. 
-          Please upgrade to "umzug" and return a promise instead.`
-        );
-      }
-    ],
-    path    : './app/server/migrations',
-    pattern : /\.js$/
-  },
-
-  logging() {
-    console.log.apply(null, arguments);
-  },
-});
-
-const seedersManager = new Umzug({
-  storage        : 'sequelize',
-  storageOptions : {
-    sequelize,
-    modelName: 'SequelizeSeederMeta'
-  },
-
-  migrations: {
-    params: [
-      sequelize.getQueryInterface(),
-      sequelize.constructor,
-      function () {
-        throw new Error(
-          `Migration tried to use old style "done" callback. 
-          Please upgrade to "umzug" and return a promise instead.`
-        );
-      }
-    ],
-    path    : './app/server/seeders',
-    pattern : /\.js$/
-  },
-
-  logging() {
-    console.log.apply(null, arguments);
-  },
-});
-
-db.migrationManager = migrationManager;
-db.seedersManager = seedersManager;
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
