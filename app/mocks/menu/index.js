@@ -35,7 +35,7 @@ import {
 import { appointmentMenus } from './appointments';
 import { userMenus } from './users';
 import { settingsMenus } from './settings';
-import { regulacaoMenus } from './regulacao';
+// import { regulacaoMenus } from './regulacao';
 
 library.add(
   faTachometerAlt,
@@ -84,16 +84,16 @@ export default [
       resources : ['home']
     }
   },
-  {
-    code       : '1',
-    route      : '/prontuario-eletronico',
-    icon       : 'file-medical-alt',
-    name       : 'Prontuário Eletrônico',
-    permission : {
-      action: 'view',
-    }
-  },
-  ...regulacaoMenus,
+  // {
+  //   code       : '1',
+  //   route      : '/prontuario-eletronico',
+  //   icon       : 'file-medical-alt',
+  //   name       : 'Prontuário Eletrônico',
+  //   permission : {
+  //     action: 'view',
+  //   }
+  // },
+  // ...regulacaoMenus,
   ...appointmentMenus,
   ...userMenus,
   ...settingsMenus,
