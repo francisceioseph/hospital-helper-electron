@@ -15,7 +15,7 @@ const createExamAppointmentReceiptPDF = (event, appointment) => {
   const document = {
     content: [
       {
-        text      : 'PREFEITURA MUNICIPAL DE AQUIRAZ',
+        text      : 'PREFEITURA MUNICIPAL',
         style     : 'header',
         id        : 'header1',
         alignment : 'left',
@@ -27,7 +27,7 @@ const createExamAppointmentReceiptPDF = (event, appointment) => {
         alignment : 'left',
       },
       {
-        text      : 'HOSPITAL GERAL MANOEL ASSUNÇÃO PIRES',
+        text      : 'HOSPITAL GERAL',
         style     : 'subheader',
         id        : 'subheader2',
         alignment : 'left',

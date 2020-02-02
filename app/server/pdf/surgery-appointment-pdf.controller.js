@@ -15,7 +15,7 @@ const createSurgeryAppointmentReceiptPDF = (event, appointment) => {
   const document = {
     content: [
       {
-        text      : 'PREFEITURA MUNICIPAL DE AQUIRAZ',
+        text      : 'PREFEITURA MUNICIPAL',
         style     : 'header',
         id        : 'header1',
         alignment : 'left',
@@ -27,7 +27,7 @@ const createSurgeryAppointmentReceiptPDF = (event, appointment) => {
         alignment : 'left',
       },
       {
-        text      : 'HOSPITAL GERAL MANOEL ASSUNÇÃO PIRES',
+        text      : 'HOSPITAL GERAL',
         style     : 'subheader',
         id        : 'subheader2',
         alignment : 'left',
@@ -43,20 +43,19 @@ const createSurgeryAppointmentReceiptPDF = (event, appointment) => {
         widths : ['*', 'auto'],
         table  : {
           body: [
-
             ['Paciente', appointment.pacient.personal_datum.full_name],
             ['Médico', appointment.doctor.personal_datum.full_name],
             ['Tipo de Cirurgia', appointment.surgery_type.surgery_type_name],
             ['Data do Agendamento', moment(new Date(appointment.scheduled_to)).format('DD/MM/YYYY HH:mm')],
-          ]
-        }
+          ],
+        },
       },
     ],
     pageSize : 'A5',
     styles   : {
       header: {
         fontSize : 14,
-        bold     : true
+        bold     : true,
       },
       headerMargin: {
         fontSize   : 14,
@@ -66,17 +65,16 @@ const createSurgeryAppointmentReceiptPDF = (event, appointment) => {
       },
       subheader: {
         fontSize : 12,
-        bold     : false
+        bold     : false,
       },
       quote: {
-        italics: true
+        italics: true,
       },
       small: {
-        fontSize: 8
+        fontSize: 8,
       },
-      tableStyle: {
-      }
-    }
+      tableStyle: {},
+    },
   };
 
   const pdf = pdfMake.createPdf(document);
