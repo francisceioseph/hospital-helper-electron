@@ -1,7 +1,7 @@
 import t from 'typy';
 
 export class Pacient {
-  constructor(personalDatum = { bith_datum: {} }, demographics = {}, address = {}, family_datum = {}) {
+  constructor(personalDatum = { birth_datum: {} }, demographics = {}, address = {}, family_datum = {}) {
     const { birth_datum: birthDatum, ...otherPersonalDatum } = personalDatum;
 
     this.personal_datum = {
@@ -49,7 +49,13 @@ export class Pacient {
 
     const personal_datum = {
       ...pacient.personal_datum,
-      ...others.personal_datum
+      ...others.personal_datum,
+
+      birth_datum: {
+        ...pacient.personal_datum.birth_datum,
+        ...others.personal_datum.birth_datum,
+        date_of_birth: others.personal_datum.birth_datum.date_of_birth.toISOString()
+      }
     };
 
     const emails = [

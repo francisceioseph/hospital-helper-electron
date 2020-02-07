@@ -6,7 +6,7 @@ import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import { ExamTypeModalContainer } from '../../../containers/ExamType';
 
 import { tableColumns } from './exam-type.list.constants';
@@ -59,7 +59,7 @@ const withListLifecycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await WebAPI.getExamTypes();
+      const response = await ipcService.getExamTypes();
       this.props.getExamTypes(response);
       this.props.hidePageLoader();
     } catch (error) {

@@ -5,21 +5,17 @@ import * as React from 'react';
 import { HomeShortcuts } from './home.shortcuts';
 
 import { appointmentMenus } from '../../../mocks/menu/appointments';
-import { prontuarioMenus } from '../../../mocks/menu/prontuario';
 import { userMenus } from '../../../mocks/menu/users';
 import { settingsMenus } from '../../../mocks/menu/settings';
+// import { regulacaoMenus } from '../../../mocks/menu/regulacao';
 import '../Home.scss';
 
-type Props = {
-  permissions: Array<Object>
-};
-
-const ShortcutList = (props: Props) => (
+const ShortcutList = () => (
   <div>
-    <HomeShortcuts title="Agendamentos" menus={appointmentMenus} permissions={props.permissions} />
-    <HomeShortcuts title="Prontuarios" menus={prontuarioMenus} permissions={props.permissions} />
-    <HomeShortcuts title="Usuários" menus={userMenus} permissions={props.permissions} />
-    <HomeShortcuts title="Configurações" menus={settingsMenus} permissions={props.permissions} />
+    <HomeShortcuts title="Agendamentos" menus={appointmentMenus} />
+    {/* <HomeShortcuts title="Regulação" menus={regulacaoMenus} /> */}
+    <HomeShortcuts title="Usuários" menus={userMenus} />
+    <HomeShortcuts title="Configurações" menus={settingsMenus} />
   </div>
 );
 

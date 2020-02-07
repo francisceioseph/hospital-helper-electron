@@ -10,7 +10,7 @@ import { showPageLoader, hidePageLoader } from '../../../containers/layouts/acti
 const normalizeExamList = exams => _.chain(exams)
   .values()
   .map(exam => ({
-    title : `Exame - ${exam.pacient.full_name}`,
+    title : `Exame - ${exam.pacient.personal_datum.full_name}`,
     start : moment(exam.scheduled_to).toDate(),
     end   : moment(exam.scheduled_to)
       .add(1, 'hour')

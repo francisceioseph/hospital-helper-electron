@@ -8,11 +8,10 @@ import { showExamTypeModal, getExamTypes } from '../../ExamTypes/exam-types.acti
 import {
   createExam, selectExam, clearExam, updateExam
 } from '../exams.actions';
-import { printPdf } from '../../../utils/print-pdf';
 
 import ExamForm from '../components/exam.form.component';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
@@ -41,10 +40,7 @@ const mapDispatchToProps = {
 
 const showAppointmentPDF = async (appointment, props, form) => {
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-
-    printPdf(data);
-    props.hidePageLoader();
+    ipcService.openExamAppointmentPDF(appointment);
     form.resetFields();
   } catch (error) {
     props.hidePageLoader();
@@ -53,6 +49,8 @@ const showAppointmentPDF = async (appointment, props, form) => {
       content : 'Não foi possível acessar o arquivo PDF',
       onOk    : () => form.resetFields()
     });
+  } finally {
+    props.hidePageLoader();
   }
 };
 
@@ -60,19 +58,18 @@ const onExamFormSubmit = props => async (values, form) => {
   props.showPageLoader();
 
   try {
-    const { exam: currentExam } = props;
+    const exam = {
+      ...props.exam,
+      ...values,
+      scheduled_to: values.scheduled_to.toISOString()
+    };
     let response;
 
-    if (currentExam.id) {
-      const newExam = {
-        id: currentExam.id,
-        ...values
-      };
-
-      response = await WebAPI.updateExam(currentExam.id, newExam);
+    if (exam.id) {
+      response = await ipcService.updateExam(exam.id, exam);
       props.updateExam(response);
     } else {
-      response = await WebAPI.createExam(values);
+      response = await ipcService.createExam(exam);
       props.createExam(response);
     }
 
@@ -109,7 +106,11 @@ const withLifeCycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await Promise.all([WebAPI.getExamTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
+      const response = await Promise.all([
+        ipcService.getExamTypes(),
+        ipcService.getPacients(),
+        ipcService.getDoctors()
+      ]);
 
       this.props.getExamTypes(response[0]);
       this.props.getPacients(response[1]);

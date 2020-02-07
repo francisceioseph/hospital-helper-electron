@@ -8,7 +8,7 @@ import {
   Row, Input, Divider, Table, Button, Col
 } from 'antd';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import { AppointmentTypeModalContainer } from '../../../containers/AppointmentType';
 
 import { tableColumns } from './appointment-type.list.constants';
@@ -62,7 +62,7 @@ const withListLifecycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await WebAPI.getAppointmentTypes();
+      const response = await ipcService.getAppointmentTypes();
       this.props.getAppointmentTypes(response);
       this.props.hidePageLoader();
     } catch (error) {

@@ -21,7 +21,7 @@ const handleOnEditClick = (record) => {
 
 export const tableColumns = [
   {
-    title     : 'Especialidade',
+    title     : 'Clínica',
     dataIndex : 'specialty_name',
     key       : 'specialty_name'
   },
@@ -31,7 +31,6 @@ export const tableColumns = [
     render : (text, record) => (
       <ButtonGroup>
         <Button icon="edit" onClick={() => handleOnEditClick(record)} />
-        <Button icon="delete" onClick={() => handleOnDeleteClick(record)} />
       </ButtonGroup>
     )
   }

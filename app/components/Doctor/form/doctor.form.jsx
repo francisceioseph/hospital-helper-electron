@@ -48,23 +48,6 @@ const DoctorFormComponent = (props: Props) => {
           {decoratorManager.birthDateDecorator(entries.getBirthDateField())}
         </FormItem>
 
-        {props.mode === 'new' && (
-          <div>
-            <Divider orientation="left">Dados de Usuário</Divider>
-            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.EMAIL} hasFeedback>
-              {decoratorManager.emailDecorator(entries.getEmailField())}
-            </FormItem>
-
-            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.PASSWORD} hasFeedback>
-              {decoratorManager.passwordDecorator(entries.getPasswordField())}
-            </FormItem>
-
-            <FormItem {...FORM_ITEM_LAYOUT} label={LABELS.PASSWORD_CONFIRMATION} hasFeedback>
-              {decoratorManager.passwordConfirmationDecorator(entries.getPasswordField())}
-            </FormItem>
-          </div>
-        )}
-
         {props.showSubmit && (
           <FormItem {...FORM_ITEM_SUBMIT_LAYOUT}>
             <Button type="primary" htmlType="submit" className="login-form-button">

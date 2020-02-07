@@ -9,7 +9,7 @@ import {
 import SugestSelector from '../../../components/forms/SugestSelector';
 import Agenda from '../../../components/Agenda';
 import ExamDetailList from './detail.component';
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 const ExamComponent = (props) => {
   const { history, exams } = props;
@@ -78,7 +78,7 @@ const onSelectSlot = props => () => {
 const onSelectExamType = props => async (examTypeId) => {
   props.showPageLoader();
   try {
-    const res = await WebAPI.getExams(examTypeId);
+    const res = await ipcService.getExams(examTypeId);
     props.getExams(res);
   } catch (error) {
     console.log(error);
@@ -97,9 +97,10 @@ const examListLifecycle = lifecycle({
   async componentWillMount() {
     this.props.showPageLoader();
     try {
-      const response = await WebAPI.getExamTypes();
+      const response = await ipcService.getExamTypes();
+      const exams = await ipcService.getExams();
       this.props.getExamTypes(response);
-      this.props.getExams({ data: [] });
+      this.props.getExams(exams);
 
       this.props.hidePageLoader();
     } catch (error) {

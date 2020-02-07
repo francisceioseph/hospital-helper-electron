@@ -3,17 +3,19 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import * as Alerts from '../../../components/Alerts';
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 import { Pacient } from '../../../models/pacient.model';
 import { PacientModalForm } from '../../../components/Pacient';
-import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
+import { showPageLoader, hidePageLoader } from '../../layouts/actions';
 import { createPacient, updatePacient, clearSelectedPacient } from '../../../pages/Pacient/pacient.actions';
 
 type Props = {
   pacient: Object,
   createPacient: Function,
   updatePacient: Function,
+  showPageLoader: Function,
+  hidePageLoader: Function,
   clearSelectedPacient: Function,
   visible: boolean,
   onCancel: Function,
@@ -29,24 +31,26 @@ const mapStateToProps = ({ pacients }) => ({
 const mapDispatchToProps = {
   createPacient,
   updatePacient,
-  clearSelectedPacient, 
-  showPageLoader, 
+  clearSelectedPacient,
+  showPageLoader,
   hidePageLoader
 };
 
 class PacientModalFormContainer extends React.Component<Props> {
   saveFormData = async (values) => {
     this.props.showPageLoader();
-    const { form } = this.formRef.props;
+    const { form } = this;
 
     try {
       const pacient = Pacient.buildForAPI(values, this.props.pacient);
 
+      console.log(pacient);
+
       if (this.props.mode !== 'edit') {
-        const { data } = await WebAPI.postPacient(pacient);
+        const { data } = await ipcService.postPacient(pacient);
         this.props.createPacient(data);
       } else {
-        const { data } = await WebAPI.updatePacient(pacient.id, pacient);
+        const { data } = await ipcService.updatePacient(pacient.id, pacient);
         this.props.updatePacient(data);
       }
 
@@ -64,7 +68,7 @@ class PacientModalFormContainer extends React.Component<Props> {
   };
 
   handleCreate = () => {
-    const { form } = this.formRef.props;
+    const { form } = this;
     form.validateFields((error, values) => {
       if (!error) {
         this.saveFormData(values);
@@ -73,8 +77,8 @@ class PacientModalFormContainer extends React.Component<Props> {
     });
   };
 
-  saveFormRef = (formRef) => {
-    this.formRef = formRef;
+  saveFormRef = (form) => {
+    this.form = form;
   };
 
   handleCancel = (event) => {
@@ -88,7 +92,7 @@ class PacientModalFormContainer extends React.Component<Props> {
         <PacientModalForm
           titleText={this.props.titleText}
           pacient={this.props.pacient}
-          wrappedComponentRef={this.saveFormRef}
+          ref={this.saveFormRef}
           onCreate={this.handleCreate}
           visible={this.props.visible}
           onCancel={this.handleCancel}
@@ -105,5 +109,7 @@ PacientModalFormContainer.defaultProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  null,
+  { withRef: true }
 )(PacientModalFormContainer);

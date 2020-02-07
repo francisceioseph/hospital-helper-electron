@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as WebAPI from '../../utils/api.service';
+import * as ipcService from '../../utils/ipc.service';
 
 export const GET_APPOINTMENT_TYPES = 'FETCH_APPOINTMENT_TYPES';
 export const CREATE_APPOINTMENT_TYPE = 'CREATE_APPOINTMENT_TYPES';
@@ -19,4 +19,4 @@ export const getAppointmentTypes = createAction(GET_APPOINTMENT_TYPES);
 export const createAppointmentType = createAction(CREATE_APPOINTMENT_TYPE);
 export const updateAppointmentType = createAction(UPDATE_APPOINTMENT_TYPE);
 export const applyAppointmentTypesFilter = createAction(APPLY_APPOINTMENT_TYPES_FILTER);
-export const removeAppointmentType = createAction(REMOVE_APPOINTMENT_TYPE, WebAPI.removeAppointmentType);
+export const removeAppointmentType = createAction(REMOVE_APPOINTMENT_TYPE, ipcService.removeAppointmentType);

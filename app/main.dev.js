@@ -10,19 +10,25 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
-import electron from 'electron';
-import path from 'path';
-import fs from 'fs';
-import os from 'os';
 
-import MenuBuilder from './menu';
+
+const log = require('electron-log');
+const path = require('path');
+const fs = require('fs');
+const os = require('os');
+
+const electron = require('electron');
+const { autoUpdater } = require('electron-updater');
+const syncDB = require('./server/syncDB');
+const MenuBuilder = require('./menu');
+
+const { app } = electron;
+const { BrowserWindow } = electron;
+
 
 const { ipcMain: ipc, shell } = electron;
 
-export default class AppUpdater {
+class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;
@@ -82,8 +88,8 @@ app.on('ready', async () => {
     height         : 728,
     webPreferences : {
       plugins         : true,
-      nodeIntegration : true
-    }
+      nodeIntegration : true,
+    },
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -105,6 +111,8 @@ app.on('ready', async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  syncDB();
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();

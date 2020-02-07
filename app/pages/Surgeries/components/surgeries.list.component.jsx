@@ -6,7 +6,7 @@ import {
   Row, Divider, Button, Col, Modal
 } from 'antd';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 import SugestSelector from '../../../components/forms/SugestSelector';
 import Agenda from '../../../components/Agenda';
@@ -60,9 +60,10 @@ const withLifecycle = lifecycle({
     this.props.showPageLoader();
 
     try {
-      const response = await WebAPI.getDoctors();
+      const response = await ipcService.getDoctors();
+      const surgeries = await ipcService.getSurgeries();
       this.props.getDoctors(response);
-      this.props.getSurgeries({ data: [] });
+      this.props.getSurgeries(surgeries);
       this.props.hidePageLoader();
     } catch (error) {
       console.log(error);
@@ -92,7 +93,7 @@ const onSelectSlot = props => () => {
 const onSelectDoctor = props => async (doctorId) => {
   props.showPageLoader();
   try {
-    const res = await WebAPI.getSurgeries(doctorId);
+    const res = await ipcService.getSurgeries(doctorId);
     props.getSurgeries(res);
   } catch (error) {
     console.log(error);

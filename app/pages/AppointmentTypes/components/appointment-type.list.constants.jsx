@@ -36,7 +36,6 @@ export const tableColumns = [
             handleOnEditClick(record);
           }}
         />
-        <Button icon="delete" onClick={() => handleOnDeleteClick(record)} />
       </ButtonGroup>
     )
   }

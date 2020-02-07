@@ -53,31 +53,31 @@ export default merge.smart(baseConfig, {
   ],
 
   output: {
-    publicPath: `http://localhost:${port}/dist/`,
-    filename: 'renderer.dev.js'
+    publicPath : `http://localhost:${port}/dist/`,
+    filename   : 'renderer.dev.js'
   },
 
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
+        test    : /\.jsx?$/,
+        exclude : /node_modules/,
+        use     : {
+          loader  : 'babel-loader',
+          options : {
             cacheDirectory: true
           }
         }
       },
       {
-        test: /\.global\.css$/,
-        use: [
+        test : /\.global\.css$/,
+        use  : [
           {
             loader: 'style-loader'
           },
           {
-            loader: 'css-loader',
-            options: {
+            loader  : 'css-loader',
+            options : {
               sourceMap: true
             }
           }
@@ -85,14 +85,14 @@ export default merge.smart(baseConfig, {
       },
       // SASS support - compile all .global.scss files and pipe it to style.css
       {
-        test: /\.(scss|sass)$/,
-        use: [
+        test : /\.(scss|sass)$/,
+        use  : [
           {
             loader: 'style-loader'
           },
           {
-            loader: 'css-loader',
-            options: {
+            loader  : 'css-loader',
+            options : {
               sourceMap: true
             }
           },
@@ -102,8 +102,8 @@ export default merge.smart(baseConfig, {
         ]
       },
       {
-        test: /\.less$/,
-        use: [
+        test : /\.less$/,
+        use  : [
           {
             loader: 'style-loader'
           },
@@ -111,26 +111,26 @@ export default merge.smart(baseConfig, {
             loader: 'css-loader' // translates CSS into CommonJS
           },
           {
-            loader: 'less-loader', // compiles Less to CSS
-            options: {
+            loader  : 'less-loader', // compiles Less to CSS
+            options : {
               javascriptEnabled: true
             }
           }
         ]
       },
       {
-        test: /\.css$/,
-        use: [
+        test : /\.css$/,
+        use  : [
           {
             loader: 'style-loader'
           },
           {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:5]'
+            loader  : 'css-loader',
+            options : {
+              modules        : true,
+              sourceMap      : true,
+              importLoaders  : 1,
+              localIdentName : '[name]__[local]__[hash:base64:5]'
             }
           }
         ]
@@ -139,22 +139,22 @@ export default merge.smart(baseConfig, {
       // import logoUrl from './logo.svg'; gives you the URL.
       // import { ReactComponent as Logo } from './logo.svg'; gives you a component.
       {
-        test: /\.svg$/,
-        use: [
+        test : /\.svg$/,
+        use  : [
           {
-            loader: require.resolve('babel-loader'),
-            options: {
+            loader  : require.resolve('babel-loader'),
+            options : {
               // @remove-on-eject-begin
-              babelrc: false,
-              presets: [require.resolve('babel-preset-react-app')],
+              babelrc        : false,
+              presets        : [require.resolve('babel-preset-react-app')],
               // @remove-on-eject-end
-              cacheDirectory: true
+              cacheDirectory : true
             }
           },
           require.resolve('svgr/webpack'),
           {
-            loader: require.resolve('file-loader'),
-            options: {
+            loader  : require.resolve('file-loader'),
+            options : {
               name: 'static/media/[name].[hash:8].[ext]'
             }
           }
@@ -162,57 +162,57 @@ export default merge.smart(baseConfig, {
       },
       // WOFF Font
       {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            mimetype: 'application/font-woff'
+        test : /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        use  : {
+          loader  : 'url-loader',
+          options : {
+            limit    : 10000,
+            mimetype : 'application/font-woff'
           }
         }
       },
       // WOFF2 Font
       {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            mimetype: 'application/font-woff'
+        test : /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        use  : {
+          loader  : 'url-loader',
+          options : {
+            limit    : 10000,
+            mimetype : 'application/font-woff'
           }
         }
       },
       // TTF Font
       {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            mimetype: 'application/octet-stream'
+        test : /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        use  : {
+          loader  : 'url-loader',
+          options : {
+            limit    : 10000,
+            mimetype : 'application/octet-stream'
           }
         }
       },
       // EOT Font
       {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader'
+        test : /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use  : 'file-loader'
       },
       // SVG Font
       {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            mimetype: 'image/svg+xml'
+        test : /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        use  : {
+          loader  : 'url-loader',
+          options : {
+            limit    : 10000,
+            mimetype : 'image/svg+xml'
           }
         }
       },
       // Common Image Formats
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
-        use: 'url-loader'
+        test : /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
+        use  : 'url-loader'
       }
     ]
   },
@@ -221,10 +221,10 @@ export default merge.smart(baseConfig, {
     requiredByDLLConfig
       ? null
       : new webpack.DllReferencePlugin({
-          context: path.join(__dirname, '..', 'dll'),
-          manifest: require(manifest),
-          sourceType: 'var'
-        }),
+        context    : path.join(__dirname, '..', 'dll'),
+        manifest   : require(manifest),
+        sourceType : 'var'
+      }),
 
     new webpack.HotModuleReplacementPlugin({
       multiStep: true
@@ -254,37 +254,37 @@ export default merge.smart(baseConfig, {
   ],
 
   node: {
-    __dirname: false,
-    __filename: false
+    __dirname  : false,
+    __filename : false
   },
 
   devServer: {
     port,
     publicPath,
-    compress: true,
-    noInfo: true,
-    stats: 'errors-only',
-    inline: true,
-    lazy: false,
-    hot: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    contentBase: path.join(__dirname, 'dist'),
-    watchOptions: {
-      aggregateTimeout: 300,
-      ignored: /node_modules/,
-      poll: 100
+    compress     : true,
+    noInfo       : true,
+    stats        : 'errors-only',
+    inline       : true,
+    lazy         : false,
+    hot          : true,
+    headers      : { 'Access-Control-Allow-Origin': '*' },
+    contentBase  : path.join(__dirname, 'dist'),
+    watchOptions : {
+      aggregateTimeout : 300,
+      ignored          : /node_modules/,
+      poll             : 100
     },
     historyApiFallback: {
-      verbose: true,
-      disableDotRule: false
+      verbose        : true,
+      disableDotRule : false
     },
     before() {
       if (process.env.START_HOT) {
         console.log('Starting Main Process...');
         spawn('npm', ['run', 'start-main-dev'], {
-          shell: true,
-          env: process.env,
-          stdio: 'inherit'
+          shell : true,
+          env   : process.env,
+          stdio : 'inherit'
         })
           .on('close', code => process.exit(code))
           .on('error', spawnError => console.error(spawnError));

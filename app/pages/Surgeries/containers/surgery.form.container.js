@@ -4,12 +4,11 @@ import { withHandlers, compose, lifecycle } from 'recompose';
 
 import { getPacients } from '../../Pacient/pacient.actions';
 import { getDoctors } from '../../Doctors/doctors.actions';
-import { getSurgeryTypes, createSurgery } from '../surgeries.actions';
-import { printPdf } from '../../../utils/print-pdf';
+import { getSurgeryTypes, createSurgery, updateSurgery } from '../surgeries.actions';
 
 import SurgeryForm from '../components/surgery.form.component';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alert from '../../../components/Alerts';
 
 import { showPageLoader, hidePageLoader } from '../../../containers/layouts/actions';
@@ -22,6 +21,7 @@ const mapStateToProps = ({ doctors, pacients, surgeries }) => ({
 
 const mapDispatchToProps = {
   createSurgery,
+  updateSurgery,
   getSurgeryTypes,
   getPacients,
   getDoctors,
@@ -31,8 +31,7 @@ const mapDispatchToProps = {
 
 const showAppointmentPDF = async (appointment, form) => {
   try {
-    const { data } = await WebAPI.getPdfFile(appointment.receipt_url);
-    printPdf(data);
+    ipcService.openSurgeryAppointmentPDF(appointment);
     form.resetFields();
   } catch (error) {
     Alert.error({
@@ -44,14 +43,27 @@ const showAppointmentPDF = async (appointment, form) => {
 
 const onSurgeryFormSubmit = props => async (values, form) => {
   try {
-    const { data: surgery } = await WebAPI.createSurgery(values);
-    props.createSurgery(surgery);
+    const surgeryData = {
+      ...props.surgery,
+      ...values,
+      scheduled_to: values.scheduled_to.toISOString()
+    };
+
+    let response;
+
+    if (surgeryData.id) {
+      response = await ipcService.updateSurgery(surgeryData);
+      props.updateSurgery(response.data);
+    } else {
+      response = await ipcService.createSurgery(surgeryData);
+      props.createSurgery(response.data);
+    }
 
     Alert.success({
       content    : 'Agendamento realizado com sucesso. Deseja imprimir comprovante?',
       okText     : 'Sim',
       cancelText : 'Não',
-      onOk       : () => showAppointmentPDF(surgery, form),
+      onOk       : () => showAppointmentPDF(response.data, form),
       onCancel   : () => form.resetFields()
     });
   } catch (error) {
@@ -68,7 +80,11 @@ const withFormHandlers = withHandlers({
 const withLifeCycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
-    const response = await Promise.all([WebAPI.getSurgeryTypes(), WebAPI.getPacients(), WebAPI.getDoctors()]);
+    const response = await Promise.all([
+      ipcService.getSurgeryTypes(),
+      ipcService.getPacients(),
+      ipcService.getDoctors()
+    ]);
 
     this.props.getSurgeryTypes(response[0]);
     this.props.getPacients(response[1]);

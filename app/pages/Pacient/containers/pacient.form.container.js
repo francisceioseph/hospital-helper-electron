@@ -5,7 +5,7 @@ import { showPageLoader, hidePageLoader } from '../../../containers/layouts/acti
 import { createPacient } from '../pacient.actions';
 import { PacientFormComponent } from '../components';
 
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 import * as Alerts from '../../../components/Alerts';
 
 const mapStateToProps = ({ pacients }) => ({
@@ -13,8 +13,8 @@ const mapStateToProps = ({ pacients }) => ({
 });
 
 const mapDispatchToProps = {
-  createPacient, 
-  showPageLoader, 
+  createPacient,
+  showPageLoader,
   hidePageLoader
 };
 
@@ -22,21 +22,28 @@ const onNewPacientFormSubmit = props => async (values, form) => {
   props.showPageLoader();
   try {
     const {
-      phone, email, address, ...others
+      phone, email, address, personal_datum, ...others
     } = values;
-    
+
     const pacient = {
       ...others,
-      emails     : email ? [{ address: email }] : [],
-      telephones : phone ? [{ number: phone }] : [],
-      addresses  : address ? [{ ...address }] : [],
-      next_of_kin: {
-        full_name: values.next_of_kin.full_name || "",
-        cpf: values.next_of_kin.cpf || "",
+      personal_datum: {
+        ...personal_datum,
+        birth_datum: {
+          ...personal_datum.birth_datum,
+          date_of_birth: personal_datum.birth_datum.date_of_birth.toISOString()
+        }
+      },
+      emails      : email ? [{ address: email }] : [],
+      telephones  : phone ? [{ number: phone }] : [],
+      addresses   : address ? [{ ...address }] : [],
+      next_of_kin : {
+        full_name : values.next_of_kin.full_name || '',
+        cpf       : values.next_of_kin.cpf || '',
       }
     };
 
-    const { data } = await WebAPI.postPacient(pacient);
+    const { data } = await ipcService.postPacient(pacient);
 
     props.createPacient(data);
     props.hidePageLoader();

@@ -9,7 +9,7 @@ import {
 import SugestSelector from '../../../components/forms/SugestSelector';
 import Agenda from '../../../components/Agenda';
 import AppointmentInfo from './detail.component';
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 const AppointmentList = props => (
   <div>
@@ -76,7 +76,7 @@ const onSelectSlot = props => () => {
 const onSelectDoctor = props => async (doctorId) => {
   props.showPageLoader();
   try {
-    const res = await WebAPI.getAppointments(doctorId);
+    const res = await ipcService.getAppointments(doctorId);
     props.getAppointments(res);
   } catch (error) {
     console.log(error);
@@ -95,9 +95,10 @@ const withLifecycle = lifecycle({
   async componentDidMount() {
     this.props.showPageLoader();
     try {
-      const res = await WebAPI.getDoctors();
+      const res = await ipcService.getDoctors();
+      const appointments = await ipcService.getAppointments();
       this.props.getDoctors(res);
-      this.props.getAppointments({ data: [] });
+      this.props.getAppointments(appointments);
     } catch (error) {
       console.log(error);
     } finally {

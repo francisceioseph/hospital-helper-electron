@@ -1,9 +1,9 @@
 // @flow
-import {
-  app, Menu, shell, BrowserWindow
-} from 'electron';
+const {
+  app, Menu, BrowserWindow
+} = require('electron');
 
-export default class MenuBuilder {
+class MenuBuilder {
   mainWindow: BrowserWindow;
 
   constructor(mainWindow: BrowserWindow) {
@@ -140,3 +140,5 @@ export default class MenuBuilder {
     return templateDefault;
   }
 }
+
+module.exports = MenuBuilder;

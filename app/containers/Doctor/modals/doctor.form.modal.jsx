@@ -4,10 +4,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import * as Alerts from '../../../components/Alerts';
-import * as WebAPI from '../../../utils/api.service';
+import * as ipcService from '../../../utils/ipc.service';
 
 import { DoctorModalForm } from '../../../components/Doctor';
-import { Doctor } from '../../../models';
+import { Doctor } from '../../../models/doctor.model';
 import { createDoctor, updateDoctor } from '../../../pages/Doctors/doctors.actions';
 import { showPageLoader, hidePageLoader } from '../../layouts/actions';
 
@@ -27,6 +27,8 @@ type Props = {
   doctor: Object,
   createDoctor: Function,
   updateDoctor: Function,
+  showPageLoader: Function,
+  hidePageLoader: Function,
   visible: boolean,
   onCancel: Function,
   onSubmitSuccess: Function,
@@ -36,21 +38,21 @@ type Props = {
 
 class DoctorModalFormContainer extends React.Component<Props> {
   saveFormData = async (values) => {
-    const { form } = this.formRef.props;
+    const form = this.formRef;
     this.props.showPageLoader();
 
     try {
       const doctor = Doctor.buildForAPI(values, this.props.doctor);
 
       if (this.props.mode !== 'edit') {
-        const { data } = await WebAPI.createDoctor(doctor);
+        const { data } = await ipcService.createDoctor(doctor);
         this.props.createDoctor(data);
       } else {
-        const { data } = await WebAPI.updateDoctor(doctor.id, doctor);
+        const { data } = await ipcService.updateDoctor(doctor.id, doctor);
         this.props.updateDoctor(data);
       }
 
-      this.props.hidePageLoader();      
+      this.props.hidePageLoader();
       Alerts.success({
         onOk: () => {
           form.resetFields();
@@ -64,7 +66,7 @@ class DoctorModalFormContainer extends React.Component<Props> {
   };
 
   handleCreate = () => {
-    const { form } = this.formRef.props;
+    const form = this.formRef;
     form.validateFields((error, values) => {
       if (!error) {
         this.saveFormData(values);
@@ -82,7 +84,7 @@ class DoctorModalFormContainer extends React.Component<Props> {
         <DoctorModalForm
           titleText={this.props.titleText}
           doctor={this.props.doctor}
-          wrappedComponentRef={this.saveFormRef}
+          ref={this.saveFormRef}
           onCreate={this.handleCreate}
           visible={this.props.visible}
           onCancel={this.props.onCancel}
@@ -100,5 +102,7 @@ DoctorModalFormContainer.defaultProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  null,
+  { withRef: true }
 )(DoctorModalFormContainer);
