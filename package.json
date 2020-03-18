@@ -297,7 +297,7 @@
     "redux-actions": "^2.6.4",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^3.35.1",
+    "sequelize": "^5.15.1",
     "source-map-support": "^0.5.9",
     "sqlite3": "^4.1.0",
     "svgr": "1.6.0",
