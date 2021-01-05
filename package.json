@@ -263,7 +263,7 @@
     "action-cable-react-jwt": "^0.0.5",
     "antd": "^3.13.1",
     "autoprefixer": "7.1.2",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "axios-extensions": "^3.0.5",
     "babel-preset-react-app": "^6.1.0",
     "connected-react-router": "^5.0.1",
