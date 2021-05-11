@@ -275,7 +275,7 @@
     "history": "^4.7.2",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "moment": "^2.23.0",
     "path-to-regexp": "^3.0.0",
     "pdfmake": "^0.1.58",
